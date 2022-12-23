@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Addams.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,15 +10,15 @@ namespace Addams.Models
     public class Track
     {
 
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public string Id { get; set; } = String.Empty;
+        public string Name { get; set; } = String.Empty;
+        public string Artists { get; set; } = String.Empty;
+        public string AlbumName { get; set; } = String.Empty;
+        public bool Explicit { get; set; }
+        public bool IsLocal { get; set; }
+        public int Duration { get; set; }
 
-        public Track(int id, string name, string description)
-        {
-            this.Id = id;
-            this.Name = name;
-            this.Description = description;
-        }
+
+         public override string ToString() => $"Name : {Name} - Artist : {Artists} - Id : {Id}";
     }
 }

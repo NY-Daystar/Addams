@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Addams.Entities
 {
-    public class Tracks
+    public class TrackList
     {
         public string? href { get; set; }
         public List<TrackItem>? items { get; set; }

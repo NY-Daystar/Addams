@@ -9,11 +9,6 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Collections.Generic;
 
-
-//- "Class ApiSpotify"
-//TODO    - "Get Track by playlist from playlist id"
-//TODO    - "Get Trackdata from track id"
-// TODO faire des tests unitaires
 // TODO faire un README
 // TODO faire un todo.txt pour la liste dans evernote
 // TODO mettre un logger dans APPDATA
@@ -21,6 +16,7 @@ using System.Collections.Generic;
 // TODO faire un github action pour lancer les tests unitaires
 // TODO sonarCube pour l'analyse de code
 // TODO ajouter du multilangue avec un fichier Resx
+// TODO faire des tests unitaires
 
 namespace Addams
 {
@@ -59,7 +55,7 @@ namespace Addams
         /// <returns></returns>
         public static async Task<List<Models.Playlist>> GetPlaylists(string user)
         {
-
+            Console.WriteLine("Getting playlist data...");
             SpotifyService service = new SpotifyService(user);
 
             // Get playlist

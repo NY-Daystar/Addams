@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 namespace Addams.Entities
 {
     /// <summary>
-    /// Owner data
+    /// Artist data
     /// </summary>
-    public class Owner
+    public class Artist
     {
-        public string? display_name { get; set; }
         public ExternalUrls? external_urls { get; set; }
-        public string? href { get; set; } 
+        public string? href { get; set; }
         public string? id { get; set; }
+        public string? name { get; set; }
         public string? type { get; set; }
         public string? uri { get; set; }
     }

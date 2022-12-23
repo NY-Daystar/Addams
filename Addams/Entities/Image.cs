@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Addams.Entities
 {
+    /// <summary>
+    /// Image specification
+    /// </summary>
     public class Image
     {
         public int? height { get; set; }

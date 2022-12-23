@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 namespace Addams.Entities
 {
     /// <summary>
-    /// TODO to comment
-    /// Liste des playlists
+    /// Playlist entity fetch from spotify api when request /playlists/
+    /// to deserialize: Playlists myDeserializedClass = JsonConvert.DeserializeObject<Playlists>(myJsonResponse);
     /// </summary>
-    // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
     public class Playlists
     {
         public string? href { get; set; }
@@ -25,17 +24,17 @@ namespace Addams.Entities
     public class Playlist
     {
         public bool? collaborative { get; set; }
-        public string? description { get; set; }
+        public string description { get; set; } = string.Empty; 
         public ExternalUrls? external_urls { get; set; }
-        public string? href { get; set; }
-        public string? id { get; set; }
+        public string href { get; set; } = string.Empty;
+        public string id { get; set; } = string.Empty;
         public List<Image>? images { get; set; }
-        public string? name { get; set; }
+        public string name { get; set; } = string.Empty;
         public Owner? owner { get; set; }
         public object? primary_color { get; set; }
         public bool? @public { get; set; }
         public string? snapshot_id { get; set; }
-        public Tracks? tracks { get; set; }
+        public TrackList? tracks { get; set; }
         public string? type { get; set; }
         public string? uri { get; set; }
     }

@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace Addams.Entities
 {
+    /// <summary>
+    /// External Urls outside of Spotify (Yt, deezer)
+    /// </summary>
     public class ExternalUrls
     {
-        public string? spotify { get; set; }// = string.Empty;
+        public string? spotify { get; set; }
     }
 }
