@@ -55,9 +55,6 @@ namespace Addams.Entities
         public int? total { get; set; }
     }
 
- 
-
-
     public class VideoThumbnail
     {
         public object? url { get; set; }

@@ -13,7 +13,7 @@ namespace Addams.Entities
     public class Track
     {
         public Album? album { get; set; }
-        public List<Artist>? artists { get; set; }
+        public List<Artist> artists { get; set; } = new List<Artist>();
         public List<string>? available_markets { get; set; }
         public int? disc_number { get; set; }
         public int? duration_ms { get; set; }
@@ -24,7 +24,7 @@ namespace Addams.Entities
         public string? href { get; set; }
         public string? id { get; set; }
         public bool? is_local { get; set; }
-        public string? name { get; set; }
+        public string name { get; set; } = string.Empty;
         public int? popularity { get; set; }
         public string? preview_url { get; set; }
         public bool? track { get; set; }

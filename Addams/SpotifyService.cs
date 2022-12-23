@@ -21,7 +21,7 @@ namespace Addams.Service
         /// <summary>
         /// Default OAuth2 token to get access to spotify API data
         /// </summary>
-        private static string AUTH_TOKEN = @"BQBQxfQeL3dza9Nw5WeFYAGwhunyzbgnKuJKPaPDt5C1Pl92104Shubt8_jrew7xKm-HZBdqkatyFnjghZ9q-WUZIdMPb7nmtXOXCprpLG8sew02083dX4UptlbAeiM-chW0LnSHCaV8m2xuiikn8YvcCiY6GGBsYECR9nj7RKMUskodZqlJ2rbThIdvsrKOA6BlC5XsU7o";
+        private static string AUTH_TOKEN = @"BQAHT25nTfQhIo_43YAuXCwsYwREPIMve5MRrvnYNuFcXwNdPkuq45SMu0QBLEVYDkf6lOCMS59I3JtxJN8EaABUA-siivNvLsaTrIpxbxWJhY3GawIANKGnLlsb_FNCBsxLDW00glMM2Xbd5Q1nTe-yHvKhXtNd3oArZg7reQzcIveEAScOVpro-xtjpk6kqENxfyea-0c";
 
         /// <summary>
         /// Spotify Api requests
@@ -156,7 +156,12 @@ namespace Addams.Service
         {
             if (trackEntity.id == null)
             {
-                throw new SpotifyException($"GetTrackData id null of the playlist name : {trackEntity.name}");
+                Console.WriteLine($"GetTrackData id null of the track name: {trackEntity.name}");
+                return new Models.Track
+                {
+                    Name = trackEntity.name,
+                    Artists = string.Join(",", trackEntity.artists.Select(x => x.name))
+                };
             }
 
             // Get track data

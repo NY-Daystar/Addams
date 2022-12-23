@@ -1,6 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-using Addams.Entities;
+﻿using Addams.Entities;
 using Addams.Models;
 using Addams.Service;
 using Addams.Api;
