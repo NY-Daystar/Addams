@@ -1,12 +1,12 @@
 ﻿
+using Addams.Entities;
+using Addams.Exceptions;
 using Newtonsoft.Json;
 using System;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using Addams.Entities;
-using Addams.Exceptions;
 
 namespace Addams.Api
 {

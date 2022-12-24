@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Addams.Entities
 {
@@ -13,7 +9,7 @@ namespace Addams.Entities
     public class Playlists
     {
         public string? href { get; set; }
-        public List<Playlist>? items { get; set; }
+        public List<Playlist> items { get; set; } = new List<Playlist>();
         public int? limit { get; set; }
         public string? next { get; set; }
         public int? offset { get; set; }

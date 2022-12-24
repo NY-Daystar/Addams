@@ -1,9 +1,5 @@
-﻿using Addams.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Addams.Entities
 {
@@ -25,7 +21,7 @@ namespace Addams.Entities
         public object? primary_color { get; set; }
         public bool? @public { get; set; }
         public string? snapshot_id { get; set; }
-        public TrackList? tracks { get; set; } 
+        public TrackList tracks { get; set; } = new TrackList();
         public string? type { get; set; } 
         public string? uri { get; set; }
     }

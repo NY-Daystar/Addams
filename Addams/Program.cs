@@ -1,11 +1,7 @@
-﻿using Addams.Entities;
-using Addams.Models;
-using Addams.Service;
-using Addams.Api;
+﻿using Addams.Service;
 using System;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 // TODO faire un README
 // TODO faire un todo.txt pour la liste dans evernote

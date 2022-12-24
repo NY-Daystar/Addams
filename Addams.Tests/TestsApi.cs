@@ -1,9 +1,7 @@
-using NUnit.Framework;
 using Addams.Api;
 using Addams.Entities;
 using Addams.Exceptions;
-using Newtonsoft.Json.Linq;
-using Addams.Models;
+using NUnit.Framework;
 
 namespace Addams.Tests
 {
