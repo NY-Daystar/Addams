@@ -2,11 +2,25 @@ using NUnit.Framework;
 using Addams.Api;
 using Addams.Entities;
 using Addams.Exceptions;
+using Newtonsoft.Json.Linq;
+using Addams.Models;
 
 namespace Addams.Tests
 {
     public class TestsApi
     {
+
+        private string authToken = @"BQDCyBq4jwYpt3b1M6qyOrHlITmRGJV5uH9doVwXqdiaCIQEZWcDaBWZgg_iJOGBrl2km9osf_6O0YQ-Ni1ZBPCo_mkBcXkgMHW6LcyS9J7gTGPjvZ4h68QTCHwNgu7QMpWmifPBXIY_UdINHh8Y6p6cQETxNQ34eG77UUR4cWcZaAERjMrPUmdLqQhxvEE0kdiGVFKaSW4";
+        private string user = "gravityx3";
+        private SpotifyApi api;
+
+        [SetUp]
+        // TODO generer un token a terme
+        public void SetUp()
+        {
+            api = new SpotifyApi(user, authToken);
+        }
+
 
         [Test]
         public void TestGetPlaylistWithBadToken()
@@ -18,18 +32,33 @@ namespace Addams.Tests
             Assert.ThrowsAsync<SpotifyUnauthorizedException>(() => api.FetchUserPlaylists());
         }
 
+        [Test]
         /// <summary>
-        /// README you need to regenerate token if you don't need
+        /// TODO you need to regenerate token if you don't need
         /// </summary>
-        public void TestGetPlaylistWithRightToken()
+        public async Task TestGetPlaylistWithRightToken()
         {
-            /// README you need to regenerate token if it's expired
-            string token = ""; // TODO meettrre un boon token
-            string user = "gravityx3";
-            SpotifyApi api = new SpotifyApi(user, token);
+            Playlists playlists = await api.FetchUserPlaylists();
 
-            Assert.ThrowsAsync<SpotifyUnauthorizedException>(() => api.FetchUserPlaylists());
-            Assert.Pass();
+            Assert.IsNotNull(playlists);
+            Assert.IsNotEmpty(playlists.items);
+            Assert.IsNull(playlists.next);
+            Assert.IsNotNull(playlists.href);
+            Assert.That(playlists.total == playlists.items.Count);
+        }
+
+        [Test]
+        public async Task TestGetPlaylistTracksMoreThan100Tracks()
+        {
+            string id = "0CFuMybe6s77w6QQrJjW7d";
+            PlaylistTracks playlistTracks = await api.FetchPlaylistTracks(id);
+
+            Assert.IsNotNull(playlistTracks);
+            Assert.IsNotNull(playlistTracks.href);
+            Assert.IsNotNull(playlistTracks.name);
+            Assert.IsNotEmpty(playlistTracks.tracks.items);
+            Assert.That(playlistTracks.tracks.total == playlistTracks.tracks.items.Count);
+            Assert.IsNull(playlistTracks.tracks.next);
         }
     }
 }

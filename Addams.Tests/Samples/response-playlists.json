@@ -1,5 +1,5 @@
 {
-  "href" : "https://api.spotify.com/v1/users/gravityx3/playlists?offset=0&limit=11",
+  "href" : "https://api.spotify.com/v1/users/XXXXXXX/playlists?offset=0&limit=11",
   "items" : [ {
     "collaborative" : false,
     "description" : "",
@@ -15,14 +15,14 @@
     } ],
     "name" : "LES DERNIÈRES VOLONTÉS DE MOZART (SYMPHONY)",
     "owner" : {
-      "display_name" : "gravityx3",
+      "display_name" : "XXXXXXX",
       "external_urls" : {
-        "spotify" : "https://open.spotify.com/user/gravityx3"
+        "spotify" : "https://open.spotify.com/user/XXXXXXX"
       },
-      "href" : "https://api.spotify.com/v1/users/gravityx3",
-      "id" : "gravityx3",
+      "href" : "https://api.spotify.com/v1/users/XXXXXXX",
+      "id" : "XXXXXXX",
       "type" : "user",
-      "uri" : "spotify:user:gravityx3"
+      "uri" : "spotify:user:XXXXXXX"
     },
     "primary_color" : null,
     "public" : false,
@@ -48,14 +48,14 @@
     } ],
     "name" : "Brûler le feu",
     "owner" : {
-      "display_name" : "gravityx3",
+      "display_name" : "XXXXXXX",
       "external_urls" : {
-        "spotify" : "https://open.spotify.com/user/gravityx3"
+        "spotify" : "https://open.spotify.com/user/XXXXXXX"
       },
-      "href" : "https://api.spotify.com/v1/users/gravityx3",
-      "id" : "gravityx3",
+      "href" : "https://api.spotify.com/v1/users/XXXXXXX",
+      "id" : "XXXXXXX",
       "type" : "user",
-      "uri" : "spotify:user:gravityx3"
+      "uri" : "spotify:user:XXXXXXX"
     },
     "primary_color" : null,
     "public" : false,
@@ -89,14 +89,14 @@
     } ],
     "name" : "RAP US",
     "owner" : {
-      "display_name" : "gravityx3",
+      "display_name" : "XXXXXXX",
       "external_urls" : {
-        "spotify" : "https://open.spotify.com/user/gravityx3"
+        "spotify" : "https://open.spotify.com/user/XXXXXXX"
       },
-      "href" : "https://api.spotify.com/v1/users/gravityx3",
-      "id" : "gravityx3",
+      "href" : "https://api.spotify.com/v1/users/XXXXXXX",
+      "id" : "XXXXXXX",
       "type" : "user",
-      "uri" : "spotify:user:gravityx3"
+      "uri" : "spotify:user:XXXXXXX"
     },
     "primary_color" : null,
     "public" : false,
@@ -122,14 +122,14 @@
     } ],
     "name" : "Mag",
     "owner" : {
-      "display_name" : "gravityx3",
+      "display_name" : "XXXXXXX",
       "external_urls" : {
-        "spotify" : "https://open.spotify.com/user/gravityx3"
+        "spotify" : "https://open.spotify.com/user/XXXXXXX"
       },
-      "href" : "https://api.spotify.com/v1/users/gravityx3",
-      "id" : "gravityx3",
+      "href" : "https://api.spotify.com/v1/users/XXXXXXX",
+      "id" : "XXXXXXX",
       "type" : "user",
-      "uri" : "spotify:user:gravityx3"
+      "uri" : "spotify:user:XXXXXXX"
     },
     "primary_color" : null,
     "public" : false,
@@ -196,14 +196,14 @@
     } ],
     "name" : "Nonante-Cinq",
     "owner" : {
-      "display_name" : "gravityx3",
+      "display_name" : "XXXXXXX",
       "external_urls" : {
-        "spotify" : "https://open.spotify.com/user/gravityx3"
+        "spotify" : "https://open.spotify.com/user/XXXXXXX"
       },
-      "href" : "https://api.spotify.com/v1/users/gravityx3",
-      "id" : "gravityx3",
+      "href" : "https://api.spotify.com/v1/users/XXXXXXX",
+      "id" : "XXXXXXX",
       "type" : "user",
-      "uri" : "spotify:user:gravityx3"
+      "uri" : "spotify:user:XXXXXXX"
     },
     "primary_color" : null,
     "public" : false,
@@ -229,14 +229,14 @@
     } ],
     "name" : "La fouine XXI",
     "owner" : {
-      "display_name" : "gravityx3",
+      "display_name" : "XXXXXXX",
       "external_urls" : {
-        "spotify" : "https://open.spotify.com/user/gravityx3"
+        "spotify" : "https://open.spotify.com/user/XXXXXXX"
       },
-      "href" : "https://api.spotify.com/v1/users/gravityx3",
-      "id" : "gravityx3",
+      "href" : "https://api.spotify.com/v1/users/XXXXXXX",
+      "id" : "XXXXXXX",
       "type" : "user",
-      "uri" : "spotify:user:gravityx3"
+      "uri" : "spotify:user:XXXXXXX"
     },
     "primary_color" : null,
     "public" : false,
@@ -262,14 +262,14 @@
     } ],
     "name" : "Life By Misadventure",
     "owner" : {
-      "display_name" : "gravityx3",
+      "display_name" : "XXXXXXX",
       "external_urls" : {
-        "spotify" : "https://open.spotify.com/user/gravityx3"
+        "spotify" : "https://open.spotify.com/user/XXXXXXX"
       },
-      "href" : "https://api.spotify.com/v1/users/gravityx3",
-      "id" : "gravityx3",
+      "href" : "https://api.spotify.com/v1/users/XXXXXXX",
+      "id" : "XXXXXXX",
       "type" : "user",
-      "uri" : "spotify:user:gravityx3"
+      "uri" : "spotify:user:XXXXXXX"
     },
     "primary_color" : null,
     "public" : false,
@@ -295,14 +295,14 @@
     } ],
     "name" : "Booba – ULTRA",
     "owner" : {
-      "display_name" : "gravityx3",
+      "display_name" : "XXXXXXX",
       "external_urls" : {
-        "spotify" : "https://open.spotify.com/user/gravityx3"
+        "spotify" : "https://open.spotify.com/user/XXXXXXX"
       },
-      "href" : "https://api.spotify.com/v1/users/gravityx3",
-      "id" : "gravityx3",
+      "href" : "https://api.spotify.com/v1/users/XXXXXXX",
+      "id" : "XXXXXXX",
       "type" : "user",
-      "uri" : "spotify:user:gravityx3"
+      "uri" : "spotify:user:XXXXXXX"
     },
     "primary_color" : null,
     "public" : false,
@@ -336,14 +336,14 @@
     } ],
     "name" : "A ecouter",
     "owner" : {
-      "display_name" : "gravityx3",
+      "display_name" : "XXXXXXX",
       "external_urls" : {
-        "spotify" : "https://open.spotify.com/user/gravityx3"
+        "spotify" : "https://open.spotify.com/user/XXXXXXX"
       },
-      "href" : "https://api.spotify.com/v1/users/gravityx3",
-      "id" : "gravityx3",
+      "href" : "https://api.spotify.com/v1/users/XXXXXXX",
+      "id" : "XXXXXXX",
       "type" : "user",
-      "uri" : "spotify:user:gravityx3"
+      "uri" : "spotify:user:XXXXXXX"
     },
     "primary_color" : null,
     "public" : false,
@@ -389,7 +389,7 @@
     "uri" : "spotify:playlist:0CFuMybe6s77w6QQrJjW7d"
   } ],
   "limit" : 11,
-  "next" : "https://api.spotify.com/v1/users/gravityx3/playlists?offset=11&limit=11",
+  "next" : "https://api.spotify.com/v1/users/XXXXXXX/playlists?offset=11&limit=11",
   "offset" : 0,
   "previous" : null,
   "total" : 34
