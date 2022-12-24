@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Addams.Entities
+﻿namespace Addams.Entities
 {
-    // TO comment
+    /// <summary>
+    /// External Ids outside of Spotify (Yt, deezer, etc...)
+    /// </summary>
     public class ExternalIds
     {
+        public string? isrc { get; set; }
     }
+}
 }
