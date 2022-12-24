@@ -103,7 +103,7 @@ namespace Addams.Api
         public async Task<PlaylistTracks> FetchPlaylistTracks(string id)
         {
 
-            string url = $@"{API}/playlists/{id}?offset?{offset}";
+            string url = $@"{API}/playlists/{id}";
             //Console.WriteLine($"FetchPlaylistTracks call API: {url}"); // TODO put log
 
             HttpResponseMessage response = await this.client.GetAsync(url);
@@ -117,25 +117,34 @@ namespace Addams.Api
                 throw new SpotifyException($"Can't get FetchPlaylistTracks\nStatusCode {response.StatusCode} : {response.Content}");
             }
             string content = await response.Content.ReadAsStringAsync();
-            PlaylistTracks tracks = JsonConvert.DeserializeObject<PlaylistTracks>(content) ?? new PlaylistTracks();
+            PlaylistTracks playlistTracks = JsonConvert.DeserializeObject<PlaylistTracks>(content) ?? new PlaylistTracks();
 
-            // TODO ajouter les tracks qui sont rester
-            if(tracks.tracks.total >= TRACK_LIMITS)
+            if (playlistTracks.tracks.total >= TRACK_LIMITS)
             {
-                Console.WriteLine($"Only fetch {tracks.tracks.items.Count} tracks for a total to {tracks.tracks.total}");
-                // Faire uu foreach tant qu'il reste des tracks
-                // TODO call: tracks.tracks.items.AddRange()
-            }
+                Console.WriteLine($"Only fetch {playlistTracks.tracks.items.Count} tracks for a total to {playlistTracks.tracks.total}");
 
-            return tracks;
+                TrackList trackList = playlistTracks.tracks;
+                do
+                {
+                    trackList = await this.FetchOverflowTracks(trackList.next);
+                    playlistTracks.tracks.items.AddRange(trackList.items);
+                    Console.WriteLine("ITEMS", playlistTracks.tracks.items.Count);
+                } while (trackList.next != null);
+                playlistTracks.tracks.next = trackList.next;
+            }
+            return playlistTracks;
         }
 
-       // TODO a faire
-        public async Task<PlaylistTracks> FetchOverflowtracks(string id, int offset)
+        /// <summary>
+        /// Fetch overflow tracks from specific API url
+        /// </summary>
+        /// <param name="url">url to request to fetch tracks</param>
+        /// <returns>Tracklist overflowed</returns>
+        /// <exception cref="SpotifyUnauthorizedException"></exception>
+        /// <exception cref="SpotifyException"></exception>
+        public async Task<TrackList> FetchOverflowTracks(string url)
         {
-
-            string url = $@"{API}/playlists/{id}?offset?{offset}";
-            //Console.WriteLine($"FetchPlaylistTracks call API: {url}"); // TODO put log
+            //Console.WriteLine($"FetchOverflowTracks call API: {url}"); // TODO put log
 
             HttpResponseMessage response = await this.client.GetAsync(url);
             if (response.StatusCode == HttpStatusCode.Unauthorized)
@@ -148,16 +157,9 @@ namespace Addams.Api
                 throw new SpotifyException($"Can't get FetchPlaylistTracks\nStatusCode {response.StatusCode} : {response.Content}");
             }
             string content = await response.Content.ReadAsStringAsync();
-            PlaylistTracks tracks = JsonConvert.DeserializeObject<PlaylistTracks>(content) ?? new PlaylistTracks();
+            TrackList trackList = JsonConvert.DeserializeObject<TrackList>(content) ?? new TrackList();
 
-            // TODO ajouter les tracks qui sont resterr
-            if (tracks.tracks.total >= TRACK_LIMITS)
-            {
-                Console.WriteLine($"Only fetch {tracks.tracks.items.Count} tracks for a total to {tracks.tracks.total}");
-                tracks.tracks.items.AddRange()
-            }
-
-            return tracks;
+            return trackList;
         }
 
         /// <summary>
@@ -183,7 +185,7 @@ namespace Addams.Api
                 throw new SpotifyException($"Can't get FetchTrack\nStatusCode {response.StatusCode} : {response.Content}");
             }
             string content = await response.Content.ReadAsStringAsync();
-            TrackData trackData= JsonConvert.DeserializeObject<TrackData>(content) ?? new TrackData();
+            TrackData trackData = JsonConvert.DeserializeObject<TrackData>(content) ?? new TrackData();
             return trackData;
         }
     }

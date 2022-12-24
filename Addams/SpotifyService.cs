@@ -1,4 +1,4 @@
-﻿
+
 using Newtonsoft.Json;
 using System;
 using System.Net.Http.Headers;
@@ -21,7 +21,7 @@ namespace Addams.Service
         /// <summary>
         /// Default OAuth2 token to get access to spotify API data
         /// </summary>
-        private static string AUTH_TOKEN = @"BQAHT25nTfQhIo_43YAuXCwsYwREPIMve5MRrvnYNuFcXwNdPkuq45SMu0QBLEVYDkf6lOCMS59I3JtxJN8EaABUA-siivNvLsaTrIpxbxWJhY3GawIANKGnLlsb_FNCBsxLDW00glMM2Xbd5Q1nTe-yHvKhXtNd3oArZg7reQzcIveEAScOVpro-xtjpk6kqENxfyea-0c";
+        private static string AUTH_TOKEN = @"BQA8JH8vlHjyOaOsCuBbukEOEU4PfzKeLEgWbQ_7-4VHDHasMUGKfam3TZnTZwa4stynhYxBJcuNnWF5y0lu-Wuy17IodlZXAsHN1N6Kv-6gUiZTinJLu7owAT2lmH2iUZy3vEeoiwDkdgmnVZ3xXqbktSJob8iZ1-O2rA6LaowKwMNs3EZRp_x6_vkPRMFNMPCwhmVGAyQ";
 
         /// <summary>
         /// Spotify Api requests
@@ -73,14 +73,10 @@ namespace Addams.Service
             // Get tracks for each playlist
             foreach (Entities.Playlist p in playlistsData.items)
             {
-
-                Console.WriteLine($"Playlist name : {p.name} - id : {p.id}");
                 Models.Playlist playlist = await this.GetPlaylist(p);
                 Console.WriteLine($"Playlist {playlist}");
                 playlists.Add(playlist);
-                // TODO ajouter les tracks dans le models et la variable playlist
             }
-
             return playlists;
         }
 
@@ -176,25 +172,17 @@ namespace Addams.Service
                 Explicit = trackData.@explicit,
                 IsLocal = trackData.is_local,
                 Duration = trackData.duration_ms,// TODO convertir en min/secondes
+                // TODO add: album name,
+                // TODO add: album artist name,
+                // TODO add: album release date,
+                // TODO add: disc number,
+                // TODO add: track number,
+                // TODO add: popularity, 
+                // TODO add: added at,
+                // TODO add: album image url,
+                // TODO add: track url,
+                // TODO add: artist url
             };
-            // TODO track name,
-            // artist name,
-            // album name,
-            // album artiis name,
-            // album release date,
-            // diisc number,
-            // track numbeer,
-            // explicit,
-            // popullarity, 
-            // added at,
-            // allumb image urll,
-            // track duuratiion,
-            // track previe,uurr,
-            // track uri,
-            // artist url
-
-
-            Console.WriteLine($"TRACK {track}");
             return track;
         }
     }
