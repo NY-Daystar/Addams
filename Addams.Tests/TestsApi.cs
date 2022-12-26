@@ -1,4 +1,4 @@
-using Addams.Api;
+﻿using Addams.Api;
 using Addams.Entities;
 using Addams.Exceptions;
 using NUnit.Framework;
@@ -8,7 +8,7 @@ namespace Addams.Tests
     public class TestsApi
     {
 
-        private string authToken = @"BQDCyBq4jwYpt3b1M6qyOrHlITmRGJV5uH9doVwXqdiaCIQEZWcDaBWZgg_iJOGBrl2km9osf_6O0YQ-Ni1ZBPCo_mkBcXkgMHW6LcyS9J7gTGPjvZ4h68QTCHwNgu7QMpWmifPBXIY_UdINHh8Y6p6cQETxNQ34eG77UUR4cWcZaAERjMrPUmdLqQhxvEE0kdiGVFKaSW4";
+        private string authToken = @"BQBXPZbjEZBItjzh7Ery6IKgW4k_886Fr7b91oj-gAXxOOLfhQW-cnDihUERfIK4adgGJWycSbIN-QubClSO4_Gbq0PUry8ybtCrx5vpPK77gMeKoik1tm2EhbTk7KL3ztZuWEjlVul4vlkhcQck_Vcdy4fvbiACe3QY-VtfNLNzV0gpyFTowEHJXAakaBKGQoZGO7RFDcM";
         private string user = "gravityx3";
         private SpotifyApi api;
 

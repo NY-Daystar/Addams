@@ -14,12 +14,11 @@ namespace Addams.Service
         /// <summary>
         /// Default OAuth2 token to get access to spotify API data
         /// </summary>
-        private static string AUTH_TOKEN = @"BQA8JH8vlHjyOaOsCuBbukEOEU4PfzKeLEgWbQ_7-4VHDHasMUGKfam3TZnTZwa4stynhYxBJcuNnWF5y0lu-Wuy17IodlZXAsHN1N6Kv-6gUiZTinJLu7owAT2lmH2iUZy3vEeoiwDkdgmnVZ3xXqbktSJob8iZ1-O2rA6LaowKwMNs3EZRp_x6_vkPRMFNMPCwhmVGAyQ";
-
+        private static readonly string AUTH_TOKEN = @"BQDwkIeW2S_kqxt0rAw1kLNczprRqjmOj1MJ7h3hIkY68QK-NipMMaGMCSwFKnBnbpoIRtGK6Bi9ageKQbpuxJrTDPB06EfQHXKZXIj-4drcgbQ1wV3dxrbBeDl-R7z6IwwLsACibOeir8L-hckvuMLeiE1QWKSB-MXKKy-YwAUnGr7Kwuqoqsa9xkLx7SqxveIDjlJOC-4";
         /// <summary>
         /// Spotify Api requests
         /// </summary>
-        private SpotifyApi api;
+        private readonly SpotifyApi api;
 
 
         /// <summary>
@@ -49,7 +48,7 @@ namespace Addams.Service
         public async Task<List<Models.Playlist>> GetPlaylists()
         {
 
-            List<Models.Playlist> playlists = new List<Models.Playlist>();
+            List<Models.Playlist> playlists = new();
 
             // Get playlist data
             Playlists playlistsData = await this.api.FetchUserPlaylists();
@@ -61,10 +60,8 @@ namespace Addams.Service
                 return new List<Models.Playlist>();
             }
 
-            // playlistsData.items = playlistsData.items.Take(1);
-
             // Get tracks for each playlist
-            foreach (Entities.Playlist p in playlistsData.items)
+            foreach (Playlist p in playlistsData.items)
             {
                 Models.Playlist playlist = await this.GetPlaylist(p);
                 Console.WriteLine($"Playlist {playlist}");
@@ -123,60 +120,60 @@ namespace Addams.Service
             }
 
             // Get tracks data for each track
-            List<Models.Track> tracks = new List<Models.Track>();
+            List<Models.Track> tracks = new();
             foreach (Entities.TrackItem ti in playlistTracks.tracks.items)
             {
                 if (ti.track == null)
                     continue;
-                Models.Track track = await this.GetTrackData(ti.track);
+                Models.Track track = this.GetTrack(ti);
+
                 tracks.Add(track);
             }
 
             return tracks;
         }
 
+        // TODO mettre dans SpotifyService et non api
+        // TODO to recomment
         /// <summary>
         /// Create track object base on trackData fetch from spotify API
         /// </summary>
         /// <param name="trackEntity">track data from playlist call</param>
         /// <returns>Track model object</returns>
         /// <exception cref="SpotifyException"></exception>
-        public async Task<Models.Track> GetTrackData(Entities.Track trackEntity)
+        public Models.Track GetTrack(Entities.TrackItem trackEntity)
         {
-            if (trackEntity.id == null)
+            Entities.Track track = trackEntity.track;
+            if (track.id == null)
             {
-                Console.WriteLine($"GetTrackData id null of the track name: {trackEntity.name}");
+                Console.WriteLine($"GetTrackData id null of the track name: {track.name}");
                 return new Models.Track
                 {
-                    Name = trackEntity.name,
-                    Artists = string.Join(",", trackEntity.artists.Select(x => x.name))
+                    Name = track.name,
+                    Artists = string.Join(",", track.artists.Select(x => x.name))
                 };
             }
 
-            // Get track data
-            TrackData trackData = await this.api.FetchTrack(trackEntity.id) ?? new TrackData();
-
-            Models.Track track = new Models.Track
+            return new Models.Track
             {
-                Id = trackData.id,
-                Name = trackData.name,
-                Artists = string.Join(",", trackData.artists.Select(x => x.name)),
-                AlbumName = trackData.album.name,
-                Explicit = trackData.@explicit,
-                IsLocal = trackData.is_local,
-                Duration = trackData.duration_ms,// TODO convertir en min/secondes
-                // TODO add: album name,
-                // TODO add: album artist name,
-                // TODO add: album release date,
-                // TODO add: disc number,
-                // TODO add: track number,
-                // TODO add: popularity, 
-                // TODO add: added at,
-                // TODO add: album image url,
-                // TODO add: track url,
-                // TODO add: artist url
+                Id = track.id,
+                Name = track.name,
+                Artists = string.Join("|", track.artists.Select(x => x.name)),
+                AlbumName = track.album.name,
+                AlbumArtistName = string.Join("|", track.album.artists.Select(x => x.name)),
+                AlbumReleaseDate = track.album.release_date,
+                DiscNumber = track.disc_number,
+                TrackNumber = track.track_number,
+                Popularity = track.popularity,
+                AddedAt = trackEntity.added_at.ToString() ?? "",
+                AlbumImageUrl = track.album.images.First().url ?? "",
+                TrackPreviewUrl = track.preview_url,
+                TrackUri = track.uri,
+                ArtistUrl = track.artists.First().uri ?? "",
+                Explicit = track.@explicit,
+                IsLocal = track.is_local,
+                Duration = track.duration_ms,
             };
-            return track;
         }
     }
 }

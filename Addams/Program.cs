@@ -1,4 +1,5 @@
-﻿using Addams.Service;
+﻿using Addams.Export;
+using Addams.Service;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,14 +12,15 @@ using System.Threading.Tasks;
 // TODO sonarCube pour l'analyse de code
 // TODO ajouter du multilangue avec un fichier Resx
 // TODO faire des tests unitaires
+// TODO try catch sur les exceptions
 
 namespace Addams
 {
     internal class Program
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
-            Run().GetAwaiter().GetResult();       
+            Run().GetAwaiter().GetResult();
         }
 
         public static async Task Run()
@@ -27,53 +29,37 @@ namespace Addams
             // TODO possibilité de le changer aussi avec une option
             string user = "gravityx3";
 
+            Console.WriteLine("Fetching playlist data...");
             List<Models.Playlist>? playlists = await GetPlaylists(user);
-
-            if(playlists == null)
+            if (playlists == null)
             {
                 // TODO put log
                 return;
             }
+            Console.WriteLine("Playlist fetched...");
 
-            SavePlaylists("TT.csv", playlists);
-            
-            // TEST pour le token
-            //var r = await pro.GetPlaylistsItems();
-            //Console.WriteLine(r);
+            Console.WriteLine("Saving playlist...");
+            SpotifyExport.SavePlaylists(playlists);
+            Console.WriteLine("Playlist saved...");
         }
-        
+
         /// <summary>
         /// Get playlist data of user to save it after
-        /// TODO doc
         /// </summary>
-        /// <returns></returns>
+        /// <param name="user">username to get playlist</param>
+        /// <returns>List of playlists to save</returns>
         public static async Task<List<Models.Playlist>> GetPlaylists(string user)
         {
-            Console.WriteLine("Getting playlist data...");
-            SpotifyService service = new SpotifyService(user);
+            SpotifyService service = new(user);
 
             // Get playlist
             List<Models.Playlist>? playlists = await service.GetPlaylists();
 
-            if(playlists == null)
+            if (playlists == null)
             {
                 return new List<Models.Playlist>();
             }
-          
-            //Console.WriteLine($"HREF playlist : {playlists.href}"); // TODO has to work
-
             return playlists;
-        }
-
-        // TODO une fois que j'ai les data faire un SavePlaylist
-        /// <summary>
-        /// Save playlist data into csv file
-        /// </summary>
-        /// <param name="path">Path of csv file to save playlists</param>
-        /// <param name="data">List of playlist to save</param>
-        public static void SavePlaylists(string path, List<Models.Playlist> data)
-        {
-            // TODO faire un save dans un csv du fichier
         }
     }
 }

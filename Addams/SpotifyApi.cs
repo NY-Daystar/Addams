@@ -18,22 +18,22 @@ namespace Addams.Api
         /// <summary>
         /// Number of tracks fetched in one API call
         /// </summary>
-        private static int TRACK_LIMITS = 100;
+        private static readonly int TRACK_LIMITS = 100;
 
         /// <summary>
         /// Url endpoint for Spotify Api
         /// </summary>
-        private static string API = @"https://api.spotify.com/v1";
+        private static readonly string API = @"https://api.spotify.com/v1";
 
         /// <summary>
         /// User to do the request on playlist
         /// </summary>
-        private string user = String.Empty;
+        private string user;
 
         /// <summary>
         /// OAuth2 token to get info on spotify API for a specific user
         /// </summary>
-        private string authToken = String.Empty;
+        private string authToken;
 
         /// <summary>
         /// Authenticated client with OAuth Token
@@ -59,7 +59,7 @@ namespace Addams.Api
         /// 
         private HttpClient GetAuthClient()
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = new();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.authToken);
             return client;
         }
@@ -102,7 +102,6 @@ namespace Addams.Api
         /// <exception cref="SpotifyException"></exception>
         public async Task<PlaylistTracks> FetchPlaylistTracks(string id)
         {
-
             string url = $@"{API}/playlists/{id}";
             //Console.WriteLine($"FetchPlaylistTracks call API: {url}"); // TODO put log
 
@@ -119,18 +118,25 @@ namespace Addams.Api
             string content = await response.Content.ReadAsStringAsync();
             PlaylistTracks playlistTracks = JsonConvert.DeserializeObject<PlaylistTracks>(content) ?? new PlaylistTracks();
 
+            // If can't catch every tracks for a playlist in one api call
             if (playlistTracks.tracks.total >= TRACK_LIMITS)
             {
                 Console.WriteLine($"Only fetch {playlistTracks.tracks.items.Count} tracks for a total to {playlistTracks.tracks.total}");
-
                 TrackList trackList = playlistTracks.tracks;
+
+                // Get all tracks of specific playlist
                 do
                 {
+                    if (trackList.next == null)
+                    {
+                        Console.WriteLine($"Tracklist next url is null, can't get the rest of playlist");
+                        break;
+                    }
+
                     trackList = await this.FetchOverflowTracks(trackList.next);
                     playlistTracks.tracks.items.AddRange(trackList.items);
-                    Console.WriteLine("ITEMS", playlistTracks.tracks.items.Count);
                 } while (trackList.next != null);
-                playlistTracks.tracks.next = trackList.next;
+                playlistTracks.tracks.next = null;
             }
             return playlistTracks;
         }
@@ -169,7 +175,7 @@ namespace Addams.Api
         /// <returns>Track data</returns>
         /// <exception cref="SpotifyUnauthorizedException"></exception>
         /// <exception cref="SpotifyException"></exception>
-        public async Task<TrackData> FetchTrack(string id)
+        public async Task<Track> FetchTrack(string id)
         {
             string url = $@"{API}/tracks/{id}";
             //Console.WriteLine($"FetchTrack call API: {url}"); // TODO put log
@@ -185,8 +191,8 @@ namespace Addams.Api
                 throw new SpotifyException($"Can't get FetchTrack\nStatusCode {response.StatusCode} : {response.Content}");
             }
             string content = await response.Content.ReadAsStringAsync();
-            TrackData trackData = JsonConvert.DeserializeObject<TrackData>(content) ?? new TrackData();
-            return trackData;
+            Track track = JsonConvert.DeserializeObject<Track>(content) ?? new Track();
+            return track;
         }
     }
 }
