@@ -12,33 +12,18 @@ namespace Addams.Service
     internal class SpotifyService
     {
         /// <summary>
-        /// Default OAuth2 token to get access to spotify API data
-        /// </summary>
-        private static readonly string AUTH_TOKEN = @"BQD4FzvnXKMgRMLU3-gGNmkKqFkSEqCC9KLdvPnBzXQWpdYvO2PtdReosCdAjvaa2E3WKdWjKkO7hHLZwGCFkbD8q4LgWBD0hdEiAoamA9eeAd2TZMe8jKcJL_fJF5HvQ14l3x-aga3O8ikglvbmkMfZVIPWoZocOcwnKzpFvkjPA6h_LDki0BVXljffL6k4l6G_zgqdLhE";
-        /// <summary>
         /// Spotify Api requests
         /// </summary>
         private readonly SpotifyApi api;
 
-
         /// <summary>
-        /// Spotify service to get playlist and track for a user with a default token
+        /// Default Spotify service to get playlist and track with config setup
         /// </summary>
         /// <param name="user">Spotify user name</param>
         /// <param name="authToken">OAuth2 token authentication generated</param>
-        public SpotifyService(string user)
+        public SpotifyService(SpotifyConfig cfg)
         {
-            this.api = new SpotifyApi(user, AUTH_TOKEN);
-        }
-
-        /// <summary>
-        /// Spotify service to get playlist and track for a user with a specific token
-        /// </summary>
-        /// <param name="user">Spotify user name</param>
-        /// <param name="authToken">OAuth2 token authentication generated</param>
-        public SpotifyService(string user, string authToken)
-        {
-            this.api = new SpotifyApi(user, authToken);
+            this.api = new SpotifyApi(cfg);
         }
 
         /// <summary>
@@ -133,14 +118,11 @@ namespace Addams.Service
             return tracks;
         }
 
-        // TODO mettre dans SpotifyService et non api
-        // TODO to recomment
         /// <summary>
         /// Create track object base on trackData fetch from spotify API
         /// </summary>
         /// <param name="trackEntity">track data from playlist call</param>
         /// <returns>Track model object</returns>
-        /// <exception cref="SpotifyException"></exception>
         public Models.Track GetTrack(Entities.TrackItem trackEntity)
         {
             Entities.Track track = trackEntity.track;
@@ -170,6 +152,7 @@ namespace Addams.Service
                 TrackPreviewUrl = track.preview_url,
                 TrackUri = track.uri,
                 ArtistUrl = track.artists.First().uri ?? "",
+                AlbumUrl = track.album.uri ?? "",
                 Explicit = track.@explicit,
                 IsLocal = track.is_local,
                 Duration = track.duration_ms,

@@ -1,7 +1,9 @@
-﻿using System;
-using System.Drawing;
+﻿using Addams.Exceptions;
+using System;
 using System.IO;
 using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Xml.Linq;
 
 namespace Addams
 {
@@ -14,25 +16,51 @@ namespace Addams
         /// <summary>
         /// Spotify username
         /// </summary>
-        public string user { get; set; } = String.Empty;
+        [JsonPropertyName("user")]
+        public string User
+        {
+            get { return "gravityx3"; } // TODO to delete
+            set { }
+        }
 
         /// <summary>
         /// Spotify Client ID from app created in spotify account
         /// </summary>
-        public string clientID { get; set; } = String.Empty;
+        [JsonPropertyName("clientID")]
+        public string ClientID { get; set; } = String.Empty;
 
         /// <summary>
         /// Spotify Client secret from app created in spotify account
         /// </summary>
-        public string clientSecret { get; set; } = String.Empty;
+        [JsonPropertyName("clientSecret")]
+        public string ClientSecret { get; set; } = String.Empty;
 
         /// <summary>
-        /// Oauth2 token generated
+        /// OAuth2 token generated 
+        /// Default OAuth2 token
         /// </summary>
-        public string token { get; set; } = String.Empty;
+        [JsonPropertyName("token")]
+        public string Token
+        {
+            get
+            {
+                // TODO to delete
+                return @"BQDJIh8gVYoovzVjLOSQ46Kv-tkp0sU6eoInjNg1slH0vSxjbXgxEaWrTINiDxF7T8ALqayWVV1dhcaHEaN_1tdoxEH5rIrmYrGA-dIDEWVHNDlzVeq2TJwIgoIarNY-28slsfjRcFO0ldpVaX1SyT6gt_o0-go-f593C7ZjOxG1hNnGGtjU9IJ7Yl8SwGzXZqIwVbPx1iY";
+            }
+            set { }
+        }
 
         /// <summary>
-        /// Config file store in AppData folder
+        /// Datetime of last save
+        /// </summary>
+        [JsonPropertyName("datetime")]
+        public string _datetime
+        {
+            get { return DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss"); }
+        }
+
+        /// <summary>
+        /// Config file store in AppData folder : %APPDATA%\Addams
         /// </summary>
         public static string filePath
         {
@@ -40,10 +68,23 @@ namespace Addams
             {
                 return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Addams\\config.json");
             }
-            set { }
         }
 
-        //$@"Path.Con{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}";
+
+        /// <summary>
+        /// Ask data of user to create configuration program
+        /// </summary>
+        public void Setup()
+        {
+            Console.Write("Enter your spotify username: ");
+            User = Console.ReadLine() ?? String.Empty;
+
+            Console.Write("Enter your spotify clientID: ");
+            ClientID = Console.ReadLine() ?? String.Empty;
+
+            Console.Write("Enter your spotify clientSecret: ");
+            ClientSecret = Console.ReadLine() ?? String.Empty;
+        }
 
         /// <summary>
         /// Serialize object to save json file in appData
@@ -79,25 +120,42 @@ namespace Addams
         /// <returns>SpotiifyConfig with datavalue from file</returns>
         public static SpotifyConfig Read()
         {
-            string content = File.ReadAllText(filePath);
-            return JsonSerializer.Deserialize<SpotifyConfig>(content) ?? new SpotifyConfig();
+            try
+            {
+                string content = File.ReadAllText(filePath);
+                return JsonSerializer.Deserialize<SpotifyConfig?>(content) ?? new SpotifyConfig();
+            }
+            catch
+            {
+                throw new SpotifyConfigException();
+            }
         }
 
-        public override bool Equals(Object obj)
+        public override bool Equals(object? obj)
         {
             //Check for null and compare run-time types.
-            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
-            {
-                return false;
-            }
-            else
-            {
-                SpotifyConfig p = (SpotifyConfig)obj;
-                return user == p.user
-                    && clientID == p.clientID
-                    && clientSecret == p.clientSecret
-                    && token == p.token;
-            }
+            if (obj == null || this.GetType() != obj.GetType()) return false;
+
+            SpotifyConfig p = (SpotifyConfig)obj;
+
+            return User == p.User
+                && ClientID == p.ClientID
+                && ClientSecret == p.ClientSecret
+                && Token == p.Token;
+        }
+
+        public override int GetHashCode()
+        {
+            return User.GetHashCode() + ClientID.GetHashCode() + ClientSecret.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return $"\tUser: '{User}'\n" +
+                $"\tClientID: '{ClientID}'\n" +
+                $"\tClientSecret: '{ClientSecret}'\n" +
+                $"\tToken: '{Token}'\n" +
+                $"\tDatetime: '{_datetime}'";
         }
     }
 }

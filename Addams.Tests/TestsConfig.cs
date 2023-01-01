@@ -17,9 +17,10 @@ namespace Addams.Tests
         {
             SpotifyConfig config = new()
             {
-                clientID = "MY_CLIENT_IDa",
-                token = "MY_TOKEN",
-                user = "MY_USER"
+                ClientID = "MY_CLIENT_ID",
+                ClientSecret = "MY_CLIENT_SECRET",
+                Token = "MY_TOKEN",
+                User = "MY_USER"
             };
 
             config.Save();

@@ -1,14 +1,15 @@
-﻿using Addams.Entities;
-using Addams.Utils;
+﻿using Addams.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Xml.Linq;
 
 namespace Addams.Export
 {
-    // TODO to comment: classe qui gere la sauvegarde des fichiers
+    
+    /// <summary>
+    /// Class to handle csv export data file with spotify tracks data
+    /// </summary>
     public class SpotifyExport
     {
         /// <summary>
@@ -59,21 +60,43 @@ namespace Addams.Export
 
             // TODO mettre avec le resx d'autres langues
             string headerLine = string.Join(",", new List<string> {
-                "Track Name", "Artist Name(s)", "Album Name",
-                "Album Artist Name(s)", "Album Release Date","Disc Number",
-                "Track Duration", "Track Number", "Explicit",
-                "Popularity", "Added At", "Album Image Url",
-                "Track Preview Url", "Track Uri", "Artist Url"
+                "Track Name",
+                "Artist Name(s)",
+                "Album Name",
+                "Album Artist Name(s)",
+                "Album Release Date",
+                "Disc Number",
+                "Track Number",
+                "Track Duration",
+                "Explicit",
+                "Popularity",
+                "Added At",
+                "Track Uri",
+                "Artist Url",
+                "Album Url",
+                "Album Image Url",
+                "Track Preview Url",
             });
 
             List<string> dataLines = playlist.Tracks.Select(t =>
             string.Join(",",
-                t.Name.Replace(",", "-"), t.Artists, t.AlbumName,
-                t.AlbumArtistName, t.AlbumReleaseDate, t.DiscNumber,
-                t.TrackNumber, t.Duration, t.Explicit,
-                t.Popularity, t.AddedAt, t.AlbumImageUrl,
-                t.TrackPreviewUrl, t.TrackUri, t.ArtistUrl
-                )).ToList();
+                t.Name.Replace(",", "-"),
+                t.Artists,
+                t.AlbumName,
+                t.AlbumArtistName,
+                t.AlbumReleaseDate,
+                t.DiscNumber,
+                t.TrackNumber,
+                t.Duration,
+                t.Explicit,
+                t.Popularity,
+                t.AddedAt,
+                t.TrackUri,
+                t.ArtistUrl,
+                t.AlbumUrl,
+                t.AlbumImageUrl,
+                t.TrackPreviewUrl)
+            ).ToList();
 
             List<string> csvData = new();
             csvData.Add(headerLine);

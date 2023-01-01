@@ -1,5 +1,4 @@
-﻿
-using Addams.Entities;
+﻿using Addams.Entities;
 using Addams.Exceptions;
 using Newtonsoft.Json;
 using System;
@@ -32,29 +31,53 @@ namespace Addams.Api
         /// <summary>
         /// User to do the request on playlist
         /// </summary>
-        private string user;
+        private string User;
+
+        /// <summary>
+        /// Id of spotify app
+        /// </summary>
+        private string ClientID;
+
+        /// <summary>
+        /// Secret of spotify app
+        /// </summary>
+        private string ClientSecret;
 
         /// <summary>
         /// OAuth2 token to get info on spotify API for a specific user
         /// </summary>
-        private string authToken;
+        private string AuthToken = String.Empty;
 
         /// <summary>
         /// Authenticated client with OAuth Token
         /// </summary>
-        private HttpClient client;
+        private HttpClient Client;
 
         /// <summary>
         /// Setup Spotify API
         /// </summary>
         /// <param name="user">User to get infos</param>
         /// <param name="authToken">Authentication token to get access to the data</param>
-        public SpotifyApi(string user, string authToken)
+        public SpotifyApi(SpotifyConfig cfg)
         {
-            this.user = user;
-            this.authToken = authToken;
-            this.client = this.GetAuthClient();
+            this.User = cfg.User;
+            this.ClientID = cfg.ClientID;
+            this.ClientSecret = cfg.ClientSecret;
+            this.AuthToken = cfg.Token;
+            this.Client = this.GetAuthClient();
         }
+
+        /// <summary>
+        /// Setup Spotify API
+        /// </summary>
+        /// <param name="user">User to get infos</param>
+        /// <param name="authToken">Authentication token to get access to the data</param>
+        //public SpotifyApi(string user, string authToken)
+        //{
+        //    this.User = user;
+        //    this.AuthToken = authToken;
+        //    this.Client = this.GetAuthClient();
+        //}
 
         /// <summary>
         /// Setup http client with authorization token (oauth2) for spotify api
@@ -64,7 +87,7 @@ namespace Addams.Api
         private HttpClient GetAuthClient()
         {
             HttpClient client = new();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.authToken);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.AuthToken);
             return client;
         }
 
@@ -77,13 +100,13 @@ namespace Addams.Api
         public async Task<Playlists> FetchUserPlaylists()
         {
 
-            string url = $@"{API}/users/{this.user}/playlists?limit={PLAYLIST_LIMIT}&offset=0";
+            string url = $@"{API}/users/{this.User}/playlists?limit={PLAYLIST_LIMIT}&offset=0";
             //Console.WriteLine($"FetchUserPlaylists call API: {url}"); // TODO put log
 
-            HttpResponseMessage response = await this.client.GetAsync(url);
+            HttpResponseMessage response = await Client.GetAsync(url);
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
-                throw new SpotifyUnauthorizedException($"Can't get FetchUserPlaylists\nThe token {this.authToken}\nis invalid for user: {this.user}\n" +
+                throw new SpotifyUnauthorizedException($"Can't get FetchUserPlaylists\nThe token {this.AuthToken}\nis invalid for user: {this.User}\n" +
                     "You need to create a new one or refresh it");
             }
             if (!response.IsSuccessStatusCode)
@@ -107,10 +130,10 @@ namespace Addams.Api
             string url = $@"{API}/playlists/{id}";
             //Console.WriteLine($"FetchPlaylistTracks call API: {url}"); // TODO put log
 
-            HttpResponseMessage response = await this.client.GetAsync(url);
+            HttpResponseMessage response = await Client.GetAsync(url);
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
-                throw new SpotifyUnauthorizedException($"Can't get FetchPlaylistTracks\nThe token {this.authToken}\nis invalid for user: {this.user}\n" +
+                throw new SpotifyUnauthorizedException($"Can't get FetchPlaylistTracks\nThe token {this.AuthToken}\nis invalid for user: {this.User}\n" +
                     "You need to create a new one or refresh it");
             }
             if (!response.IsSuccessStatusCode)
@@ -154,10 +177,10 @@ namespace Addams.Api
         {
             //Console.WriteLine($"FetchOverflowTracks call API: {url}"); // TODO put log
 
-            HttpResponseMessage response = await this.client.GetAsync(url);
+            HttpResponseMessage response = await Client.GetAsync(url);
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
-                throw new SpotifyUnauthorizedException($"Can't get FetchPlaylistTracks\nThe token {this.authToken}\nis invalid for user: {this.user}\n" +
+                throw new SpotifyUnauthorizedException($"Can't get FetchPlaylistTracks\nThe token {this.AuthToken}\nis invalid for user: {this.User}\n" +
                     "You need to create a new one or refresh it");
             }
             if (!response.IsSuccessStatusCode)
@@ -182,10 +205,10 @@ namespace Addams.Api
             string url = $@"{API}/tracks/{id}";
             //Console.WriteLine($"FetchTrack call API: {url}"); // TODO put log
 
-            HttpResponseMessage response = await this.client.GetAsync(url);
+            HttpResponseMessage response = await Client.GetAsync(url);
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
-                throw new SpotifyUnauthorizedException($"Can't get FetchTrack\nThe token {this.authToken}\nis invalid for user: {this.user}\n" +
+                throw new SpotifyUnauthorizedException($"Can't get FetchTrack\nThe token {this.AuthToken}\nis invalid for user: {this.User}\n" +
                     "You need to create a new one or refresh it");
             }
             if (!response.IsSuccessStatusCode)
