@@ -7,8 +7,7 @@ namespace Addams.Tests
 {
     public class TestsApi
     {
-
-        private string authToken = @"BQBXPZbjEZBItjzh7Ery6IKgW4k_886Fr7b91oj-gAXxOOLfhQW-cnDihUERfIK4adgGJWycSbIN-QubClSO4_Gbq0PUry8ybtCrx5vpPK77gMeKoik1tm2EhbTk7KL3ztZuWEjlVul4vlkhcQck_Vcdy4fvbiACe3QY-VtfNLNzV0gpyFTowEHJXAakaBKGQoZGO7RFDcM";
+        private string authToken = @"BQD4FzvnXKMgRMLU3-gGNmkKqFkSEqCC9KLdvPnBzXQWpdYvO2PtdReosCdAjvaa2E3WKdWjKkO7hHLZwGCFkbD8q4LgWBD0hdEiAoamA9eeAd2TZMe8jKcJL_fJF5HvQ14l3x-aga3O8ikglvbmkMfZVIPWoZocOcwnKzpFvkjPA6h_LDki0BVXljffL6k4l6G_zgqdLhE";
         private string user = "gravityx3";
         private SpotifyApi api;
 
