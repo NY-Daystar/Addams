@@ -25,6 +25,9 @@ namespace Addams
 
         public static async Task Run()
         {
+            // TODO faire une class config avec une method read et une method write
+            // TODO la rendre serializable https://learn.microsoft.com/en-us/dotnet/standard/serialization/basic-serialization
+            // TODO faire une method askValue aussi pour recuperer le nom de user et de clientid
             // TODO le mettre dans une config et lors du premier lancement le demander au user 
             // TODO possibilité de le changer aussi avec une option
             string user = "gravityx3";

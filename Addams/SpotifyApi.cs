@@ -15,10 +15,14 @@ namespace Addams.Api
     /// </summary>
     public class SpotifyApi
     {
-        /// <summary>
-        /// Number of tracks fetched in one API call
+        /// Number of playlist fetchable in spotify API
         /// </summary>
-        private static readonly int TRACK_LIMITS = 100;
+        private static readonly int PLAYLIST_LIMIT = 50;
+
+        /// <summary>
+        /// Number of tracks fetched in spotify API
+        /// </summary>
+        private static readonly int TRACK_LIMIT = 100;
 
         /// <summary>
         /// Url endpoint for Spotify Api
@@ -72,10 +76,8 @@ namespace Addams.Api
         /// <exception cref="SpotifyException"></exception>
         public async Task<Playlists> FetchUserPlaylists()
         {
-            const int limit = 50;
-            const int offset = 0;
 
-            string url = $@"{API}/users/{this.user}/playlists?limit={limit}&offset={offset}";
+            string url = $@"{API}/users/{this.user}/playlists?limit={PLAYLIST_LIMIT}&offset=0";
             //Console.WriteLine($"FetchUserPlaylists call API: {url}"); // TODO put log
 
             HttpResponseMessage response = await this.client.GetAsync(url);
@@ -119,7 +121,7 @@ namespace Addams.Api
             PlaylistTracks playlistTracks = JsonConvert.DeserializeObject<PlaylistTracks>(content) ?? new PlaylistTracks();
 
             // If can't catch every tracks for a playlist in one api call
-            if (playlistTracks.tracks.total >= TRACK_LIMITS)
+            if (playlistTracks.tracks.total >= TRACK_LIMIT)
             {
                 Console.WriteLine($"Only fetch {playlistTracks.tracks.items.Count} tracks for a total to {playlistTracks.tracks.total}");
                 TrackList trackList = playlistTracks.tracks;

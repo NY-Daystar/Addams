@@ -14,7 +14,7 @@ namespace Addams.Service
         /// <summary>
         /// Default OAuth2 token to get access to spotify API data
         /// </summary>
-        private static readonly string AUTH_TOKEN = @"BQDwkIeW2S_kqxt0rAw1kLNczprRqjmOj1MJ7h3hIkY68QK-NipMMaGMCSwFKnBnbpoIRtGK6Bi9ageKQbpuxJrTDPB06EfQHXKZXIj-4drcgbQ1wV3dxrbBeDl-R7z6IwwLsACibOeir8L-hckvuMLeiE1QWKSB-MXKKy-YwAUnGr7Kwuqoqsa9xkLx7SqxveIDjlJOC-4";
+        private static readonly string AUTH_TOKEN = @"BQD4FzvnXKMgRMLU3-gGNmkKqFkSEqCC9KLdvPnBzXQWpdYvO2PtdReosCdAjvaa2E3WKdWjKkO7hHLZwGCFkbD8q4LgWBD0hdEiAoamA9eeAd2TZMe8jKcJL_fJF5HvQ14l3x-aga3O8ikglvbmkMfZVIPWoZocOcwnKzpFvkjPA6h_LDki0BVXljffL6k4l6G_zgqdLhE";
         /// <summary>
         /// Spotify Api requests
         /// </summary>
