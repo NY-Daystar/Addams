@@ -68,18 +68,6 @@ namespace Addams.Api
         }
 
         /// <summary>
-        /// Setup Spotify API
-        /// </summary>
-        /// <param name="user">User to get infos</param>
-        /// <param name="authToken">Authentication token to get access to the data</param>
-        //public SpotifyApi(string user, string authToken)
-        //{
-        //    this.User = user;
-        //    this.AuthToken = authToken;
-        //    this.Client = this.GetAuthClient();
-        //}
-
-        /// <summary>
         /// Setup http client with authorization token (oauth2) for spotify api
         /// </summary>
         /// <returns>HttpClient with token authentication value</returns>

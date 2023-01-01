@@ -26,6 +26,5 @@ namespace Addams.Tests
 
             // TODO assert si le fichier existe
         }
-
     }
 }

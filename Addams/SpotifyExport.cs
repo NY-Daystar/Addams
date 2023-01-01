@@ -99,10 +99,13 @@ namespace Addams.Export
             ).ToList();
 
             List<string> csvData = new();
-            csvData.Add(headerLine);
+            csvData.Add(headerLine); // TODO info IDE0028: Collection initialization can be simplified 
             csvData.AddRange(dataLines);
 
             File.WriteAllLines(csvFilePath, csvData);
+            // TODO gerer l'exceptiion dans le cas ou le csv est open
+            // System.IO.IOException: 'The process cannot access the file
+            // 'D:\Dev\Addams\Addams\bin\Debug\net7.0\data\A ecouter.csv' because it is being used by another process.'
         }
     }
 }

@@ -155,7 +155,7 @@ namespace Addams.Service
                 AlbumUrl = track.album.uri ?? "",
                 Explicit = track.@explicit,
                 IsLocal = track.is_local,
-                Duration = track.duration_ms,
+                _duration = track.duration_ms,
             };
         }
     }

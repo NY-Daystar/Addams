@@ -1,4 +1,5 @@
 ﻿using System;
+using Addams.Utils;
 
 namespace Addams.Models
 {
@@ -48,16 +49,20 @@ namespace Addams.Models
         public int TrackNumber { get; set; }
 
         public bool IsLocal { get; set; }
-        // TODO voir la duration pour la convertir en min/secondes
-        // TODO faire un  test unitaires dessus
-        // TODO replace par 
-        // public int _duration { get; set; }
-        // public string Duration
+
+        public int _duration { get; set; }
 
         /// <summary>
         /// Time duration of the track ('minutes:secondes')
         /// </summary>
-        public int Duration { get; set; }
+        /// TODO
+        public string Duration
+        {
+            get 
+            { 
+                return FormatDuration(_duration); 
+            }
+        }
 
         /// <summary>
         /// Number in range 0-100 for unpopular to very popular
@@ -104,5 +109,16 @@ namespace Addams.Models
         /// </summary>
         /// <returns>Name, artist and the id of the track</returns>
         public override string ToString() => $"Name : {Name} - Artist : {Artists} - Id : {Id}";
+
+        /// <summary>
+        /// Format milliseconds value to track duration standard
+        /// </summary>
+        /// <param name="duration">ms value</param>
+        /// <returns>time formatted (HH:MM:SS)</returns>
+        public string FormatDuration(int duration)
+        {
+            TimeSpan ts = TimeConverter.ConvertMsToTimeSpan(duration);
+            return TimeConverter.FormatTimeSpan(ts);
+        }
     }
 }

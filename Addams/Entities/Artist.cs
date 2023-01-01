@@ -1,5 +1,10 @@
-﻿namespace Addams.Entities
+﻿using Newtonsoft.Json;
+
+namespace Addams.Entities
 {
+
+    // TODO use attribute: [DefaultValue(5)]            
+    // TODO use attribute: [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
     /// <summary>
     /// Artist data
     /// </summary>

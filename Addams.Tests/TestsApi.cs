@@ -7,32 +7,25 @@ namespace Addams.Tests
 {
     public class TestsApi
     {
-        private string authToken = @"BQDJIh8gVYoovzVjLOSQ46Kv-tkp0sU6eoInjNg1slH0vSxjbXgxEaWrTINiDxF7T8ALqayWVV1dhcaHEaN_1tdoxEH5rIrmYrGA-dIDEWVHNDlzVeq2TJwIgoIarNY-28slsfjRcFO0ldpVaX1SyT6gt_o0-go-f593C7ZjOxG1hNnGGtjU9IJ7Yl8SwGzXZqIwVbPx1iY";
-        private string user = "gravityx3";
         private SpotifyApi api;
 
         [SetUp]
         // TODO generer un token a terme
         public void SetUp()
         {
-            SpotifyConfig cfg = new()
-            {
-                User = user,
-                Token = authToken,
-            };
+            SpotifyConfig cfg = new();
             api = new SpotifyApi(cfg);
         }
 
-
-        [Test]
+        // TODO a tester
         public void TestGetPlaylistWithBadToken()
         {
-
-            SpotifyApi api = new SpotifyApi(new SpotifyConfig()
+            SpotifyConfig config = new SpotifyConfig()
             {
                 User = "gravityx3",
                 Token = "bad_token",
-            });
+            };
+            SpotifyApi api = new SpotifyApi(config);
 
             Assert.ThrowsAsync<SpotifyUnauthorizedException>(() => api.FetchUserPlaylists());
         }
