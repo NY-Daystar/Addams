@@ -38,10 +38,14 @@ namespace Addams
         /// <returns></returns>
         public static SpotifyConfig SetupConfig()
         {
+            SpotifyConfig defaultConfig = new();
             SpotifyConfig config = new();
+
             try
             {
                 config = SpotifyConfig.Read();
+                config.Token = defaultConfig.Token; // TODO get default token for now 
+                // TODO forcer le refresh du TOKEN
                 Console.WriteLine($"Config already exists:\n{config}");
             }
             catch (SpotifyConfigException)

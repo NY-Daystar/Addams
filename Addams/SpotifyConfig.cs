@@ -39,15 +39,7 @@ namespace Addams
         /// Default OAuth2 token
         /// </summary>
         [JsonPropertyName("token")]
-        public string Token
-        {
-            get
-            {
-                // TODO to delete
-                return @"BQBdaFNsVuh7xAfchvMzQmEYbAd3LddvputukQ37CUdHit59IKsNrNc15KZ0dGEyzH7_Y30xXnF7eBlpL2xh7f5M7qsTsWBWIOoedvRMSG_i4iMSxyiNU50mO9VWj9c2ARku1FzjPA8HVNYpQpih8piI6ebN-xpAwveW8tJ9UF6S0gC1yZCBINzydeP2n-qnjkV1AhT6vq8";
-            }
-            set { }
-        }
+        public string Token { get; set; } = @"BQAvaUu7hzYG6YjaE2Cw--bJdCmWt2R7tNYmBs00SbsSxVkCaoeztmeZy-O3wQ3ievseKdRU3wdcFwSde6sNRFFLndVsV52K-hJufCLsu773-za-nuN2-qX6Y40KLIIROaZxGZe4Ow9DinLKkDnGHgM_3X4ai94iFRZ0YEj0q0-ABBHVAJ5qBll9quCObqVOWDynB1CW";
 
         /// <summary>
         /// Datetime of last save

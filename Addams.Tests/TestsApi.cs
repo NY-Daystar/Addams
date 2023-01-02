@@ -17,7 +17,7 @@ namespace Addams.Tests
             api = new SpotifyApi(cfg);
         }
 
-        // TODO a tester
+        [Test]
         public void TestGetPlaylistWithBadToken()
         {
             SpotifyConfig config = new SpotifyConfig()

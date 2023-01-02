@@ -14,9 +14,13 @@ namespace Addams.Api
     /// </summary>
     public class SpotifyApi
     {
-        /// Number of playlist fetchable in spotify API
+        /// Number of playlists fetchable in spotify API
         /// </summary>
         private static readonly int PLAYLIST_LIMIT = 50;
+
+        /// Number of tracks liked fetchable in spotify API
+        /// </summary>
+        private static readonly int TRACK_LIKED_LIMIT = 50;
 
         /// <summary>
         /// Number of tracks fetched in spotify API
@@ -80,6 +84,36 @@ namespace Addams.Api
         }
 
         /// <summary>
+        /// Fetch Liked songs of user
+        /// </summary>
+        /// <returns>Playlist of liked soong of a user return by spotify api /tracks</returns>
+        /// <exception cref="SpotifyUnauthorizedException"></exception>
+        /// <exception cref="SpotifyException"></exception>
+        public async Task<LikePlaylist> FetchUserLikeTracks()
+        {
+            // TODO Faire une boucle qui recupere tout en se basant sur la vaaleurr total et en faisant varier ll'offset
+            string url = $@"{API}/users/{this.User}/tracks?limit={TRACK_LIKED_LIMIT}&offset=50";
+            //Console.WriteLine($"FetchUserLikeTracks call API: {url}"); // TODO put log
+
+            HttpResponseMessage response = await Client.GetAsync(url);
+            if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                throw new SpotifyUnauthorizedException($"Can't get FetchUserLikeTracks\nThe token {this.AuthToken}\nis invalid for user: {this.User}\n" +
+                    "You need to create a new one or refresh it");
+            }
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new SpotifyException($"Can't get FetchUserLikeTracks\nStatusCode {response.StatusCode} : {response.Content}");
+            }
+            string content = await response.Content.ReadAsStringAsync();
+            LikePlaylist playlist = JsonConvert.DeserializeObject<LikePlaylist>(content) ?? new LikePlaylist();
+            return playlist;
+        }
+
+
+
+
+        /// <summary>
         /// Fetch data about playlist's user
         /// </summary>
         /// <returns>Playlist data return by spotify api /playlists</returns>
@@ -87,7 +121,6 @@ namespace Addams.Api
         /// <exception cref="SpotifyException"></exception>
         public async Task<Playlists> FetchUserPlaylists()
         {
-
             string url = $@"{API}/users/{this.User}/playlists?limit={PLAYLIST_LIMIT}&offset=0";
             //Console.WriteLine($"FetchUserPlaylists call API: {url}"); // TODO put log
 
