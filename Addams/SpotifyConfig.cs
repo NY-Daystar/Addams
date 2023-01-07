@@ -39,7 +39,7 @@ namespace Addams
         /// Default OAuth2 token
         /// </summary>
         [JsonPropertyName("token")]
-        public string Token { get; set; } = @"BQAvaUu7hzYG6YjaE2Cw--bJdCmWt2R7tNYmBs00SbsSxVkCaoeztmeZy-O3wQ3ievseKdRU3wdcFwSde6sNRFFLndVsV52K-hJufCLsu773-za-nuN2-qX6Y40KLIIROaZxGZe4Ow9DinLKkDnGHgM_3X4ai94iFRZ0YEj0q0-ABBHVAJ5qBll9quCObqVOWDynB1CW";
+        public string Token { get; set; }
 
         /// <summary>
         /// Datetime of last save

@@ -1,5 +1,5 @@
-﻿using Addams.Export;
-using Addams.Exceptions;
+﻿using Addams.Exceptions;
+using Addams.Export;
 using Addams.Service;
 using System;
 using System.Collections.Generic;
@@ -16,10 +16,18 @@ namespace Addams
 
         public static async Task Run()
         {
+            Console.WriteLine("Setup config..."); // TODO put log
             SpotifyConfig cfg = SetupConfig();
 
-            Console.WriteLine("Fetching playlist data...");
-            List<Models.Playlist>? playlists = await GetPlaylists(cfg);
+            Console.WriteLine("Setup service..."); // TODO put log
+            SpotifyService service = new(cfg);
+            
+            Console.WriteLine("Get OAuth2 token...");
+            string newToken = await service.RefreshToken();
+            service.Update(newToken);
+
+            Console.WriteLine("Fetching playlist data..."); // TODO put log
+            List<Models.Playlist>? playlists = await GetPlaylists(service);
             if (playlists == null)
             {
                 // TODO put log
@@ -45,7 +53,7 @@ namespace Addams
             {
                 config = SpotifyConfig.Read();
                 config.Token = defaultConfig.Token; // TODO get default token for now 
-                // TODO forcer le refresh du TOKEN
+                SpotifyService service = new(config);
                 Console.WriteLine($"Config already exists:\n{config}");
             }
             catch (SpotifyConfigException)
@@ -57,15 +65,14 @@ namespace Addams
             return config;
         }
 
+        // TODO recomment
         /// <summary>
         /// Get playlist data of user to save it after
         /// </summary>
         /// <param name="user">username to get playlist</param>
         /// <returns>List of playlists to save</returns>
-        public static async Task<List<Models.Playlist>> GetPlaylists(SpotifyConfig config)
+        public static async Task<List<Models.Playlist>> GetPlaylists(SpotifyService service)
         {
-            SpotifyService service = new(config);
-
             // Get playlist
             List<Models.Playlist>? playlists = await service.GetPlaylists();
 
@@ -75,5 +82,6 @@ namespace Addams
             }
             return playlists;
         }
+
     }
 }

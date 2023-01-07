@@ -2,6 +2,7 @@
 using Addams.Exceptions;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -50,7 +51,7 @@ namespace Addams.Api
         /// <summary>
         /// OAuth2 token to get info on spotify API for a specific user
         /// </summary>
-        private string AuthToken = String.Empty;
+        public string AuthToken { private get; set; }
 
         /// <summary>
         /// Authenticated client with OAuth Token
@@ -82,6 +83,44 @@ namespace Addams.Api
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.AuthToken);
             return client;
         }
+
+        // TODO to comment
+        public void RefreshClient(string token)
+        {
+            this.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        }
+
+        //TODO to comment
+        public async Task<Token> Authorize()
+        {
+            FormUrlEncodedContent requestData = new FormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string, string>("client_id", this.ClientID),
+                new KeyValuePair<string, string>("client_secret", this.ClientSecret),
+                //new KeyValuePair<string, string>("scope","playlist-read-private user-library-read ugc-image-upload user-read-playback-state user-modify-playback-state user-read-currently-playing app-remote-control playlist-read-private playlist-read-collaborative playlist-modify-private playlist-modify-public user-follow-modify user-follow-read user-read-playback-position user-top-read user-read-recently-played user-library-modify user-library-read user-read-email user-read-private"),
+                new KeyValuePair<string, string>("scope","playlist-read-private user-library-read"),
+                new KeyValuePair<string, string>("grant_type", "authorization_code")
+            });
+
+            string url = "https://accounts.spotify.com/api/token";
+            var response = await new HttpClient().PostAsync(url, requestData);
+
+            if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                // TODO changer le message
+                throw new SpotifyUnauthorizedException($"Can't get Authorize\nThe token {this.AuthToken}\nis invalid for user: {this.User}\n" +
+                    "You need to create a new one or refresh it");
+            }
+            if (!response.IsSuccessStatusCode)
+            {
+                // TODO changer le message
+                throw new SpotifyException($"Can't get Authorize\nStatusCode {response.StatusCode} : {response.Content}");
+            }
+            string content = await response.Content.ReadAsStringAsync();
+            Token token = JsonConvert.DeserializeObject<Token>(content) ?? new Token();
+            return token;
+        }
+
 
         /// <summary>
         /// Fetch Liked songs of user

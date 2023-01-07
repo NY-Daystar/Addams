@@ -1,0 +1,85 @@
+﻿// TODO faire un Analyze CodeCleanup > Analyze > Code Cleanup > Run Code cleanup profile 1
+
+// TODO tester la classe ProgrammeNEW
+
+// TODO a tester D:\Dev\Workspace-Golang - A METTRE SUR GITHUB\update-golang
+
+// TODO tester Workspace-Python
+
+// TODO faire en sorte que un service a une config et une api
+
+// Voir pour utilier GIT sur VS 2022
+
+// TODO mettre un logger dans APPDATA
+	- https://stackify.com/log4net-guide-dotnet-logging/
+	- https://stackoverflow.com/questions/1260157/whats-the-most-widely-used-logging-framework-in-c
+
+	// TODO tester le projet Dev/WebApiAuth avec l'url 
+// localhost:8888/login avec le bon clientId et clientSecret
+
+// TODO Recuperer la playlist des song likés
+	- Trouver l'url/id de cette playlist
+	- puis l'extraire
+	- Voir sur l'exemple exportify il y arrive sinon
+
+// TODO faire un setup d'option au lancement de l'application
+//- 1 - lancement du program pour l'export
+//- 2 - Show configuration file
+//      - Afficher le path
+//      - Afficher la config
+//- 3 - Modifier configuration file
+//          - Afficher la config
+//          - Rappeler le setup pour réecrire les value et reset le token
+//- 4 - Show log filee
+//    - Afficher le path des logs
+//    - Afficher les 50 deerniers logs
+
+Release 1.5
+
+// TODO gerer le OAUTH2 
+	- demander à chatGPT pour faire une autorisaction code flow en c# sur spotify pour l'oauth2
+	- il faut suivre ce guide qui demande une authorisation de fou : https://developer.spotify.com/documentation/general/guides/authorization/code-flow/
+	- detecter l'obsolescence du token OAUTH2 et le regenerer puis le sauvegarder dauns un fichier de config dans APPDATA
+	- Regarder ce code pour avoirr let token: https://github.com/watsonbox/exportify/blob/d1247f715df1932ccc389364bffdb2f95d8d4bcb/src/components/Login.jsx
+	- Recuperer l'expiration qui est de 3600s et mettre du coup la date d'expiration en config et ne pas refresh si la date n'est pas atteinte
+Release-2 :
+// TODO configure code analysis : Analyze > Configure code analysis
+// TODO setup un msi package pour une install propre etc...
+// TODO setup un autoupdater avec la release github
+
+// TODO faire un github action pour lancer les tests unitaires
+// TODO sonarCube pour l'analyse de code
+// TODO ajouter du multilangue avec un fichier Resx
+// TODO faire des tests unitaires
+// TODO try catch sur les exceptions
+
+Release-3 :
+Faire une appli windows form
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+- On a enregistré une application pour utiliser l'api spotify
+	- Lien pour enregistrer l'application: https://developer.spotify.com/dashboard/applications
+	- On peut ensuite generer un token oauth2 avec ces infos pour obtenir un token: https://www.youtube.com/watch?v=N34BM2CU_3g
+	- Il faudra dans le code faire ça pour recuperer le token: https://developer.spotify.com/documentation/general/guides/authorization/client-credentials/
+	- Pour l'appel WEBS voir postman avec la liste des appels
+- Exporter mes playlist Spotify en csv 
+- puis voir pour l'automatiser régulièrement (appel DLL via script bash)
+- https://soundiiz.com/fr/tutorial/export-spotify-to-text
+- Faire le README: avec la description de ce qu'il y a faire https://developer.spotify.com/dashboard/applications
+- Voir exemple de code C# sur github pour voir la structure
+	- README + CHANGELOG
+		- README AVEC LA VERSION
+	- GITHUB ACTION
+- V1 avec juste la ligne de commande qui demande le token qui le save dans un fichier json et qui execute les api pour sauvegarder le fichier
+	- Si token invalide ou non existant on demande d'en régénérer un
+	- Mettre les steps de géneration du token avec ouverture du navigateur par defaut du user sur les bonne page spotify
+	- Ouverture de postman également
+	- Faire un executable portable dans GIT
+- V2 qui génère le token si il n'existe pas, verification du token dans le cas 
+	- Voir comment on fait un appel OAUTH2 en C# pour generer le token spotify
+	- Save les infos client id et autre dans le json
+	- Faire exe portable spotify et un setup
+- V3 - interface graphique
+

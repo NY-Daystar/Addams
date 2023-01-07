@@ -11,10 +11,16 @@ namespace Addams.Service
 {
     internal class SpotifyService
     {
+
         /// <summary>
         /// Spotify Api requests
         /// </summary>
-        private readonly SpotifyApi api;
+        private SpotifyConfig config;
+
+        /// <summary>
+        /// Spotify Api requests
+        /// </summary>
+        private SpotifyApi api;
 
         /// <summary>
         /// Default Spotify service to get playlist and track with config setup
@@ -23,7 +29,31 @@ namespace Addams.Service
         /// <param name="authToken">OAuth2 token authentication generated</param>
         public SpotifyService(SpotifyConfig cfg)
         {
+            this.config = cfg;
             this.api = new SpotifyApi(cfg);
+        }
+
+        /// <summary>
+        /// Setup authorization to Spotify Application to get OAUTH2 Token
+        /// </summary>
+        /// <returns>Token string</returns>
+        public async Task<string> RefreshToken()
+        {
+            Token OAuth2 = await this.api.Authorize();
+
+            if (OAuth2.access_token == null) throw new Exception();// TODO changer exception en AuthorizeException
+            return OAuth2.access_token;
+        }
+
+        // TODO to comment
+
+        public void Update(string accessToken)
+        {
+            // TODO fusionner en setToken()
+            this.config.Token = accessToken;
+            this.config.Save();
+
+            this.api.RefreshClient(accessToken);
         }
 
         /// <summary>
@@ -38,6 +68,9 @@ namespace Addams.Service
             // Get playlist data
             Playlists playlistsData = await this.api.FetchUserPlaylists();
 
+            //Liked song playlist
+            Models.Playlist likedPlaylist = await this.GetLikedTracks();
+            playlists.Add(likedPlaylist);
 
             if (playlistsData == null || playlistsData.items == null)
             {
@@ -157,6 +190,18 @@ namespace Addams.Service
                 IsLocal = track.is_local,
                 _duration = track.duration_ms,
             };
+        }
+
+
+
+        //TODO TO  COMMENT
+        public async Task<Models.Playlist> GetLikedTracks()
+        {
+            //TODO convvertir enn Model playlist
+            LikePlaylist playlist = await this.api.FetchUserLikeTracks();
+
+            return new Models.Playlist();
+
         }
     }
 }
