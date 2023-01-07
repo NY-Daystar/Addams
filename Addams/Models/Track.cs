@@ -1,5 +1,5 @@
-﻿using System;
-using Addams.Utils;
+﻿using Addams.Utils;
+using System;
 
 namespace Addams.Models
 {
@@ -11,32 +11,32 @@ namespace Addams.Models
         /// <summary>
         /// Spotify track id
         /// </summary>
-        public string Id { get; set; } = String.Empty;
+        public string Id { get; set; } = string.Empty;
 
         /// <summary>
         /// Name of the track
         /// </summary>
-        public string Name { get; set; } = String.Empty;
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// List of artist(separated by `|`)
         /// </summary>
-        public string Artists { get; set; } = String.Empty;
+        public string Artists { get; set; } = string.Empty;
 
         /// <summary>
         /// Name of the album
         /// </summary>
-        public string AlbumName { get; set; } = String.Empty;
+        public string AlbumName { get; set; } = string.Empty;
 
         /// <summary>
         /// Album's artists (separated by '|')
         /// </summary>
-        public string AlbumArtistName { get; set; } = String.Empty;
+        public string AlbumArtistName { get; set; } = string.Empty;
 
         /// <summary>
         /// Release date of the album('YYYY-MM-DD')
         /// </summary>
-        public string AlbumReleaseDate { get; set; } = String.Empty;
+        public string AlbumReleaseDate { get; set; } = string.Empty;
 
         /// <summary>
         /// If album has multiple disc
@@ -56,13 +56,7 @@ namespace Addams.Models
         /// Time duration of the track ('minutes:secondes')
         /// </summary>
         /// TODO
-        public string Duration
-        {
-            get 
-            { 
-                return FormatDuration(_duration); 
-            }
-        }
+        public string Duration => FormatDuration(_duration);
 
         /// <summary>
         /// Number in range 0-100 for unpopular to very popular
@@ -72,22 +66,22 @@ namespace Addams.Models
         /// <summary>
         /// Datetime when you add this track in your playlist
         /// </summary>
-        public string AddedAt { get; set; } = String.Empty;
+        public string AddedAt { get; set; } = string.Empty;
 
         /// <summary>
         /// Spotify url of the track
         /// </summary>
-        public string TrackUri { get; set; } = String.Empty;
+        public string TrackUri { get; set; } = string.Empty;
 
         /// <summary>
         /// Spotify url of the artist
         /// </summary>
-        public string ArtistUrl { get; set; } = String.Empty;
+        public string ArtistUrl { get; set; } = string.Empty;
 
         /// <summary>
         /// Spotify url of the album
         /// </summary>
-        public string AlbumUrl { get; set; } = String.Empty;
+        public string AlbumUrl { get; set; } = string.Empty;
 
         /// <summary>
         /// If track is explicit or not('True or False')
@@ -97,18 +91,21 @@ namespace Addams.Models
         /// <summary>
         /// Url image of the album
         /// </summary>
-        public string AlbumImageUrl { get; set; } = String.Empty;
+        public string AlbumImageUrl { get; set; } = string.Empty;
 
         /// <summary>
         /// Url track preview of the album (30sec audio)
         /// </summary>
-        public string TrackPreviewUrl { get; set; } = String.Empty;
+        public string TrackPreviewUrl { get; set; } = string.Empty;
 
         /// <summary>
         /// Show several informations of a track
         /// </summary>
         /// <returns>Name, artist and the id of the track</returns>
-        public override string ToString() => $"Name : {Name} - Artist : {Artists} - Id : {Id}";
+        public override string ToString()
+        {
+            return $"Name : {Name} - Artist : {Artists} - Id : {Id}";
+        }
 
         /// <summary>
         /// Format milliseconds value to track duration standard

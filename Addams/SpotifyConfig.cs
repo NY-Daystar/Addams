@@ -18,7 +18,7 @@ namespace Addams
         [JsonPropertyName("user")]
         public string User
         {
-            get { return "gravityx3"; } // TODO to delete
+            get => "gravityx3";  // TODO to delete
             set { }
         }
 
@@ -26,40 +26,31 @@ namespace Addams
         /// Spotify Client ID from app created in spotify account
         /// </summary>
         [JsonPropertyName("clientID")]
-        public string ClientID { get; set; } = String.Empty;
+        public string ClientID { get; set; } = string.Empty;
 
         /// <summary>
         /// Spotify Client secret from app created in spotify account
         /// </summary>
         [JsonPropertyName("clientSecret")]
-        public string ClientSecret { get; set; } = String.Empty;
+        public string ClientSecret { get; set; } = string.Empty;
 
         /// <summary>
         /// OAuth2 token generated 
         /// Default OAuth2 token
         /// </summary>
         [JsonPropertyName("token")]
-        public string Token { get; set; }
+        public string? Token { get; set; }
 
         /// <summary>
         /// Datetime of last save
         /// </summary>
         [JsonPropertyName("datetime")]
-        public string _datetime
-        {
-            get { return DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss"); }
-        }
+        public string _datetime => DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss");
 
         /// <summary>
         /// Config file store in AppData folder : %APPDATA%\Addams
         /// </summary>
-        public static string filePath
-        {
-            get
-            {
-                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Addams\\config.json");
-            }
-        }
+        public static string filePath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Addams\\config.json");
 
 
         /// <summary>
@@ -68,13 +59,13 @@ namespace Addams
         public void Setup()
         {
             Console.Write("Enter your spotify username: ");
-            User = Console.ReadLine() ?? String.Empty;
+            User = Console.ReadLine() ?? string.Empty;
 
             Console.Write("Enter your spotify clientID: ");
-            ClientID = Console.ReadLine() ?? String.Empty;
+            ClientID = Console.ReadLine() ?? string.Empty;
 
             Console.Write("Enter your spotify clientSecret: ");
-            ClientSecret = Console.ReadLine() ?? String.Empty;
+            ClientSecret = Console.ReadLine() ?? string.Empty;
         }
 
         /// <summary>
@@ -90,14 +81,17 @@ namespace Addams
                     Path.GetDirectoryName(filePath)
                     ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Addams"); ;
                 if (folder == null)
+                {
                     throw new DirectoryNotFoundException($"SpotifyConfig - Save method can't find folder based on path {filePath}");
+                }
+
                 if (!Directory.Exists(folder))
                 {
-                    Directory.CreateDirectory(folder);
+                    _ = Directory.CreateDirectory(folder);
                 }
                 File.Create(filePath).Close();
             }
-            JsonSerializerOptions options = new JsonSerializerOptions()
+            JsonSerializerOptions options = new()
             {
                 WriteIndented = true,
             };
@@ -125,7 +119,10 @@ namespace Addams
         public override bool Equals(object? obj)
         {
             //Check for null and compare run-time types.
-            if (obj == null || this.GetType() != obj.GetType()) return false;
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
 
             SpotifyConfig p = (SpotifyConfig)obj;
 

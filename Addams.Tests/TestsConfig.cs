@@ -7,7 +7,6 @@ namespace Addams.Tests
         [Test]
         public void TestConfigFilePathValid()
         {
-            SpotifyConfig config = new SpotifyConfig();
             Assert.IsNotNull(SpotifyConfig.filePath);
             Assert.IsNotEmpty(SpotifyConfig.filePath);
         }

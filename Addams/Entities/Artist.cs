@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Addams.Entities
+﻿namespace Addams.Entities
 {
 
     // TODO use attribute: [DefaultValue(5)]            

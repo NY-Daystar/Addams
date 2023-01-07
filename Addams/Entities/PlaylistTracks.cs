@@ -15,14 +15,14 @@ namespace Addams.Entities
         public Followers? followers { get; set; }
         public string? href { get; set; }
         public string? id { get; set; }
-        public List<Image>? images { get; set; } 
-        public string? name { get; set; } 
-        public Owner? owner { get; set; } 
+        public List<Image>? images { get; set; }
+        public string? name { get; set; }
+        public Owner? owner { get; set; }
         public object? primary_color { get; set; }
         public bool? @public { get; set; }
         public string? snapshot_id { get; set; }
         public TrackList tracks { get; set; } = new TrackList();
-        public string? type { get; set; } 
+        public string? type { get; set; }
         public string? uri { get; set; }
     }
     public class TrackItem
@@ -42,7 +42,7 @@ namespace Addams.Entities
         public string? href { get; set; }
         public string? id { get; set; }
         public string? type { get; set; }
-        public string? uri { get; set; } 
+        public string? uri { get; set; }
     }
 
     public class Followers

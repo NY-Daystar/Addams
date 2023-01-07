@@ -1,5 +1,4 @@
-﻿using Addams.Export;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace Addams.Tests
 {
@@ -15,7 +14,10 @@ namespace Addams.Tests
 
             string wDir = Path.Combine(exeFolder, "data");
             if (!Directory.Exists(wDir))
-                Directory.CreateDirectory(wDir);
+            {
+                _ = Directory.CreateDirectory(wDir);
+            }
+
             SpotifyExport.SavePlaylist(wDir, new Models.Playlist
             {
                 Name = "Chillhop Radio 🐾 jazz/lofi hip hop beats to study/relax to | Study Music | Chillhop Music 2022"

@@ -8,7 +8,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
-namespace Addams.Api
+namespace Addams
 {
     /// <summary>
     /// Spotify API requests
@@ -36,17 +36,17 @@ namespace Addams.Api
         /// <summary>
         /// User to do the request on playlist
         /// </summary>
-        private string User;
+        private readonly string User;
 
         /// <summary>
         /// Id of spotify app
         /// </summary>
-        private string ClientID;
+        private readonly string ClientID;
 
         /// <summary>
         /// Secret of spotify app
         /// </summary>
-        private string ClientSecret;
+        private readonly string ClientSecret;
 
         /// <summary>
         /// OAuth2 token to get info on spotify API for a specific user
@@ -56,7 +56,7 @@ namespace Addams.Api
         /// <summary>
         /// Authenticated client with OAuth Token
         /// </summary>
-        private HttpClient Client;
+        private readonly HttpClient Client;
 
         /// <summary>
         /// Setup Spotify API
@@ -65,11 +65,11 @@ namespace Addams.Api
         /// <param name="authToken">Authentication token to get access to the data</param>
         public SpotifyApi(SpotifyConfig cfg)
         {
-            this.User = cfg.User;
-            this.ClientID = cfg.ClientID;
-            this.ClientSecret = cfg.ClientSecret;
-            this.AuthToken = cfg.Token;
-            this.Client = this.GetAuthClient();
+            User = cfg.User;
+            ClientID = cfg.ClientID;
+            ClientSecret = cfg.ClientSecret;
+            AuthToken = cfg.Token;
+            Client = GetAuthClient();
         }
 
         /// <summary>
@@ -80,35 +80,35 @@ namespace Addams.Api
         private HttpClient GetAuthClient()
         {
             HttpClient client = new();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.AuthToken);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AuthToken);
             return client;
         }
 
         // TODO to comment
         public void RefreshClient(string token)
         {
-            this.Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
         }
 
         //TODO to comment
         public async Task<Token> Authorize()
         {
-            FormUrlEncodedContent requestData = new FormUrlEncodedContent(new[]
+            FormUrlEncodedContent requestData = new(new[]
             {
-                new KeyValuePair<string, string>("client_id", this.ClientID),
-                new KeyValuePair<string, string>("client_secret", this.ClientSecret),
+                new KeyValuePair<string, string>("client_id", ClientID),
+                new KeyValuePair<string, string>("client_secret", ClientSecret),
                 //new KeyValuePair<string, string>("scope","playlist-read-private user-library-read ugc-image-upload user-read-playback-state user-modify-playback-state user-read-currently-playing app-remote-control playlist-read-private playlist-read-collaborative playlist-modify-private playlist-modify-public user-follow-modify user-follow-read user-read-playback-position user-top-read user-read-recently-played user-library-modify user-library-read user-read-email user-read-private"),
                 new KeyValuePair<string, string>("scope","playlist-read-private user-library-read"),
                 new KeyValuePair<string, string>("grant_type", "authorization_code")
             });
 
             string url = "https://accounts.spotify.com/api/token";
-            var response = await new HttpClient().PostAsync(url, requestData);
+            HttpResponseMessage response = await new HttpClient().PostAsync(url, requestData);
 
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
                 // TODO changer le message
-                throw new SpotifyUnauthorizedException($"Can't get Authorize\nThe token {this.AuthToken}\nis invalid for user: {this.User}\n" +
+                throw new SpotifyUnauthorizedException($"Can't get Authorize\nThe token {AuthToken}\nis invalid for user: {User}\n" +
                     "You need to create a new one or refresh it");
             }
             if (!response.IsSuccessStatusCode)
@@ -131,13 +131,13 @@ namespace Addams.Api
         public async Task<LikePlaylist> FetchUserLikeTracks()
         {
             // TODO Faire une boucle qui recupere tout en se basant sur la vaaleurr total et en faisant varier ll'offset
-            string url = $@"{API}/users/{this.User}/tracks?limit={TRACK_LIKED_LIMIT}&offset=50";
+            string url = $@"{API}/users/{User}/tracks?limit={TRACK_LIKED_LIMIT}&offset=50";
             //Console.WriteLine($"FetchUserLikeTracks call API: {url}"); // TODO put log
 
             HttpResponseMessage response = await Client.GetAsync(url);
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
-                throw new SpotifyUnauthorizedException($"Can't get FetchUserLikeTracks\nThe token {this.AuthToken}\nis invalid for user: {this.User}\n" +
+                throw new SpotifyUnauthorizedException($"Can't get FetchUserLikeTracks\nThe token {AuthToken}\nis invalid for user: {User}\n" +
                     "You need to create a new one or refresh it");
             }
             if (!response.IsSuccessStatusCode)
@@ -160,13 +160,13 @@ namespace Addams.Api
         /// <exception cref="SpotifyException"></exception>
         public async Task<Playlists> FetchUserPlaylists()
         {
-            string url = $@"{API}/users/{this.User}/playlists?limit={PLAYLIST_LIMIT}&offset=0";
+            string url = $@"{API}/users/{User}/playlists?limit={PLAYLIST_LIMIT}&offset=0";
             //Console.WriteLine($"FetchUserPlaylists call API: {url}"); // TODO put log
 
             HttpResponseMessage response = await Client.GetAsync(url);
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
-                throw new SpotifyUnauthorizedException($"Can't get FetchUserPlaylists\nThe token {this.AuthToken}\nis invalid for user: {this.User}\n" +
+                throw new SpotifyUnauthorizedException($"Can't get FetchUserPlaylists\nThe token {AuthToken}\nis invalid for user: {User}\n" +
                     "You need to create a new one or refresh it");
             }
             if (!response.IsSuccessStatusCode)
@@ -193,7 +193,7 @@ namespace Addams.Api
             HttpResponseMessage response = await Client.GetAsync(url);
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
-                throw new SpotifyUnauthorizedException($"Can't get FetchPlaylistTracks\nThe token {this.AuthToken}\nis invalid for user: {this.User}\n" +
+                throw new SpotifyUnauthorizedException($"Can't get FetchPlaylistTracks\nThe token {AuthToken}\nis invalid for user: {User}\n" +
                     "You need to create a new one or refresh it");
             }
             if (!response.IsSuccessStatusCode)
@@ -218,7 +218,7 @@ namespace Addams.Api
                         break;
                     }
 
-                    trackList = await this.FetchOverflowTracks(trackList.next);
+                    trackList = await FetchOverflowTracks(trackList.next);
                     playlistTracks.tracks.items.AddRange(trackList.items);
                 } while (trackList.next != null);
                 playlistTracks.tracks.next = null;
@@ -240,7 +240,7 @@ namespace Addams.Api
             HttpResponseMessage response = await Client.GetAsync(url);
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
-                throw new SpotifyUnauthorizedException($"Can't get FetchPlaylistTracks\nThe token {this.AuthToken}\nis invalid for user: {this.User}\n" +
+                throw new SpotifyUnauthorizedException($"Can't get FetchPlaylistTracks\nThe token {AuthToken}\nis invalid for user: {User}\n" +
                     "You need to create a new one or refresh it");
             }
             if (!response.IsSuccessStatusCode)
@@ -268,7 +268,7 @@ namespace Addams.Api
             HttpResponseMessage response = await Client.GetAsync(url);
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
-                throw new SpotifyUnauthorizedException($"Can't get FetchTrack\nThe token {this.AuthToken}\nis invalid for user: {this.User}\n" +
+                throw new SpotifyUnauthorizedException($"Can't get FetchTrack\nThe token {AuthToken}\nis invalid for user: {User}\n" +
                     "You need to create a new one or refresh it");
             }
             if (!response.IsSuccessStatusCode)

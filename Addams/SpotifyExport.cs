@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace Addams.Export
+namespace Addams
 {
-    
+
     /// <summary>
     /// Class to handle csv export data file with spotify tracks data
     /// </summary>
@@ -28,7 +28,9 @@ namespace Addams.Export
 
             string wDir = Path.Combine(exeFolder, "data");
             if (!Directory.Exists(wDir))
-                Directory.CreateDirectory(wDir);
+            {
+                _ = Directory.CreateDirectory(wDir);
+            }
 
             // Save each playlist
             foreach (Models.Playlist playlist in data)
@@ -98,8 +100,10 @@ namespace Addams.Export
                 t.TrackPreviewUrl)
             ).ToList();
 
-            List<string> csvData = new();
-            csvData.Add(headerLine); // TODO info IDE0028: Collection initialization can be simplified 
+            List<string> csvData = new()
+            {
+                headerLine // TODO info IDE0028: Collection initialization can be simplified 
+            };
             csvData.AddRange(dataLines);
 
             File.WriteAllLines(csvFilePath, csvData);

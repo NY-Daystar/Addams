@@ -1,5 +1,4 @@
-﻿using Addams.Api;
-using Addams.Entities;
+﻿using Addams.Entities;
 using Addams.Exceptions;
 using NUnit.Framework;
 
@@ -20,14 +19,14 @@ namespace Addams.Tests
         [Test]
         public void TestGetPlaylistWithBadToken()
         {
-            SpotifyConfig config = new SpotifyConfig()
+            SpotifyConfig config = new()
             {
                 User = "gravityx3",
                 Token = "bad_token",
             };
-            SpotifyApi api = new SpotifyApi(config);
+            SpotifyApi api = new(config);
 
-            Assert.ThrowsAsync<SpotifyUnauthorizedException>(() => api.FetchUserPlaylists());
+            _ = Assert.ThrowsAsync<SpotifyUnauthorizedException>(api.FetchUserPlaylists);
         }
 
         [Test]

@@ -1,4 +1,4 @@
-﻿// TODO faire un Analyze CodeCleanup > Analyze > Code Cleanup > Run Code cleanup profile 1
+﻿// TODO voir pour generer automatiquement le build preferences a chaque build
 
 // TODO tester la classe ProgrammeNEW
 

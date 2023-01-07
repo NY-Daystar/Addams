@@ -1,6 +1,4 @@
 ﻿using Addams.Exceptions;
-using Addams.Export;
-using Addams.Service;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -21,7 +19,7 @@ namespace Addams
 
             Console.WriteLine("Setup service..."); // TODO put log
             SpotifyService service = new(cfg);
-            
+
             Console.WriteLine("Get OAuth2 token...");
             string newToken = await service.RefreshToken();
             service.Update(newToken);
@@ -76,11 +74,7 @@ namespace Addams
             // Get playlist
             List<Models.Playlist>? playlists = await service.GetPlaylists();
 
-            if (playlists == null)
-            {
-                return new List<Models.Playlist>();
-            }
-            return playlists;
+            return playlists ?? new List<Models.Playlist>();
         }
 
     }

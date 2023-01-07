@@ -1,13 +1,11 @@
-﻿
-using Addams.Api;
-using Addams.Entities;
+﻿using Addams.Entities;
 using Addams.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Addams.Service
+namespace Addams
 {
     internal class SpotifyService
     {
@@ -15,12 +13,12 @@ namespace Addams.Service
         /// <summary>
         /// Spotify Api requests
         /// </summary>
-        private SpotifyConfig config;
+        private readonly SpotifyConfig config;
 
         /// <summary>
         /// Spotify Api requests
         /// </summary>
-        private SpotifyApi api;
+        private readonly SpotifyApi api;
 
         /// <summary>
         /// Default Spotify service to get playlist and track with config setup
@@ -29,8 +27,8 @@ namespace Addams.Service
         /// <param name="authToken">OAuth2 token authentication generated</param>
         public SpotifyService(SpotifyConfig cfg)
         {
-            this.config = cfg;
-            this.api = new SpotifyApi(cfg);
+            config = cfg;
+            api = new SpotifyApi(cfg);
         }
 
         /// <summary>
@@ -39,9 +37,13 @@ namespace Addams.Service
         /// <returns>Token string</returns>
         public async Task<string> RefreshToken()
         {
-            Token OAuth2 = await this.api.Authorize();
+            Token OAuth2 = await api.Authorize();
 
-            if (OAuth2.access_token == null) throw new Exception();// TODO changer exception en AuthorizeException
+            if (OAuth2.access_token == null)
+            {
+                throw new Exception();// TODO changer exception en AuthorizeException
+            }
+
             return OAuth2.access_token;
         }
 
@@ -50,10 +52,10 @@ namespace Addams.Service
         public void Update(string accessToken)
         {
             // TODO fusionner en setToken()
-            this.config.Token = accessToken;
-            this.config.Save();
+            config.Token = accessToken;
+            config.Save();
 
-            this.api.RefreshClient(accessToken);
+            api.RefreshClient(accessToken);
         }
 
         /// <summary>
@@ -66,10 +68,10 @@ namespace Addams.Service
             List<Models.Playlist> playlists = new();
 
             // Get playlist data
-            Playlists playlistsData = await this.api.FetchUserPlaylists();
+            Playlists playlistsData = await api.FetchUserPlaylists();
 
             //Liked song playlist
-            Models.Playlist likedPlaylist = await this.GetLikedTracks();
+            Models.Playlist likedPlaylist = await GetLikedTracks();
             playlists.Add(likedPlaylist);
 
             if (playlistsData == null || playlistsData.items == null)
@@ -81,7 +83,7 @@ namespace Addams.Service
             // Get tracks for each playlist
             foreach (Playlist p in playlistsData.items)
             {
-                Models.Playlist playlist = await this.GetPlaylist(p);
+                Models.Playlist playlist = await GetPlaylist(p);
                 Console.WriteLine($"Playlist {playlist}");
                 playlists.Add(playlist);
             }
@@ -94,7 +96,7 @@ namespace Addams.Service
         /// <param name="playlist">Playlist entity fetched by /playlists request</param>
         /// <returns>Playlist model with tracklist</returns>
         /// <exception cref="SpotifyException"></exception>
-        public async Task<Models.Playlist> GetPlaylist(Entities.Playlist playlist)
+        public async Task<Models.Playlist> GetPlaylist(Playlist playlist)
         {
 
             if (playlist.id == null)
@@ -102,7 +104,7 @@ namespace Addams.Service
                 throw new SpotifyException($"getPlaylistTracks id null of the playlist name : {playlist.name}");
             }
 
-            List<Models.Track> tracks = await this.GetPlaylistTracks(playlist.id);
+            List<Models.Track> tracks = await GetPlaylistTracks(playlist.id);
 
             if (tracks.Count == 0)
             {
@@ -127,7 +129,7 @@ namespace Addams.Service
         public async Task<List<Models.Track>> GetPlaylistTracks(string id)
         {
             // Get playlist data
-            PlaylistTracks? playlistTracks = await this.api.FetchPlaylistTracks(id);
+            PlaylistTracks? playlistTracks = await api.FetchPlaylistTracks(id);
 
             if (playlistTracks == null
                 || playlistTracks.tracks == null
@@ -139,11 +141,14 @@ namespace Addams.Service
 
             // Get tracks data for each track
             List<Models.Track> tracks = new();
-            foreach (Entities.TrackItem ti in playlistTracks.tracks.items)
+            foreach (TrackItem ti in playlistTracks.tracks.items)
             {
                 if (ti.track == null)
+                {
                     continue;
-                Models.Track track = this.GetTrack(ti);
+                }
+
+                Models.Track track = GetTrack(ti);
 
                 tracks.Add(track);
             }
@@ -156,9 +161,9 @@ namespace Addams.Service
         /// </summary>
         /// <param name="trackEntity">track data from playlist call</param>
         /// <returns>Track model object</returns>
-        public Models.Track GetTrack(Entities.TrackItem trackEntity)
+        public Models.Track GetTrack(TrackItem trackEntity)
         {
-            Entities.Track track = trackEntity.track;
+            Track track = trackEntity.track;
             if (track.id == null)
             {
                 Console.WriteLine($"GetTrackData id null of the track name: {track.name}");
@@ -198,7 +203,7 @@ namespace Addams.Service
         public async Task<Models.Playlist> GetLikedTracks()
         {
             //TODO convvertir enn Model playlist
-            LikePlaylist playlist = await this.api.FetchUserLikeTracks();
+            _ = await api.FetchUserLikeTracks();
 
             return new Models.Playlist();
 

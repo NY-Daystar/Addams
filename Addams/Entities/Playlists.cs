@@ -20,7 +20,7 @@ namespace Addams.Entities
     public class Playlist
     {
         public bool? collaborative { get; set; }
-        public string description { get; set; } = string.Empty; 
+        public string description { get; set; } = string.Empty;
         public ExternalUrls? external_urls { get; set; }
         public string href { get; set; } = string.Empty;
         public string id { get; set; } = string.Empty;

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Addams.Entities
+﻿namespace Addams.Entities
 {
     /// <summary>
     /// Token class to get OAUTH2 token authorization
