@@ -1,6 +1,6 @@
 ﻿// TODO voir pour generer automatiquement le build preferences a chaque build
 
-// TODO tester la classe ProgrammeNEW
+// TODO tester la classe ProgrammeNEW pour le nouveau TOKEN pour ca voir les reponses de chatGPT avec l'authorization code
 
 // TODO a tester D:\Dev\Workspace-Golang - A METTRE SUR GITHUB\update-golang
 
@@ -34,15 +34,14 @@
 //    - Afficher le path des logs
 //    - Afficher les 50 deerniers logs
 
-Release 1.5
-
 // TODO gerer le OAUTH2 
 	- demander à chatGPT pour faire une autorisaction code flow en c# sur spotify pour l'oauth2
 	- il faut suivre ce guide qui demande une authorisation de fou : https://developer.spotify.com/documentation/general/guides/authorization/code-flow/
 	- detecter l'obsolescence du token OAUTH2 et le regenerer puis le sauvegarder dauns un fichier de config dans APPDATA
 	- Regarder ce code pour avoirr let token: https://github.com/watsonbox/exportify/blob/d1247f715df1932ccc389364bffdb2f95d8d4bcb/src/components/Login.jsx
 	- Recuperer l'expiration qui est de 3600s et mettre du coup la date d'expiration en config et ne pas refresh si la date n'est pas atteinte
-Release-2 :
+
+Release-1 :
 // TODO configure code analysis : Analyze > Configure code analysis
 // TODO setup un msi package pour une install propre etc...
 // TODO setup un autoupdater avec la release github
@@ -53,8 +52,14 @@ Release-2 :
 // TODO faire des tests unitaires
 // TODO try catch sur les exceptions
 
-Release-3 :
-Faire une appli windows form
+Release-2 :
+- Faire une appli windows form pour avoir une vue graphique
+	- tab Vue Export playlist
+	- tab Vue configuration
+
+Release 3:
+- Avoir la possibilite de charger un csv ou plusieur pour voir la playlist
+- Ajout de la fonctionnalité de crée une playlist - Vue créer playlist
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

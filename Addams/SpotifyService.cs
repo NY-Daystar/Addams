@@ -58,12 +58,16 @@ namespace Addams
             api.RefreshClient(accessToken);
         }
 
+        // TODO recomment
         /// <summary>
         /// Get all playlist created or saved by a user
         /// </summary>
         /// <returns></returns>
-        public async Task<List<Models.Playlist>> GetPlaylists()
+        public async Task<List<Models.Playlist>> GetPlaylists(bool allPlaylist)
         {
+            // TODO Si il veut certaines:
+            //- Faire un affichage des playlist exportables avec un numéro
+            //- Et l'utilisateur choisis celle qui veut exporter avec une commandé linq qui filtre uniquement ceux qui veulent
 
             List<Models.Playlist> playlists = new();
 
