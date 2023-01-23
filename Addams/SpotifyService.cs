@@ -1,5 +1,6 @@
 ﻿using Addams.Entities;
 using Addams.Exceptions;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace Addams
 {
     internal class SpotifyService
     {
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// Spotify Api requests
@@ -80,7 +82,7 @@ namespace Addams
 
             if (playlistsData == null || playlistsData.items == null)
             {
-                Console.WriteLine("No playlists found");
+                Logger.Warn("No playlists found");
                 return new List<Models.Playlist>();
             }
 
@@ -88,7 +90,7 @@ namespace Addams
             foreach (Playlist p in playlistsData.items)
             {
                 Models.Playlist playlist = await GetPlaylist(p);
-                Console.WriteLine($"Playlist {playlist}");
+                Logger.Info($"Playlist {playlist}");
                 playlists.Add(playlist);
             }
             return playlists;
@@ -112,7 +114,7 @@ namespace Addams
 
             if (tracks.Count == 0)
             {
-                Console.WriteLine($"No tracks found for the playlist {playlist.name} - id: {playlist.id}");
+                Logger.Warn($"No tracks found for the playlist {playlist.name} - id: {playlist.id}");
             }
 
             return new Models.Playlist
@@ -170,7 +172,7 @@ namespace Addams
             Track track = trackEntity.track;
             if (track.id == null)
             {
-                Console.WriteLine($"GetTrackData id null of the track name: {track.name}");
+                Logger.Warn($"GetTrackData id null of the track name: {track.name}");
                 return new Models.Track
                 {
                     Name = track.name,

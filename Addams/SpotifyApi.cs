@@ -1,6 +1,7 @@
 ﻿using Addams.Entities;
 using Addams.Exceptions;
 using Newtonsoft.Json;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -15,6 +16,9 @@ namespace Addams
     /// </summary>
     public class SpotifyApi
     {
+
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
         /// Number of playlists fetchable in spotify API
         /// </summary>
         private static readonly int PLAYLIST_LIMIT = 50;
@@ -132,7 +136,7 @@ namespace Addams
         {
             // TODO Faire une boucle qui recupere tout en se basant sur la vaaleurr total et en faisant varier ll'offset
             string url = $@"{API}/users/{User}/tracks?limit={TRACK_LIKED_LIMIT}&offset=50";
-            //Console.WriteLine($"FetchUserLikeTracks call API: {url}"); // TODO put log
+            Logger.Debug($"FetchUserLikeTracks call API: {url}");
 
             HttpResponseMessage response = await Client.GetAsync(url);
             if (response.StatusCode == HttpStatusCode.Unauthorized)
@@ -161,7 +165,7 @@ namespace Addams
         public async Task<Playlists> FetchUserPlaylists()
         {
             string url = $@"{API}/users/{User}/playlists?limit={PLAYLIST_LIMIT}&offset=0";
-            //Console.WriteLine($"FetchUserPlaylists call API: {url}"); // TODO put log
+            Logger.Debug($"FetchUserPlaylists call API: {url}");
 
             HttpResponseMessage response = await Client.GetAsync(url);
             if (response.StatusCode == HttpStatusCode.Unauthorized)
@@ -188,7 +192,7 @@ namespace Addams
         public async Task<PlaylistTracks> FetchPlaylistTracks(string id)
         {
             string url = $@"{API}/playlists/{id}";
-            //Console.WriteLine($"FetchPlaylistTracks call API: {url}"); // TODO put log
+            Logger.Debug($"FetchPlaylistTracks call API: {url}");
 
             HttpResponseMessage response = await Client.GetAsync(url);
             if (response.StatusCode == HttpStatusCode.Unauthorized)
@@ -206,7 +210,7 @@ namespace Addams
             // If can't catch every tracks for a playlist in one api call
             if (playlistTracks.tracks.total >= TRACK_LIMIT)
             {
-                Console.WriteLine($"Only fetch {playlistTracks.tracks.items.Count} tracks for a total to {playlistTracks.tracks.total}");
+                Logger.Warn($"Only fetch {playlistTracks.tracks.items.Count} tracks for a total to {playlistTracks.tracks.total}");
                 TrackList trackList = playlistTracks.tracks;
 
                 // Get all tracks of specific playlist
@@ -214,7 +218,7 @@ namespace Addams
                 {
                     if (trackList.next == null)
                     {
-                        Console.WriteLine($"Tracklist next url is null, can't get the rest of playlist");
+                        Logger.Warn($"Tracklist next url is null, can't get the rest of playlist");
                         break;
                     }
 
@@ -235,7 +239,7 @@ namespace Addams
         /// <exception cref="SpotifyException"></exception>
         public async Task<TrackList> FetchOverflowTracks(string url)
         {
-            //Console.WriteLine($"FetchOverflowTracks call API: {url}"); // TODO put log
+            Logger.Debug($"FetchOverflowTracks call API: {url}");
 
             HttpResponseMessage response = await Client.GetAsync(url);
             if (response.StatusCode == HttpStatusCode.Unauthorized)
@@ -263,7 +267,7 @@ namespace Addams
         public async Task<Track> FetchTrack(string id)
         {
             string url = $@"{API}/tracks/{id}";
-            //Console.WriteLine($"FetchTrack call API: {url}"); // TODO put log
+            Logger.Debug($"FetchTrack call API: {url}");
 
             HttpResponseMessage response = await Client.GetAsync(url);
             if (response.StatusCode == HttpStatusCode.Unauthorized)

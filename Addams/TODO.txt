@@ -1,28 +1,21 @@
-﻿// TODO voir pour generer automatiquement le build preferences a chaque build
-
-// TODO tester la classe ProgrammeNEW pour le nouveau TOKEN pour ca voir les reponses de chatGPT avec l'authorization code
-
-// TODO a tester D:\Dev\Workspace-Golang - A METTRE SUR GITHUB\update-golang
-
-// TODO tester Workspace-Python
-
-// TODO faire en sorte que un service a une config et une api
-
-// Voir pour utilier GIT sur VS 2022
-
-// TODO mettre un logger dans APPDATA
+﻿// TODO feature logger mettre un logger dans APPDATA
+	- Mettre le logger console et dans un fichier
 	- https://stackify.com/log4net-guide-dotnet-logging/
 	- https://stackoverflow.com/questions/1260157/whats-the-most-widely-used-logging-framework-in-c
 
-	// TODO tester le projet Dev/WebApiAuth avec l'url 
-// localhost:8888/login avec le bon clientId et clientSecret
+// TODO feature mode-debug :  ajouter mode debug
+	- Parser les arguments si -d ou --debug alors afficher les logs de debug en console
 
-// TODO Recuperer la playlist des song likés
+// TODO feature refacto-service: faire en sorte que un service a une config et une api
+
+// TODO en develop: generer automatiquement le build preferences a chaque build
+
+// TODO feature liked-song Recuperer la playlist des song likés
 	- Trouver l'url/id de cette playlist
 	- puis l'extraire
 	- Voir sur l'exemple exportify il y arrive sinon
 
-// TODO faire un setup d'option au lancement de l'application
+// TODO feature setup-app : faire un setup d'option au lancement de l'application
 //- 1 - lancement du program pour l'export
 //- 2 - Show configuration file
 //      - Afficher le path
@@ -35,7 +28,10 @@
 //    - Afficher les 50 deerniers logs
 
 // TODO gerer le OAUTH2 
+	- tester le projet Dev/WebApiAuth avec l'url 
+	- localhost:8888/login avec le bon clientId et clientSecret
 	- demander à chatGPT pour faire une autorisaction code flow en c# sur spotify pour l'oauth2
+	- tester la classe ProgrammeNEW pour le nouveau TOKEN pour ca voir les reponses de chatGPT avec l'authorization code
 	- il faut suivre ce guide qui demande une authorisation de fou : https://developer.spotify.com/documentation/general/guides/authorization/code-flow/
 	- detecter l'obsolescence du token OAUTH2 et le regenerer puis le sauvegarder dauns un fichier de config dans APPDATA
 	- Regarder ce code pour avoirr let token: https://github.com/watsonbox/exportify/blob/d1247f715df1932ccc389364bffdb2f95d8d4bcb/src/components/Login.jsx
@@ -60,6 +56,11 @@ Release-2 :
 Release 3:
 - Avoir la possibilite de charger un csv ou plusieur pour voir la playlist
 - Ajout de la fonctionnalité de crée une playlist - Vue créer playlist
+
+
+// TODO a tester D:\Dev\Workspace-Golang - A METTRE SUR GITHUB\update-golang
+
+// TODO tester Workspace-Python
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -1,4 +1,5 @@
 ﻿using Addams.Utils;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,6 +13,8 @@ namespace Addams
     /// </summary>
     public class SpotifyExport
     {
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
         /// <summary>
         /// Save playlist data into csv file
         /// </summary>
@@ -58,7 +61,7 @@ namespace Addams
             string csvFilePath = Path.Combine(path, $"{filename}.csv");
             //csvFilePath = PathUtil.FormatValidPath(csvFilePath);
 
-            Console.WriteLine($"STORE FILE HERE : {csvFilePath}"); // TODO put log
+            Logger.Info($"STORE FILE HERE : {csvFilePath}"); // TODO put log
 
             // TODO mettre avec le resx d'autres langues
             string headerLine = string.Join(",", new List<string> {

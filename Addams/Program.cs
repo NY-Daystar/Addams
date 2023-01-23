@@ -1,12 +1,23 @@
 ﻿using Addams.Exceptions;
+using NLog;
+using NLog.Config;
+using NLog.Layouts;
+using NLog.Targets;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace Addams
 {
+    // TODO rename to Addams
     internal class Program
     {
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
         public static void Main()
         {
             Run().GetAwaiter().GetResult();
@@ -14,13 +25,17 @@ namespace Addams
 
         public static async Task Run()
         {
+            string logFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Addams", "logs", "addams.log"); ;
+            LogLevel level = LogLevel.Debug;
+            SetupLogger(logFile, level);
+
             // TODO refacto la partie service qui a une config et une api on setup le service qui a une config vierge
             // TODO on charge la config dans le service
             // DU couup inverser les lignes en dessous et adapter le code
-            Console.WriteLine("Setup config..."); // TODO put log
+            Logger.Debug("Setup config...");
             SpotifyConfig cfg = SetupConfig();
 
-            Console.WriteLine("Setup service..."); // TODO put log
+            Logger.Debug("Setup service...");
             SpotifyService service = new SpotifyService(cfg);
             /// TODO
 
@@ -32,18 +47,52 @@ namespace Addams
             // Ask if you want all playlist or just a few
             bool allPlaylist = AskAllPlaylistWanted();
 
-            Console.WriteLine("Fetching playlist data..."); // TODO put log
+            Logger.Info("Fetching playlist data...");
             List<Models.Playlist>? playlists = await GetPlaylists(service, allPlaylist); ;
             if (playlists == null)
             {
-                // TODO put log
+                Logger.Error("None playlist found");
                 return;
             }
-            Console.WriteLine("Playlist fetched...");
+            Logger.Info("Playlist fetched...");
 
-            Console.WriteLine("Saving playlist...");
+            Logger.Info("Saving playlist...");
             SpotifyExport.SavePlaylists(playlists);
-            Console.WriteLine("Playlist saved...");
+            Logger.Info("Playlist saved...");
+        }
+
+        /// <summary>
+        /// Setup the logger with its path and it's minimum level
+        /// </summary>
+        /// <param name="filePath">path of the file</param>
+        /// <param name="level">Minimum level to define</param>
+        private static void SetupLogger(string filePath, LogLevel level)
+        {
+            LoggingConfiguration config = new LoggingConfiguration();
+            Layout layout = "level:${uppercase:${level}} - date:${date} - caller: ${callsite-filename}:${callsite-linenumber} - ${message} ${exception:format=tostring}";
+
+            // Targets where to log to: File and Console
+            FileTarget logfile = new FileTarget("logfile")
+            {
+                FileName = filePath,
+                ArchiveEvery = FileArchivePeriod.Minute,
+                ArchiveNumbering = ArchiveNumberingMode.Rolling,
+                MaxArchiveFiles = 5,
+                Layout = layout
+
+            };
+
+            ConsoleTarget logconsole = new ConsoleTarget("logconsole")
+            {
+                Layout = layout
+            };
+
+            // Rules for mapping loggers to targets            
+            config.AddRule(level, LogLevel.Fatal, logconsole);
+            config.AddRule(LogLevel.Trace, LogLevel.Fatal, logfile);
+
+            // Apply config           
+            LogManager.Configuration = config;
         }
 
         // TODO recomment
@@ -74,12 +123,12 @@ namespace Addams
                 config = SpotifyConfig.Read();
                 config.Token = defaultConfig.Token; // TODO get default token for now 
                 SpotifyService service = new(config);
-                Console.WriteLine($"Config already exists:\n{config}");
+                Logger.Debug($"Config already exists:\n{config}");
             }
             catch (SpotifyConfigException)
             {
                 config.Setup();
-                Console.WriteLine($"This config will be saved:\n{config}");
+                Logger.Warn($"This config will be saved:\n{config}");
                 config.Save();
             }
             return config;
@@ -116,6 +165,5 @@ namespace Addams
             Console.WriteLine();
             return false;
         }
-
     }
 }

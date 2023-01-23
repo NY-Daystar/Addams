@@ -39,7 +39,7 @@ namespace Addams
         /// Default OAuth2 token
         /// </summary>
         [JsonPropertyName("token")]
-        public string? Token { get; set; } = @"BQBN2QDhx9WKP65chwPnrNw0dNPB7tRrgxA_xbnum_FFe7Nt0Th-Ve-qejqvSZrBGtYlmMukQfVMKO6Ia7_6SEcobIeyblu8Lc6ChBugYWLJTq80R_JV9sLgZxYjXCcUFaf1Uu8G-Q7Cn7ifWUmkYj5TIBY_EolKxAZzoDK8KC7zjEJ5LkdDQzhw1agcvr2HMAsLPUBz04QMux5QsTf2AA";
+        public string? Token { get; set; } = @"BQAhtzzQk2blmXSvV_lHNdsRp0OQNYtF13F1OoUFHuZ18Q8gi7vOi9POp7vhv8NHkXC-xO9zjpwDGd5aRYsrz1uCP7yQlh6PQyiOkNMkHFtzB3CwwCbcsBNnih6PTjWyLjlM0GgrIvzX_o14YBEty-f4wcXE7ybb_GOOzjZuJLiZwn3jGsCwy62UI9eN0rwFHxjbISgETG6xKE8nAoLJzA";
 
         /// <summary>
         /// Datetime of last save
@@ -50,7 +50,7 @@ namespace Addams
         /// <summary>
         /// Config file store in AppData folder : %APPDATA%\Addams
         /// </summary>
-        public static string filePath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Addams\\config.json");
+        public static string filePath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Addams\\config.json"); // TODO a combine avec un comma
 
 
         /// <summary>
