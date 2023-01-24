@@ -76,7 +76,7 @@ namespace Addams
             // Get playlist data
             Playlists playlistsData = await api.FetchUserPlaylists();
 
-            //Liked song playlist
+            // Liked song playlist
             Models.Playlist likedPlaylist = await GetLikedTracks();
             playlists.Add(likedPlaylist);
 
@@ -206,13 +206,16 @@ namespace Addams
 
 
         //TODO TO  COMMENT
+        // TODO mettre pas mal de logs
         public async Task<Models.Playlist> GetLikedTracks()
         {
             //TODO convvertir enn Model playlist
             _ = await api.FetchUserLikeTracks();
 
-            return new Models.Playlist();
-
+            return new Models.Playlist()
+            {
+                Name = "Liked Songs"
+            };
         }
     }
 }

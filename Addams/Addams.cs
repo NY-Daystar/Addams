@@ -37,7 +37,7 @@ namespace Addams
 
             // TODO refacto la partie service qui a une config et une api on setup le service qui a une config vierge
             // TODO on charge la config dans le service
-            // DU couup inverser les lignes en dessous et adapter le code
+            // DU coup inverser les lignes en dessous et adapter le code
             Logger.Debug("Setup config...");
             SpotifyConfig cfg = SetupConfig();
 
