@@ -5,16 +5,12 @@ using NLog.Layouts;
 using NLog.Targets;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace Addams
 {
-    // TODO rename to Addams
-    internal class Program
+    internal class Addams
     {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 

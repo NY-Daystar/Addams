@@ -153,9 +153,6 @@ namespace Addams
             return playlist;
         }
 
-
-
-
         /// <summary>
         /// Fetch data about playlist's user
         /// </summary>

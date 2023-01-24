@@ -1,9 +1,4 @@
-﻿// TODO feature logger mettre un logger dans APPDATA
-	- Mettre le logger console et dans un fichier
-	- https://stackify.com/log4net-guide-dotnet-logging/
-	- https://stackoverflow.com/questions/1260157/whats-the-most-widely-used-logging-framework-in-c
-
-// TODO feature mode-debug :  ajouter mode debug
+﻿// TODO feature mode-debug :  ajouter mode debug
 	- Parser les arguments si -d ou --debug alors afficher les logs de debug en console
 
 // TODO feature refacto-service: faire en sorte que un service a une config et une api
@@ -36,6 +31,13 @@
 	- detecter l'obsolescence du token OAUTH2 et le regenerer puis le sauvegarder dauns un fichier de config dans APPDATA
 	- Regarder ce code pour avoirr let token: https://github.com/watsonbox/exportify/blob/d1247f715df1932ccc389364bffdb2f95d8d4bcb/src/components/Login.jsx
 	- Recuperer l'expiration qui est de 3600s et mettre du coup la date d'expiration en config et ne pas refresh si la date n'est pas atteinte
+
+// TODO feature import : faire la classe SpotifyImport
+	- En gros on prend un csv via un fileExplorer
+	- On deserialize pour avoir une playlist
+	- On demande un nom a la nouvelle playlist
+	- On fait un call api pour ajouter soit la playlist d'un coup soit les pistes 1 par 1
+	- Faire un test avec les piste liked en creant une playlist du nom de "RR" avec
 
 Release-1 :
 // TODO configure code analysis : Analyze > Configure code analysis

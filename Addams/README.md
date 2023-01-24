@@ -38,6 +38,8 @@ TODO download executable from github Addams.exe
 -   TODO mettre la console spotify les liens etc... etc...
 //TODO mettre les bons scope de l'OAUTH2' playlist-read-private user-library-read
 
+// TODO specifier le mode debug avec --debug
+
 ## Get Started
 
 ### Setup spotify app
