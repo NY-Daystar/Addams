@@ -14,16 +14,26 @@ namespace Addams
     {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
-        public static void Main()
+        private static string LOGFILE => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                "Addams",
+                "logs",
+                "addams.log"
+                );
+
+        public static void Main(string[] args)
         {
-            Run().GetAwaiter().GetResult();
+            Run(args).GetAwaiter().GetResult();
         }
 
-        public static async Task Run()
+        public static async Task Run(string[] args)
         {
-            string logFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Addams", "logs", "addams.log"); ;
-            LogLevel level = LogLevel.Debug;
-            SetupLogger(logFile, level);
+            // Get arguments from exe file
+            AddamsOptions options = AddamsOptions.DefineOptions(args);
+
+            LogLevel level = options.Debug ? LogLevel.Debug : LogLevel.Info;
+            SetupLogger(LOGFILE, level);
+
+            Logger.Info("Launching Addams Application");
 
             // TODO refacto la partie service qui a une config et une api on setup le service qui a une config vierge
             // TODO on charge la config dans le service
@@ -33,7 +43,6 @@ namespace Addams
 
             Logger.Debug("Setup service...");
             SpotifyService service = new SpotifyService(cfg);
-            /// TODO
 
             // TODO Gestion OAUTH2 authorization_code
             //Console.WriteLine("Get OAuth2 token...");
@@ -42,6 +51,7 @@ namespace Addams
 
             // Ask if you want all playlist or just a few
             bool allPlaylist = AskAllPlaylistWanted();
+            Console.WriteLine();
 
             Logger.Info("Fetching playlist data...");
             List<Models.Playlist>? playlists = await GetPlaylists(service, allPlaylist); ;
@@ -137,7 +147,6 @@ namespace Addams
         /// <returns>bool of the pick</returns>
         public static bool AskAllPlaylistWanted()
         {
-            bool answered = false;
             do
             {
                 Console.Write("Do you want to export all playlist\n    [1]:Yes\t[2]:No : ");
@@ -156,10 +165,7 @@ namespace Addams
                 {
                     Console.WriteLine($"\nYou type '{key}'. Please choose '1' or '2'"); // TODO language
                 }
-            } while (!answered);
-
-            Console.WriteLine();
-            return false;
+            } while (true);
         }
     }
 }
