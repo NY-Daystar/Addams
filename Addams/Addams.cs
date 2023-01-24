@@ -42,7 +42,7 @@ namespace Addams
             SpotifyConfig cfg = SetupConfig();
 
             Logger.Debug("Setup service...");
-            SpotifyService service = new SpotifyService(cfg);
+            SpotifyService service = new(cfg);
 
             // TODO Gestion OAUTH2 authorization_code
             //Console.WriteLine("Get OAuth2 token...");
@@ -74,11 +74,11 @@ namespace Addams
         /// <param name="level">Minimum level to define</param>
         private static void SetupLogger(string filePath, LogLevel level)
         {
-            LoggingConfiguration config = new LoggingConfiguration();
+            LoggingConfiguration config = new();
             Layout layout = "level:${uppercase:${level}} - date:${date} - caller: ${callsite-filename}:${callsite-linenumber} - ${message} ${exception:format=tostring}";
 
             // Targets where to log to: File and Console
-            FileTarget logfile = new FileTarget("logfile")
+            FileTarget logfile = new("logfile")
             {
                 FileName = filePath,
                 ArchiveEvery = FileArchivePeriod.Minute,
@@ -88,7 +88,7 @@ namespace Addams
 
             };
 
-            ConsoleTarget logconsole = new ConsoleTarget("logconsole")
+            ConsoleTarget logconsole = new("logconsole")
             {
                 Layout = layout
             };

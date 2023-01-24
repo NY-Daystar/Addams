@@ -2,7 +2,6 @@
 using Addams.Exceptions;
 using Newtonsoft.Json;
 using NLog;
-using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
