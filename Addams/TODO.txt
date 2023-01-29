@@ -1,14 +1,11 @@
-﻿// TODO feature mode-debug :  ajouter mode debug
-	- Parser les arguments si -d ou --debug alors afficher les logs de debug en console
-
-// TODO feature refacto-service: faire en sorte que un service a une config et une api
-
-// TODO en develop: generer automatiquement le build preferences a chaque build
+﻿// TODO en develop: generer automatiquement le build preferences a chaque build
 
 // TODO feature liked-song Recuperer la playlist des song likés
 	- Trouver l'url/id de cette playlist
 	- puis l'extraire
 	- Voir sur l'exemple exportify il y arrive sinon
+
+// TODO feature choose-playlist : finir le choix des playlist à exporter
 
 // TODO feature setup-app : faire un setup d'option au lancement de l'application
 //- 1 - lancement du program pour l'export

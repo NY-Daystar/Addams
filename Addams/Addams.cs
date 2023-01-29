@@ -1,5 +1,4 @@
-﻿using Addams.Exceptions;
-using NLog;
+﻿using NLog;
 using NLog.Config;
 using NLog.Layouts;
 using NLog.Targets;
@@ -32,19 +31,12 @@ namespace Addams
 
             LogLevel level = options.Debug ? LogLevel.Debug : LogLevel.Info;
             SetupLogger(LOGFILE, level);
-
             Logger.Info("Launching Addams Application");
 
-            // TODO refacto la partie service qui a une config et une api on setup le service qui a une config vierge
-            // TODO on charge la config dans le service
-            // DU coup inverser les lignes en dessous et adapter le code
-            Logger.Debug("Setup config...");
-            SpotifyConfig cfg = SetupConfig();
+            Logger.Debug("Setup service with config and api...");
+            SpotifyService service = new();
 
-            Logger.Debug("Setup service...");
-            SpotifyService service = new(cfg);
-
-            // TODO Gestion OAUTH2 authorization_code
+            // TODO feature OAUTH2 authorization_code
             //Console.WriteLine("Get OAuth2 token...");
             //string newToken = await service.RefreshToken();
             //service.Update(newToken);
@@ -54,7 +46,9 @@ namespace Addams
             Console.WriteLine();
 
             Logger.Info("Fetching playlist data...");
-            List<Models.Playlist>? playlists = await GetPlaylists(service, allPlaylist); ;
+            List<Models.Playlist>? playlists = await service.GetPlaylists(allPlaylist); // Get playlist data of user to save it after
+
+
             if (playlists == null)
             {
                 Logger.Error("None playlist found");
@@ -101,45 +95,6 @@ namespace Addams
             LogManager.Configuration = config;
         }
 
-        // TODO recomment
-        /// <summary>
-        /// Get playlist data of user to save it after
-        /// </summary>
-        /// <param name="user">username to get playlist</param>
-        /// <returns>List of playlists to save</returns>
-        public static async Task<List<Models.Playlist>> GetPlaylists(SpotifyService service, bool allPlaylist)
-        {
-            // Get playlist
-            List<Models.Playlist>? playlists = await service.GetPlaylists(allPlaylist);
-
-            return playlists ?? new List<Models.Playlist>();
-        }
-
-        /// <summary>
-        /// Retrieve config if already exists if not we create it
-        /// </summary>
-        /// <returns></returns>
-        public static SpotifyConfig SetupConfig()
-        {
-            SpotifyConfig defaultConfig = new();
-            SpotifyConfig config = new();
-
-            try
-            {
-                config = SpotifyConfig.Read();
-                config.Token = defaultConfig.Token; // TODO get default token for now 
-                SpotifyService service = new(config);
-                Logger.Debug($"Config already exists:\n{config}");
-            }
-            catch (SpotifyConfigException)
-            {
-                config.Setup();
-                Logger.Warn($"This config will be saved:\n{config}");
-                config.Save();
-            }
-            return config;
-        }
-
         /// <summary>
         /// Ask the user if he want to export all playlist
         /// Yes : means true, No means false
@@ -163,7 +118,7 @@ namespace Addams
                 }
                 else
                 {
-                    Console.WriteLine($"\nYou type '{key}'. Please choose '1' or '2'"); // TODO language
+                    Console.WriteLine($"\nYou type '{key}'. Please choose '1' or '2'"); // TODO feature language
                 }
             } while (true);
         }

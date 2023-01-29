@@ -31,7 +31,7 @@ namespace Addams.Tests
 
         [Test]
         /// <summary>
-        /// TODO you need to regenerate token if you don't need
+        /// TODO feature OAUTH2 you need to regenerate token if you don't need
         /// </summary>
         public async Task TestGetPlaylistWithRightToken()
         {

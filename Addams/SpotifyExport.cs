@@ -21,9 +21,9 @@ namespace Addams
         /// <param name="data">List of playlist to save</param>
         public static void SavePlaylists(List<Models.Playlist> data)
         {
-            // TODO gerer un mode specific pour tout save dans un fichier ou plusieurs
-            // TODO faire un mode si on save tout dans un fichier ou une playlist par fichier
-            // TODO faire un save dans un csv du fichier
+            // TODO feature save-mode: gerer un mode specific pour tout save dans un fichier ou plusieurs
+            //      - faire un mode si on save tout dans un fichier ou une playlist par fichier
+            //      - faire un save dans un csv du fichier
 
             string exePath = System.Reflection.Assembly.GetExecutingAssembly().Location ?? throw new Exception("exe path is null");
 
@@ -43,15 +43,16 @@ namespace Addams
         }
 
 
-        //TODO voir si je peux faire un seul .xlsx avec tous les onglets
-        // TODO faire un mode si on save tout dans un fichier ou une playlist par fichier
-        // TODO faire un save dans un csv du fichier
-        // TODO to comment
+        //TODO feature save-mode
+        //  - voir si je peux faire un seul .xlsx avec tous les onglets
+        //  - faire un mode si on save tout dans un fichier ou une playlist par fichier
+        //  - faire un save dans un csv du fichier
+
         /// <summary>
         /// Save playlist data into csv file
         /// </summary>
-        /// <param name="data">List of playlist to save</param>
-        /// 
+        /// <param name="path">Path of csv file when playlist is saved</param>
+        /// <param name="playlist">playlist data to save (playlist name, tracks, etc...)</param>
         public static void SavePlaylist(string path, Models.Playlist playlist)
         {
             // Format filename
@@ -63,7 +64,7 @@ namespace Addams
 
             Logger.Info($"STORE FILE HERE : {csvFilePath}"); // TODO put log
 
-            // TODO mettre avec le resx d'autres langues
+            // TODO feature language: mettre avec le resx d'autres langues
             string headerLine = string.Join(",", new List<string> {
                 "Track Name",
                 "Artist Name(s)",
