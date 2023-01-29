@@ -1,4 +1,4 @@
-﻿using Addams.Entities;
+using Addams.Entities;
 using Addams.Exceptions;
 using NUnit.Framework;
 

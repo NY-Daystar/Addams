@@ -1,4 +1,4 @@
-﻿using Addams.Entities;
+using Addams.Entities;
 using Addams.Exceptions;
 using NLog;
 using System;
@@ -210,7 +210,7 @@ namespace Addams
         /// <returns>Playlist model with liked songs</returns>
         public async Task<Models.Playlist> GetLikedTracks()
         {
-            TrackList likedPlaylistEnt = await api.FetchUserLikedTracks();
+            TrackList likedPlaylistEnt = await api.FetchLikedTracks();
 
             if (likedPlaylistEnt == null
                || likedPlaylistEnt.items == null

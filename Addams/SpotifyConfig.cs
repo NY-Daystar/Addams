@@ -44,7 +44,7 @@ namespace Addams
         [JsonPropertyName("token")]
         public string Token { get; set; } = _token;
 
-        private static readonly string _token = @"BQCS1lHoufRq4ZMxvU_EepMmQxGoPOGfekIb3FMTfIeBDA4iqh62CSj1_Rrlbql1DiXFdRzATTf1wfjAPhghsYGu3HqhUJQ0t9rKkgXYyJZ6bIkVe3b8pZHtmfkocQ069FXQaxktjQ6aH10QZlMk72M8T8hCZkUEeBfDHWXwGiFDUaI8gTWEeb1Kyx1791NWBgmyShSIv4IC_N8Yk0Yw8gA";
+        private static readonly string _token = @"BQBqPKw8DpC3yOi73Dx6iuGrTmzDasKMC5NM0nEa8lFPEVSB0Us7PjxkcqCMZDAAhjt_oe__lt3VNk5_D3cJ-KdAFcUJjstWqOgocBEgEKLXwnmzNc4Dh-dhFeIMMC4_wM76-1674ePScXMTtS0OXtWSDaSJU7hmJvX-Zn9nKSkShAN46ECh04m2beWYFg0f5Ag2IR7h6ZXtghxgCHJJ46M";
 
         /// <summary>
         /// Datetime of last save

@@ -1,4 +1,4 @@
-﻿using Addams.Entities;
+using Addams.Entities;
 using Addams.Exceptions;
 using Newtonsoft.Json;
 using NLog;
@@ -175,26 +175,12 @@ namespace Addams
             PlaylistTracks playlist = JsonConvert.DeserializeObject<PlaylistTracks>(content) ?? new PlaylistTracks();
 
             // If can't catch every tracks for a playlist in one api call
-            // TODO bugfix-overflow : mettre tout ce if dans une methode
+            // Add all the tracks overflow by api on the playlist
             if (playlist.tracks.total >= TRACK_LIMIT)
             {
-                Logger.Warn($"Only fetch {playlist.tracks.items.Count} tracks for a total to {playlist.tracks.total}");
-                TrackList trackList = playlist.tracks;
-
-                // Get all tracks of specific playlist
-                do
-                {
-                    if (trackList.next == null)
-                    {
-                        Logger.Warn($"Tracklist next url is null, can't get the rest of playlist");
-                        break;
-                    }
-
-                    trackList = await FetchOverflowTracks(trackList.next);
-                    playlist.tracks.items.AddRange(trackList.items);
-                    Logger.Info($"Get the rest of playlist {playlist.tracks.items.Count}/{playlist.tracks.total} songs");
-                } while (trackList.next != null);
-                playlist.tracks.next = null;
+                Logger.Warn($"For {playlist.name} : only fetch {playlist.tracks.items.Count} tracks for a total to {playlist.tracks.total}");
+                playlist.tracks = await FetchTracksOverflow(playlist.tracks);
+                Logger.Info($"Fetch all tracks for the playlist {playlist.tracks.items.Count}/{playlist.tracks.total}");
             }
             return playlist;
         }
@@ -224,27 +210,12 @@ namespace Addams
             TrackList playlist = JsonConvert.DeserializeObject<TrackList>(content) ?? new TrackList();
 
             // If can't catch every tracks for a playlist in one api call
-            // TODO bugfix-overflow : mettre tout ce if dans une methode
+            // Add all the tracks overflow by api on the playlist
             if (playlist.total >= TRACK_LIMIT)
             {
-                Logger.Warn($"Only fetch {playlist.items.Count} tracks for a total to {playlist.total}");
-                TrackList trackList = playlist;
-
-                // Get all tracks of specific playlist
-                do
-                {
-                    if (trackList.next == null)
-                    {
-                        Logger.Warn($"Tracklist next url is null, can't get the rest of playlist");
-                        break;
-                    }
-
-
-                    trackList = await FetchOverflowTracks(trackList.next);
-                    playlist.items.AddRange(trackList.items);
-                    Logger.Info($"Get the rest of playlist {playlist.items.Count}/{playlist.total} songs");
-                } while (trackList.next != null);
-                playlist.next = null;
+                Logger.Warn($"For Liked Song : only fetch {playlist.items.Count} tracks for a total to {playlist.total}");
+                playlist = await FetchTracksOverflow(playlist);
+                Logger.Info($"Fetch all tracks for the playlist {playlist.items.Count}/{playlist.total}");
             }
             return playlist;
         }
@@ -277,25 +248,56 @@ namespace Addams
         }
 
         /// <summary>
+        /// Add in playlist overflow tracks from specific API url
+        /// </summary>
+        /// <param name="url">url to request to fetch tracks</param>
+        /// <returns>Tracklist overflowed</returns>
+        /// <exception cref="SpotifyUnauthorizedException"></exception>
+        /// <exception cref="SpotifyException"></exception>
+        private async Task<TrackList> FetchTracksOverflow(TrackList playlist)
+        {
+            // Get all tracks of specific playlist
+            do
+            {
+                if (playlist.next == null)
+                {
+                    Logger.Warn($"Playlist next url is null, can't get the rest of playlist");
+                    break;
+                }
+
+                // Get part of the playlist from url
+                TrackList trackList = await FetchTrackListFromUrl(playlist.next);
+
+                // Add tracks into original playlist
+                playlist.items.AddRange(trackList.items);
+                playlist.next = trackList.next;
+                Logger.Info($"Get the rest of playlist {playlist.items.Count}/{playlist.total} songs");
+
+            } while (playlist.next != null);
+
+            return playlist;
+        }
+
+        /// <summary>
         /// Fetch overflow tracks from specific API url
         /// </summary>
         /// <param name="url">url to request to fetch tracks</param>
         /// <returns>Tracklist overflowed</returns>
         /// <exception cref="SpotifyUnauthorizedException"></exception>
         /// <exception cref="SpotifyException"></exception>
-        public async Task<TrackList> FetchOverflowTracks(string url)
+        private async Task<TrackList> FetchTrackListFromUrl(string url)
         {
-            Logger.Debug($"FetchOverflowTracks call API: {url}");
+            Logger.Debug($"FetchTrackListFromUrl call API: {url}");
 
             HttpResponseMessage response = await Client.GetAsync(url);
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
-                throw new SpotifyUnauthorizedException($"Can't get FetchPlaylistTracks\nThe token {AuthToken}\nis invalid for user: {User}\n" +
+                throw new SpotifyUnauthorizedException($"Can't get FetchTrackListFromUrl\nThe token {AuthToken}\nis invalid for user: {User}\n" +
                     "You need to create a new one or refresh it");
             }
             if (!response.IsSuccessStatusCode)
             {
-                throw new SpotifyException($"Can't get FetchPlaylistTracks\nStatusCode {response.StatusCode} : {response.Content}");
+                throw new SpotifyException($"Can't get FetchTrackListFromUrl\nStatusCode {response.StatusCode} : {response.Content}");
             }
             string content = await response.Content.ReadAsStringAsync();
             TrackList trackList = JsonConvert.DeserializeObject<TrackList>(content) ?? new TrackList();
