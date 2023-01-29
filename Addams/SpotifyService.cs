@@ -1,4 +1,4 @@
-using Addams.Entities;
+﻿using Addams.Entities;
 using Addams.Exceptions;
 using NLog;
 using System;
@@ -15,12 +15,12 @@ namespace Addams
         /// <summary>
         /// Spotify Api requests
         /// </summary>
-        private SpotifyConfig config;
+        private readonly SpotifyConfig config;
 
         /// <summary>
         /// Spotify Api requests
         /// </summary>
-        private SpotifyApi api;
+        private readonly SpotifyApi api;
 
         /// <summary>
         /// Setup SpotifyService to get playlist and track 
@@ -32,7 +32,7 @@ namespace Addams
             Logger.Debug("Setup config...");
             config = SpotifyConfig.Get();
             Logger.Debug("Setup Api...");
-            this.api = new SpotifyApi(config);
+            api = new SpotifyApi(config);
         }
 
         /// <summary>
