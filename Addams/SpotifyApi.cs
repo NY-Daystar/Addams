@@ -1,4 +1,4 @@
-using Addams.Entities;
+﻿using Addams.Entities;
 using Addams.Exceptions;
 using Newtonsoft.Json;
 using NLog;
@@ -137,12 +137,12 @@ namespace Addams
             HttpResponseMessage response = await Client.GetAsync(url);
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
-                throw new SpotifyUnauthorizedException($"Can't get FetchUserPlaylists\nThe token {AuthToken}\nis invalid for user: {User}\n" +
+                throw new SpotifyUnauthorizedException($"Can't get FetchPlaylists\nThe token {AuthToken}\nis invalid for user: {User}\n" +
                     "You need to create a new one or refresh it");
             }
             if (!response.IsSuccessStatusCode)
             {
-                throw new SpotifyException($"Can't get FetchUserPlaylists\nStatusCode {response.StatusCode} : {response.Content}");
+                throw new SpotifyException($"Can't get FetchPlaylists\nStatusCode {response.StatusCode} : {response.Content}");
             }
             string content = await response.Content.ReadAsStringAsync();
             Playlists playlists = JsonConvert.DeserializeObject<Playlists>(content) ?? new Playlists();
@@ -164,12 +164,12 @@ namespace Addams
             HttpResponseMessage response = await Client.GetAsync(url);
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
-                throw new SpotifyUnauthorizedException($"Can't get FetchPlaylistTracks\nThe token {AuthToken}\nis invalid for user: {User}\n" +
+                throw new SpotifyUnauthorizedException($"Can't get FetchTracks\nThe token {AuthToken}\nis invalid for user: {User}\n" +
                     "You need to create a new one or refresh it");
             }
             if (!response.IsSuccessStatusCode)
             {
-                throw new SpotifyException($"Can't get FetchPlaylistTracks\nStatusCode {response.StatusCode} : {response.Content}");
+                throw new SpotifyException($"Can't get FetchTracks\nStatusCode {response.StatusCode} : {response.Content}");
             }
             string content = await response.Content.ReadAsStringAsync();
             PlaylistTracks playlist = JsonConvert.DeserializeObject<PlaylistTracks>(content) ?? new PlaylistTracks();
@@ -191,20 +191,20 @@ namespace Addams
         /// <returns>Playlist of liked songs of a user return by spotify api /tracks</returns>
         /// <exception cref="SpotifyUnauthorizedException"></exception>
         /// <exception cref="SpotifyException"></exception>
-        public async Task<TrackList> FetchUserLikedTracks()
+        public async Task<TrackList> FetchLikedTracks()
         {
             string url = $@"{API}/users/{User}/tracks?limit={TRACK_LIKED_LIMIT}&offset=0";
-            Logger.Debug($"FetchUserLikeTracks call API: {url}");
+            Logger.Debug($"FetchLikedTracks call API: {url}");
 
             HttpResponseMessage response = await Client.GetAsync(url);
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
-                throw new SpotifyUnauthorizedException($"Can't get FetchUserLikeTracks\nThe token {AuthToken}\nis invalid for user: {User}\n" +
+                throw new SpotifyUnauthorizedException($"Can't get FetchLikedTracks\nThe token {AuthToken}\nis invalid for user: {User}\n" +
                     "You need to create a new one or refresh it");
             }
             if (!response.IsSuccessStatusCode)
             {
-                throw new SpotifyException($"Can't get FetchUserLikeTracks\nStatusCode {response.StatusCode} : {response.Content}");
+                throw new SpotifyException($"Can't get FetchLikedTracks\nStatusCode {response.StatusCode} : {response.Content}");
             }
             string content = await response.Content.ReadAsStringAsync();
             TrackList playlist = JsonConvert.DeserializeObject<TrackList>(content) ?? new TrackList();

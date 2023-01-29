@@ -1,4 +1,4 @@
-using Addams.Entities;
+﻿using Addams.Entities;
 using Addams.Exceptions;
 using NUnit.Framework;
 
@@ -9,7 +9,7 @@ namespace Addams.Tests
         private SpotifyApi api;
 
         [SetUp]
-        // TODO generer un token a terme
+        // TODO feature OAUTH2 : generer un token a terme
         public void SetUp()
         {
             SpotifyConfig cfg = new();
