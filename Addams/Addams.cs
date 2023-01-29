@@ -1,5 +1,4 @@
-﻿using Addams.Exceptions;
-using NLog;
+﻿using NLog;
 using NLog.Config;
 using NLog.Layouts;
 using NLog.Targets;
@@ -37,7 +36,7 @@ namespace Addams
             Logger.Debug("Setup service with config and api...");
             SpotifyService service = new();
 
-            // TODO Gestion OAUTH2 authorization_code
+            // TODO feature OAUTH2 authorization_code
             //Console.WriteLine("Get OAuth2 token...");
             //string newToken = await service.RefreshToken();
             //service.Update(newToken);
@@ -47,7 +46,9 @@ namespace Addams
             Console.WriteLine();
 
             Logger.Info("Fetching playlist data...");
-            List<Models.Playlist>? playlists = await GetPlaylists(service, allPlaylist); ;
+            List<Models.Playlist>? playlists = await service.GetPlaylists(allPlaylist); // Get playlist data of user to save it after
+
+
             if (playlists == null)
             {
                 Logger.Error("None playlist found");
@@ -94,20 +95,6 @@ namespace Addams
             LogManager.Configuration = config;
         }
 
-        // TODO recomment
-        /// <summary>
-        /// Get playlist data of user to save it after
-        /// </summary>
-        /// <param name="user">username to get playlist</param>
-        /// <returns>List of playlists to save</returns>
-        public static async Task<List<Models.Playlist>> GetPlaylists(SpotifyService service, bool allPlaylist)
-        {
-            // Get playlist
-            List<Models.Playlist>? playlists = await service.GetPlaylists(allPlaylist);
-
-            return playlists ?? new List<Models.Playlist>();
-        }
-
         /// <summary>
         /// Ask the user if he want to export all playlist
         /// Yes : means true, No means false
@@ -131,7 +118,7 @@ namespace Addams
                 }
                 else
                 {
-                    Console.WriteLine($"\nYou type '{key}'. Please choose '1' or '2'"); // TODO language
+                    Console.WriteLine($"\nYou type '{key}'. Please choose '1' or '2'"); // TODO feature language
                 }
             } while (true);
         }

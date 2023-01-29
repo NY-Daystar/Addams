@@ -5,7 +5,7 @@
 	- puis l'extraire
 	- Voir sur l'exemple exportify il y arrive sinon
 
-// TODO finir le choix des playlist à exporter
+// TODO feature choose-playlist : finir le choix des playlist à exporter
 
 // TODO feature setup-app : faire un setup d'option au lancement de l'application
 //- 1 - lancement du program pour l'export

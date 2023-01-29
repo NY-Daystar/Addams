@@ -87,13 +87,13 @@ namespace Addams
             return client;
         }
 
-        // TODO OAUTH2 to comment
+        // TODO feature OAUTH2 to comment
         public void RefreshClient(string token)
         {
             Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
         }
 
-        //TODO OAUTH2 to comment
+        //TODO feature OAUTH2 to comment
         public async Task<Token> Authorize()
         {
             FormUrlEncodedContent requestData = new(new[]
@@ -110,13 +110,13 @@ namespace Addams
 
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
-                // TODO changer le message
+                // TODO feature OAUTH2: changer le message d'erreur
                 throw new SpotifyUnauthorizedException($"Can't get Authorize\nThe token {AuthToken}\nis invalid for user: {User}\n" +
                     "You need to create a new one or refresh it");
             }
             if (!response.IsSuccessStatusCode)
             {
-                // TODO changer le message
+                // TODO feature OAUTH2: changer le message d'erreur
                 throw new SpotifyException($"Can't get Authorize\nStatusCode {response.StatusCode} : {response.Content}");
             }
             string content = await response.Content.ReadAsStringAsync();
@@ -128,12 +128,12 @@ namespace Addams
         /// <summary>
         /// Fetch Liked songs of user
         /// </summary>
-        /// <returns>Playlist of liked soong of a user return by spotify api /tracks</returns>
+        /// <returns>Playlist of liked song of a user return by spotify api /tracks</returns>
         /// <exception cref="SpotifyUnauthorizedException"></exception>
         /// <exception cref="SpotifyException"></exception>
         public async Task<LikePlaylist> FetchUserLikeTracks()
         {
-            // TODO Faire une boucle qui recupere tout en se basant sur la vaaleurr total et en faisant varier ll'offset
+            // TODO feature liked-playlist Faire une boucle qui recupere tout en se basant sur la vaaleurr total et en faisant varier ll'offset
             string url = $@"{API}/users/{User}/tracks?limit={TRACK_LIKED_LIMIT}&offset=50";
             Logger.Debug($"FetchUserLikeTracks call API: {url}");
 

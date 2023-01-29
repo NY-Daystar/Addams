@@ -21,7 +21,7 @@ namespace Addams
         [JsonPropertyName("user")]
         public string User
         {
-            get => "gravityx3";  // TODO to delete
+            get => "gravityx3";  // OAUTH2 TODO to delete
             set { }
         }
 
@@ -41,7 +41,7 @@ namespace Addams
         /// OAuth2 token generated 
         /// Default OAuth2 token
         /// </summary>
-        /// TODO a changer en static
+        /// TODO small-change: a changer en static
         [JsonPropertyName("token")]
         public string? Token { get; set; } = @"BQDgayBYqaebmO4dXyp5nSmpecjWDI5zegIJ1k3ERUtmAzPdEHQbN9KBQMgzWXNa_qybRpwMDK5h3cAME13JR9-soT2YKNhB6AJW-XHC81hLbquhd0scGlyEr17wwkp1oEDqdYtmNxUpFbtk3-PDc38HCjyy88FjvhCBTmMyiJtDIH6PGdtHU7T-6J7HIh7Uumtb0ITzm3JUN9EuPF1knLM";
 
@@ -54,7 +54,8 @@ namespace Addams
         /// <summary>
         /// Config file store in AppData folder : %APPDATA%\Addams
         /// </summary>
-        public static string filePath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Addams\\config.json"); // TODO a combine avec un comma
+        /// TODO small-change: a combine avec un comma
+        public static string filePath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Addams\\config.json"); 
 
         /// <summary>
         /// Retrieve config if already exists if not we create it

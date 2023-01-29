@@ -45,32 +45,32 @@ namespace Addams
 
             if (OAuth2.access_token == null)
             {
-                throw new Exception();// TODO changer exception en AuthorizeException
+                throw new Exception();// TODO feature OAUTH2: changer exception en AuthorizeException
             }
 
             return OAuth2.access_token;
         }
 
-        // TODO OAUTH2 to comment
+        // TODO feature OAUTH2 to comment
         public void Update(string accessToken)
         {
-            // TODO fusionner en setToken()
+            // TODO feature OAUTH2 fusionner en setToken()
             config.Token = accessToken;
             config.Save();
 
             api.RefreshClient(accessToken);
         }
 
-        // TODO recomment
+        // TODO feature choose-playlists: To Recomment
         /// <summary>
         /// Get all playlist created or saved by a user
         /// </summary>
         /// <returns></returns>
         public async Task<List<Models.Playlist>> GetPlaylists(bool allPlaylist)
         {
-            // TODO Si il veut certaines:
-            //- Faire un affichage des playlist exportables avec un numéro
-            //- Et l'utilisateur choisis celle qui veut exporter avec une commandé linq qui filtre uniquement ceux qui veulent
+            // TODO feature choose-playlists: Si il veut certaines:
+            //  - Faire un affichage des playlist exportables avec un numéro
+            //  - Et l'utilisateur choisis celle qui veut exporter avec une commandé linq qui filtre uniquement ceux qui veulent
 
             List<Models.Playlist> playlists = new();
 
@@ -206,11 +206,11 @@ namespace Addams
 
 
 
-        //TODO TO  COMMENT
-        // TODO mettre pas mal de logs
+        //TODO feature liked-tracks: To comment
+        //TODO feature liked-tracks: Put logs
         public async Task<Models.Playlist> GetLikedTracks()
         {
-            //TODO convvertir enn Model playlist
+            //TODO feature liked-tracks: convertir en Model playlist
             _ = await api.FetchUserLikeTracks();
 
             return new Models.Playlist()
