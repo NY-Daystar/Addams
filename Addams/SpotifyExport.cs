@@ -60,9 +60,6 @@ namespace Addams
 
             // Format path
             string csvFilePath = Path.Combine(path, $"{filename}.csv");
-            //csvFilePath = PathUtil.FormatValidPath(csvFilePath);
-
-            Logger.Info($"STORE FILE HERE : {csvFilePath}"); // TODO put log
 
             // TODO feature language: mettre avec le resx d'autres langues
             string headerLine = string.Join(",", new List<string> {
@@ -106,14 +103,27 @@ namespace Addams
 
             List<string> csvData = new()
             {
-                headerLine // TODO info IDE0028: Collection initialization can be simplified 
+                headerLine
             };
             csvData.AddRange(dataLines);
 
-            File.WriteAllLines(csvFilePath, csvData);
-            // TODO bugfix openException: gerer l'exception dans le cas ou le csv est open
-            // System.IO.IOException: 'The process cannot access the file
-            // 'D:\Dev\Addams\Addams\bin\Debug\net7.0\data\A ecouter.csv' because it is being used by another process.'
+            bool exported = false;
+            do
+            {
+                try
+                {
+                    File.WriteAllLines(csvFilePath, csvData);
+                    exported = true;
+                }
+                catch (IOException ex)
+                {
+                    Logger.Error($"{ex} : Message: {ex.Message}\nStackTrace:{ex.StackTrace}");
+                    Logger.Error($"Le fichier {csvFilePath} est déjà ouvert par un autre processus" +
+                        $"\nVeuillez le fermer pour réessayer"); // TODO feature language
+                }
+            } while (!exported);
+
+            Logger.Info($"Votre playlist est sauvegardé ici : {csvFilePath}"); // feature language
         }
     }
 }
