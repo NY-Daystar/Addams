@@ -1,4 +1,4 @@
-using Addams.Entities;
+﻿using Addams.Entities;
 using Addams.Exceptions;
 using NLog;
 using System;
@@ -238,7 +238,7 @@ namespace Addams
 
             return new Models.Playlist()
             {
-                Name = "Liked Songs",
+                Name = "0 - Liked Songs",
                 Description = "Playlist of liked songs",
                 Href = href,
                 Tracks = tracks,
