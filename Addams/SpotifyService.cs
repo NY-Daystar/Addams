@@ -210,7 +210,7 @@ namespace Addams
         /// <returns>Playlist model with liked songs</returns>
         public async Task<Models.Playlist> GetLikedTracks()
         {
-            TrackList likedPlaylistEnt = await api.FetchUserLikedTracks();
+            TrackList likedPlaylistEnt = await api.FetchLikedTracks();
 
             if (likedPlaylistEnt == null
                || likedPlaylistEnt.items == null
@@ -238,7 +238,7 @@ namespace Addams
 
             return new Models.Playlist()
             {
-                Name = "Liked Songs",
+                Name = "0 - Liked Songs",
                 Description = "Playlist of liked songs",
                 Href = href,
                 Tracks = tracks,

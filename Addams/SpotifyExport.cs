@@ -111,7 +111,7 @@ namespace Addams
             csvData.AddRange(dataLines);
 
             File.WriteAllLines(csvFilePath, csvData);
-            // TODO gerer l'exceptiion dans le cas ou le csv est open
+            // TODO bugfix openException: gerer l'exception dans le cas ou le csv est open
             // System.IO.IOException: 'The process cannot access the file
             // 'D:\Dev\Addams\Addams\bin\Debug\net7.0\data\A ecouter.csv' because it is being used by another process.'
         }
