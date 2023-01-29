@@ -15,8 +15,7 @@ namespace Addams
     /// </summary>
     public class SpotifyApi
     {
-
-        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         /// Number of playlists fetchable in spotify API
         /// </summary>

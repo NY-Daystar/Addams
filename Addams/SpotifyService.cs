@@ -10,17 +10,17 @@ namespace Addams
 {
     internal class SpotifyService
     {
-        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// Spotify Api requests
         /// </summary>
-        private SpotifyConfig config;
+        private readonly SpotifyConfig config;
 
         /// <summary>
         /// Spotify Api requests
         /// </summary>
-        private SpotifyApi api;
+        private readonly SpotifyApi api;
 
         /// <summary>
         /// Setup SpotifyService to get playlist and track 
@@ -30,9 +30,9 @@ namespace Addams
         public SpotifyService()
         {
             Logger.Debug("Setup config...");
-            this.config = new SpotifyConfig();
+            config = SpotifyConfig.Get();
             Logger.Debug("Setup Api...");
-            this.api = new SpotifyApi(config);
+            api = new SpotifyApi(config);
         }
 
         /// <summary>

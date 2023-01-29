@@ -13,7 +13,7 @@ namespace Addams
     /// </summary>
     public class SpotifyExport
     {
-        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// Save playlist data into csv file
