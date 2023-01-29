@@ -53,9 +53,8 @@ namespace Addams.Models
         public int _duration { get; set; }
 
         /// <summary>
-        /// Time duration of the track ('minutes:secondes')
+        /// Time duration of the track ('hours:minutes:seconds')
         /// </summary>
-        /// TODO small-change: To check
         public string Duration => FormatDuration(_duration);
 
         /// <summary>
