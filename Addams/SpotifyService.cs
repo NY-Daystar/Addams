@@ -30,7 +30,7 @@ namespace Addams
         public SpotifyService()
         {
             Logger.Debug("Setup config...");
-            this.config = new SpotifyConfig();
+            config = SpotifyConfig.Get();
             Logger.Debug("Setup Api...");
             this.api = new SpotifyApi(config);
         }
