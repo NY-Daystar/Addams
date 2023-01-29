@@ -1,4 +1,4 @@
-﻿using Addams.Exceptions;
+using Addams.Exceptions;
 using NLog;
 using System;
 using System.IO;
@@ -13,7 +13,7 @@ namespace Addams
     /// </summary>
     public class SpotifyConfig
     {
-        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// Spotify username

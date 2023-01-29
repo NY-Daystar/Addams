@@ -1,4 +1,4 @@
-﻿using Addams.Entities;
+using Addams.Entities;
 using Addams.Exceptions;
 using NLog;
 using System;
@@ -10,7 +10,7 @@ namespace Addams
 {
     internal class SpotifyService
     {
-        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// Spotify Api requests
