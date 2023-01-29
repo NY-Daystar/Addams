@@ -45,9 +45,9 @@ namespace Addams.Tests
         }
 
         [Test]
-        public async Task TestGetPlaylistTracksMoreThan100Tracks()
+        [TestCase("0CFuMybe6s77w6QQrJjW7d")]
+        public async Task TestGetPlaylistTracksMoreThan100Tracks(string playlistId)
         {
-            string playlistId = "0CFuMybe6s77w6QQrJjW7d"; // TODO mettre un testCase
             PlaylistTracks playlistTracks = await api.FetchTracks(playlistId);
 
             Assert.IsNotNull(playlistTracks);
