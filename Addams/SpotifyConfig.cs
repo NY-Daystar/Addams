@@ -42,9 +42,10 @@ namespace Addams
         /// OAuth2 token generated 
         /// Default OAuth2 token
         /// </summary>
-        /// TODO small-change: a changer en static
         [JsonPropertyName("token")]
-        public string? Token { get; set; } = @"BQDpxLc9ZUSpc6-pbfem_q34aKm-2g23Y-d4B1ic_Q8v_OMvPFZ9GdZf3D-UUDecaXuBxIj-pswG3h2Axx3cUJzD4UfeW_xCYsK9yR3nezNFizXyKgUsROnqhzCfQEzoaZM3HP8EJbDksEI4U5I8Rb4tNxA_OLlcu-_8-UHup48dGMrNEqf6yylW9Ihaa2KTzD8DN84-LimxF-oLTP3Huo8";
+        public string Token { get; set; } = _token;
+        
+        private static string _token = @"BQDpxLc9ZUSpc6-pbfem_q34aKm-2g23Y-d4B1ic_Q8v_OMvPFZ9GdZf3D-UUDecaXuBxIj-pswG3h2Axx3cUJzD4UfeW_xCYsK9yR3nezNFizXyKgUsROnqhzCfQEzoaZM3HP8EJbDksEI4U5I8Rb4tNxA_OLlcu-_8-UHup48dGMrNEqf6yylW9Ihaa2KTzD8DN84-LimxF-oLTP3Huo8";
 
         /// <summary>
         /// Datetime of last save
