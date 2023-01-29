@@ -1,7 +1,8 @@
-using Addams.Exceptions;
+﻿using Addams.Exceptions;
 using NLog;
 using System;
 using System.IO;
+using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -43,7 +44,7 @@ namespace Addams
         /// </summary>
         /// TODO small-change: a changer en static
         [JsonPropertyName("token")]
-        public string? Token { get; set; } = @"BQDgayBYqaebmO4dXyp5nSmpecjWDI5zegIJ1k3ERUtmAzPdEHQbN9KBQMgzWXNa_qybRpwMDK5h3cAME13JR9-soT2YKNhB6AJW-XHC81hLbquhd0scGlyEr17wwkp1oEDqdYtmNxUpFbtk3-PDc38HCjyy88FjvhCBTmMyiJtDIH6PGdtHU7T-6J7HIh7Uumtb0ITzm3JUN9EuPF1knLM";
+        public string? Token { get; set; } = @"BQDpxLc9ZUSpc6-pbfem_q34aKm-2g23Y-d4B1ic_Q8v_OMvPFZ9GdZf3D-UUDecaXuBxIj-pswG3h2Axx3cUJzD4UfeW_xCYsK9yR3nezNFizXyKgUsROnqhzCfQEzoaZM3HP8EJbDksEI4U5I8Rb4tNxA_OLlcu-_8-UHup48dGMrNEqf6yylW9Ihaa2KTzD8DN84-LimxF-oLTP3Huo8";
 
         /// <summary>
         /// Datetime of last save
@@ -54,8 +55,15 @@ namespace Addams
         /// <summary>
         /// Config file store in AppData folder : %APPDATA%\Addams
         /// </summary>
-        /// TODO small-change: a combine avec un comma
-        public static string filePath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Addams\\config.json"); 
+        public static string ConfigFilepath
+        {
+            get
+            {
+                string _appDataFolderName = "Addams"; // Name of the project for %APPDATA% folder
+                string _appDataConfigFilename = "config.json"; // Config file name 
+                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), _appDataFolderName, _appDataConfigFilename);
+            }
+        }
 
         /// <summary>
         /// Retrieve config if already exists if not we create it
@@ -103,28 +111,28 @@ namespace Addams
         public void Save()
         {
             // Setup file and Directory if not exists
-            if (!File.Exists(filePath))
+            if (!File.Exists(ConfigFilepath))
             {
                 string folder =
-                    Path.GetDirectoryName(filePath)
+                    Path.GetDirectoryName(ConfigFilepath)
                     ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Addams"); ;
                 if (folder == null)
                 {
-                    throw new DirectoryNotFoundException($"SpotifyConfig - Save method can't find folder based on path {filePath}");
+                    throw new DirectoryNotFoundException($"SpotifyConfig - Save method can't find folder based on path {ConfigFilepath}");
                 }
 
                 if (!Directory.Exists(folder))
                 {
                     _ = Directory.CreateDirectory(folder);
                 }
-                File.Create(filePath).Close();
+                File.Create(ConfigFilepath).Close();
             }
             JsonSerializerOptions options = new()
             {
                 WriteIndented = true,
             };
             string content = JsonSerializer.Serialize(this, options);
-            File.WriteAllText(filePath, content);
+            File.WriteAllText(ConfigFilepath, content);
         }
 
         /// <summary>
@@ -135,7 +143,7 @@ namespace Addams
         {
             try
             {
-                string content = File.ReadAllText(filePath);
+                string content = File.ReadAllText(ConfigFilepath);
                 return JsonSerializer.Deserialize<SpotifyConfig?>(content) ?? new SpotifyConfig();
             }
             catch
