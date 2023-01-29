@@ -1,13 +1,15 @@
-﻿using NUnit.Framework;
+﻿using Addams.Utils;
+using NUnit.Framework;
 
 namespace Addams.Tests
 {
     public class TestsExport
     {
-        // TODO test to write and execute
         [Test]
         public void TestSavePlaylistWithInvalidFilename()
         {
+            string playlistName = "Chillhop Radio 🐾 jazz/lofi hip hop beats to study/relax to | Study Music | Chillhop Music 2022";
+
             string exePath = System.Reflection.Assembly.GetExecutingAssembly().Location ?? throw new Exception("exe path is null");
 
             string exeFolder = Path.GetDirectoryName(exePath) ?? throw new Exception("exe folder path is null");
@@ -20,13 +22,19 @@ namespace Addams.Tests
 
             SpotifyExport.SavePlaylist(wDir, new Models.Playlist
             {
-                Name = "Chillhop Radio 🐾 jazz/lofi hip hop beats to study/relax to | Study Music | Chillhop Music 2022"
-                ///
-                /// System.IO.DirectoryNotFoundException: 'Could not find a part of the path 'D:\Dev\Addams\Addams\bin\Debug\net7.0\data\'.'
-                ///,
+                Name = playlistName,
+                Tracks = new List<Models.Track>
+                {
+                    new Models.Track {Name="Track1" },
+                    new Models.Track {Name="Track2" },
+                    new Models.Track {Name="Track3" },
+                }
             });
 
-            // TODO assert si le fichier existe
+            string playlistPathAfterValidate = $"{PathUtil.FormatValidFilename(playlistName)}.csv";
+            string playlistPath = Path.Combine(wDir, playlistPathAfterValidate);
+
+            Assert.IsTrue(File.Exists(playlistPath));
         }
     }
 }
