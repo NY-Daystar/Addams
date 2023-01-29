@@ -123,41 +123,13 @@ namespace Addams
             return token;
         }
 
-
         /// <summary>
-        /// Fetch Liked songs of user
-        /// </summary>
-        /// <returns>Playlist of liked song of a user return by spotify api /tracks</returns>
-        /// <exception cref="SpotifyUnauthorizedException"></exception>
-        /// <exception cref="SpotifyException"></exception>
-        public async Task<LikePlaylist> FetchUserLikeTracks()
-        {
-            // TODO feature liked-playlist Faire une boucle qui recupere tout en se basant sur la vaaleurr total et en faisant varier ll'offset
-            string url = $@"{API}/users/{User}/tracks?limit={TRACK_LIKED_LIMIT}&offset=50";
-            Logger.Debug($"FetchUserLikeTracks call API: {url}");
-
-            HttpResponseMessage response = await Client.GetAsync(url);
-            if (response.StatusCode == HttpStatusCode.Unauthorized)
-            {
-                throw new SpotifyUnauthorizedException($"Can't get FetchUserLikeTracks\nThe token {AuthToken}\nis invalid for user: {User}\n" +
-                    "You need to create a new one or refresh it");
-            }
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new SpotifyException($"Can't get FetchUserLikeTracks\nStatusCode {response.StatusCode} : {response.Content}");
-            }
-            string content = await response.Content.ReadAsStringAsync();
-            LikePlaylist playlist = JsonConvert.DeserializeObject<LikePlaylist>(content) ?? new LikePlaylist();
-            return playlist;
-        }
-
-        /// <summary>
-        /// Fetch data about playlist's user
+        /// Fetch all playlists of a user
         /// </summary>
         /// <returns>Playlist data return by spotify api /playlists</returns>
         /// <exception cref="SpotifyUnauthorizedException"></exception>
         /// <exception cref="SpotifyException"></exception>
-        public async Task<Playlists> FetchUserPlaylists()
+        public async Task<Playlists> FetchPlaylists()
         {
             string url = $@"{API}/users/{User}/playlists?limit={PLAYLIST_LIMIT}&offset=0";
             Logger.Debug($"FetchUserPlaylists call API: {url}");
@@ -184,7 +156,7 @@ namespace Addams
         /// <returns>Tracks' playlist</returns>
         /// <exception cref="SpotifyUnauthorizedException"></exception>
         /// <exception cref="SpotifyException"></exception>
-        public async Task<PlaylistTracks> FetchPlaylistTracks(string id)
+        public async Task<PlaylistTracks> FetchTracks(string id)
         {
             string url = $@"{API}/playlists/{id}";
             Logger.Debug($"FetchPlaylistTracks call API: {url}");
@@ -200,13 +172,14 @@ namespace Addams
                 throw new SpotifyException($"Can't get FetchPlaylistTracks\nStatusCode {response.StatusCode} : {response.Content}");
             }
             string content = await response.Content.ReadAsStringAsync();
-            PlaylistTracks playlistTracks = JsonConvert.DeserializeObject<PlaylistTracks>(content) ?? new PlaylistTracks();
+            PlaylistTracks playlist = JsonConvert.DeserializeObject<PlaylistTracks>(content) ?? new PlaylistTracks();
 
             // If can't catch every tracks for a playlist in one api call
-            if (playlistTracks.tracks.total >= TRACK_LIMIT)
+            // TODO bugfix-overflow : mettre tout ce if dans une methode
+            if (playlist.tracks.total >= TRACK_LIMIT)
             {
-                Logger.Warn($"Only fetch {playlistTracks.tracks.items.Count} tracks for a total to {playlistTracks.tracks.total}");
-                TrackList trackList = playlistTracks.tracks;
+                Logger.Warn($"Only fetch {playlist.tracks.items.Count} tracks for a total to {playlist.tracks.total}");
+                TrackList trackList = playlist.tracks;
 
                 // Get all tracks of specific playlist
                 do
@@ -218,11 +191,89 @@ namespace Addams
                     }
 
                     trackList = await FetchOverflowTracks(trackList.next);
-                    playlistTracks.tracks.items.AddRange(trackList.items);
+                    playlist.tracks.items.AddRange(trackList.items);
+                    Logger.Info($"Get the rest of playlist {playlist.tracks.items.Count}/{playlist.tracks.total} songs");
                 } while (trackList.next != null);
-                playlistTracks.tracks.next = null;
+                playlist.tracks.next = null;
             }
-            return playlistTracks;
+            return playlist;
+        }
+
+        /// <summary>
+        /// Fetch Liked songs of user
+        /// </summary>
+        /// <returns>Playlist of liked songs of a user return by spotify api /tracks</returns>
+        /// <exception cref="SpotifyUnauthorizedException"></exception>
+        /// <exception cref="SpotifyException"></exception>
+        public async Task<TrackList> FetchUserLikedTracks()
+        {
+            string url = $@"{API}/users/{User}/tracks?limit={TRACK_LIKED_LIMIT}&offset=0";
+            Logger.Debug($"FetchUserLikeTracks call API: {url}");
+
+            HttpResponseMessage response = await Client.GetAsync(url);
+            if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                throw new SpotifyUnauthorizedException($"Can't get FetchUserLikeTracks\nThe token {AuthToken}\nis invalid for user: {User}\n" +
+                    "You need to create a new one or refresh it");
+            }
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new SpotifyException($"Can't get FetchUserLikeTracks\nStatusCode {response.StatusCode} : {response.Content}");
+            }
+            string content = await response.Content.ReadAsStringAsync();
+            TrackList playlist = JsonConvert.DeserializeObject<TrackList>(content) ?? new TrackList();
+
+            // If can't catch every tracks for a playlist in one api call
+            // TODO bugfix-overflow : mettre tout ce if dans une methode
+            if (playlist.total >= TRACK_LIMIT)
+            {
+                Logger.Warn($"Only fetch {playlist.items.Count} tracks for a total to {playlist.total}");
+                TrackList trackList = playlist;
+
+                // Get all tracks of specific playlist
+                do
+                {
+                    if (trackList.next == null)
+                    {
+                        Logger.Warn($"Tracklist next url is null, can't get the rest of playlist");
+                        break;
+                    }
+
+
+                    trackList = await FetchOverflowTracks(trackList.next);
+                    playlist.items.AddRange(trackList.items);
+                    Logger.Info($"Get the rest of playlist {playlist.items.Count}/{playlist.total} songs");
+                } while (trackList.next != null);
+                playlist.next = null;
+            }
+            return playlist;
+        }
+
+        /// <summary>
+        /// Fetch track data from its id
+        /// </summary>
+        /// <param name="id">id of track</param>
+        /// <returns>Track data</returns>
+        /// <exception cref="SpotifyUnauthorizedException"></exception>
+        /// <exception cref="SpotifyException"></exception>
+        public async Task<Track> FetchTrack(string id)
+        {
+            string url = $@"{API}/tracks/{id}";
+            Logger.Debug($"FetchTrack call API: {url}");
+
+            HttpResponseMessage response = await Client.GetAsync(url);
+            if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                throw new SpotifyUnauthorizedException($"Can't get FetchTrack\nThe token {AuthToken}\nis invalid for user: {User}\n" +
+                    "You need to create a new one or refresh it");
+            }
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new SpotifyException($"Can't get FetchTrack\nStatusCode {response.StatusCode} : {response.Content}");
+            }
+            string content = await response.Content.ReadAsStringAsync();
+            Track track = JsonConvert.DeserializeObject<Track>(content) ?? new Track();
+            return track;
         }
 
         /// <summary>
@@ -250,33 +301,6 @@ namespace Addams
             TrackList trackList = JsonConvert.DeserializeObject<TrackList>(content) ?? new TrackList();
 
             return trackList;
-        }
-
-        /// <summary>
-        /// Fetch track data from its id
-        /// </summary>
-        /// <param name="id">id of trrack</param>
-        /// <returns>Track data</returns>
-        /// <exception cref="SpotifyUnauthorizedException"></exception>
-        /// <exception cref="SpotifyException"></exception>
-        public async Task<Track> FetchTrack(string id)
-        {
-            string url = $@"{API}/tracks/{id}";
-            Logger.Debug($"FetchTrack call API: {url}");
-
-            HttpResponseMessage response = await Client.GetAsync(url);
-            if (response.StatusCode == HttpStatusCode.Unauthorized)
-            {
-                throw new SpotifyUnauthorizedException($"Can't get FetchTrack\nThe token {AuthToken}\nis invalid for user: {User}\n" +
-                    "You need to create a new one or refresh it");
-            }
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new SpotifyException($"Can't get FetchTrack\nStatusCode {response.StatusCode} : {response.Content}");
-            }
-            string content = await response.Content.ReadAsStringAsync();
-            Track track = JsonConvert.DeserializeObject<Track>(content) ?? new Track();
-            return track;
         }
     }
 }

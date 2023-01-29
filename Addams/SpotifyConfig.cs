@@ -2,7 +2,6 @@
 using NLog;
 using System;
 using System.IO;
-using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -44,8 +43,8 @@ namespace Addams
         /// </summary>
         [JsonPropertyName("token")]
         public string Token { get; set; } = _token;
-        
-        private static string _token = @"BQDpxLc9ZUSpc6-pbfem_q34aKm-2g23Y-d4B1ic_Q8v_OMvPFZ9GdZf3D-UUDecaXuBxIj-pswG3h2Axx3cUJzD4UfeW_xCYsK9yR3nezNFizXyKgUsROnqhzCfQEzoaZM3HP8EJbDksEI4U5I8Rb4tNxA_OLlcu-_8-UHup48dGMrNEqf6yylW9Ihaa2KTzD8DN84-LimxF-oLTP3Huo8";
+
+        private static readonly string _token = @"BQCS1lHoufRq4ZMxvU_EepMmQxGoPOGfekIb3FMTfIeBDA4iqh62CSj1_Rrlbql1DiXFdRzATTf1wfjAPhghsYGu3HqhUJQ0t9rKkgXYyJZ6bIkVe3b8pZHtmfkocQ069FXQaxktjQ6aH10QZlMk72M8T8hCZkUEeBfDHWXwGiFDUaI8gTWEeb1Kyx1791NWBgmyShSIv4IC_N8Yk0Yw8gA";
 
         /// <summary>
         /// Datetime of last save

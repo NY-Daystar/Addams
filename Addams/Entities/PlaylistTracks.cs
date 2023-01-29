@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Addams.Entities
 {
@@ -25,16 +24,6 @@ namespace Addams.Entities
         public string? type { get; set; }
         public string? uri { get; set; }
     }
-    public class TrackItem
-    {
-        public DateTime? added_at { get; set; }
-        public AddedBy? added_by { get; set; }
-        public bool? is_local { get; set; }
-        public object? primary_color { get; set; }
-        public Track track { get; set; } = new Track();
-        public VideoThumbnail? video_thumbnail { get; set; }
-    }
-
 
     public class AddedBy
     {

@@ -1,11 +1,9 @@
-﻿// TODO en develop: generer automatiquement le build preferences a chaque build
-
-// TODO feature liked-song Recuperer la playlist des song likés
-	- Trouver l'url/id de cette playlist
-	- puis l'extraire
-	- Voir sur l'exemple exportify il y arrive sinon
+﻿// Bugfix sur les noms de playlist, d'album etc.. faire un trim space
+// Check dans liked-song.csv : song M83 outro le titre de l'album
 
 // TODO feature choose-playlist : finir le choix des playlist à exporter
+
+// TODO utiliser l'extension resharper pour les tests
 
 // TODO feature setup-app : faire un setup d'option au lancement de l'application
 //- 1 - lancement du program pour l'export
@@ -37,6 +35,7 @@
 	- Faire un test avec les piste liked en creant une playlist du nom de "RR" avec
 
 Release-1 :
+// TODO voir pour le run code analysis -> click droit sur la solution Run code analysis on solution
 // TODO configure code analysis : Analyze > Configure code analysis
 // TODO setup un msi package pour une install propre etc...
 // TODO setup un autoupdater avec la release github

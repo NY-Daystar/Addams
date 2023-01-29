@@ -26,7 +26,7 @@ namespace Addams.Tests
             };
             SpotifyApi api = new(config);
 
-            _ = Assert.ThrowsAsync<SpotifyUnauthorizedException>(api.FetchUserPlaylists);
+            _ = Assert.ThrowsAsync<SpotifyUnauthorizedException>(api.FetchPlaylists);
         }
 
         [Test]
@@ -35,7 +35,7 @@ namespace Addams.Tests
         /// </summary>
         public async Task TestGetPlaylistWithRightToken()
         {
-            Playlists playlists = await api.FetchUserPlaylists();
+            Playlists playlists = await api.FetchPlaylists();
 
             Assert.IsNotNull(playlists);
             Assert.IsNotEmpty(playlists.items);
@@ -47,8 +47,8 @@ namespace Addams.Tests
         [Test]
         public async Task TestGetPlaylistTracksMoreThan100Tracks()
         {
-            string id = "0CFuMybe6s77w6QQrJjW7d";
-            PlaylistTracks playlistTracks = await api.FetchPlaylistTracks(id);
+            string playlistId = "0CFuMybe6s77w6QQrJjW7d"; // TODO mettre un testCase
+            PlaylistTracks playlistTracks = await api.FetchTracks(playlistId);
 
             Assert.IsNotNull(playlistTracks);
             Assert.IsNotNull(playlistTracks.href);

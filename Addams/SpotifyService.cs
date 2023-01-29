@@ -75,7 +75,7 @@ namespace Addams
             List<Models.Playlist> playlists = new();
 
             // Get playlist data
-            Playlists playlistsData = await api.FetchUserPlaylists();
+            Playlists playlistsData = await api.FetchPlaylists();
 
             // Liked song playlist
             Models.Playlist likedPlaylist = await GetLikedTracks();
@@ -133,10 +133,10 @@ namespace Addams
         /// </summary>
         /// <param name="id">Id ot the playlist</param>
         /// <returns>List of track</returns>
-        public async Task<List<Models.Track>> GetPlaylistTracks(string id)
+        public async Task<List<Models.Track>> GetPlaylistTracks(string playlistId)
         {
             // Get playlist data
-            PlaylistTracks? playlistTracks = await api.FetchPlaylistTracks(id);
+            PlaylistTracks? playlistTracks = await api.FetchTracks(playlistId);
 
             if (playlistTracks == null
                 || playlistTracks.tracks == null
@@ -204,18 +204,44 @@ namespace Addams
             };
         }
 
-
-
-        //TODO feature liked-tracks: To comment
-        //TODO feature liked-tracks: Put logs
+        /// <summary>
+        /// Fetch all the tracks in liked songs on Spotify
+        /// </summary>
+        /// <returns>Playlist model with liked songs</returns>
         public async Task<Models.Playlist> GetLikedTracks()
         {
-            //TODO feature liked-tracks: convertir en Model playlist
-            _ = await api.FetchUserLikeTracks();
+            TrackList likedPlaylistEnt = await api.FetchUserLikedTracks();
+
+            if (likedPlaylistEnt == null
+               || likedPlaylistEnt.items == null
+               || likedPlaylistEnt.href == null
+               )
+            {
+                return new Models.Playlist();
+            }
+
+            // Get tracks data for each track
+            List<Models.Track> tracks = new();
+            foreach (TrackItem ti in likedPlaylistEnt.items)
+            {
+                if (ti.track == null)
+                {
+                    continue;
+                }
+
+                Models.Track track = GetTrack(ti);
+
+                tracks.Add(track);
+            }
+
+            string href = likedPlaylistEnt.href[..likedPlaylistEnt.href.IndexOf("?")];
 
             return new Models.Playlist()
             {
-                Name = "Liked Songs"
+                Name = "Liked Songs",
+                Description = "Playlist of liked songs",
+                Href = href,
+                Tracks = tracks,
             };
         }
     }
