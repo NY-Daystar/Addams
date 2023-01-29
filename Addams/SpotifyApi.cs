@@ -87,13 +87,13 @@ namespace Addams
             return client;
         }
 
-        // TODO to comment
+        // TODO OAUTH2 to comment
         public void RefreshClient(string token)
         {
             Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
         }
 
-        //TODO to comment
+        //TODO OAUTH2 to comment
         public async Task<Token> Authorize()
         {
             FormUrlEncodedContent requestData = new(new[]

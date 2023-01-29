@@ -1,4 +1,5 @@
 ﻿using Addams.Exceptions;
+using NLog;
 using System;
 using System.IO;
 using System.Text.Json;
@@ -12,6 +13,8 @@ namespace Addams
     /// </summary>
     public class SpotifyConfig
     {
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
         /// <summary>
         /// Spotify username
         /// </summary>
@@ -38,8 +41,9 @@ namespace Addams
         /// OAuth2 token generated 
         /// Default OAuth2 token
         /// </summary>
+        /// TODO a changer en static
         [JsonPropertyName("token")]
-        public string? Token { get; set; } = @"BQDhNeTVmdJwXX8iXdWJFcKitg4lAh-7SATIEe-HayKqH6PgDDlzJtiOHwftpcxwrpJMFQO1H8CI8uTmW1OYjR4iJJhAS2b6RLTdUf6BNGwpWVr3KTTe6vqxIFh_3ksxmxzD10NDjL3RXK1fd5qFA2BIalSwncAhbBBCMDWNsR8M8wvNUhK159aAQ02h7KA89P0ReDR-3hJUN1E--uNcEI8";
+        public string? Token { get; set; } = @"BQDgayBYqaebmO4dXyp5nSmpecjWDI5zegIJ1k3ERUtmAzPdEHQbN9KBQMgzWXNa_qybRpwMDK5h3cAME13JR9-soT2YKNhB6AJW-XHC81hLbquhd0scGlyEr17wwkp1oEDqdYtmNxUpFbtk3-PDc38HCjyy88FjvhCBTmMyiJtDIH6PGdtHU7T-6J7HIh7Uumtb0ITzm3JUN9EuPF1knLM";
 
         /// <summary>
         /// Datetime of last save
@@ -52,6 +56,29 @@ namespace Addams
         /// </summary>
         public static string filePath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Addams\\config.json"); // TODO a combine avec un comma
 
+        /// <summary>
+        /// Retrieve config if already exists if not we create it
+        /// </summary>
+        /// <returns>SpotifyConfig</returns>
+        public static SpotifyConfig Get()
+        {
+            SpotifyConfig defaultConfig = new();
+            SpotifyConfig config = new();
+
+            try
+            {
+                config = Read();
+                config.Token = defaultConfig.Token; // TODO get default token for now 
+                Logger.Debug($"Config already exists:\n{config}");
+            }
+            catch (SpotifyConfigException)
+            {
+                config.Setup();
+                Logger.Warn($"This config will be saved:\n{config}");
+                config.Save();
+            }
+            return config;
+        }
 
         /// <summary>
         /// Ask data of user to create configuration program

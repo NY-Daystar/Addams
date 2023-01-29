@@ -15,22 +15,24 @@ namespace Addams
         /// <summary>
         /// Spotify Api requests
         /// </summary>
-        private readonly SpotifyConfig config;
+        private SpotifyConfig config;
 
         /// <summary>
         /// Spotify Api requests
         /// </summary>
-        private readonly SpotifyApi api;
+        private SpotifyApi api;
 
         /// <summary>
-        /// Default Spotify service to get playlist and track with config setup
+        /// Setup SpotifyService to get playlist and track 
+        /// Based on configuration file (new or existing)
+        /// Then create Api object with config setup
         /// </summary>
-        /// <param name="user">Spotify user name</param>
-        /// <param name="authToken">OAuth2 token authentication generated</param>
-        public SpotifyService(SpotifyConfig cfg)
+        public SpotifyService()
         {
-            config = cfg;
-            api = new SpotifyApi(cfg);
+            Logger.Debug("Setup config...");
+            this.config = new SpotifyConfig();
+            Logger.Debug("Setup Api...");
+            this.api = new SpotifyApi(config);
         }
 
         /// <summary>
@@ -49,8 +51,7 @@ namespace Addams
             return OAuth2.access_token;
         }
 
-        // TODO to comment
-
+        // TODO OAUTH2 to comment
         public void Update(string accessToken)
         {
             // TODO fusionner en setToken()

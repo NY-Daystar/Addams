@@ -32,17 +32,10 @@ namespace Addams
 
             LogLevel level = options.Debug ? LogLevel.Debug : LogLevel.Info;
             SetupLogger(LOGFILE, level);
-
             Logger.Info("Launching Addams Application");
 
-            // TODO refacto la partie service qui a une config et une api on setup le service qui a une config vierge
-            // TODO on charge la config dans le service
-            // DU coup inverser les lignes en dessous et adapter le code
-            Logger.Debug("Setup config...");
-            SpotifyConfig cfg = SetupConfig();
-
-            Logger.Debug("Setup service...");
-            SpotifyService service = new(cfg);
+            Logger.Debug("Setup service with config and api...");
+            SpotifyService service = new();
 
             // TODO Gestion OAUTH2 authorization_code
             //Console.WriteLine("Get OAuth2 token...");
@@ -113,31 +106,6 @@ namespace Addams
             List<Models.Playlist>? playlists = await service.GetPlaylists(allPlaylist);
 
             return playlists ?? new List<Models.Playlist>();
-        }
-
-        /// <summary>
-        /// Retrieve config if already exists if not we create it
-        /// </summary>
-        /// <returns></returns>
-        public static SpotifyConfig SetupConfig()
-        {
-            SpotifyConfig defaultConfig = new();
-            SpotifyConfig config = new();
-
-            try
-            {
-                config = SpotifyConfig.Read();
-                config.Token = defaultConfig.Token; // TODO get default token for now 
-                SpotifyService service = new(config);
-                Logger.Debug($"Config already exists:\n{config}");
-            }
-            catch (SpotifyConfigException)
-            {
-                config.Setup();
-                Logger.Warn($"This config will be saved:\n{config}");
-                config.Save();
-            }
-            return config;
         }
 
         /// <summary>
