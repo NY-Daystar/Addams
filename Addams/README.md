@@ -7,7 +7,7 @@
 
 C# project to export in csv spotify user's playlist
 
-**_Version: 1.1.0_**
+**_Version: v0.0.1**
 
 ## Summary
 
