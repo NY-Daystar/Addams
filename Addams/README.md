@@ -7,7 +7,7 @@
 
 C# project to export in csv spotify user's playlist
 
-**_Version: 1.1.0_**
+**\_Version: v0.0.1**
 
 ## Summary
 
@@ -36,7 +36,7 @@ to do this [follow this](#setup-spotify-app)
 TODO download executable from github Addams.exe
 
 -   TODO mettre la console spotify les liens etc... etc...
-//TODO mettre les bons scope de l'OAUTH2' playlist-read-private user-library-read
+    //TODO mettre les bons scope de l'OAUTH2' playlist-read-private user-library-read
 
 // TODO specifier le mode debug avec --debug
 
