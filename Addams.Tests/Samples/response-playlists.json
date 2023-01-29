@@ -1,0 +1,396 @@
+{
+  "href" : "https://api.spotify.com/v1/users/XXXXXXX/playlists?offset=0&limit=11",
+  "items" : [ {
+    "collaborative" : false,
+    "description" : "",
+    "external_urls" : {
+      "spotify" : "https://open.spotify.com/playlist/7E8bZKZ9AetCYEYUjJYwEg"
+    },
+    "href" : "https://api.spotify.com/v1/playlists/7E8bZKZ9AetCYEYUjJYwEg",
+    "id" : "7E8bZKZ9AetCYEYUjJYwEg",
+    "images" : [ {
+      "height" : 640,
+      "url" : "https://i.scdn.co/image/ab67616d0000b27325ff4a5680f5d4a939530eaf",
+      "width" : 640
+    } ],
+    "name" : "LES DERNIÈRES VOLONTÉS DE MOZART (SYMPHONY)",
+    "owner" : {
+      "display_name" : "XXXXXXX",
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/user/XXXXXXX"
+      },
+      "href" : "https://api.spotify.com/v1/users/XXXXXXX",
+      "id" : "XXXXXXX",
+      "type" : "user",
+      "uri" : "spotify:user:XXXXXXX"
+    },
+    "primary_color" : null,
+    "public" : false,
+    "snapshot_id" : "Miw3MTQxODBkMDBjOGNjNTc3YTIwZjQzNTUwNGQ1OTMzNjg3ODcxYTYw",
+    "tracks" : {
+      "href" : "https://api.spotify.com/v1/playlists/7E8bZKZ9AetCYEYUjJYwEg/tracks",
+      "total" : 18
+    },
+    "type" : "playlist",
+    "uri" : "spotify:playlist:7E8bZKZ9AetCYEYUjJYwEg"
+  }, {
+    "collaborative" : false,
+    "description" : "",
+    "external_urls" : {
+      "spotify" : "https://open.spotify.com/playlist/30qQAMuyukyFx9TNl2LYXj"
+    },
+    "href" : "https://api.spotify.com/v1/playlists/30qQAMuyukyFx9TNl2LYXj",
+    "id" : "30qQAMuyukyFx9TNl2LYXj",
+    "images" : [ {
+      "height" : 640,
+      "url" : "https://i.scdn.co/image/ab67616d0000b2731a7b0c6329a41cd16fb5702d",
+      "width" : 640
+    } ],
+    "name" : "Brûler le feu",
+    "owner" : {
+      "display_name" : "XXXXXXX",
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/user/XXXXXXX"
+      },
+      "href" : "https://api.spotify.com/v1/users/XXXXXXX",
+      "id" : "XXXXXXX",
+      "type" : "user",
+      "uri" : "spotify:user:XXXXXXX"
+    },
+    "primary_color" : null,
+    "public" : false,
+    "snapshot_id" : "MixjYmEwZTdiYTBkODBhYTQzZmM4YWUxZjAxZjNlNTkzZmIzN2M2NDA2",
+    "tracks" : {
+      "href" : "https://api.spotify.com/v1/playlists/30qQAMuyukyFx9TNl2LYXj/tracks",
+      "total" : 14
+    },
+    "type" : "playlist",
+    "uri" : "spotify:playlist:30qQAMuyukyFx9TNl2LYXj"
+  }, {
+    "collaborative" : false,
+    "description" : "",
+    "external_urls" : {
+      "spotify" : "https://open.spotify.com/playlist/6tgqlBArr28QA1VvRZnpow"
+    },
+    "href" : "https://api.spotify.com/v1/playlists/6tgqlBArr28QA1VvRZnpow",
+    "id" : "6tgqlBArr28QA1VvRZnpow",
+    "images" : [ {
+      "height" : 640,
+      "url" : "https://mosaic.scdn.co/640/ab67616d0000b2730ae17b44cc2c047be7442a33ab67616d0000b27327ed4f26fa2bfbd714dba7ddab67616d0000b2736e9cba73e17558eabbe6c5b0ab67616d0000b273bc9f8a3590d01c5954aad5c9",
+      "width" : 640
+    }, {
+      "height" : 300,
+      "url" : "https://mosaic.scdn.co/300/ab67616d0000b2730ae17b44cc2c047be7442a33ab67616d0000b27327ed4f26fa2bfbd714dba7ddab67616d0000b2736e9cba73e17558eabbe6c5b0ab67616d0000b273bc9f8a3590d01c5954aad5c9",
+      "width" : 300
+    }, {
+      "height" : 60,
+      "url" : "https://mosaic.scdn.co/60/ab67616d0000b2730ae17b44cc2c047be7442a33ab67616d0000b27327ed4f26fa2bfbd714dba7ddab67616d0000b2736e9cba73e17558eabbe6c5b0ab67616d0000b273bc9f8a3590d01c5954aad5c9",
+      "width" : 60
+    } ],
+    "name" : "RAP US",
+    "owner" : {
+      "display_name" : "XXXXXXX",
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/user/XXXXXXX"
+      },
+      "href" : "https://api.spotify.com/v1/users/XXXXXXX",
+      "id" : "XXXXXXX",
+      "type" : "user",
+      "uri" : "spotify:user:XXXXXXX"
+    },
+    "primary_color" : null,
+    "public" : false,
+    "snapshot_id" : "MTAsYjhhZDc3ZTAxM2E0NGQ2ZTA0ZTI4NTUyNWM3YTZkNGIxNTc3NWVkMw==",
+    "tracks" : {
+      "href" : "https://api.spotify.com/v1/playlists/6tgqlBArr28QA1VvRZnpow/tracks",
+      "total" : 9
+    },
+    "type" : "playlist",
+    "uri" : "spotify:playlist:6tgqlBArr28QA1VvRZnpow"
+  }, {
+    "collaborative" : false,
+    "description" : "",
+    "external_urls" : {
+      "spotify" : "https://open.spotify.com/playlist/4yB6y1u3hfITc25GkCAlxP"
+    },
+    "href" : "https://api.spotify.com/v1/playlists/4yB6y1u3hfITc25GkCAlxP",
+    "id" : "4yB6y1u3hfITc25GkCAlxP",
+    "images" : [ {
+      "height" : 640,
+      "url" : "https://i.scdn.co/image/ab67616d0000b27349c0f190d16f75081dc2e4aa",
+      "width" : 640
+    } ],
+    "name" : "Mag",
+    "owner" : {
+      "display_name" : "XXXXXXX",
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/user/XXXXXXX"
+      },
+      "href" : "https://api.spotify.com/v1/users/XXXXXXX",
+      "id" : "XXXXXXX",
+      "type" : "user",
+      "uri" : "spotify:user:XXXXXXX"
+    },
+    "primary_color" : null,
+    "public" : false,
+    "snapshot_id" : "MyxlZjRiMGYwMTJhZTUzZTNmMTc1N2U2NTI2M2ExYTU0YWQ4YzgwOGNm",
+    "tracks" : {
+      "href" : "https://api.spotify.com/v1/playlists/4yB6y1u3hfITc25GkCAlxP/tracks",
+      "total" : 2
+    },
+    "type" : "playlist",
+    "uri" : "spotify:playlist:4yB6y1u3hfITc25GkCAlxP"
+  }, {
+    "collaborative" : false,
+    "description" : "",
+    "external_urls" : {
+      "spotify" : "https://open.spotify.com/playlist/755Bil2Ba9KqX33yAhFoOV"
+    },
+    "href" : "https://api.spotify.com/v1/playlists/755Bil2Ba9KqX33yAhFoOV",
+    "id" : "755Bil2Ba9KqX33yAhFoOV",
+    "images" : [ {
+      "height" : 640,
+      "url" : "https://mosaic.scdn.co/640/ab67616d0000b2731551c93dfa33ea4f30ef4eeaab67616d0000b273304ae5169ad8e53e261b93f2ab67616d0000b273cb5ec46d6f1d2cf8d36d3663ab67616d0000b273d1241debb8543af8322a7d6a",
+      "width" : 640
+    }, {
+      "height" : 300,
+      "url" : "https://mosaic.scdn.co/300/ab67616d0000b2731551c93dfa33ea4f30ef4eeaab67616d0000b273304ae5169ad8e53e261b93f2ab67616d0000b273cb5ec46d6f1d2cf8d36d3663ab67616d0000b273d1241debb8543af8322a7d6a",
+      "width" : 300
+    }, {
+      "height" : 60,
+      "url" : "https://mosaic.scdn.co/60/ab67616d0000b2731551c93dfa33ea4f30ef4eeaab67616d0000b273304ae5169ad8e53e261b93f2ab67616d0000b273cb5ec46d6f1d2cf8d36d3663ab67616d0000b273d1241debb8543af8322a7d6a",
+      "width" : 60
+    } ],
+    "name" : "LEague of legends songs",
+    "owner" : {
+      "display_name" : "mrpaleo",
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/user/mrpaleo"
+      },
+      "href" : "https://api.spotify.com/v1/users/mrpaleo",
+      "id" : "mrpaleo",
+      "type" : "user",
+      "uri" : "spotify:user:mrpaleo"
+    },
+    "primary_color" : null,
+    "public" : false,
+    "snapshot_id" : "ODQsZDhjYjEyOGQ3ZTYwMDcyZmQ4NTliNWZhN2U4OWNlNjQ4Yzc2NDg4NQ==",
+    "tracks" : {
+      "href" : "https://api.spotify.com/v1/playlists/755Bil2Ba9KqX33yAhFoOV/tracks",
+      "total" : 27
+    },
+    "type" : "playlist",
+    "uri" : "spotify:playlist:755Bil2Ba9KqX33yAhFoOV"
+  }, {
+    "collaborative" : false,
+    "description" : "",
+    "external_urls" : {
+      "spotify" : "https://open.spotify.com/playlist/6z98J3d5q7683cBpH58BzM"
+    },
+    "href" : "https://api.spotify.com/v1/playlists/6z98J3d5q7683cBpH58BzM",
+    "id" : "6z98J3d5q7683cBpH58BzM",
+    "images" : [ {
+      "height" : 640,
+      "url" : "https://i.scdn.co/image/ab67616d0000b27392dc99b0795e0b8471780217",
+      "width" : 640
+    } ],
+    "name" : "Nonante-Cinq",
+    "owner" : {
+      "display_name" : "XXXXXXX",
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/user/XXXXXXX"
+      },
+      "href" : "https://api.spotify.com/v1/users/XXXXXXX",
+      "id" : "XXXXXXX",
+      "type" : "user",
+      "uri" : "spotify:user:XXXXXXX"
+    },
+    "primary_color" : null,
+    "public" : false,
+    "snapshot_id" : "MiwyNzdhZTlmMTI2YjMzODI5YTEyMDE3NTZmY2M5ZmIwOGEzZjExNWFj",
+    "tracks" : {
+      "href" : "https://api.spotify.com/v1/playlists/6z98J3d5q7683cBpH58BzM/tracks",
+      "total" : 12
+    },
+    "type" : "playlist",
+    "uri" : "spotify:playlist:6z98J3d5q7683cBpH58BzM"
+  }, {
+    "collaborative" : false,
+    "description" : "",
+    "external_urls" : {
+      "spotify" : "https://open.spotify.com/playlist/23rguWOo9tA7eHNRvs3Wq1"
+    },
+    "href" : "https://api.spotify.com/v1/playlists/23rguWOo9tA7eHNRvs3Wq1",
+    "id" : "23rguWOo9tA7eHNRvs3Wq1",
+    "images" : [ {
+      "height" : 640,
+      "url" : "https://i.scdn.co/image/ab67616d0000b2732b32d41140e07352abe57599",
+      "width" : 640
+    } ],
+    "name" : "La fouine XXI",
+    "owner" : {
+      "display_name" : "XXXXXXX",
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/user/XXXXXXX"
+      },
+      "href" : "https://api.spotify.com/v1/users/XXXXXXX",
+      "id" : "XXXXXXX",
+      "type" : "user",
+      "uri" : "spotify:user:XXXXXXX"
+    },
+    "primary_color" : null,
+    "public" : false,
+    "snapshot_id" : "MixjZjRhOTQ2M2NlNzNjMzVlODQ3ODdjZmFmN2Y0M2RjZGVkMWJkMDU3",
+    "tracks" : {
+      "href" : "https://api.spotify.com/v1/playlists/23rguWOo9tA7eHNRvs3Wq1/tracks",
+      "total" : 16
+    },
+    "type" : "playlist",
+    "uri" : "spotify:playlist:23rguWOo9tA7eHNRvs3Wq1"
+  }, {
+    "collaborative" : false,
+    "description" : "",
+    "external_urls" : {
+      "spotify" : "https://open.spotify.com/playlist/0twYeuvIyGZwDEeJnf5Kv8"
+    },
+    "href" : "https://api.spotify.com/v1/playlists/0twYeuvIyGZwDEeJnf5Kv8",
+    "id" : "0twYeuvIyGZwDEeJnf5Kv8",
+    "images" : [ {
+      "height" : 640,
+      "url" : "https://i.scdn.co/image/ab67616d0000b2737bf3a3453f0623dc3b7eb2ea",
+      "width" : 640
+    } ],
+    "name" : "Life By Misadventure",
+    "owner" : {
+      "display_name" : "XXXXXXX",
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/user/XXXXXXX"
+      },
+      "href" : "https://api.spotify.com/v1/users/XXXXXXX",
+      "id" : "XXXXXXX",
+      "type" : "user",
+      "uri" : "spotify:user:XXXXXXX"
+    },
+    "primary_color" : null,
+    "public" : false,
+    "snapshot_id" : "MiwwNjMzNDZkMzYwNDc0OGUxNWVkY2I5YTRjYzY5NDM0ZWJiODlhY2Vj",
+    "tracks" : {
+      "href" : "https://api.spotify.com/v1/playlists/0twYeuvIyGZwDEeJnf5Kv8/tracks",
+      "total" : 15
+    },
+    "type" : "playlist",
+    "uri" : "spotify:playlist:0twYeuvIyGZwDEeJnf5Kv8"
+  }, {
+    "collaborative" : false,
+    "description" : "",
+    "external_urls" : {
+      "spotify" : "https://open.spotify.com/playlist/0jg6xX7bXlSX5yeoZ19Qz8"
+    },
+    "href" : "https://api.spotify.com/v1/playlists/0jg6xX7bXlSX5yeoZ19Qz8",
+    "id" : "0jg6xX7bXlSX5yeoZ19Qz8",
+    "images" : [ {
+      "height" : 640,
+      "url" : "https://i.scdn.co/image/ab67616d0000b273b7c26131d453d1d9afb81aa0",
+      "width" : 640
+    } ],
+    "name" : "Booba – ULTRA",
+    "owner" : {
+      "display_name" : "XXXXXXX",
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/user/XXXXXXX"
+      },
+      "href" : "https://api.spotify.com/v1/users/XXXXXXX",
+      "id" : "XXXXXXX",
+      "type" : "user",
+      "uri" : "spotify:user:XXXXXXX"
+    },
+    "primary_color" : null,
+    "public" : false,
+    "snapshot_id" : "Miw1Yjc0NzlmYzRhOTUwYWExMjIxMDhkMzZjYjBjZTM5M2ZmNWM1NTY1",
+    "tracks" : {
+      "href" : "https://api.spotify.com/v1/playlists/0jg6xX7bXlSX5yeoZ19Qz8/tracks",
+      "total" : 14
+    },
+    "type" : "playlist",
+    "uri" : "spotify:playlist:0jg6xX7bXlSX5yeoZ19Qz8"
+  }, {
+    "collaborative" : false,
+    "description" : "",
+    "external_urls" : {
+      "spotify" : "https://open.spotify.com/playlist/08NAZYVNgG57459khVuXwm"
+    },
+    "href" : "https://api.spotify.com/v1/playlists/08NAZYVNgG57459khVuXwm",
+    "id" : "08NAZYVNgG57459khVuXwm",
+    "images" : [ {
+      "height" : 640,
+      "url" : "https://mosaic.scdn.co/640/ab67616d0000b2733cfd876c0e5db6147394be77ab67616d0000b2737d214af8499aa95ad220f573ab67616d0000b273c41f4e1133b0e6c5fcf58680ab67616d0000b273db0917ddd4139153bc1d1a1a",
+      "width" : 640
+    }, {
+      "height" : 300,
+      "url" : "https://mosaic.scdn.co/300/ab67616d0000b2733cfd876c0e5db6147394be77ab67616d0000b2737d214af8499aa95ad220f573ab67616d0000b273c41f4e1133b0e6c5fcf58680ab67616d0000b273db0917ddd4139153bc1d1a1a",
+      "width" : 300
+    }, {
+      "height" : 60,
+      "url" : "https://mosaic.scdn.co/60/ab67616d0000b2733cfd876c0e5db6147394be77ab67616d0000b2737d214af8499aa95ad220f573ab67616d0000b273c41f4e1133b0e6c5fcf58680ab67616d0000b273db0917ddd4139153bc1d1a1a",
+      "width" : 60
+    } ],
+    "name" : "A ecouter",
+    "owner" : {
+      "display_name" : "XXXXXXX",
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/user/XXXXXXX"
+      },
+      "href" : "https://api.spotify.com/v1/users/XXXXXXX",
+      "id" : "XXXXXXX",
+      "type" : "user",
+      "uri" : "spotify:user:XXXXXXX"
+    },
+    "primary_color" : null,
+    "public" : false,
+    "snapshot_id" : "MjQsMmVlNjIzMmM4YWUzNGM1MzQwNGM2NTk1ZWY0NzhlODc3M2ZmZTkxYQ==",
+    "tracks" : {
+      "href" : "https://api.spotify.com/v1/playlists/08NAZYVNgG57459khVuXwm/tracks",
+      "total" : 10
+    },
+    "type" : "playlist",
+    "uri" : "spotify:playlist:08NAZYVNgG57459khVuXwm"
+  }, {
+    "collaborative" : false,
+    "description" : "Chillhop for studying / relaxing / gaming / working. Instrumental lofi hip hop beats from around the globe. Check out our  24/7 YouTube livestream <a href=\"https://youtu.be/5yx6BWlEVcY\">here</a> or listen on other platforms <a href=\"https://chillhop.lnk.to/listenWE\">here</a>.",
+    "external_urls" : {
+      "spotify" : "https://open.spotify.com/playlist/0CFuMybe6s77w6QQrJjW7d"
+    },
+    "href" : "https://api.spotify.com/v1/playlists/0CFuMybe6s77w6QQrJjW7d",
+    "id" : "0CFuMybe6s77w6QQrJjW7d",
+    "images" : [ {
+      "height" : null,
+      "url" : "https://i.scdn.co/image/ab67706c0000bebb987f5ca8ac6c003c8dc30499",
+      "width" : null
+    } ],
+    "name" : "Chillhop Radio 🐾 jazz/lofi hip hop beats to study/relax to | Study Music | Chillhop Music 2022",
+    "owner" : {
+      "display_name" : "Chillhop Music",
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/user/chillhopmusic"
+      },
+      "href" : "https://api.spotify.com/v1/users/chillhopmusic",
+      "id" : "chillhopmusic",
+      "type" : "user",
+      "uri" : "spotify:user:chillhopmusic"
+    },
+    "primary_color" : null,
+    "public" : false,
+    "snapshot_id" : "MTc5NCwwZDYwNGY1MjA2MjhkNmM3NmVmMWVmZGU0Nzc1OWJkZDQ3M2Q5NzNl",
+    "tracks" : {
+      "href" : "https://api.spotify.com/v1/playlists/0CFuMybe6s77w6QQrJjW7d/tracks",
+      "total" : 300
+    },
+    "type" : "playlist",
+    "uri" : "spotify:playlist:0CFuMybe6s77w6QQrJjW7d"
+  } ],
+  "limit" : 11,
+  "next" : "https://api.spotify.com/v1/users/XXXXXXX/playlists?offset=11&limit=11",
+  "offset" : 0,
+  "previous" : null,
+  "total" : 34
+}
