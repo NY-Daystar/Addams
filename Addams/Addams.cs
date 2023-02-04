@@ -56,9 +56,9 @@ namespace Addams
             }
             Logger.Info("Playlist fetched...");
 
-            Logger.Info("Saving playlist...");
+            Logger.Info("Saving playlists...");
             SpotifyExport.SavePlaylists(playlists);
-            Logger.Info("Playlist saved...");
+            Logger.Info("All playlists are saved...");
         }
 
         /// <summary>
