@@ -2,6 +2,7 @@
 
 namespace Addams.Tests
 {
+    [TestFixture]
     public class TestsOptions
     {
         [Test]

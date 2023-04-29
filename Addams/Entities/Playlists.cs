@@ -9,7 +9,7 @@ namespace Addams.Entities
     public class Playlists
     {
         public string? href { get; set; }
-        public List<Playlist> items { get; set; } = new List<Playlist>();
+        public IEnumerable<Playlist> items { get; set; } = new List<Playlist>();
         public int? limit { get; set; }
         public string? next { get; set; }
         public int? offset { get; set; }
@@ -24,7 +24,7 @@ namespace Addams.Entities
         public ExternalUrls? external_urls { get; set; }
         public string href { get; set; } = string.Empty;
         public string id { get; set; } = string.Empty;
-        public List<Image>? images { get; set; }
+        public IEnumerable<Image>? images { get; set; }
         public string name { get; set; } = string.Empty;
         public Owner? owner { get; set; }
         public object? primary_color { get; set; }

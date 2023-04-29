@@ -3,6 +3,7 @@ using Addams.Exceptions;
 using Newtonsoft.Json;
 using NLog;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -178,9 +179,9 @@ namespace Addams
             // Add all the tracks overflow by api on the playlist
             if (playlist.tracks.total >= TRACK_LIMIT)
             {
-                Logger.Warn($"For {playlist.name} : only fetch {playlist.tracks.items.Count} tracks for a total to {playlist.tracks.total}");
+                Logger.Warn($"For {playlist.name} : only fetch {playlist.tracks.items.ToList().Count} tracks for a total to {playlist.tracks.total}");
                 playlist.tracks = await FetchTracksOverflow(playlist.tracks);
-                Logger.Info($"Fetch all tracks for the playlist {playlist.tracks.items.Count}/{playlist.tracks.total}");
+                Logger.Info($"Fetch all tracks for the playlist {playlist.tracks.items.ToList().Count}/{playlist.tracks.total}");
             }
             return playlist;
         }
@@ -213,9 +214,9 @@ namespace Addams
             // Add all the tracks overflow by api on the playlist
             if (playlist.total >= TRACK_LIMIT)
             {
-                Logger.Warn($"For Liked Song : only fetch {playlist.items.Count} tracks for a total to {playlist.total}");
+                Logger.Warn($"For Liked Song : only fetch {playlist.items.ToList().Count} tracks for a total to {playlist.total}");
                 playlist = await FetchTracksOverflow(playlist);
-                Logger.Info($"Fetch all tracks for the playlist {playlist.items.Count}/{playlist.total}");
+                Logger.Info($"Fetch all tracks for the playlist {playlist.items.ToList().Count}/{playlist.total}");
             }
             return playlist;
         }
@@ -269,9 +270,9 @@ namespace Addams
                 TrackList trackList = await FetchTrackListFromUrl(playlist.next);
 
                 // Add tracks into original playlist
-                playlist.items.AddRange(trackList.items);
+                playlist.items.ToList().AddRange(trackList.items);
                 playlist.next = trackList.next;
-                Logger.Info($"Get the rest of playlist {playlist.items.Count}/{playlist.total} songs");
+                Logger.Info($"Get the rest of playlist {playlist.items.ToList().Count}/{playlist.total} songs");
 
             } while (playlist.next != null);
 

@@ -4,6 +4,7 @@ using NUnit.Framework;
 
 namespace Addams.Tests
 {
+    [TestFixture]
     public class TestsApi
     {
         private SpotifyApi api;
@@ -19,6 +20,7 @@ namespace Addams.Tests
         [Test]
         public void TestGetPlaylistWithBadToken()
         {
+            // Arrange
             SpotifyConfig config = new()
             {
                 User = "gravityx3",
@@ -26,6 +28,7 @@ namespace Addams.Tests
             };
             SpotifyApi api = new(config);
 
+            // Act & Assert
             _ = Assert.ThrowsAsync<SpotifyUnauthorizedException>(api.FetchPlaylists);
         }
 
@@ -35,26 +38,36 @@ namespace Addams.Tests
         /// </summary>
         public async Task TestGetPlaylistWithRightToken()
         {
-            Playlists playlists = await api.FetchPlaylists();
+            // Arrange
+            Playlists playlists;
 
+            // Act
+            playlists = await api.FetchPlaylists();
+
+            // Assert
             Assert.IsNotNull(playlists);
             Assert.IsNotEmpty(playlists.items);
             Assert.IsNull(playlists.next);
             Assert.IsNotNull(playlists.href);
-            Assert.That(playlists.total == playlists.items.Count);
+            Assert.That(playlists.total == playlists.items.ToList().Count);
         }
 
         [Test]
         [TestCase("0CFuMybe6s77w6QQrJjW7d")]
         public async Task TestGetPlaylistTracksMoreThan100Tracks(string playlistId)
         {
-            PlaylistTracks playlistTracks = await api.FetchTracks(playlistId);
+            // Arrange
+            PlaylistTracks playlistTracks;
 
+            // Act
+            playlistTracks = await api.FetchTracks(playlistId);
+
+            // Assert
             Assert.IsNotNull(playlistTracks);
             Assert.IsNotNull(playlistTracks.href);
             Assert.IsNotNull(playlistTracks.name);
             Assert.IsNotEmpty(playlistTracks.tracks.items);
-            Assert.That(playlistTracks.tracks.total == playlistTracks.tracks.items.Count);
+            Assert.That(playlistTracks.tracks.total == playlistTracks.tracks.items.ToList().Count);
             Assert.IsNull(playlistTracks.tracks.next);
         }
     }

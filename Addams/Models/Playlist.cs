@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Addams.Models
 {
@@ -14,7 +15,7 @@ namespace Addams.Models
 
         public string Href { get; set; } = string.Empty;
 
-        public List<Track> Tracks { get; set; } = new List<Track>();
+        public IEnumerable<Track> Tracks { get; set; } = new List<Track>();
 
         public Playlist() { }
 
@@ -29,7 +30,7 @@ namespace Addams.Models
 
         public override string ToString()
         {
-            return $"Name : {Name} - Tracks number : {Tracks.Count} - Id : {Id}";
+            return $"Name : {Name} - Tracks number : {Tracks.ToList().Count} - Id : {Id}";
         }
     }
 }

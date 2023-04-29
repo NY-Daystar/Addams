@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Addams
 {
-    internal class Addams
+    internal static class Addams
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
@@ -46,7 +46,7 @@ namespace Addams
             Console.WriteLine();
 
             Logger.Info("Fetching playlist data...");
-            List<Models.Playlist>? playlists = await service.GetPlaylists(allPlaylist); // Get playlist data of user to save it after
+            IEnumerable<Models.Playlist>? playlists = await service.GetPlaylists(allPlaylist); // Get playlist data of user to save it after
 
 
             if (playlists == null)

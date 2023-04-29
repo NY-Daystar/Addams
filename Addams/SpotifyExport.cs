@@ -19,7 +19,7 @@ namespace Addams
         /// Save playlist data into csv file
         /// </summary>
         /// <param name="data">List of playlist to save</param>
-        public static void SavePlaylists(List<Models.Playlist> data)
+        public static void SavePlaylists(IEnumerable<Models.Playlist> data)
         {
             // TODO feature save-mode: gerer un mode specific pour tout save dans un fichier ou plusieurs
             //      - faire un mode si on save tout dans un fichier ou une playlist par fichier
@@ -81,7 +81,7 @@ namespace Addams
                 "Track Preview Url",
             });
 
-            List<string> dataLines = playlist.Tracks.Select(t =>
+            IEnumerable<string> dataLines = playlist.Tracks.Select(t =>
             string.Join(",",
                 t.Name.Replace(",", "-"),
                 t.Artists.Replace(",", "-").Trim(),

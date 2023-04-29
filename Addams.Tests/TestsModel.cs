@@ -4,12 +4,13 @@ using NUnit.Framework;
 
 namespace Addams.Tests
 {
+    [TestFixture]
     public class TestsModel
     {
         [Test]
         public void TestDurationValue()
         {
-            // First test
+            // Arrange
             string expected = "00:02:35";
             int duration = 155000;
 

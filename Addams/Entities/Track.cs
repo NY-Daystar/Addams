@@ -8,8 +8,8 @@ namespace Addams.Entities
     public class Track
     {
         public Album album { get; set; } = new Album();
-        public List<Artist> artists { get; set; } = new List<Artist>();
-        public List<string>? available_markets { get; set; }
+        public IEnumerable<Artist> artists { get; set; } = new List<Artist>();
+        public IEnumerable<string>? available_markets { get; set; }
         public int disc_number { get; set; }
         public int duration_ms { get; set; }
         public bool @explicit { get; set; }

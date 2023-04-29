@@ -1,21 +1,11 @@
-﻿// Bugfix sur les noms de playlist, d'album etc.. faire un trim space
-// Check dans liked-song.csv : song M83 outro le titre de l'album
+﻿// TODO feature choose-playlist : finir le choix des playlist à exporter
 
-// TODO feature choose-playlist : finir le choix des playlist à exporter
+// TODO utiliser l'extension re-sharper pour les tests
 
-// TODO utiliser l'extension resharper pour les tests
-
-// TODO feature setup-app : faire un setup d'option au lancement de l'application
-//- 1 - lancement du program pour l'export
-//- 2 - Show configuration file
-//      - Afficher le path
-//      - Afficher la config
-//- 3 - Modifier configuration file
-//          - Afficher la config
-//          - Rappeler le setup pour réecrire les value et reset le token
-//- 4 - Show log filee
-//    - Afficher le path des logs
-//    - Afficher les 50 deerniers logs
+// TODO feature public-export : ajouter deux type d'export
+	- l'export privé celui qu'on a actuellement
+	- et un export public en transmettant une url sans authentification requise
+	- Pour ça faire une Interface IExporter avec une classe Export qui implemente une méthode exportPrivate et une exportPublic
 
 // TODO gerer le OAUTH2 
 	- tester le projet Dev/WebApiAuth avec l'url 
@@ -27,12 +17,44 @@
 	- Regarder ce code pour avoirr let token: https://github.com/watsonbox/exportify/blob/d1247f715df1932ccc389364bffdb2f95d8d4bcb/src/components/Login.jsx
 	- Recuperer l'expiration qui est de 3600s et mettre du coup la date d'expiration en config et ne pas refresh si la date n'est pas atteinte
 
+// TODO feature youtube
+	- Utilisé l'api de youtube pour faire 
+
+// TODO feature autoupdate : mettre en place un autoupdate d'exe
+
+// TODO tests unitaires
+	- Faire des objets MOQ en utilisant ces exemples : https://openclassrooms.com/fr/courses/5641591-testez-votre-application-c/5696246-utilisez-le-framework-de-simulacre-moq
+
+// TODO bugfix: Ajout fichier manquant
+/// Ajouter le  .nuget avec la lib Nlog
+// TODO ajouter la licence et le README
+// Les assemblyInfo et les packages.config
+
+// TODO feature setup-app : faire un setup d'option au lancement de l'application
+//- 1 - lancement du program pour l'export
+//- 2 - Show configuration file
+//      - Afficher le path
+//      - Afficher la config
+//- 3 - Modifier configuration file
+//          - Afficher la config
+//          - Rappeler le setup pour réecrire les value et reset le token
+//- 4 - Show log file
+//    - Afficher le path des logs
+//    - Afficher les 50 derniers logs
+
+// TODO Faire un installeur setup pour executable
+	- https://gaby277.developpez.com/Tutoriels/VisualStudioInstallerProject/
+	- https://learn.microsoft.com/fr-fr/windows/msix/app-installer/create-appinstallerfile-vs
+
+
 // TODO feature import : faire la classe SpotifyImport
 	- En gros on prend un csv via un fileExplorer
 	- On deserialize pour avoir une playlist
 	- On demande un nom a la nouvelle playlist
 	- On fait un call api pour ajouter soit la playlist d'un coup soit les pistes 1 par 1
 	- Faire un test avec les piste liked en creant une playlist du nom de "RR" avec
+
+// TODO creer un installer wizard comme pour le projet Ânkh : https://github.com/NY-Daystar/Ankh
 
 Release-1 :
 // TODO voir pour le run code analysis -> click droit sur la solution Run code analysis on solution

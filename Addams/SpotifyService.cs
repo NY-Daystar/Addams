@@ -66,7 +66,7 @@ namespace Addams
         /// Get all playlist created or saved by a user
         /// </summary>
         /// <returns></returns>
-        public async Task<List<Models.Playlist>> GetPlaylists(bool allPlaylist)
+        public async Task<IEnumerable<Models.Playlist>> GetPlaylists(bool allPlaylist)
         {
             // TODO feature choose-playlists: Si il veut certaines:
             //  - Faire un affichage des playlist exportables avec un numéro
@@ -111,9 +111,9 @@ namespace Addams
                 throw new SpotifyException($"getPlaylistTracks id null of the playlist name : {playlist.name}");
             }
 
-            List<Models.Track> tracks = await GetPlaylistTracks(playlist.id);
+            IEnumerable<Models.Track> tracks = await GetPlaylistTracks(playlist.id);
 
-            if (tracks.Count == 0)
+            if (tracks.ToList().Count == 0)
             {
                 Logger.Warn($"No tracks found for the playlist {playlist.name} - id: {playlist.id}");
             }
@@ -133,7 +133,7 @@ namespace Addams
         /// </summary>
         /// <param name="id">Id ot the playlist</param>
         /// <returns>List of track</returns>
-        public async Task<List<Models.Track>> GetPlaylistTracks(string playlistId)
+        public async Task<IEnumerable<Models.Track>> GetPlaylistTracks(string playlistId)
         {
             // Get playlist data
             PlaylistTracks? playlistTracks = await api.FetchTracks(playlistId);

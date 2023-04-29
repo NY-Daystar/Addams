@@ -14,7 +14,7 @@ namespace Addams.Entities
         public Followers? followers { get; set; }
         public string? href { get; set; }
         public string? id { get; set; }
-        public List<Image>? images { get; set; }
+        public IEnumerable<Image>? images { get; set; }
         public string? name { get; set; }
         public Owner? owner { get; set; }
         public object? primary_color { get; set; }

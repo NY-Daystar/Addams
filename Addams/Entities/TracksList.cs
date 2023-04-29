@@ -5,7 +5,7 @@ namespace Addams.Entities
     public class TrackList
     {
         public string? href { get; set; }
-        public List<TrackItem> items { get; set; } = new List<TrackItem>();
+        public IEnumerable<TrackItem> items { get; set; } = new List<TrackItem>();
         public int? limit { get; set; }
         public string? next { get; set; }
         public int? offset { get; set; }
