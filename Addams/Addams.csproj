@@ -9,7 +9,12 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <RepositoryUrl>https://github.com/LucasNoga/addams</RepositoryUrl>
         <PackageProjectUrl>https://github.com/LucasNoga/addams</PackageProjectUrl>
+        <ApplicationIcon>AddamsLogo.ico</ApplicationIcon>
     </PropertyGroup>
+
+    <ItemGroup>
+      <Content Include="AddamsLogo.ico" />
+    </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />

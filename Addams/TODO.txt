@@ -1,13 +1,6 @@
-﻿// TODO feature choose-playlist : finir le choix des playlist à exporter
-
-// TODO utiliser l'extension re-sharper pour les tests
-
-// TODO feature public-export : ajouter deux type d'export
-	- l'export privé celui qu'on a actuellement
-	- et un export public en transmettant une url sans authentification requise
-	- Pour ça faire une Interface IExporter avec une classe Export qui implemente une méthode exportPrivate et une exportPublic
-
-// TODO gerer le OAUTH2 
+﻿// TODO gerer le OAUTH2 
+	- Creer un projet Simulation pouur aller jusqu'a la génération du token comme sur postman
+	-----------
 	- tester le projet Dev/WebApiAuth avec l'url 
 	- localhost:8888/login avec le bon clientId et clientSecret
 	- demander à chatGPT pour faire une autorisaction code flow en c# sur spotify pour l'oauth2
@@ -16,6 +9,17 @@
 	- detecter l'obsolescence du token OAUTH2 et le regenerer puis le sauvegarder dauns un fichier de config dans APPDATA
 	- Regarder ce code pour avoirr let token: https://github.com/watsonbox/exportify/blob/d1247f715df1932ccc389364bffdb2f95d8d4bcb/src/components/Login.jsx
 	- Recuperer l'expiration qui est de 3600s et mettre du coup la date d'expiration en config et ne pas refresh si la date n'est pas atteinte
+
+--------------------------------------------------------------
+
+
+
+// TODO utiliser l'extension re-sharper pour les tests
+
+// TODO feature public-export : ajouter deux type d'export
+	- l'export privé celui qu'on a actuellement
+	- et un export public en transmettant une url sans authentification requise
+	- Pour ça faire une Interface IExporter avec une classe Export qui implemente une méthode exportPrivate et une exportPublic
 
 // TODO feature youtube
 	- Utilisé l'api de youtube pour faire 

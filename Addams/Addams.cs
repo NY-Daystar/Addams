@@ -1,4 +1,5 @@
 ﻿using Addams.Entities;
+using Addams.Utils;
 using NLog;
 using NLog.Config;
 using NLog.Layouts;
@@ -21,6 +22,10 @@ namespace Addams
                 "addams.log"
                 );
 
+        private static readonly string _application = "Addams";
+
+        private static readonly string _version = "1.0.0";
+
         public static void Main(string[] args)
         {
             Run(args).GetAwaiter().GetResult();
@@ -30,6 +35,10 @@ namespace Addams
         {
             // Get arguments from exe file
             AddamsOptions options = AddamsOptions.DefineOptions(args);
+
+            Core.WriteLine("Welcome to ", ConsoleColor.Yellow, _application, ConsoleColor.White,
+                " - Version : ", ConsoleColor.Yellow, _version, ConsoleColor.White);
+            Console.WriteLine("---------------------");
 
             LogLevel level = options.Debug ? LogLevel.Debug : LogLevel.Info; // add in exe argument --debug
             SetupLogger(LOGFILE, level);
