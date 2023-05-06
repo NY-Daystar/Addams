@@ -11,7 +11,7 @@ namespace Addams
     /// <summary>
     /// Class to handle csv export data file with spotify tracks data
     /// </summary>
-    public class SpotifyExport
+    public static class SpotifyExport
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 

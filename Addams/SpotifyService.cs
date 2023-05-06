@@ -23,6 +23,11 @@ namespace Addams
         private readonly SpotifyApi api;
 
         /// <summary>
+        /// Name of playlist of liked songs
+        /// </summary>
+        const string LIKED_SONGS = "Liked Songs";
+
+        /// <summary>
         /// Setup SpotifyService to get playlist and track 
         /// Based on configuration file (new or existing)
         /// Then create Api object with config setup
@@ -43,12 +48,7 @@ namespace Addams
         {
             Token OAuth2 = await api.Authorize();
 
-            if (OAuth2.access_token == null)
-            {
-                throw new Exception();// TODO feature OAUTH2: changer exception en AuthorizeException
-            }
-
-            return OAuth2.access_token;
+            return OAuth2.access_token ?? throw new SpotifyUnauthorizedException();
         }
 
         // TODO feature OAUTH2 to comment
@@ -61,34 +61,53 @@ namespace Addams
             api.RefreshClient(accessToken);
         }
 
-        // TODO feature choose-playlists: To Recomment
         /// <summary>
-        /// Get all playlist created or saved by a user
+        /// Fetch name of the playlists
         /// </summary>
-        /// <returns></returns>
-        public async Task<IEnumerable<Models.Playlist>> GetPlaylists(bool allPlaylist)
-        {
-            // TODO feature choose-playlists: Si il veut certaines:
-            //  - Faire un affichage des playlist exportables avec un numéro
-            //  - Et l'utilisateur choisis celle qui veut exporter avec une commandé linq qui filtre uniquement ceux qui veulent
+        /// <returns>List of playlist names</returns>
 
+        public async Task<IEnumerable<Playlist>> GetPlaylistsName()
+        {
+            // Get playlist data
+            Playlists playlistsData = await api.FetchPlaylists();
+
+            List<Playlist> playlists = playlistsData.items.ToList();
+            playlists = playlists.Prepend(new Playlist() { name = LIKED_SONGS }).ToList();
+
+            return playlists;
+        }
+
+        /// <summary>
+        /// Get playlist wanted by the user created or saved in Spotify
+        /// </summary>
+        /// <param name="playlistSelected">List of playlist wanted</param>
+        /// <returns>Playlist's models</returns>
+        public async Task<IEnumerable<Models.Playlist>> GetPlaylists(IEnumerable<Entities.Playlist> playlistSelected)
+        {
             List<Models.Playlist> playlists = new();
 
             // Get playlist data
             Playlists playlistsData = await api.FetchPlaylists();
 
-            // Liked song playlist
-            Models.Playlist likedPlaylist = await GetLikedTracks();
-            playlists.Add(likedPlaylist);
-
-            if (playlistsData == null || playlistsData.items == null)
+            if (playlistsData.items == null)
             {
                 Logger.Warn("No playlists found");
                 return new List<Models.Playlist>();
             }
 
+            List<Playlist> playlistToFetch = playlistsData.items.Where(p => playlistSelected.Select(ps => ps.name).Contains(p.name)).ToList();
+
+            Logger.Debug($"Playlist selected: {string.Join("; ", playlistSelected.Select(p => p.name))}");
+
+            // Liked song playlist if choosen or want all playlist
+            if (playlistSelected.Select(p => p.name).Contains(LIKED_SONGS))
+            {
+                Models.Playlist likedPlaylist = await GetLikedTracks();
+                playlists.Add(likedPlaylist);
+            }
+
             // Get tracks for each playlist
-            foreach (Playlist p in playlistsData.items)
+            foreach (Playlist p in playlistToFetch)
             {
                 Models.Playlist playlist = await GetPlaylist(p);
                 Logger.Info($"Playlist {playlist}");

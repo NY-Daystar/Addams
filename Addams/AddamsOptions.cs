@@ -1,5 +1,4 @@
-﻿using NLog;
-using System;
+﻿using System;
 
 namespace Addams
 {
@@ -8,8 +7,6 @@ namespace Addams
     /// </summary>
     public class AddamsOptions
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-
         /// <summary>
         /// Boolean to set if we are in debug log or not
         /// </summary>

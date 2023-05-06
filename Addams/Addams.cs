@@ -1,10 +1,12 @@
-﻿using NLog;
+﻿using Addams.Entities;
+using NLog;
 using NLog.Config;
 using NLog.Layouts;
 using NLog.Targets;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Addams
@@ -29,7 +31,7 @@ namespace Addams
             // Get arguments from exe file
             AddamsOptions options = AddamsOptions.DefineOptions(args);
 
-            LogLevel level = options.Debug ? LogLevel.Debug : LogLevel.Info;
+            LogLevel level = options.Debug ? LogLevel.Debug : LogLevel.Info; // add in exe argument --debug
             SetupLogger(LOGFILE, level);
             Logger.Info("Launching Addams Application");
 
@@ -37,17 +39,21 @@ namespace Addams
             SpotifyService service = new();
 
             // TODO feature OAUTH2 authorization_code
-            //Console.WriteLine("Get OAuth2 token...");
+            // Console.WriteLine("Get OAuth2 token...");
             //string newToken = await service.RefreshToken();
             //service.Update(newToken);
 
             // Ask if you want all playlist or just a few
-            bool allPlaylist = AskAllPlaylistWanted();
-            Console.WriteLine();
+            bool allPlaylist = AddamsUser.AskAllPlaylistWanted();
+
+            IEnumerable<Playlist> playlistsSelected = await service.GetPlaylistsName();
+
+            // If we don't want all playlist
+            if (!allPlaylist)
+                playlistsSelected = AddamsUser.SelectPlaylist(playlistsSelected.ToList());
 
             Logger.Info("Fetching playlist data...");
-            IEnumerable<Models.Playlist>? playlists = await service.GetPlaylists(allPlaylist); // Get playlist data of user to save it after
-
+            IEnumerable<Models.Playlist>? playlists = await service.GetPlaylists(playlistsSelected); // Get playlist data of user to save it after
 
             if (playlists == null)
             {
@@ -93,34 +99,6 @@ namespace Addams
 
             // Apply config           
             LogManager.Configuration = config;
-        }
-
-        /// <summary>
-        /// Ask the user if he want to export all playlist
-        /// Yes : means true, No means false
-        /// </summary>
-        /// <returns>bool of the pick</returns>
-        public static bool AskAllPlaylistWanted()
-        {
-            do
-            {
-                Console.Write("Do you want to export all playlist\n    [1]:Yes\t[2]:No : ");
-
-                char key = Console.ReadKey().KeyChar;
-
-                if (key == '1')
-                {
-                    return true;
-                }
-                else if (key == '2')
-                {
-                    return false;
-                }
-                else
-                {
-                    Console.WriteLine($"\nYou type '{key}'. Please choose '1' or '2'"); // TODO feature language
-                }
-            } while (true);
         }
     }
 }

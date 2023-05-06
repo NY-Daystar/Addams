@@ -19,11 +19,7 @@ namespace Addams
         /// Spotify username
         /// </summary>
         [JsonPropertyName("user")]
-        public string User
-        {
-            get => "gravityx3";  // OAUTH2 TODO to delete
-            set { }
-        }
+        public string User { get; set; } = "gravityx3"; // OAUTH2 TODO to delete
 
         /// <summary>
         /// Spotify Client ID from app created in spotify account
@@ -44,7 +40,7 @@ namespace Addams
         [JsonPropertyName("token")]
         public string Token { get; set; } = _token;
 
-        private static readonly string _token = @"BQAmJlT19o6Gic8o2mbaj-LDKs10RfYOBalPzGlYBZOlmFTmLEiffAm8e-AZj8vfdM-kkygRQgpobRTflySxb-HljYGwkxgFps5MimqyBFyrcqfzVZEdS4SDhaqs9OGrgH6uWZbso3wCjmA6MkqBnIngquMvi2XuqnyVi0bqH864p9VB0zvyRJKzsHa5_75rczZ_ES9ywCILBgpCP0oshmo";
+        private static readonly string _token = @"BQD0M3s-PTkWGPwEWHgDoZ1q6UxCj_jyDdQeJ6Q9mT9-NXHoPWyTRWjfB9iUsBRMbRzl2deYR3yR1rLTWB2SA6y7-i5L6znPNrSV-DEsYf8smTa_jJFNy0x7wOeLfq5OHa8s4Sm88rH36ZdYtNMIQP-PhDDwmNGuer2Nt6HY6gFu4XKxYy15gtUYCQiv4Cz1mB0wX_vkceM6RemRo0FxSCY";
 
         /// <summary>
         /// Datetime of last save
@@ -115,7 +111,7 @@ namespace Addams
             {
                 string folder =
                     Path.GetDirectoryName(ConfigFilepath)
-                    ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Addams"); ;
+                    ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Addams");
                 if (folder == null)
                 {
                     throw new DirectoryNotFoundException($"SpotifyConfig - Save method can't find folder based on path {ConfigFilepath}");

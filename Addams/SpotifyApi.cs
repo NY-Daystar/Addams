@@ -18,10 +18,12 @@ namespace Addams
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
+        /// <summary>
         /// Number of playlists fetchable in spotify API
         /// </summary>
         private static readonly int PLAYLIST_LIMIT = 50;
 
+        /// <summary>
         /// Number of tracks liked fetchable in spotify API
         /// </summary>
         private static readonly int TRACK_LIKED_LIMIT = 50;
@@ -105,18 +107,18 @@ namespace Addams
                 new KeyValuePair<string, string>("grant_type", "authorization_code")
             });
 
-            string url = "https://accounts.spotify.com/api/token";
+            string url = $"https://accounts.spotify.com/api/token";
             HttpResponseMessage response = await new HttpClient().PostAsync(url, requestData);
 
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
-                // TODO feature OAUTH2: changer le message d'erreur
+                // TODO feature OAUTH2: Change error message
                 throw new SpotifyUnauthorizedException($"Can't get Authorize\nThe token {AuthToken}\nis invalid for user: {User}\n" +
                     "You need to create a new one or refresh it");
             }
             if (!response.IsSuccessStatusCode)
             {
-                // TODO feature OAUTH2: changer le message d'erreur
+                // TODO feature OAUTH2: Change error message
                 throw new SpotifyException($"Can't get Authorize\nStatusCode {response.StatusCode} : {response.Content}");
             }
             string content = await response.Content.ReadAsStringAsync();

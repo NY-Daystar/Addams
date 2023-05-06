@@ -5,7 +5,7 @@ namespace Addams.Utils
     /// <summary>
     /// Class to get valid path and filename
     /// </summary>
-    public class PathUtil
+    public static class PathUtil
     {
         /// <summary>
         /// Remove invalid characters for filename including '/' and ':'

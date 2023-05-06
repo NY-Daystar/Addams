@@ -5,7 +5,7 @@ namespace Addams.Utils
     /// <summary>
     /// Class to handle time conversion
     /// </summary>
-    public class TimeConverter
+    public static class TimeConverter
     {
         /// <summary>
         /// Get timeSpan from ms value
