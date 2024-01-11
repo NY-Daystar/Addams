@@ -1,12 +1,11 @@
-﻿namespace Addams.Entities
+﻿namespace Addams.Entities;
+
+/// <summary>
+/// Image specification
+/// </summary>
+public class Image
 {
-    /// <summary>
-    /// Image specification
-    /// </summary>
-    public class Image
-    {
-        public int? height { get; set; }
-        public string? url { get; set; }
-        public int? width { get; set; }
-    }
+    public int? height { get; set; }
+    public string? url { get; set; }
+    public int? width { get; set; }
 }

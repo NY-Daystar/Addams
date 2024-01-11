@@ -10,104 +10,103 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Addams
+namespace Addams;
+
+internal static class Addams
 {
-    internal static class Addams
+    private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+    private static string LOGFILE => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            "Addams",
+            "logs",
+            "addams.log"
+            );
+
+    private const string _application = "Addams";
+
+    private const string _version = "1.0.0";
+
+    public static void Main(string[] args)
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        RunAsync(args).GetAwaiter().GetResult();
+    }
 
-        private static string LOGFILE => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                "Addams",
-                "logs",
-                "addams.log"
-                );
+    public static async Task RunAsync(string[] args)
+    {
+        // Get arguments from exe file
+        AddamsOptions options = AddamsOptions.DefineOptions(args);
 
-        private const string _application = "Addams";
+        Core.WriteLine("Welcome to ", ConsoleColor.Yellow, _application, ConsoleColor.White,
+            " - Version : ", ConsoleColor.Yellow, _version, ConsoleColor.White);
+        Console.WriteLine("---------------------");
 
-        private const string _version = "1.0.0";
+        LogLevel level = options.Debug ? LogLevel.Debug : LogLevel.Info; // add in exe argument --debug
+        SetupLogger(LOGFILE, level);
+        Logger.Info("Launching Addams Application");
 
-        public static void Main(string[] args)
+        Logger.Debug("Setup service with config and api...");
+        SpotifyService service = new();
+
+        // TODO feature OAUTH2 authorization_code
+        // Console.WriteLine("Get OAuth2 token...");
+        //string newToken = await service.RefreshToken();
+        //service.Update(newToken);
+
+        // Ask if you want all playlist or just a few
+        bool allPlaylist = AddamsUser.AskAllPlaylistWanted();
+
+        IEnumerable<Playlist> playlistsSelected = await service.GetPlaylistsNameAsync();
+
+        // If we don't want all playlist
+        if (!allPlaylist)
+            playlistsSelected = AddamsUser.SelectPlaylist(playlistsSelected.ToList());
+
+        Logger.Info("Fetching playlist data...");
+        IEnumerable<Models.Playlist>? playlists = await service.GetPlaylistsAsync(playlistsSelected); // Get playlist data of user to save it after
+
+        if (playlists == null)
         {
-            Run(args).GetAwaiter().GetResult();
+            Logger.Error("None playlist found");
+            return;
         }
+        Logger.Info("Playlist fetched...");
 
-        public static async Task Run(string[] args)
+        Logger.Info("Saving playlists...");
+        SpotifyExport.SavePlaylists(playlists);
+        Logger.Info("All playlists are saved...");
+    }
+
+    /// <summary>
+    /// Setup the logger with its path and it's minimum level
+    /// </summary>
+    /// <param name="filePath">path of the file</param>
+    /// <param name="level">Minimum level to define</param>
+    private static void SetupLogger(string filePath, LogLevel level)
+    {
+        LoggingConfiguration config = new();
+        Layout layout = "level:${uppercase:${level}} - date:${date} - caller: ${callsite-filename}:${callsite-linenumber} - ${message} ${exception:format=tostring}";
+
+        // Targets where to log to: File and Console
+        FileTarget logfile = new("logfile")
         {
-            // Get arguments from exe file
-            AddamsOptions options = AddamsOptions.DefineOptions(args);
+            FileName = filePath,
+            ArchiveEvery = FileArchivePeriod.Minute,
+            ArchiveNumbering = ArchiveNumberingMode.Rolling,
+            MaxArchiveFiles = 5,
+            Layout = layout
 
-            Core.WriteLine("Welcome to ", ConsoleColor.Yellow, _application, ConsoleColor.White,
-                " - Version : ", ConsoleColor.Yellow, _version, ConsoleColor.White);
-            Console.WriteLine("---------------------");
+        };
 
-            LogLevel level = options.Debug ? LogLevel.Debug : LogLevel.Info; // add in exe argument --debug
-            SetupLogger(LOGFILE, level);
-            Logger.Info("Launching Addams Application");
-
-            Logger.Debug("Setup service with config and api...");
-            SpotifyService service = new();
-
-            // TODO feature OAUTH2 authorization_code
-            // Console.WriteLine("Get OAuth2 token...");
-            //string newToken = await service.RefreshToken();
-            //service.Update(newToken);
-
-            // Ask if you want all playlist or just a few
-            bool allPlaylist = AddamsUser.AskAllPlaylistWanted();
-
-            IEnumerable<Playlist> playlistsSelected = await service.GetPlaylistsName();
-
-            // If we don't want all playlist
-            if (!allPlaylist)
-                playlistsSelected = AddamsUser.SelectPlaylist(playlistsSelected.ToList());
-
-            Logger.Info("Fetching playlist data...");
-            IEnumerable<Models.Playlist>? playlists = await service.GetPlaylists(playlistsSelected); // Get playlist data of user to save it after
-
-            if (playlists == null)
-            {
-                Logger.Error("None playlist found");
-                return;
-            }
-            Logger.Info("Playlist fetched...");
-
-            Logger.Info("Saving playlists...");
-            SpotifyExport.SavePlaylists(playlists);
-            Logger.Info("All playlists are saved...");
-        }
-
-        /// <summary>
-        /// Setup the logger with its path and it's minimum level
-        /// </summary>
-        /// <param name="filePath">path of the file</param>
-        /// <param name="level">Minimum level to define</param>
-        private static void SetupLogger(string filePath, LogLevel level)
+        ConsoleTarget logconsole = new("logconsole")
         {
-            LoggingConfiguration config = new();
-            Layout layout = "level:${uppercase:${level}} - date:${date} - caller: ${callsite-filename}:${callsite-linenumber} - ${message} ${exception:format=tostring}";
+            Layout = layout
+        };
 
-            // Targets where to log to: File and Console
-            FileTarget logfile = new("logfile")
-            {
-                FileName = filePath,
-                ArchiveEvery = FileArchivePeriod.Minute,
-                ArchiveNumbering = ArchiveNumberingMode.Rolling,
-                MaxArchiveFiles = 5,
-                Layout = layout
+        // Rules for mapping loggers to targets            
+        config.AddRule(level, LogLevel.Fatal, logconsole);
+        config.AddRule(LogLevel.Trace, LogLevel.Fatal, logfile);
 
-            };
-
-            ConsoleTarget logconsole = new("logconsole")
-            {
-                Layout = layout
-            };
-
-            // Rules for mapping loggers to targets            
-            config.AddRule(level, LogLevel.Fatal, logconsole);
-            config.AddRule(LogLevel.Trace, LogLevel.Fatal, logfile);
-
-            // Apply config           
-            LogManager.Configuration = config;
-        }
+        // Apply config           
+        LogManager.Configuration = config;
     }
 }

@@ -1,10 +1,9 @@
-﻿namespace Addams.Entities
+﻿namespace Addams.Entities;
+
+/// <summary>
+/// External Urls outside of Spotify (Yt, deezer, etc...)
+/// </summary>
+public class ExternalUrls
 {
-    /// <summary>
-    /// External Urls outside of Spotify (Yt, deezer, etc...)
-    /// </summary>
-    public class ExternalUrls
-    {
-        public string? spotify { get; set; }
-    }
+    public string? spotify { get; set; }
 }
