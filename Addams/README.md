@@ -5,7 +5,8 @@
 [![Version](https://img.shields.io/github/tag/LucasNoga/addams.svg)](https://github.com/LucasNoga/addams/releases)
 [![Total views](https://img.shields.io/sourcegraph/rrc/github.com/LucasNoga/addams.svg)](https://sourcegraph.com/github.com/LucasNoga/addams)
 
-C# project to export in csv spotify user's playlist
+C# project to export in csv spotify user's playlist  
+Source code analysed with [DeepSource](https://deepsource.com/)
 
 **\_Version: v0.0.1**
 

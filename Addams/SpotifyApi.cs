@@ -21,22 +21,22 @@ namespace Addams
         /// <summary>
         /// Number of playlists fetchable in spotify API
         /// </summary>
-        private static readonly int PLAYLIST_LIMIT = 50;
+        private const int PLAYLIST_LIMIT = 50;
 
         /// <summary>
         /// Number of tracks liked fetchable in spotify API
         /// </summary>
-        private static readonly int TRACK_LIKED_LIMIT = 50;
+        private const int TRACK_LIKED_LIMIT = 50;
 
         /// <summary>
         /// Number of tracks fetched in spotify API
         /// </summary>
-        private static readonly int TRACK_LIMIT = 100;
+        private const int TRACK_LIMIT = 100;
 
         /// <summary>
         /// Url endpoint for Spotify Api
         /// </summary>
-        private static readonly string API = @"https://api.spotify.com/v1";
+        private const string API = @"https://api.spotify.com/v1";
 
         /// <summary>
         /// User to do the request on playlist

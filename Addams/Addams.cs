@@ -22,9 +22,9 @@ namespace Addams
                 "addams.log"
                 );
 
-        private static readonly string _application = "Addams";
+        private const string _application = "Addams";
 
-        private static readonly string _version = "1.0.0";
+        private const string _version = "1.0.0";
 
         public static void Main(string[] args)
         {
