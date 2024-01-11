@@ -46,7 +46,7 @@ namespace Addams
         /// Datetime of last save
         /// </summary>
         [JsonPropertyName("datetime")]
-        public string _datetime => DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss");
+        public string _datetime => DateTime.UtcNow.ToString("yyyy-MM-dd_HH:mm:ss");
 
         /// <summary>
         /// Config file store in AppData folder : %APPDATA%\Addams

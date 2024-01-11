@@ -107,7 +107,7 @@ namespace Addams
                 new KeyValuePair<string, string>("grant_type", "authorization_code")
             });
 
-            string url = $"https://accounts.spotify.com/api/token";
+            string url = "https://accounts.spotify.com/api/token";
             HttpResponseMessage response = await new HttpClient().PostAsync(url, requestData);
 
             if (response.StatusCode == HttpStatusCode.Unauthorized)
@@ -264,7 +264,7 @@ namespace Addams
             {
                 if (playlist.next == null)
                 {
-                    Logger.Warn($"Playlist next url is null, can't get the rest of playlist");
+                    Logger.Warn("Playlist next url is null, can't get the rest of playlist");
                     break;
                 }
 

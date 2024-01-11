@@ -24,7 +24,7 @@ namespace Addams
             List<string> playlistNames = playlists.Select(p => p.name).ToList();
             List<string> playlistChosen = new();
 
-            int choice;
+            int choice = 0;
             do
             {
                 choice = choosePlaylist(playlistNames);
@@ -55,11 +55,11 @@ namespace Addams
             }
             do
             {
-                Console.Write($"Which playlist do you want to export " +
-                    $"(1 - {playlistNames.Count()}) ? \ntype 0 to exit : ");  // TODO feature language
+                Console.Write("Which playlist do you want to export "
+                    + $"(1 - {playlistNames.Count()}) ? \ntype 0 to exit : ");  // TODO feature language
 
                 string key = Console.ReadLine() ?? string.Empty;
-                int keyInt;
+                int keyInt = 0;
                 try
                 {
                     keyInt = Convert.ToInt32(key);
