@@ -15,25 +15,24 @@ internal static class AddamsUser
     /// <returns>List of playlist</returns>
     public static IEnumerable<Entities.Playlist> SelectPlaylist(List<Entities.Playlist> playlists)
     {
-
-        List<string> playlistNames = playlists.Select(p => p.name).ToList();
+        List<string> playlistNames = playlists.ConvertAll(p => p.Name).ToList();
         List<string> playlistChosen = new();
 
         int choice = 0;
         do
         {
-            choice = choosePlaylist(playlistNames);
+            choice = ChoosePlaylist(playlistNames);
 
             if (choice != -1)
             {
-                playlistChosen.Add(playlistNames.ElementAt(choice));
+                playlistChosen.Add(playlistNames[choice]);
                 playlistNames.RemoveAt(choice);
             }
         } while (choice != -1);
 
         Logger.Debug($"playlistChosen : {string.Join("; ", playlistChosen)}");
 
-        return playlists.Where(p => playlistChosen.Contains(p.name)).ToList();
+        return playlists.Where(p => playlistChosen.Contains(p.Name)).ToList();
     }
 
     /// <summary>
@@ -41,20 +40,20 @@ internal static class AddamsUser
     /// </summary>
     /// <param name="playlistNames">Playlist names</param>
     /// <returns>-1 no choice or index of the playlist</returns>
-    private static int choosePlaylist(IEnumerable<string> playlistNames)
+    private static int ChoosePlaylist(IEnumerable<string> playlistNames)
     {
         foreach (string playlistName in playlistNames)
         {
             int index = playlistNames.ToList().IndexOf(playlistName) + 1;
             Console.WriteLine($"[{index}] - {playlistName}");
         }
-        do
+        while (true)
         {
             Console.Write("Which playlist do you want to export "
                 + $"(1 - {playlistNames.Count()}) ? \ntype 0 to exit : ");  // TODO feature language
 
             string key = Console.ReadLine() ?? string.Empty;
-            int keyInt = 0;
+            int keyInt;
             try
             {
                 keyInt = Convert.ToInt32(key);
@@ -74,7 +73,7 @@ internal static class AddamsUser
             {
                 return keyInt - 1;
             }
-        } while (true);
+        }
     }
 
     /// <summary>

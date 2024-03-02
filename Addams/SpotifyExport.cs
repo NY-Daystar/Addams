@@ -7,7 +7,6 @@ using System.Linq;
 
 namespace Addams;
 
-
 /// <summary>
 /// Class to handle csv export data file with spotify tracks data
 /// </summary>
@@ -21,10 +20,6 @@ public static class SpotifyExport
     /// <param name="data">List of playlist to save</param>
     public static void SavePlaylists(IEnumerable<Models.Playlist> data)
     {
-        // TODO feature save-mode: gerer un mode specific pour tout save dans un fichier ou plusieurs
-        //      - faire un mode si on save tout dans un fichier ou une playlist par fichier
-        //      - faire un save dans un csv du fichier
-
         string exePath = System.Reflection.Assembly.GetExecutingAssembly().Location ?? throw new Exception("exe path is null");
 
         string exeFolder = Path.GetDirectoryName(exePath) ?? throw new Exception("exe folder path is null");
@@ -41,12 +36,6 @@ public static class SpotifyExport
             SavePlaylist(wDir, playlist);
         }
     }
-
-
-    //TODO feature save-mode
-    //  - voir si je peux faire un seul .xlsx avec tous les onglets
-    //  - faire un mode si on save tout dans un fichier ou une playlist par fichier
-    //  - faire un save dans un csv du fichier
 
     /// <summary>
     /// Save playlist data into csv file
@@ -119,7 +108,7 @@ public static class SpotifyExport
             {
                 Logger.Error($"{ex} : Message: {ex.Message}\nStackTrace:{ex.StackTrace}");
                 Logger.Error($"Le fichier {csvFilePath} est déjà ouvert par un autre processus" +
-                    $"\nVeuillez le fermer pour réessayer"); // TODO feature language
+                    "\nVeuillez le fermer pour réessayer"); // TODO feature language
             }
         } while (!exported);
 

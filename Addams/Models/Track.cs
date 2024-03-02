@@ -4,7 +4,7 @@ using System;
 namespace Addams.Models;
 
 /// <summary>
-/// Track model to store track data into csv 
+/// Track model to store track data into csv
 /// </summary>
 public class Track
 {
@@ -50,12 +50,12 @@ public class Track
 
     public bool IsLocal { get; set; }
 
-    public int _duration { get; set; }
+    public int Duration { get; set; }
 
     /// <summary>
     /// Time duration of the track ('hours:minutes:seconds')
     /// </summary>
-    public string Duration => FormatDuration(_duration);
+    public string DurationFormatted => FormatDuration(Duration);
 
     /// <summary>
     /// Number in range 0-100 for unpopular to very popular
@@ -111,7 +111,7 @@ public class Track
     /// </summary>
     /// <param name="duration">ms value</param>
     /// <returns>time formatted (HH:MM:SS)</returns>
-    public string FormatDuration(int duration)
+    public static string FormatDuration(int duration)
     {
         TimeSpan ts = TimeConverter.ConvertMsToTimeSpan(duration);
         return TimeConverter.FormatTimeSpan(ts);

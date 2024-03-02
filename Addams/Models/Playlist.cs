@@ -4,7 +4,7 @@ using System.Linq;
 namespace Addams.Models;
 
 /// <summary>
-/// Playlist model to store tracks to save into csv 
+/// Playlist model to store tracks to save into csv
 /// </summary>
 public class Playlist
 {
