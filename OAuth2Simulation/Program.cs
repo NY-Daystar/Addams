@@ -36,7 +36,7 @@ else
 
 static int SelectOption()
 {
-    int choice;
+    int choice = 0;
     try
     {
         Console.Write("Which method do you want to simulate for Oauth2 [1-2]\n\t- 1 : Manual\n\t- 2 : Automatic\nYour choice : ");

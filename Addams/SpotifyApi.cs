@@ -102,10 +102,10 @@ public class SpotifyApi
         Console.WriteLine(url);
 
         // Step 2 : Get Authorization Code
-        var authorizationCode = await GetAuthorizationCode();
+        var authorizationCode = await FetchAuthorizationCodeAsync();
 
         // Step 3 : Call Spotify Api to exchange `Authorization Code` for an `Access Token`
-        var tokenEntity = await FetchTokenApi(authorizationCode);
+        var tokenEntity = await FetchTokenApiAsync(authorizationCode);
 
         // Convert Token from entity to model
         TokenModel token = JsonConvert.DeserializeObject<TokenModel>(JsonConvert.SerializeObject(tokenEntity)) ?? new TokenModel();
@@ -125,7 +125,7 @@ public class SpotifyApi
     /// Then authorization got call spotify Api to get access token
     /// </summary>
     /// <returns>Token Oauth2</returns>
-    static async Task<string> GetAuthorizationCode()
+    static async Task<string> FetchAuthorizationCodeAsync()
     {
         var host = $"{SpotifyConfig.Hostname}:{SpotifyConfig.Port}/";
 
@@ -154,7 +154,7 @@ public class SpotifyApi
     /// </summary>
     /// <param name="authorizationCode"></param>
     /// <returns>Token object</returns>
-    async Task<Token> FetchTokenApi(string authorizationCode)
+    async Task<Token> FetchTokenApiAsync(string authorizationCode)
     {
         var httpClient = new HttpClient();
         var url = $"{SpotifyConfig.AuthorityUri}/api/token";

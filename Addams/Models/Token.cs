@@ -47,7 +47,7 @@ public class TokenModel
     /// </summary>
     public void CalculateExpiration()
     {
-        GeneratedAt = DateTime.Now;
+        GeneratedAt = DateTime.UtcNow;
         ExpiredDate = GeneratedAt.AddSeconds(ExpiresIn);
     }
 
@@ -67,6 +67,11 @@ public class TokenModel
             && Scope == p.Scope
             && GeneratedAt == p.GeneratedAt
             && ExpiredDate == p.ExpiredDate;
+    }
+
+    public override int GetHashCode()
+    {
+        throw new NotImplementedException();
     }
 
     public override string ToString() => $"Value: {Value[..15]}................. - Type: {Type} - ExpiredDate: {ExpiredDate}";

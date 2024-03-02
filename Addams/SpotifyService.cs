@@ -44,29 +44,29 @@ internal class SpotifyService
     /// Verify is service is functionnal requesting API and test result
     /// </summary>
     /// <returns>if result valid returns true, otherwise false</returns>
-    public async Task<bool> IsTokenValid()
+    public async Task<bool> IsTokenValidAsync()
     {
+        // On first launch no token
         if (config.Token == null)
             return false;
 
-        if (config.Token.ExpiredDate < DateTime.Now)
+        // If token has expired
+        if (config.Token.ExpiredDate < DateTime.UtcNow)
         {
             Logger.Warn($"Token has expired, expiration date : {config.Token.ExpiredDate}");
             return false;
         }
-        else
+
+        Logger.Info($"Token is still valid, the expiration date is : {config.Token.ExpiredDate}");
+        try
         {
-            Logger.Info($"Token is still valid, the expiration date is : {config.Token.ExpiredDate}");
-            try
-            {
-                await GetPlaylistsNameAsync();
-                return true;
-            }
-            catch (SpotifyException ex)
-            {
-                Logger.Debug($"Exception caught to test service {ex.Message}");
-                return false;
-            }
+            await GetPlaylistsNameAsync();
+            return true;
+        }
+        catch (SpotifyException ex)
+        {
+            Logger.Debug($"Exception caught to test service {ex.Message}");
+            return false;
         }
     }
 

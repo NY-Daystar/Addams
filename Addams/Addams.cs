@@ -53,7 +53,7 @@ internal static class Addams
         SpotifyService service = new();
 
         Logger.Debug("Verify OAuth2 token");
-        if (!await service.IsTokenValid())
+        if (!await service.IsTokenValidAsync())
         {
             Logger.Warn("Invalid Token, Refreshing token");
             await service.RefreshTokenAsync();
