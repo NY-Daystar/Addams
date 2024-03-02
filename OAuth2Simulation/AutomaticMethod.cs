@@ -6,12 +6,9 @@ namespace Oauth2Simulation;
 /// <summary>
 /// Generate automatically token extracting by uri
 /// </summary>
-public class AutomaticMethod : Method
+public class AutomaticMethod(Method method) : Method(method.Hostname, method.Port, method.AuthorityUri, method.RedirectUri,
+    method.UserId, method.ClientId, method.ClientSecret, method.Scope, method.ResponseType)
 {
-    public AutomaticMethod(Method method) : base(method.Hostname, method.Port, method.AuthorityUri, method.RedirectUri,
-        method.UserId, method.ClientId, method.ClientSecret, method.Scope, method.ResponseType)
-    { }
-
     /// <summary>
     /// Execute Oauth2 Method
     /// </summary>
@@ -26,7 +23,7 @@ public class AutomaticMethod : Method
 
         if (string.IsNullOrEmpty(token))
         {
-            Console.WriteLine($"Error when exchange authorizing code for a token");
+            Console.WriteLine("Error when exchange authorizing code for a token");
             return;
         }
 
@@ -39,7 +36,6 @@ public class AutomaticMethod : Method
         var apiResponse = await httpClient.GetAsync(spotifyApiUrl);
         var content = await apiResponse.Content.ReadAsStringAsync();
         Console.WriteLine($"Réponse de l'API Spotify : {content}");
-
     }
 
     /// <summary>
@@ -72,7 +68,7 @@ public class AutomaticMethod : Method
                     Address = url,
                     ClientId = ClientId,
                     ClientSecret = ClientSecret,
-                    Code = authorizationCode ?? String.Empty,
+                    Code = authorizationCode ?? string.Empty,
                     RedirectUri = RedirectUri
                 });
 

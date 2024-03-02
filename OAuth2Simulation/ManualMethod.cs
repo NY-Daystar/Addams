@@ -5,17 +5,14 @@ namespace Oauth2Simulation;
 /// <summary>
 /// Generate Oauth2 Token copying authorizing code from url manually
 /// </summary>
-public class ManualMethod : Method
+public class ManualMethod(Method method) : Method(method.Hostname, method.Port, method.AuthorityUri, method.RedirectUri,
+    method.UserId, method.ClientId, method.ClientSecret, method.Scope, method.ResponseType)
 {
-    public ManualMethod(Method method) : base(method.Hostname, method.Port, method.AuthorityUri, method.RedirectUri,
-        method.UserId, method.ClientId, method.ClientSecret, method.Scope, method.ResponseType)
-    { }
-
     /// <summary>
     /// Execute Oauth2 Method
     /// </summary>
     async public Task Execute()
-    {     
+    {
         // Étape 1 : Rediriger l'utilisateur vers Spotify pour autoriser l'application
         var authorizationRequestUrl = $"{AuthorityUri}/authorize?client_id={ClientId}&response_type={ResponseType}&redirect_uri={Uri.EscapeDataString(RedirectUri)}&scope={Uri.EscapeDataString(Scope)}";
         Console.WriteLine("Veuillez autoriser l'application en visitant cette URL :");
@@ -23,7 +20,7 @@ public class ManualMethod : Method
 
         // Étape 2 : Récupérer le code d'autorisation de Spotify
         Console.WriteLine("Entrez le code d'autorisation obtenu après avoir autorisé l'application :");
-        var authorizationCode = Console.ReadLine();
+        var authorizationCode = Console.ReadLine() ?? string.Empty;
 
         // Étape 3 : Échanger le code contre un jeton d'accès
         var httpClient = new HttpClient();
