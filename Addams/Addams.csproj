@@ -13,19 +13,20 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Content Include="AddamsLogo.ico" />
+        <Content Include="AddamsLogo.ico" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
-      <PackageReference Include="Nlog" Version="5.1.1" />
+        <PackageReference Include="IdentityModel" Version="6.2.0" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="Nlog" Version="5.1.4" />
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="README.md">
-        <Pack>True</Pack>
-        <PackagePath>\</PackagePath>
-      </None>
+        <None Update="README.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
     </ItemGroup>
 
 </Project>

@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace Addams;
 
+/// <summary>
+/// Entrypoint of the program
+/// </summary>
 internal static class Addams
 {
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
@@ -36,6 +39,8 @@ internal static class Addams
         // Get arguments from exe file
         AddamsOptions options = AddamsOptions.DefineOptions(args);
 
+        //TODO faire un affichage de la config si demander
+
         Core.WriteLine("Welcome to ", ConsoleColor.Yellow, _application, ConsoleColor.White,
             " - Version : ", ConsoleColor.Yellow, _version, ConsoleColor.White);
         Console.WriteLine("---------------------");
@@ -47,10 +52,12 @@ internal static class Addams
         Logger.Debug("Setup service with config and api...");
         SpotifyService service = new();
 
-        // TODO feature OAUTH2 authorization_code
-        // Console.WriteLine("Get OAuth2 token...");
-        //string newToken = await service.RefreshToken();
-        //service.Update(newToken);
+        Logger.Debug("Verify OAuth2 token");
+        if (!await service.IsTokenValid())
+        {
+            Logger.Warn("Invalid Token, Refreshing token");
+            await service.RefreshTokenAsync();
+        }
 
         // Ask if you want all playlist or just a few
         bool allPlaylist = AddamsUser.AskAllPlaylistWanted();
@@ -94,7 +101,6 @@ internal static class Addams
             ArchiveNumbering = ArchiveNumberingMode.Rolling,
             MaxArchiveFiles = 5,
             Layout = layout
-
         };
 
         ConsoleTarget logconsole = new("logconsole")
