@@ -1,14 +1,27 @@
-﻿namespace Addams.Entities;
+﻿using Newtonsoft.Json;
+
+namespace Addams.Entities;
 
 /// <summary>
 /// Owner data
 /// </summary>
 public class Owner
 {
-    public string? display_name { get; set; }
-    public ExternalUrls? external_urls { get; set; }
-    public string? href { get; set; }
-    public string? id { get; set; }
-    public string? type { get; set; }
-    public string? uri { get; set; }
+    [JsonProperty(PropertyName = "display_name")]
+    public string? DisplayName { get; set; }
+
+    [JsonProperty(PropertyName = "external_urls")]
+    public ExternalUrls? ExternalUrls { get; set; }
+
+    [JsonProperty(PropertyName = "href")]
+    public string? Href { get; set; }
+
+    [JsonProperty(PropertyName = "id")]
+    public string? Id { get; set; }
+
+    [JsonProperty(PropertyName = "type")]
+    public string? Type { get; set; }
+
+    [JsonProperty(PropertyName = "uri")]
+    public string? Uri { get; set; }
 }

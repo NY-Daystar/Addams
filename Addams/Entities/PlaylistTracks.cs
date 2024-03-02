@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Addams.Entities;
 
@@ -8,39 +9,81 @@ namespace Addams.Entities;
 /// </summary>
 public class PlaylistTracks
 {
-    public bool? collaborative { get; set; }
-    public string? description { get; set; }
-    public ExternalUrls? external_urls { get; set; }
-    public Followers? followers { get; set; }
-    public string? href { get; set; }
-    public string? id { get; set; }
-    public IEnumerable<Image>? images { get; set; }
-    public string? name { get; set; }
-    public Owner? owner { get; set; }
-    public object? primary_color { get; set; }
-    public bool? @public { get; set; }
-    public string? snapshot_id { get; set; }
-    public TrackList tracks { get; set; } = new TrackList();
-    public string? type { get; set; }
-    public string? uri { get; set; }
+    [JsonProperty(PropertyName = "collaborative")]
+    public bool? Collaborative { get; set; }
+
+    [JsonProperty(PropertyName = "description")]
+    public string? Description { get; set; }
+
+    [JsonProperty(PropertyName = "external_urls")]
+    public ExternalUrls? ExternalUrls { get; set; }
+
+    [JsonProperty(PropertyName = "followers")]
+    public Followers? Followers { get; set; }
+
+    [JsonProperty(PropertyName = "href")]
+    public string? Href { get; set; }
+
+    [JsonProperty(PropertyName = "id")]
+    public string? Id { get; set; }
+
+    [JsonProperty(PropertyName = "images")]
+    public IEnumerable<Image>? Images { get; set; }
+
+    [JsonProperty(PropertyName = "name")]
+    public string? Name { get; set; }
+
+    [JsonProperty(PropertyName = "owner")]
+    public Owner? Owner { get; set; }
+
+    [JsonProperty(PropertyName = "primary_color")]
+    public object? PrimaryColor { get; set; }
+
+    [JsonProperty(PropertyName = "@public")]
+    public bool? Public { get; set; }
+
+    [JsonProperty(PropertyName = "snapshot_id")]
+    public string? SnapshotId { get; set; }
+
+    [JsonProperty(PropertyName = "tracks")]
+    public TrackList Tracks { get; set; } = new TrackList();
+
+    [JsonProperty(PropertyName = "type")]
+    public string? Type { get; set; }
+
+    [JsonProperty(PropertyName = "uri")]
+    public string? Uri { get; set; }
 }
 
 public class AddedBy
 {
-    public ExternalUrls? external_urls { get; set; }
-    public string? href { get; set; }
-    public string? id { get; set; }
-    public string? type { get; set; }
-    public string? uri { get; set; }
+    [JsonProperty(PropertyName = "external_urls")]
+    public ExternalUrls? ExternalUrls { get; set; }
+
+    [JsonProperty(PropertyName = "href")]
+    public string? Href { get; set; }
+
+    [JsonProperty(PropertyName = "id")]
+    public string? Id { get; set; }
+
+    [JsonProperty(PropertyName = "type")]
+    public string? Type { get; set; }
+
+    [JsonProperty(PropertyName = "uri")]
+    public string? Uri { get; set; }
 }
 
 public class Followers
 {
-    public object? href { get; set; }
-    public int? total { get; set; }
+    [JsonProperty(PropertyName = "href")]
+    public object? Href { get; set; }
+
+    [JsonProperty(PropertyName = "total")]
+    public int? Total { get; set; }
 }
 
 public class VideoThumbnail
 {
-    public object? url { get; set; }
+    [JsonProperty(PropertyName = "url")]
+    public object? Url { get; set; }
 }
