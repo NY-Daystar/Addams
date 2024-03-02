@@ -1,126 +1,118 @@
-﻿using NLog;
+﻿using Addams.Entities;
+using Addams.Utils;
+using NLog;
 using NLog.Config;
 using NLog.Layouts;
 using NLog.Targets;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
-namespace Addams
+namespace Addams;
+
+/// <summary>
+/// Entrypoint of the program
+/// </summary>
+internal static class Addams
 {
-    internal class Addams
+    private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+    private static string LOGFILE => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            "Addams",
+            "logs",
+            "addams.log"
+            );
+
+    private const string _application = "Addams";
+
+    private const string _version = "1.0.0";
+
+    public static void Main(string[] args)
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        RunAsync(args).GetAwaiter().GetResult();
+    }
 
-        private static string LOGFILE => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                "Addams",
-                "logs",
-                "addams.log"
-                );
+    public static async Task RunAsync(string[] args)
+    {
+        // Get arguments from exe file
+        AddamsOptions options = AddamsOptions.DefineOptions(args);
 
-        public static void Main(string[] args)
+        //TODO faire un affichage de la config si demander
+
+        Core.WriteLine("Welcome to ", ConsoleColor.Yellow, _application, ConsoleColor.White,
+            " - Version : ", ConsoleColor.Yellow, _version, ConsoleColor.White);
+        Console.WriteLine("---------------------");
+
+        LogLevel level = options.Debug ? LogLevel.Debug : LogLevel.Info; // add in exe argument --debug
+        SetupLogger(LOGFILE, level);
+        Logger.Info("Launching Addams Application");
+
+        Logger.Debug("Setup service with config and api...");
+        SpotifyService service = new();
+
+        Logger.Debug("Verify OAuth2 token");
+        if (!await service.IsTokenValidAsync())
         {
-            Run(args).GetAwaiter().GetResult();
+            Logger.Warn("Invalid Token, Refreshing token");
+            await service.RefreshTokenAsync();
         }
 
-        public static async Task Run(string[] args)
+        // Ask if you want all playlist or just a few
+        bool allPlaylist = AddamsUser.AskAllPlaylistWanted();
+
+        IEnumerable<Playlist> playlistsSelected = await service.GetPlaylistsNameAsync();
+
+        // If we don't want all playlist
+        if (!allPlaylist)
+            playlistsSelected = AddamsUser.SelectPlaylist(playlistsSelected.ToList());
+
+        Logger.Info("Fetching playlist data...");
+        IEnumerable<Models.Playlist>? playlists = await service.GetPlaylistsAsync(playlistsSelected); // Get playlist data of user to save it after
+
+        if (playlists == null)
         {
-            // Get arguments from exe file
-            AddamsOptions options = AddamsOptions.DefineOptions(args);
-
-            LogLevel level = options.Debug ? LogLevel.Debug : LogLevel.Info;
-            SetupLogger(LOGFILE, level);
-            Logger.Info("Launching Addams Application");
-
-            Logger.Debug("Setup service with config and api...");
-            SpotifyService service = new();
-
-            // TODO feature OAUTH2 authorization_code
-            //Console.WriteLine("Get OAuth2 token...");
-            //string newToken = await service.RefreshToken();
-            //service.Update(newToken);
-
-            // Ask if you want all playlist or just a few
-            bool allPlaylist = AskAllPlaylistWanted();
-            Console.WriteLine();
-
-            Logger.Info("Fetching playlist data...");
-            List<Models.Playlist>? playlists = await service.GetPlaylists(allPlaylist); // Get playlist data of user to save it after
-
-
-            if (playlists == null)
-            {
-                Logger.Error("None playlist found");
-                return;
-            }
-            Logger.Info("Playlist fetched...");
-
-            Logger.Info("Saving playlist...");
-            SpotifyExport.SavePlaylists(playlists);
-            Logger.Info("Playlist saved...");
+            Logger.Error("None playlist found");
+            return;
         }
+        Logger.Info("Playlist fetched...");
 
-        /// <summary>
-        /// Setup the logger with its path and it's minimum level
-        /// </summary>
-        /// <param name="filePath">path of the file</param>
-        /// <param name="level">Minimum level to define</param>
-        private static void SetupLogger(string filePath, LogLevel level)
+        Logger.Info("Saving playlists...");
+        SpotifyExport.SavePlaylists(playlists);
+        Logger.Info("All playlists are saved...");
+    }
+
+    /// <summary>
+    /// Setup the logger with its path and it's minimum level
+    /// </summary>
+    /// <param name="filePath">path of the file</param>
+    /// <param name="level">Minimum level to define</param>
+    private static void SetupLogger(string filePath, LogLevel level)
+    {
+        LoggingConfiguration config = new();
+        Layout layout = "level:${uppercase:${level}} - date:${date} - caller: ${callsite-filename}:${callsite-linenumber} - ${message} ${exception:format=tostring}";
+
+        // Targets where to log to: File and Console
+        FileTarget logfile = new("logfile")
         {
-            LoggingConfiguration config = new();
-            Layout layout = "level:${uppercase:${level}} - date:${date} - caller: ${callsite-filename}:${callsite-linenumber} - ${message} ${exception:format=tostring}";
+            FileName = filePath,
+            ArchiveEvery = FileArchivePeriod.Minute,
+            ArchiveNumbering = ArchiveNumberingMode.Rolling,
+            MaxArchiveFiles = 5,
+            Layout = layout
+        };
 
-            // Targets where to log to: File and Console
-            FileTarget logfile = new("logfile")
-            {
-                FileName = filePath,
-                ArchiveEvery = FileArchivePeriod.Minute,
-                ArchiveNumbering = ArchiveNumberingMode.Rolling,
-                MaxArchiveFiles = 5,
-                Layout = layout
-
-            };
-
-            ConsoleTarget logconsole = new("logconsole")
-            {
-                Layout = layout
-            };
-
-            // Rules for mapping loggers to targets            
-            config.AddRule(level, LogLevel.Fatal, logconsole);
-            config.AddRule(LogLevel.Trace, LogLevel.Fatal, logfile);
-
-            // Apply config           
-            LogManager.Configuration = config;
-        }
-
-        /// <summary>
-        /// Ask the user if he want to export all playlist
-        /// Yes : means true, No means false
-        /// </summary>
-        /// <returns>bool of the pick</returns>
-        public static bool AskAllPlaylistWanted()
+        ConsoleTarget logconsole = new("logconsole")
         {
-            do
-            {
-                Console.Write("Do you want to export all playlist\n    [1]:Yes\t[2]:No : ");
+            Layout = layout
+        };
 
-                char key = Console.ReadKey().KeyChar;
+        // Rules for mapping loggers to targets            
+        config.AddRule(level, LogLevel.Fatal, logconsole);
+        config.AddRule(LogLevel.Trace, LogLevel.Fatal, logfile);
 
-                if (key == '1')
-                {
-                    return true;
-                }
-                else if (key == '2')
-                {
-                    return false;
-                }
-                else
-                {
-                    Console.WriteLine($"\nYou type '{key}'. Please choose '1' or '2'"); // TODO feature language
-                }
-            } while (true);
-        }
+        // Apply config           
+        LogManager.Configuration = config;
     }
 }

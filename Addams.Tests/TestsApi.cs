@@ -1,61 +1,72 @@
 ﻿using Addams.Entities;
+using Addams.Models;
 using Addams.Exceptions;
 using NUnit.Framework;
 
-namespace Addams.Tests
+namespace Addams.Tests;
+
+[TestFixture]
+public class TestsApi
 {
-    public class TestsApi
+    private SpotifyApi api;
+
+    [SetUp]
+    public void SetUp()
     {
-        private SpotifyApi api;
-
-        [SetUp]
-        // TODO feature OAUTH2 : generer un token a terme
-        public void SetUp()
+        SpotifyConfig cfg = new()
         {
-            SpotifyConfig cfg = new();
-            api = new SpotifyApi(cfg);
-        }
+            UserName = "gravityx3",
+            Token = new TokenModel { Value = "BQBDF2im795ZY3UBVmI6vioexj7HMt47_URtBbIDbtUWKXuGaLGDbnwUrNEe0n9VbfF4aY9DcEZlN23pO354gpFhJLpUEGwjk4sBzgVlePPRfiyOxyJeji7XbOB5eFqgi_HTWU6tj8sSk30FDQvIyPIxmCGAk3_H1qtd8ZNpHi68Nn2q1Mq_5Qfmf9Z13HKHUASObLfjSgvyF9Q-fXoo0w" },
+        };
 
-        [Test]
-        public void TestGetPlaylistWithBadToken()
+        api = new SpotifyApi(cfg);
+    }
+
+    [Test]
+    [Description("Test with wrong token")]
+    public void TestGetPlaylistWithBadToken()
+    {
+        // Arrange
+        SpotifyConfig config = new()
         {
-            SpotifyConfig config = new()
-            {
-                User = "gravityx3",
-                Token = "bad_token",
-            };
-            SpotifyApi api = new(config);
+            UserName = "gravityx3",
+            Token = new TokenModel { Value = "bad_token" },
+        };
+        SpotifyApi spotifyApi = new(config);
 
-            _ = Assert.ThrowsAsync<SpotifyUnauthorizedException>(api.FetchPlaylists);
-        }
+        // Act & Assert
+        _ = Assert.ThrowsAsync<SpotifyUnauthorizedException>(spotifyApi.FetchPlaylistsAsync);
+    }
 
-        [Test]
-        /// <summary>
-        /// TODO feature OAUTH2 you need to regenerate token if you don't need
-        /// </summary>
-        public async Task TestGetPlaylistWithRightToken()
-        {
-            Playlists playlists = await api.FetchPlaylists();
+    [Test]
+    [Description("Test to fetch playlist data")]
+    public async Task TestGetPlaylistWithRightTokenAsync()
+    {
+        // Act
+        Playlists playlists = await api.FetchPlaylistsAsync();
 
-            Assert.IsNotNull(playlists);
-            Assert.IsNotEmpty(playlists.items);
-            Assert.IsNull(playlists.next);
-            Assert.IsNotNull(playlists.href);
-            Assert.That(playlists.total == playlists.items.Count);
-        }
+        // Assert
+        Assert.IsNotNull(playlists);
+        Assert.IsNotEmpty(playlists.Items);
+        Assert.IsNull(playlists.Next);
+        Assert.IsNotNull(playlists.Href);
+        Assert.That(playlists.Total == playlists.Items.ToList().Count);
+    }
 
-        [Test]
-        [TestCase("0CFuMybe6s77w6QQrJjW7d")]
-        public async Task TestGetPlaylistTracksMoreThan100Tracks(string playlistId)
-        {
-            PlaylistTracks playlistTracks = await api.FetchTracks(playlistId);
+    [Test]
+    [Description("Test to fetch playlist data")]
+    [TestCase("0CFuMybe6s77w6QQrJjW7d")]
+    public async Task TestGetPlaylistTracksMoreThan100TracksAsync(string playlistId)
+    {
+        // Act
+        PlaylistTracks playlistTracks = await api.FetchTracksAsync(playlistId);
 
-            Assert.IsNotNull(playlistTracks);
-            Assert.IsNotNull(playlistTracks.href);
-            Assert.IsNotNull(playlistTracks.name);
-            Assert.IsNotEmpty(playlistTracks.tracks.items);
-            Assert.That(playlistTracks.tracks.total == playlistTracks.tracks.items.Count);
-            Assert.IsNull(playlistTracks.tracks.next);
-        }
+        // Assert
+        Assert.IsNotNull(playlistTracks);
+        Assert.IsNotNull(playlistTracks.Href);
+        Assert.IsNotNull(playlistTracks.Name);
+        Assert.IsNotEmpty(playlistTracks.Tracks.Items);
+        Assert.That(playlistTracks.Tracks.Total == playlistTracks.Tracks.Items.Count);
+        Assert.IsNull(playlistTracks.Tracks.Next);
     }
 }

@@ -1,13 +1,28 @@
-﻿# Addams
-
-[![Addams-CI](https://github.com/LucasNoga/addams/actions/workflows/dotnet.yml/badge.svg)](https://github.com/LucasNoga/addams/actions/workflows/dotnet.yml)
+﻿[![Addams-CI](https://github.com/LucasNoga/addams/actions/workflows/dotnet.yml/badge.svg)](https://github.com/LucasNoga/addams/actions/workflows/dotnet.yml)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Version](https://img.shields.io/github/tag/LucasNoga/addams.svg)](https://github.com/LucasNoga/addams/releases)
 [![Total views](https://img.shields.io/sourcegraph/rrc/github.com/LucasNoga/addams.svg)](https://sourcegraph.com/github.com/LucasNoga/addams)
 
-C# project to export in csv spotify user's playlist
+![GitHub watchers](https://img.shields.io/github/watchers/ny-daystar/addams)
+![GitHub forks](https://img.shields.io/github/forks/ny-daystar/addams)
+![GitHub Repo stars](https://img.shields.io/github/stars/ny-daystar/addams)
+![GitHub repo size](https://img.shields.io/github/repo-size/ny-daystar/addams)
+![GitHub language count](https://img.shields.io/github/languages/count/ny-daystar/addams)
+![GitHub top language](https://img.shields.io/github/languages/top/ny-daystar/addams) <a href="https://codeclimate.com/github/ny-daystar/addams/maintainability"><img src="https://api.codeclimate.com/v1/badges/715c6f3ffb08de5ca621/maintainability" /></a>  
+![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/m/ny-daystar/addams/main)
+![GitHub issues](https://img.shields.io/github/issues/ny-daystar/addams)
+![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/ny-daystar/addams)
+![GitHub](https://img.shields.io/github/license/ny-daystar/addams)
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-blue.svg?style=circular)](#contributors)
 
-**_Version: v0.0.1**
+![C#](https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=csharp&logoColor=white)
+
+# Addams
+
+C# project to export in csv spotify user's playlist  
+Source code analysed with [DeepSource](https://deepsource.com/)
+
+**\_Version: v1.0.0**
 
 ## Summary
 
@@ -18,6 +33,7 @@ C# project to export in csv spotify user's playlist
     -   [Setup project](#setup-project)
     -   [Unit tests](#tests)
 -   [How it works](#how-it-works)
+-   [Understand OAuth2](#oauth2-simulation)
 -   [Contact](#contact)
 -   [Credits](#credits)
 
@@ -36,7 +52,7 @@ to do this [follow this](#setup-spotify-app)
 TODO download executable from github Addams.exe
 
 -   TODO mettre la console spotify les liens etc... etc...
-//TODO mettre les bons scope de l'OAUTH2' playlist-read-private user-library-read
+    //TODO mettre les bons scope de l'OAUTH2' playlist-read-private user-library-read
 
 // TODO specifier le mode debug avec --debug
 
@@ -96,12 +112,25 @@ Once all data fetched we create a csv for each playlist with track's data:
 
 These csv are saved in the same path of Addams.exe in a folder name `data`
 
+## OAuth2 Simulation
+
+To understand how spotify generate token you can try the projet `Oauth2Simulation`
+
+This project will show you step-by-step the mecanism of Auth2
+
+1. Authorize the application
+2. Retrieve Authorization code
+3. Exchange Authorization code for an access Token
+4. Call Api to test Spotify Token
+
+For more information :
+
+-   [Authentication guide](https://johnnycrazy.github.io/SpotifyAPI-NET/docs/auth_introduction)
+-   [Use authorization code](https://johnnycrazy.github.io/SpotifyAPI-NET/docs/authorization_code)
+
 ## Tests
 
 you can run unit tests in `Addams.Tests` project
-
-TODO suite README Dathomir : https://github.com/LucasNoga/Dathomir#get-started
-TODO suite README Dathomir : https://raw.githubusercontent.com/LucasNoga/Dathomir/master/README.md
 
 ## Contact
 

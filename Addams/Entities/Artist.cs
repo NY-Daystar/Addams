@@ -1,18 +1,27 @@
-﻿namespace Addams.Entities
-{
+﻿using Newtonsoft.Json;
 
-    // TODO use attribute: [DefaultValue(5)]            
-    // TODO use attribute: [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
-    /// <summary>
-    /// Artist data
-    /// </summary>
-    public class Artist
-    {
-        public ExternalUrls? external_urls { get; set; }
-        public string? href { get; set; }
-        public string? id { get; set; }
-        public string name { get; set; } = string.Empty;
-        public string? type { get; set; }
-        public string? uri { get; set; }
-    }
+namespace Addams.Entities;
+
+/// <summary>
+/// Artist data
+/// </summary>
+public class Artist
+{
+    [JsonProperty(PropertyName = "external_urls")]
+    public ExternalUrls? ExternalUrls { get; set; }
+
+    [JsonProperty(PropertyName = "href")]
+    public string? Href { get; set; }
+
+    [JsonProperty(PropertyName = "id")]
+    public string? Id { get; set; }
+
+    [JsonProperty(PropertyName = "name")]
+    public string Name { get; set; } = string.Empty;
+
+    [JsonProperty(PropertyName = "type")]
+    public string? Type { get; set; }
+
+    [JsonProperty(PropertyName = "uri")]
+    public string? Uri { get; set; }
 }

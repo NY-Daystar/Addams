@@ -1,34 +1,47 @@
-﻿using NUnit.Framework;
+﻿using Addams.Entities;
+using NUnit.Framework;
+using System.Globalization;
 
-namespace Addams.Tests
+namespace Addams.Tests;
+
+[TestFixture]
+public class TestsConfig
 {
-    public class TestsConfig
+    [Test]
+    public void TestConfigFilePathValid()
     {
-        [Test]
-        public void TestConfigFilePathValid()
+        // Assert
+        Assert.IsNotNull(SpotifyConfig.ConfigFilepath);
+        Assert.That(SpotifyConfig.ConfigFilepath != null);
+    }
+
+    [Test]
+    public void TestSerializeConfig()
+    {
+        // Arrange
+        SpotifyConfig config = new()
         {
-            Assert.IsNotNull(SpotifyConfig.ConfigFilepath);
-            Assert.IsNotEmpty(SpotifyConfig.ConfigFilepath);
-        }
+            UserName = "MY_USER",
+            ClientID = "MY_CLIENT_ID",
+            ClientSecret = "MY_CLIENT_SECRET",
+            Token = new Models.TokenModel {
+                Value = "MY_TOKEN",
+                Type = "Bearer",
+                ExpiresIn = 600,
+                Scope = "MY_SCOPE",
+                GeneratedAt = DateTime.ParseExact("2024-03-02T21:21:43", "yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture),
+                ExpiredDate = DateTime.ParseExact("2024-03-02T21:31:43", "yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture),
+            },
+        };
 
-        [Test]
-        public void TestSerializeConfig()
-        {
-            SpotifyConfig config = new()
-            {
-                ClientID = "MY_CLIENT_ID",
-                ClientSecret = "MY_CLIENT_SECRET",
-                Token = "MY_TOKEN",
-                User = "MY_USER"
-            };
+        config.Save();
 
-            config.Save();
+        // Act
+        SpotifyConfig cfg = SpotifyConfig.Read();
 
-            SpotifyConfig cfg = SpotifyConfig.Read();
-
-            Assert.IsNotEmpty(File.ReadAllText(SpotifyConfig.ConfigFilepath));
-            Assert.That(cfg.Equals(config));
-            Assert.IsNotNull(cfg);
-        }
+        // Assert
+        Assert.IsNotEmpty(File.ReadAllText(SpotifyConfig.ConfigFilepath));
+        Assert.That(cfg.Equals(config));
+        Assert.IsNotNull(cfg);
     }
 }

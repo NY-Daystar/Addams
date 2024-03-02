@@ -1,10 +1,12 @@
-﻿namespace Addams.Entities
+﻿using Newtonsoft.Json;
+
+namespace Addams.Entities;
+
+/// <summary>
+/// External Urls outside of Spotify (Yt, deezer, etc...)
+/// </summary>
+public class ExternalUrls
 {
-    /// <summary>
-    /// External Urls outside of Spotify (Yt, deezer, etc...)
-    /// </summary>
-    public class ExternalUrls
-    {
-        public string? spotify { get; set; }
-    }
+    [JsonProperty(PropertyName = "spotify")]
+    public string? Spotify { get; set; }
 }

@@ -2,41 +2,40 @@
 using Addams.Utils;
 using NUnit.Framework;
 
-namespace Addams.Tests
+namespace Addams.Tests;
+
+[TestFixture]
+public class TestsModel
 {
-    public class TestsModel
+    [Test]
+    public void TestDurationValue()
     {
-        [Test]
-        public void TestDurationValue()
-        {
-            // First test
-            string expected = "00:02:35";
-            int duration = 155000;
+        // Arrange
+        string expected = "00:02:35";
+        int duration = 155000;
 
-            TimeSpan ts = TimeConverter.ConvertMsToTimeSpan(duration);
-            string time = TimeConverter.FormatTimeSpan(ts);
+        TimeSpan ts = TimeConverter.ConvertMsToTimeSpan(duration);
+        string time = TimeConverter.FormatTimeSpan(ts);
 
-            Assert.That(expected == time);
+        Assert.That(expected == time);
 
-            // Second test
-            expected = "01:35:47";
-            duration = 5747000;
+        // Second test
+        expected = "01:35:47";
+        duration = 5747000;
 
-            ts = TimeConverter.ConvertMsToTimeSpan(duration);
-            time = TimeConverter.FormatTimeSpan(ts);
-            Assert.That(expected == time);
-        }
+        ts = TimeConverter.ConvertMsToTimeSpan(duration);
+        time = TimeConverter.FormatTimeSpan(ts);
+        Assert.That(expected == time);
+    }
 
-        [Test]
-        public void TestTrackDuration()
-        {
-            string expected = "00:04:12";
-            int duration = 252000;
+    [Test]
+    public void TestTrackDuration()
+    {
+        const string expected = "00:04:12";
+        const int duration = 252000;
 
-            Track t = new() { _duration = duration };
+        Track track = new() { Duration = duration };
 
-            Assert.That(expected == t.Duration);
-
-        }
+        Assert.That(expected == track.DurationFormatted);
     }
 }

@@ -1,21 +1,20 @@
 ﻿using System;
 
-namespace Addams.Exceptions
+namespace Addams.Exceptions;
+
+public class SpotifyUnauthorizedException : Exception
 {
-    public class SpotifyUnauthorizedException : Exception
+    public SpotifyUnauthorizedException()
     {
-        public SpotifyUnauthorizedException()
-        {
-        }
+    }
 
-        public SpotifyUnauthorizedException(string message)
-            : base(message)
-        {
-        }
+    public SpotifyUnauthorizedException(string message)
+        : base(message)
+    {
+    }
 
-        public SpotifyUnauthorizedException(string message, Exception inner)
-            : base(message, inner)
-        {
-        }
+    public SpotifyUnauthorizedException(string message, Exception inner)
+        : base(message, inner)
+    {
     }
 }

@@ -1,28 +1,61 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
-namespace Addams.Entities
+namespace Addams.Entities;
+
+/// <summary>
+/// Track data
+/// </summary>
+public class Track
 {
-    /// <summary>
-    /// Track data
-    /// </summary>
-    public class Track
-    {
-        public Album album { get; set; } = new Album();
-        public List<Artist> artists { get; set; } = new List<Artist>();
-        public List<string>? available_markets { get; set; }
-        public int disc_number { get; set; }
-        public int duration_ms { get; set; }
-        public bool @explicit { get; set; }
-        public ExternalIds? external_ids { get; set; }
-        public ExternalUrls? external_urls { get; set; }
-        public string? href { get; set; }
-        public string id { get; set; } = string.Empty;
-        public bool is_local { get; set; }
-        public string name { get; set; } = string.Empty;
-        public int popularity { get; set; }
-        public string preview_url { get; set; } = string.Empty;
-        public int track_number { get; set; }
-        public string? type { get; set; }
-        public string uri { get; set; } = string.Empty;
-    }
+    [JsonProperty(PropertyName = "album")]
+    public Album Album { get; set; } = new Album();
+
+    [JsonProperty(PropertyName = "artists")]
+    public IEnumerable<Artist> Artists { get; set; } = new List<Artist>();
+
+    [JsonProperty(PropertyName = "available_markets")]
+    public IEnumerable<string>? AvailableMarkets { get; set; }
+
+    [JsonProperty(PropertyName = "disc_number")]
+    public int DiscNumber { get; set; }
+
+    [JsonProperty(PropertyName = "duration_ms")]
+    public int DurationMs { get; set; }
+
+    [JsonProperty(PropertyName = "@explicit")]
+    public bool Explicit { get; set; }
+
+    [JsonProperty(PropertyName = "external_ids")]
+    public ExternalIds? ExternalIds { get; set; }
+
+    [JsonProperty(PropertyName = "external_urls")]
+    public ExternalUrls? ExternalUrls { get; set; }
+
+    [JsonProperty(PropertyName = "href")]
+    public string? Href { get; set; }
+
+    [JsonProperty(PropertyName = "id")]
+    public string Id { get; set; } = string.Empty;
+
+    [JsonProperty(PropertyName = "is_local")]
+    public bool IsLocal { get; set; }
+
+    [JsonProperty(PropertyName = "name")]
+    public string Name { get; set; } = string.Empty;
+
+    [JsonProperty(PropertyName = "popularity")]
+    public int Popularity { get; set; }
+
+    [JsonProperty(PropertyName = "preview_url")]
+    public string PreviewUrl { get; set; } = string.Empty;
+
+    [JsonProperty(PropertyName = "track_number")]
+    public int TrackNumber { get; set; }
+
+    [JsonProperty(PropertyName = "type")]
+    public string? Type { get; set; }
+
+    [JsonProperty(PropertyName = "uri")]
+    public string Uri { get; set; } = string.Empty;
 }
