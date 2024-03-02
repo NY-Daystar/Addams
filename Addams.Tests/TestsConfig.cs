@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using Addams.Entities;
+using NUnit.Framework;
+using System.Globalization;
 
 namespace Addams.Tests;
 
@@ -10,7 +12,7 @@ public class TestsConfig
     {
         // Assert
         Assert.IsNotNull(SpotifyConfig.ConfigFilepath);
-        Assert.IsNotEmpty(SpotifyConfig.ConfigFilepath);
+        Assert.That(SpotifyConfig.ConfigFilepath != null);
     }
 
     [Test]
@@ -19,10 +21,17 @@ public class TestsConfig
         // Arrange
         SpotifyConfig config = new()
         {
+            UserName = "MY_USER",
             ClientID = "MY_CLIENT_ID",
             ClientSecret = "MY_CLIENT_SECRET",
-            Token = "MY_TOKEN",
-            User = "MY_USER"
+            Token = new Models.TokenModel {
+                Value = "MY_TOKEN",
+                Type = "Bearer",
+                ExpiresIn = 600,
+                Scope = "MY_SCOPE",
+                GeneratedAt = DateTime.ParseExact("2024-03-02T21:21:43", "yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture),
+                ExpiredDate = DateTime.ParseExact("2024-03-02T21:31:43", "yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture),
+            },
         };
 
         config.Save();

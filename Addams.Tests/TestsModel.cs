@@ -31,12 +31,11 @@ public class TestsModel
     [Test]
     public void TestTrackDuration()
     {
-        string expected = "00:04:12";
-        int duration = 252000;
+        const string expected = "00:04:12";
+        const int duration = 252000;
 
-        Track t = new() { _duration = duration };
+        Track track = new() { Duration = duration };
 
-        Assert.That(expected == t.Duration);
-
+        Assert.That(expected == track.DurationFormatted);
     }
 }
