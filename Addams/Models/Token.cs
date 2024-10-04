@@ -74,5 +74,5 @@ public class TokenModel
         throw new NotImplementedException();
     }
 
-    public override string ToString() => $"Value: {Value[..15]}................. - Type: {Type} - ExpiredDate: {ExpiredDate}";
+    public override string ToString() => $"Value: {Value} - Type: {Type} - ExpiredDate: {ExpiredDate}";
 }

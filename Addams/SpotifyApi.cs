@@ -98,8 +98,8 @@ public class SpotifyApi
             $"&redirect_uri={Uri.EscapeDataString(SpotifyConfig.RedirectUri)}" +
             $"&scope={Uri.EscapeDataString(SpotifyConfig.Scope)}";
 
-        Console.WriteLine("\n\nAuthorize application, visiting this URL :\n");
-        Console.WriteLine(url);
+        Console.WriteLine("\n\nAuthorize application, visiting this URL :");
+        Console.WriteLine($"{url}\n");
 
         // Step 2 : Get Authorization Code
         var authorizationCode = await FetchAuthorizationCodeAsync();

@@ -14,17 +14,19 @@ public static class SpotifyExport
 {
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
+    private const string _application = "Addams";
+
     /// <summary>
     /// Save playlist data into csv file
     /// </summary>
     /// <param name="data">List of playlist to save</param>
     public static void SavePlaylists(IEnumerable<Models.Playlist> data)
     {
-        string exePath = System.Reflection.Assembly.GetExecutingAssembly().Location ?? throw new Exception("exe path is null");
+        // TODO faire un excel avec une playlist pas onglet
+        const string appFolder = "playlists";
+        
+        string wDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), _application, appFolder);
 
-        string exeFolder = Path.GetDirectoryName(exePath) ?? throw new Exception("exe folder path is null");
-
-        string wDir = Path.Combine(exeFolder, "data");
         if (!Directory.Exists(wDir))
         {
             _ = Directory.CreateDirectory(wDir);
