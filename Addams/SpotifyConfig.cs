@@ -170,6 +170,7 @@ public class SpotifyConfig
         try
         {
             string content = File.ReadAllText(ConfigFilepath);
+            Logger.Debug($"Read config path {ConfigFilepath}");
             return JsonSerializer.Deserialize<SpotifyConfig?>(content) ?? new SpotifyConfig();
         }
         catch

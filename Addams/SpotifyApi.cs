@@ -242,7 +242,7 @@ public class SpotifyApi
     /// <exception cref="SpotifyException"></exception>
     public async Task<TrackList> FetchLikedTracksAsync()
     {
-        string url = $"{API}/users/{Config.UserName}/tracks?limit={TRACK_LIKED_LIMIT}&offset=0";
+        string url = $"{API}/me/tracks?limit={TRACK_LIKED_LIMIT}&offset=0";
         Logger.Debug($"FetchLikedTracks call API: {url}");
 
         HttpResponseMessage response = await Client.GetAsync(url);

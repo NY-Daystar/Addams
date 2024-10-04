@@ -8,8 +8,6 @@ namespace Addams.Tests;
 [TestFixture]
 public class TestsApi
 {
-    private SpotifyApi api;
-
     [Test]
     [Description("Test with wrong token")]
     public void TestGetPlaylistWithBadToken()
