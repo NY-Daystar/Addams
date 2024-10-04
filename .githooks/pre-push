@@ -1,0 +1,133 @@
+#!/bin/bash
+
+SLN_PATH=Addams.sln
+
+DLL=$(pwd)/Addams.Tests/bin/Debug/net7.0/Addams.Tests.dll
+
+function main() {
+    if [ "$1" = "--debug" ]; then
+        DEBUG=true
+        log_verbose "Debug mode"
+    fi
+
+    if [ "$1" = "--detailed" ] || [ "$2" = "--detailed" ]; then
+        DETAILED=true
+        DEBUG=true
+        log_color "Detailed mode" "yellow"
+    fi
+
+    log_verbose "For solution : ${SLN_PATH}"
+
+    check_prerequisites
+    check 'prerequisites' $?
+    log "[✔] Verify prerequisites"
+
+    restore $DETAILED
+    check 'restore' $?
+    log "[✔] Restore Nuget"
+
+    compile $DETAILED
+    check 'compile' $?
+    log "[✔] Compiling"
+
+    unittest
+    check 'unittest' $?
+    log "[✔] Unit Tests"
+
+    log_color "Every control are checked" "green"
+}
+
+###
+# Check return code of command (restore, build, test ...)
+# $1: action to be verified
+# $2: return code of the action (0 = executed, other=action on error)
+###
+function check() {
+    action=$1
+    result_code=$2
+    log_verbose "action ${action} -> result_code: ${result_code}"
+
+    case $action in
+    'prerequisites')
+        [ $result_code != 0 ] && log_color "Error: dotnet command is not available.\ngit push canceled" "red" && exit 1
+        ;;
+
+    'restore')
+        [ $result_code != 0 ] && log_color "Error: Impossible to restore the project $(${SLN_PATH}).\ngit push canceled" "red" && exit 1
+        ;;
+
+    'compile')
+        [ $result_code != 0 ] && log_color "Error: Impossible to builde the project $(${SLN_PATH}).\ngit push canceled" "red" && exit 1
+        ;;
+
+    'unittest')
+        [ $result_code != 0 ] && log_color "Unit tests are not all passed.\ngit push canceled" "red" && exit 1
+        ;;
+    esac
+}
+
+function check_prerequisites() {
+    which dotnet >/dev/null
+}
+
+function restore() {
+    [ "${DETAILED}" == "true" ] && dotnet restore ${SLN_PATH} || dotnet restore ${SLN_PATH} >/dev/null
+    return $?
+}
+
+function compile() {
+    [ "${DETAILED}" == "true" ] && dotnet build ${SLN_PATH} || dotnet build ${SLN_PATH} >/dev/null
+    return $?
+}
+
+function unittest() {
+    [ "${DETAILED}" == "true" ] && dotnet test ${DLL} || dotnet test ${DLL} >/dev/null
+    return $?
+}
+
+################################################################### Utils functions ###################################################################
+
+function get_datetime {
+    log $(date '+%Y-%m-%d %H:%M:%S')
+}
+
+function log {
+    echo -e $@
+}
+
+function log_color {
+    message=$1
+    color=$2
+    log ${COLORS[$color]}$message${COLORS[nc]}
+}
+
+typeset -A COLORS=(
+    [default]='\033[0;39m'
+    [black]='\033[0;30m'
+    [red]='\033[0;31m'
+    [green]='\033[0;32m'
+    [yellow]='\033[0;33m'
+    [blue]='\033[0;34m'
+    [magenta]='\033[0;35m'
+    [cyan]='\033[0;36m'
+    [light_gray]='\033[0;37m'
+    [light_grey]='\033[0;37m'
+    [dark_gray]='\033[0;90m'
+    [dark_grey]='\033[0;90m'
+    [light_red]='\033[0;91m'
+    [light_green]='\033[0;92m'
+    [light_yellow]='\033[0;93m'
+    [light_blue]='\033[0;94m'
+    [light_magenta]='\033[0;95m'
+    [light_cyan]='\033[0;96m'
+    [nc]='\033[0m' # No Color
+)
+
+function log_verbose {
+    message=$@
+    date=$(get_datetime)
+    if [ "${DEBUG}" = "true" ]; then log_color "[$date] $message" "light_blue"; fi
+    return
+}
+
+main "$@"

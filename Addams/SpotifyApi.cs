@@ -98,8 +98,8 @@ public class SpotifyApi
             $"&redirect_uri={Uri.EscapeDataString(SpotifyConfig.RedirectUri)}" +
             $"&scope={Uri.EscapeDataString(SpotifyConfig.Scope)}";
 
-        Console.WriteLine("\n\nAuthorize application, visiting this URL :\n");
-        Console.WriteLine(url);
+        Console.WriteLine("\n\nAuthorize application, visiting this URL :");
+        Console.WriteLine($"{url}\n");
 
         // Step 2 : Get Authorization Code
         var authorizationCode = await FetchAuthorizationCodeAsync();
@@ -242,7 +242,7 @@ public class SpotifyApi
     /// <exception cref="SpotifyException"></exception>
     public async Task<TrackList> FetchLikedTracksAsync()
     {
-        string url = $"{API}/users/{Config.UserName}/tracks?limit={TRACK_LIKED_LIMIT}&offset=0";
+        string url = $"{API}/me/tracks?limit={TRACK_LIKED_LIMIT}&offset=0";
         Logger.Debug($"FetchLikedTracks call API: {url}");
 
         HttpResponseMessage response = await Client.GetAsync(url);

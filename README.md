@@ -84,6 +84,14 @@ $ git clone git@github.com:LucasNoga/Addams.git
 4. Rebuild solution
 5. F5 to launch project in Debug mode
 
+## For developpers
+
+You can activate git hooks with this command
+
+```bash
+git config --global core.hooksPath .githooks
+```
+
 ## How it works
 
 The project setup an OAUTH2 token with your [spotify app credentials](#setup-in-spotify) to execute spotify api request
