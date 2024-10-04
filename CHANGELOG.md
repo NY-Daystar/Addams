@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Project releases
 
+## v1.0.1 - 04 Octobrer 2024 - Endpoint tracks
+
+### Added
+
+-   git hook controls
+
+### Fixed
+
+-   Endpoint for songs liked
+
 ## v1.0.0 - 02 March 2024 - Oauth2
 
 ### Added
