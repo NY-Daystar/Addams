@@ -53,7 +53,7 @@ internal static class AddamsUser
                 + $"(1 - {playlistNames.Count()}) ? \ntype 0 to exit : ");  // TODO feature language
 
             string key = Console.ReadLine() ?? string.Empty;
-            int keyInt = 0;
+            int keyInt;
             try
             {
                 keyInt = Convert.ToInt32(key);

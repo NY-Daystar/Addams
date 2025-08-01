@@ -22,7 +22,7 @@
 C# project to export in csv spotify user's playlist  
 Source code analysed with [DeepSource](https://deepsource.com/)
 
-**\_Version: v1.0.0**
+**\_Version: v1.0.2**
 
 ## Summary
 
@@ -42,19 +42,12 @@ To test on spotify there is some link
 ## Requirements
 
 -   [.NET Framework](https://dotnet.microsoft.com/en-us/download/dotnet/7.0) >= 7.0
--   For developpment: [VS 2022](https://visualstudio.microsoft.com/fr/vs/) >= 2022
+-   [VS 2022](https://visualstudio.microsoft.com/fr/vs/) >= 2022
 
 ## How to use
 
 First you need to create a spotify application in developper mode
 to do this [follow this](#setup-spotify-app)
-
-TODO download executable from github Addams.exe
-
--   TODO mettre la console spotify les liens etc... etc...
-    //TODO mettre les bons scope de l'OAUTH2' playlist-read-private user-library-read
-
-// TODO specifier le mode debug avec --debug
 
 ## Get Started
 

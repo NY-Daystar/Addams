@@ -6,8 +6,10 @@ using NLog.Layouts;
 using NLog.Targets;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Addams;
@@ -25,13 +27,20 @@ internal static class Addams
             "addams.log"
             );
 
+    private static readonly string PLAYLIST_FOLDER = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+        _application,
+        "playlists"
+        );
+
     private const string _application = "Addams";
 
-    private const string _version = "1.0.0";
+    private const string _version = "1.0.2";
 
     public static void Main(string[] args)
     {
         RunAsync(args).GetAwaiter().GetResult();
+        Process.Start("explorer.exe", PLAYLIST_FOLDER);
+        Thread.Sleep(60000);
     }
 
     public static async Task RunAsync(string[] args)
@@ -79,7 +88,7 @@ internal static class Addams
         Logger.Info("Playlist fetched...");
 
         Logger.Info("Saving playlists...");
-        SpotifyExport.SavePlaylists(playlists);
+        SpotifyExport.SavePlaylists(PLAYLIST_FOLDER, playlists);
         Logger.Info("All playlists are saved...");
     }
 

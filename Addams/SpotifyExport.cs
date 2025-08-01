@@ -14,28 +14,23 @@ public static class SpotifyExport
 {
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-    private const string _application = "Addams";
-
     /// <summary>
     /// Save playlist data into csv file
     /// </summary>
+    /// <param name="path">Folder path where save the csv files</param>
     /// <param name="data">List of playlist to save</param>
-    public static void SavePlaylists(IEnumerable<Models.Playlist> data)
+    public static void SavePlaylists(string path, IEnumerable<Models.Playlist> data)
     {
         // TODO faire un excel avec une playlist pas onglet
-        const string appFolder = "playlists";
-        
-        string wDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), _application, appFolder);
-
-        if (!Directory.Exists(wDir))
+        if (!Directory.Exists(path))
         {
-            _ = Directory.CreateDirectory(wDir);
+            _ = Directory.CreateDirectory(path);
         }
 
         // Save each playlist
         foreach (Models.Playlist playlist in data)
         {
-            SavePlaylist(wDir, playlist);
+            SavePlaylist(path, playlist);
         }
     }
 
