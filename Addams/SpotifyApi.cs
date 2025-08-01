@@ -260,7 +260,7 @@ public class SpotifyApi
 
         // If can't catch every tracks for a playlist in one api call
         // Add all the tracks overflow by api on the playlist
-        if (playlist.Total >= TRACK_LIMIT)
+        if (playlist.Total >= TRACK_LIKED_LIMIT)
         {
             Logger.Warn($"For Liked Song : only fetch {playlist.Items.ToList().Count} tracks for a total to {playlist.Total}");
             playlist.Items.AddRange(await FetchTracksOverflowAsync(playlist));
