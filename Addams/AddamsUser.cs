@@ -28,7 +28,7 @@ internal static class AddamsUser
                 playlistChosen.Add(playlistNames[choice]);
                 playlistNames.RemoveAt(choice);
             }
-        } while (choice != -1);
+        } while (!playlistChosen.Any());
 
         Logger.Debug($"playlistChosen : {string.Join("; ", playlistChosen)}");
 

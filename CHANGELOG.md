@@ -7,7 +7,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Project releases
 
-## v1.0.1 - 04 Octobrer 2024 - Endpoint tracks
+## v1.0.2 - 01 August 2025 - Small fixes
+
+## Added
+
+-   Open folder explorer after saving playlists
+
+### Fixed
+
+-   Playlist selection
+-   Number of track for Liked Songs
+
+## v1.0.1 - 04 October 2024 - Endpoint tracks
 
 ### Added
 

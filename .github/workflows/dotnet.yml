@@ -18,10 +18,10 @@ jobs:
             - name: Setup .NET
               uses: actions/setup-dotnet@v3
               with:
-                  dotnet-version: 6.0.x
+                  dotnet-version: 7.0.x
             - name: Restore dependencies
-              run: dotnet restore
+              run: dotnet restore ./Addams/Addams.csproj
             - name: Build
-              run: dotnet build --no-restore
+              run: dotnet build ./Addams/Addams.csproj --no-restore
             - name: Test
               run: dotnet test --no-build --verbosity normal
