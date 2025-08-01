@@ -1,14 +1,13 @@
-﻿[![Addams-CI](https://github.com/LucasNoga/addams/actions/workflows/dotnet.yml/badge.svg)](https://github.com/LucasNoga/addams/actions/workflows/dotnet.yml)
+﻿[![Addams-CI](https://github.com/NY-Daystar/addams/actions/workflows/dotnet.yml/badge.svg)](https://github.com/NY-Daystar/addams/actions/workflows/dotnet.yml)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Version](https://img.shields.io/github/tag/LucasNoga/addams.svg)](https://github.com/LucasNoga/addams/releases)
-[![Total views](https://img.shields.io/sourcegraph/rrc/github.com/LucasNoga/addams.svg)](https://sourcegraph.com/github.com/LucasNoga/addams)
+[![Version](https://img.shields.io/github/tag/NY-Daystar/addams.svg)](https://github.com/NY-Daystar/addams/releases)
 
 ![GitHub watchers](https://img.shields.io/github/watchers/ny-daystar/addams)
 ![GitHub forks](https://img.shields.io/github/forks/ny-daystar/addams)
 ![GitHub Repo stars](https://img.shields.io/github/stars/ny-daystar/addams)
 ![GitHub repo size](https://img.shields.io/github/repo-size/ny-daystar/addams)
 ![GitHub language count](https://img.shields.io/github/languages/count/ny-daystar/addams)
-![GitHub top language](https://img.shields.io/github/languages/top/ny-daystar/addams) <a href="https://codeclimate.com/github/ny-daystar/addams/maintainability"><img src="https://api.codeclimate.com/v1/badges/715c6f3ffb08de5ca621/maintainability" /></a>  
+![GitHub top language](https://img.shields.io/github/languages/top/ny-daystar/addams)
 ![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/m/ny-daystar/addams/main)
 ![GitHub issues](https://img.shields.io/github/issues/ny-daystar/addams)
 ![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/ny-daystar/addams)
@@ -69,7 +68,7 @@ IMPORTANT: You can delete your app in this [link](https://www.spotify.com/fr/acc
 1. Clone repository
 
 ```bash
-$ git clone git@github.com:LucasNoga/Addams.git
+$ git clone git@github.com:NY-Daystar/Addams.git
 ```
 
 2. Open VS 2022 -> `Open project or solution`
@@ -135,8 +134,8 @@ you can run unit tests in `Addams.Tests` project
 
 ## Contact
 
--   To make a pull request: https://github.com/LucasNoga/addams/pulls
--   To summon an issue: https://github.com/LucasNoga/addams/issues
+-   To make a pull request: https://github.com/NY-Daystar/addams/pulls
+-   To summon an issue: https://github.com/NY-Daystar/addams/issues
 -   For any specific demand by mail: [luc4snoga@gmail.com](mailto:luc4snoga@gmail.com?subject=[GitHub]%addams%20Project)
 
 ## Credits
