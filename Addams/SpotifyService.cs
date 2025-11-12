@@ -52,10 +52,10 @@ internal class SpotifyService
 
         if (config.Token.ExpiredDate < DateTime.UtcNow)
         {
-            Logger.Warn(string.Format(Language.GetString("String28"), config.Token.ExpiredDate));
+            Core.WriteLine(ConsoleColor.Yellow, string.Format(Language.GetString("String28"), config.Token.ExpiredDate));
             return false;
         }
-        Logger.Info(string.Format(Language.GetString("String29"), config.Token.ExpiredDate));
+        Core.WriteLine(ConsoleColor.Green, string.Format(Language.GetString("String29"), config.Token.ExpiredDate));
 
         try
         {
@@ -107,7 +107,7 @@ internal class SpotifyService
 
         if (playlistsData.Items == null)
         {
-            Logger.Warn(Language.GetString("String9"));
+            Core.WriteLine(ConsoleColor.Yellow, Language.GetString("String9"));
             return new List<Models.Playlist>();
         }
 
@@ -147,7 +147,7 @@ internal class SpotifyService
 
         if (tracks.ToList().Count == 0)
         {
-            Logger.Warn(string.Format(Language.GetString("String31"), playlist.Name, playlist.Id));
+            Core.WriteLine(ConsoleColor.Yellow, string.Format(Language.GetString("String31"), playlist.Name, playlist.Id));
         }
 
         return new Models.Playlist
@@ -198,7 +198,7 @@ internal class SpotifyService
         Track track = trackEntity.track;
         if (track.Id == null)
         {
-            Logger.Warn($"GetTrackData id null of the track name: {track.Name}");
+            Logger.Debug($"GetTrackData id null of the track name: {track.Name}");
             return new Models.Track
             {
                 Name = track.Name,

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 
 namespace Addams.Utils;
 
@@ -16,13 +17,14 @@ public static class Core
             {
                 Console.ResetColor();
             }
-            else if (o is ConsoleColor)
+            else if (o is ConsoleColor consoleColor)
             {
-                Console.ForegroundColor = (ConsoleColor)o;
+                Console.ForegroundColor = consoleColor;
             }
             else
             {
                 Console.Write(o.ToString());
+                Console.ResetColor();
             }
         }
 

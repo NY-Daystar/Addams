@@ -21,7 +21,6 @@ public static class SpotifyExport
     /// <param name="data">List of playlist to save</param>
     public static void SavePlaylists(string path, IEnumerable<Models.Playlist> data)
     {
-        // TODO faire un excel avec une playlist pas onglet
         if (!Directory.Exists(path))
         {
             _ = Directory.CreateDirectory(path);
@@ -47,7 +46,6 @@ public static class SpotifyExport
         // Format path
         string csvFilePath = Path.Combine(path, $"{filename}.csv");
 
-        // TODO feature language: mettre avec le resx d'autres langues
         string headerLine = string.Join(",", new List<string> {
             Language.GetString("String33"),
             Language.GetString("String34"),

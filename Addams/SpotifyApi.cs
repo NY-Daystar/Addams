@@ -228,7 +228,6 @@ public class SpotifyApi
         // Add all the tracks overflow by api on the playlist
         if (playlist.Tracks.Total >= TRACK_LIMIT)
         {
-            Logger.Warn(string.Format(Language.GetString("String20"), playlist.Name, playlist.Tracks.Items.ToList().Count, playlist.Tracks.Total));
             playlist.Tracks.Items.AddRange(await FetchTracksOverflowAsync(playlist.Tracks));
             Logger.Info(string.Format(Language.GetString("String21"), playlist.Tracks.Items.ToList().Count, playlist.Tracks.Total));
         }
@@ -263,7 +262,6 @@ public class SpotifyApi
         // Add all the tracks overflow by api on the playlist
         if (playlist.Total >= TRACK_LIKED_LIMIT)
         {
-            Logger.Warn(string.Format(Language.GetString("String22"), playlist.Items.ToList().Count, playlist.Total));
             playlist.Items.AddRange(await FetchTracksOverflowAsync(playlist));
             Logger.Info(string.Format(Language.GetString("String21"), playlist.Items.ToList().Count, playlist.Total));
         }
@@ -311,7 +309,7 @@ public class SpotifyApi
         {
             if (playlist.Next == null)
             {
-                Logger.Warn(Language.GetString("String23"));
+                Core.WriteLine(ConsoleColor.Yellow, Language.GetString("String23"));
                 break;
             }
 
@@ -321,7 +319,7 @@ public class SpotifyApi
             // Add tracks into original playlist
             allTracks.AddRange(trackList.Items);
             playlist.Next = trackList.Next;
-            Logger.Info(string.Format(Language.GetString("String23"), playlist.Items.ToList().Count, playlist.Total));
+            Logger.Info(string.Format(Language.GetString("String24"), allTracks.Count, playlist.Total));
         } while (playlist.Next != null);
 
         return allTracks;

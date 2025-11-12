@@ -48,8 +48,6 @@ internal static class Addams
     {
         AddamsOptions options = AddamsOptions.DefineOptions(args);
 
-        // TODO 1 - Recuperer les musiques ne venant pas de spotify mais des fichiers locaux
-
         Core.WriteLine("Welcome to ", ConsoleColor.Yellow, _application, ConsoleColor.White,
             " - Version : ", ConsoleColor.Yellow, _version, ConsoleColor.White);
         Console.WriteLine("---------------------");

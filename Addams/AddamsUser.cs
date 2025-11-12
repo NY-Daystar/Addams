@@ -49,7 +49,6 @@ internal static class AddamsUser
         while (true)
         {
             Console.WriteLine($"{string.Format(Language.GetString("String1"), playlistNames.Count())}");
-            Console.Write(Language.GetString("String2"));
 
             string key = Console.ReadLine() ?? string.Empty;
             int keyInt;
