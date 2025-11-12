@@ -1,6 +1,5 @@
 ﻿using Addams.Utils;
 using NLog;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -21,7 +20,6 @@ public static class SpotifyExport
     /// <param name="data">List of playlist to save</param>
     public static void SavePlaylists(string path, IEnumerable<Models.Playlist> data)
     {
-        // TODO faire un excel avec une playlist pas onglet
         if (!Directory.Exists(path))
         {
             _ = Directory.CreateDirectory(path);
@@ -41,30 +39,26 @@ public static class SpotifyExport
     /// <param name="playlist">playlist data to save (playlist name, tracks, etc...)</param>
     public static void SavePlaylist(string path, Models.Playlist playlist)
     {
-        // Format filename
         string filename = PathUtil.FormatValidFilename(playlist.Name);
+        string csvFilePath = Path.Combine(path, Path.GetFileName($"{filename}.csv"));
 
-        // Format path
-        string csvFilePath = Path.Combine(path, $"{filename}.csv");
-
-        // TODO feature language: mettre avec le resx d'autres langues
         string headerLine = string.Join(",", new List<string> {
-            "Track Name",
-            "Artist Name(s)",
-            "Album Name",
-            "Album Artist Name(s)",
-            "Album Release Date",
-            "Disc Number",
-            "Track Number",
-            "Track Duration",
-            "Explicit",
-            "Popularity",
-            "Added At",
-            "Track Uri",
-            "Artist Url",
-            "Album Url",
-            "Album Image Url",
-            "Track Preview Url",
+            Language.GetString("String33"),
+            Language.GetString("String34"),
+            Language.GetString("String35"),
+            Language.GetString("String36"),
+            Language.GetString("String37"),
+            Language.GetString("String38"),
+            Language.GetString("String39"),
+            Language.GetString("String40"),
+            Language.GetString("String41"),
+            Language.GetString("String42"),
+            Language.GetString("String43"),
+            Language.GetString("String44"),
+            Language.GetString("String45"),
+            Language.GetString("String46"),
+            Language.GetString("String47"),
+            Language.GetString("String48"),
         });
 
         IEnumerable<string> dataLines = playlist.Tracks.Select(t =>
@@ -104,11 +98,11 @@ public static class SpotifyExport
             catch (IOException ex)
             {
                 Logger.Error($"{ex} : Message: {ex.Message}\nStackTrace:{ex.StackTrace}");
-                Logger.Error($"Le fichier {csvFilePath} est déjà ouvert par un autre processus" +
-                    "\nVeuillez le fermer pour réessayer"); // TODO feature language
+                Logger.Error(string.Format(Language.GetString("String26"), csvFilePath));
+                Logger.Error(Language.GetString("String27"));
             }
         } while (!exported);
 
-        Logger.Info($"Votre playlist est sauvegardé ici : {csvFilePath}"); // feature language
+        Logger.Info(string.Format(Language.GetString("String30"), csvFilePath));
     }
 }

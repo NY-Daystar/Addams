@@ -1,4 +1,5 @@
-﻿using NLog;
+﻿using Addams.Utils;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,16 +22,18 @@ internal static class AddamsUser
         int choice = 0;
         do
         {
-            choice = ChoosePlaylist(playlistNames);
+            choice = ChoosePlaylist(playlistNames) ?? 0;
 
             if (choice != -1)
             {
-                playlistChosen.Add(playlistNames[choice]);
+                var playlist = playlistNames[choice];
+                Core.WriteLine(Language.GetString("String54"), ConsoleColor.Green, playlist);
+                playlistChosen.Add(playlist);
                 playlistNames.RemoveAt(choice);
             }
-        } while (!playlistChosen.Any());
+        } while (choice != -1);
 
-        Logger.Debug($"playlistChosen : {string.Join("; ", playlistChosen)}");
+        Core.WriteLine(Language.GetString("String55"), ConsoleColor.Green, $"\n\t - {string.Join("\n\t - ", playlistChosen)}");
 
         return playlists.Where(p => playlistChosen.Contains(p.Name)).ToList();
     }
@@ -40,7 +43,7 @@ internal static class AddamsUser
     /// </summary>
     /// <param name="playlistNames">Playlist names</param>
     /// <returns>-1 no choice or index of the playlist</returns>
-    private static int ChoosePlaylist(IEnumerable<string> playlistNames)
+    private static int? ChoosePlaylist(IEnumerable<string> playlistNames)
     {
         foreach (string playlistName in playlistNames)
         {
@@ -49,25 +52,24 @@ internal static class AddamsUser
         }
         while (true)
         {
-            Console.Write("Which playlist do you want to export "
-                + $"(1 - {playlistNames.Count()}) ? \ntype 0 to exit : ");  // TODO feature language
+            Console.WriteLine($"{string.Format(Language.GetString("String1"), playlistNames.Count())}");
 
             string key = Console.ReadLine() ?? string.Empty;
-            int keyInt = 0;
+            int? keyInt;
             try
             {
                 keyInt = Convert.ToInt32(key);
             }
             catch (FormatException)
             {
-                Logger.Warn("You typed a non-numeric value, please type a numeric value"); // TODO feature language
+                Logger.Warn(Language.GetString("String3"));
                 continue;
             }
 
             if (keyInt < 0 || keyInt > playlistNames.Count())
             {
-                Logger.Warn($"\nYou type '{key}'. " +
-                    $"It's invalid, please choose between 0 and {playlistNames.Count()}"); // TODO feature language
+                Logger.Warn($"\n{Language.GetString("String13")} '{key}'. " +
+                    string.Format(Language.GetString("String14"), playlistNames.Count()));
             }
             else
             {
@@ -77,34 +79,63 @@ internal static class AddamsUser
     }
 
     /// <summary>
-    /// Ask the user if he want to export all playlist
+    /// Ask the user if he want to export all playlist, or show config
+    /// </summary>
+    /// <returns>char of the pick</returns>
+    public static string AskWhatToDo()
+    {
+        bool noretry = true;
+        string? choice;
+        do
+        {
+            Console.WriteLine($"\n{Language.GetString("String49")}" +
+                $"\n\t{Language.GetString("String50")}" +
+                $"\n\t{Language.GetString("String51")}" +
+                $"\n\t{Language.GetString("String52")}" +
+                $"\n\t{Language.GetString("String53")}");
+
+            choice = Console.ReadKey().KeyChar.ToString() ?? "1";
+            if (choice != "1" && choice != "2" && choice != "3" && choice != "4")
+            {
+                Console.WriteLine($"\n{Language.GetString("String13")} '{choice}'. {Language.GetString("String18")}");
+                noretry = false;
+            }
+        } while (!noretry);
+
+        Console.WriteLine();
+        return choice;
+    }
+
+    /// <summary>
+    /// Ask the user if he want to export all playlist, or show config
     /// Yes : means true, No means false
     /// </summary>
     /// <returns>bool of the pick</returns>
     public static bool AskAllPlaylistWanted()
     {
-        bool stop = false, choice = false;
+        bool noretry = true, choice = false;
         do
         {
-            Console.Write("Do you want to export all playlist\n    [1]:Yes\t[2]:No : "); // TODO feature language
+            Console.Write($"{Language.GetString("String15")}" +
+                $"\n\t{Language.GetString("String16")}" +
+                $"\t{Language.GetString("String17")}");
 
             char key = Console.ReadKey().KeyChar;
 
             if (key == '1')
             {
-                stop = true;
                 choice = true;
             }
             else if (key == '2')
             {
-                stop = true;
                 choice = false;
             }
             else
             {
-                Console.WriteLine($"\nYou type '{key}'. Please choose '1' or '2'"); // TODO feature language
+                Console.WriteLine($"\n{Language.GetString("String13")} '{key}'. {Language.GetString("String18")}");
+                noretry = false;
             }
-        } while (!stop);
+        } while (!noretry);
 
         Console.WriteLine();
         return choice;

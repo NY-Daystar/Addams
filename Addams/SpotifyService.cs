@@ -1,10 +1,12 @@
 ﻿using Addams.Entities;
 using Addams.Exceptions;
+using Addams.Utils;
 using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Addams;
 
@@ -46,18 +48,16 @@ internal class SpotifyService
     /// <returns>if result valid returns true, otherwise false</returns>
     public async Task<bool> IsTokenValidAsync()
     {
-        // On first launch no token
         if (config.Token == null)
             return false;
 
-        // If token has expired
         if (config.Token.ExpiredDate < DateTime.UtcNow)
         {
-            Logger.Warn($"Token has expired, expiration date : {config.Token.ExpiredDate}");
+            Core.WriteLine(ConsoleColor.Yellow, string.Format(Language.GetString("String28"), config.Token.ExpiredDate.ToLocalTime()));
             return false;
         }
+        Core.WriteLine(ConsoleColor.Green, string.Format(Language.GetString("String29"), config.Token.ExpiredDate.ToLocalTime()));
 
-        Logger.Info($"Token is still valid, the expiration date is : {config.Token.ExpiredDate}");
         try
         {
             await GetPlaylistsNameAsync();
@@ -79,9 +79,7 @@ internal class SpotifyService
     public async Task RefreshTokenAsync()
     {
         config.Token = await api.AuthorizeAsync();
-
         config.Save();
-
         api.RefreshClient(config.Token.Value);
     }
 
@@ -106,28 +104,24 @@ internal class SpotifyService
     public async Task<IEnumerable<Models.Playlist>> GetPlaylistsAsync(IEnumerable<Entities.Playlist> playlistSelected)
     {
         List<Models.Playlist> playlists = new();
-
-        // Get playlist data
         Playlists playlistsData = await api.FetchPlaylistsAsync();
 
         if (playlistsData.Items == null)
         {
-            Logger.Warn("No playlists found");
+            Core.WriteLine(ConsoleColor.Yellow, Language.GetString("String9"));
             return new List<Models.Playlist>();
         }
 
         List<Playlist> playlistToFetch = playlistsData.Items.Where(p => playlistSelected.Select(ps => ps.Name).Contains(p.Name)).ToList();
 
-        Logger.Debug($"Playlist selected: {string.Join("; ", playlistSelected.Select(p => p.Name))}");
+        Logger.Debug(string.Format(Language.GetString("String32"), string.Join("; ", playlistSelected.Select(p => p.Name))));
 
-        // Liked song playlist if choosen or want all playlist
         if (playlistSelected.Select(p => p.Name).Contains(LIKED_SONGS))
         {
             Models.Playlist likedPlaylist = await GetLikedTracksAsync();
             playlists.Add(likedPlaylist);
         }
 
-        // Get tracks for each playlist
         foreach (Playlist p in playlistToFetch)
         {
             Models.Playlist playlist = await GetPlaylistAsync(p);
@@ -154,7 +148,7 @@ internal class SpotifyService
 
         if (tracks.ToList().Count == 0)
         {
-            Logger.Warn($"No tracks found for the playlist {playlist.Name} - id: {playlist.Id}");
+            Core.WriteLine(ConsoleColor.Yellow, string.Format(Language.GetString("String31"), playlist.Name, playlist.Id));
         }
 
         return new Models.Playlist
@@ -174,7 +168,6 @@ internal class SpotifyService
     /// <returns>List of track</returns>
     public async Task<IEnumerable<Models.Track>> GetPlaylistTracksAsync(string playlistId)
     {
-        // Get playlist data
         PlaylistTracks? playlistTracks = await api.FetchTracksAsync(playlistId);
 
         if (playlistTracks == null
@@ -185,18 +178,12 @@ internal class SpotifyService
             return new List<Models.Track>();
         }
 
-        // Get tracks data for each track
         List<Models.Track> tracks = new();
         foreach (TrackItem ti in playlistTracks.Tracks.Items)
         {
             if (ti.track == null)
-            {
                 continue;
-            }
-
-            Models.Track track = GetTrack(ti);
-
-            tracks.Add(track);
+            tracks.Add(GetTrack(ti));
         }
 
         return tracks;
@@ -212,7 +199,7 @@ internal class SpotifyService
         Track track = trackEntity.track;
         if (track.Id == null)
         {
-            Logger.Warn($"GetTrackData id null of the track name: {track.Name}");
+            Logger.Debug($"GetTrackData id null of the track name: {track.Name}");
             return new Models.Track
             {
                 Name = track.Name,
@@ -259,18 +246,12 @@ internal class SpotifyService
             return new Models.Playlist();
         }
 
-        // Get tracks data for each track
         List<Models.Track> tracks = new();
         foreach (TrackItem ti in likedPlaylistEnt.Items)
         {
             if (ti.track == null)
-            {
                 continue;
-            }
-
-            Models.Track track = GetTrack(ti);
-
-            tracks.Add(track);
+            tracks.Add(GetTrack(ti));
         }
 
         string href = likedPlaylistEnt.Href[..likedPlaylistEnt.Href.IndexOf("?")];

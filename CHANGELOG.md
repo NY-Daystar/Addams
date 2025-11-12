@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Project releases
 
+## v1.0.3 - 12 November 2025 - Last features
+
+## Added
+
+-   Multi-languages
+-   Show and modify configuration
+-   Show logs
+
+### Fixed
+
+-   Adjust color displayed when warnings or errors
+-   Tracks not in Spotify
+
 ## v1.0.2 - 01 August 2025 - Small fixes
 
 ## Added

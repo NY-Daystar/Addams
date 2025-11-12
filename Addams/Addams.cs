@@ -1,5 +1,6 @@
 ﻿using Addams.Entities;
 using Addams.Utils;
+using Microsoft.VisualBasic;
 using NLog;
 using NLog.Config;
 using NLog.Layouts;
@@ -9,6 +10,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Resources;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -34,21 +36,17 @@ internal static class Addams
 
     private const string _application = "Addams";
 
-    private const string _version = "1.0.2";
+    private const string _version = "1.0.3";
 
     public static void Main(string[] args)
     {
         RunAsync(args).GetAwaiter().GetResult();
-        Process.Start("explorer.exe", PLAYLIST_FOLDER);
         Thread.Sleep(60000);
     }
 
     public static async Task RunAsync(string[] args)
     {
-        // Get arguments from exe file
         AddamsOptions options = AddamsOptions.DefineOptions(args);
-
-        //TODO faire un affichage de la config si demander
 
         Core.WriteLine("Welcome to ", ConsoleColor.Yellow, _application, ConsoleColor.White,
             " - Version : ", ConsoleColor.Yellow, _version, ConsoleColor.White);
@@ -56,40 +54,113 @@ internal static class Addams
 
         LogLevel level = options.Debug ? LogLevel.Debug : LogLevel.Info; // add in exe argument --debug
         SetupLogger(LOGFILE, level);
-        Logger.Info("Launching Addams Application");
 
-        Logger.Debug("Setup service with config and api...");
+        Logger.Info(Language.GetString("String4"));
+
+        while (true)
+        {
+            switch (AddamsUser.AskWhatToDo())
+            {
+                case "1":
+                    await ExportAsync();
+                    break;
+
+                case "2":
+                    ShowConfiguration();
+                    break;
+
+                case "3":
+                    ModifyConfiguration();
+                    break;
+
+                case "4":
+                    ShowLogs();
+                    break;
+                default:
+                    return;
+            }
+        }
+    }
+
+    private static async Task ExportAsync()
+    {
+        Logger.Debug(Language.GetString("String5"));
         SpotifyService service = new();
 
-        Logger.Debug("Verify OAuth2 token");
+        Logger.Debug(Language.GetString("String6"));
         if (!await service.IsTokenValidAsync())
         {
-            Logger.Warn("Invalid Token, Refreshing token");
+            Logger.Warn(Language.GetString("String7"));
             await service.RefreshTokenAsync();
         }
 
-        // Ask if you want all playlist or just a few
-        bool allPlaylist = AddamsUser.AskAllPlaylistWanted();
-
         IEnumerable<Playlist> playlistsSelected = await service.GetPlaylistsNameAsync();
 
-        // If we don't want all playlist
-        if (!allPlaylist)
+        if (!AddamsUser.AskAllPlaylistWanted())
             playlistsSelected = AddamsUser.SelectPlaylist(playlistsSelected.ToList());
 
-        Logger.Info("Fetching playlist data...");
-        IEnumerable<Models.Playlist>? playlists = await service.GetPlaylistsAsync(playlistsSelected); // Get playlist data of user to save it after
+        Logger.Info(Language.GetString("String8"));
+        IEnumerable<Models.Playlist>? playlists = await service.GetPlaylistsAsync(playlistsSelected);
 
         if (playlists == null)
         {
-            Logger.Error("None playlist found");
+            Logger.Error(Language.GetString("String9"));
             return;
         }
-        Logger.Info("Playlist fetched...");
+        Logger.Info(Language.GetString("String10"));
 
-        Logger.Info("Saving playlists...");
+        Logger.Info(Language.GetString("String11"));
         SpotifyExport.SavePlaylists(PLAYLIST_FOLDER, playlists);
-        Logger.Info("All playlists are saved...");
+        Logger.Info(Language.GetString("String12"));
+
+        Process.Start("explorer.exe", PLAYLIST_FOLDER);
+    }
+
+    private static void ShowConfiguration()
+    {
+        var config = SpotifyConfig.Get();
+        Console.WriteLine("---------------");
+        Console.WriteLine(config);
+        Console.WriteLine("---------------");
+    }
+
+    private static void ModifyConfiguration()
+    {
+        try
+        {
+            var psi = new ProcessStartInfo(SpotifyConfig.ConfigFilepath)
+            {
+                UseShellExecute = true
+            };
+            Process.Start(psi);
+        }
+        catch (Exception ex)
+        {
+            Logger.Debug(ex.Message);
+        }
+    }
+
+    private static void ShowLogs()
+    {
+        var tempfile = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.txt");
+        var directory = Directory.GetParent(LOGFILE);
+        if (directory != null)
+        {
+            FileManager.ConcatFiles(directory.FullName, tempfile);
+        }
+
+        try
+        {
+            var psi = new ProcessStartInfo(tempfile)
+            {
+                UseShellExecute = true
+            };
+            Process.Start(psi);
+        }
+        catch (Exception ex)
+        {
+            Logger.Debug(ex.Message);
+        }
     }
 
     /// <summary>
@@ -102,7 +173,6 @@ internal static class Addams
         LoggingConfiguration config = new();
         Layout layout = "level:${uppercase:${level}} - date:${date} - caller: ${callsite-filename}:${callsite-linenumber} - ${message} ${exception:format=tostring}";
 
-        // Targets where to log to: File and Console
         FileTarget logfile = new("logfile")
         {
             FileName = filePath,
@@ -117,11 +187,9 @@ internal static class Addams
             Layout = layout
         };
 
-        // Rules for mapping loggers to targets            
         config.AddRule(level, LogLevel.Fatal, logconsole);
         config.AddRule(LogLevel.Trace, LogLevel.Fatal, logfile);
 
-        // Apply config           
         LogManager.Configuration = config;
     }
 }

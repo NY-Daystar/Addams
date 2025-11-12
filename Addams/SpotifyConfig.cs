@@ -1,5 +1,6 @@
 ﻿using Addams.Exceptions;
 using Addams.Models;
+using Addams.Utils;
 using NLog;
 using System;
 using System.IO;
@@ -113,7 +114,7 @@ public class SpotifyConfig
         {
             Logger.Debug($"Configuration cannot be read {ex.Message}");
             config.Setup();
-            Logger.Warn($"This config will be saved:\n{config}");
+            Logger.Warn($"{Language.GetString("String25")}:\n{config}");
             config.Save();
         }
         return config;
