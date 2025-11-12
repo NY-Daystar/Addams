@@ -1,27 +1,19 @@
-﻿[![Addams-CI](https://github.com/NY-Daystar/addams/actions/workflows/dotnet.yml/badge.svg)](https://github.com/NY-Daystar/addams/actions/workflows/dotnet.yml)
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Version](https://img.shields.io/github/tag/NY-Daystar/addams.svg)](https://github.com/NY-Daystar/addams/releases)
-
-![GitHub watchers](https://img.shields.io/github/watchers/ny-daystar/addams)
-![GitHub forks](https://img.shields.io/github/forks/ny-daystar/addams)
-![GitHub Repo stars](https://img.shields.io/github/stars/ny-daystar/addams)
-![GitHub repo size](https://img.shields.io/github/repo-size/ny-daystar/addams)
-![GitHub language count](https://img.shields.io/github/languages/count/ny-daystar/addams)
-![GitHub top language](https://img.shields.io/github/languages/top/ny-daystar/addams)
-![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/m/ny-daystar/addams/main)
-![GitHub issues](https://img.shields.io/github/issues/ny-daystar/addams)
-![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/ny-daystar/addams)
-![GitHub](https://img.shields.io/github/license/ny-daystar/addams)
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-blue.svg?style=circular)](#contributors)
+﻿# Addams
 
 ![C#](https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=csharp&logoColor=white)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/3cbe4ab9c37047be9b2623a280027ce9)](https://app.codacy.com/gh/NY-Daystar/Addams/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![Addams-CI](https://github.com/NY-Daystar/addams/actions/workflows/dotnet.yml/badge.svg)](https://github.com/NY-Daystar/addams/actions/workflows/dotnet.yml) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![Version](https://img.shields.io/github/tag/NY-Daystar/addams.svg)](https://github.com/NY-Daystar/addams/releases)
 
-# Addams
+![GitHub repo size](https://img.shields.io/github/repo-size/ny-daystar/Addams) ![GitHub language count](https://img.shields.io/github/languages/count/ny-daystar/addams) ![GitHub top language](https://img.shields.io/github/languages/top/ny-daystar/addams)
+
+![GitHub issues](https://img.shields.io/github/issues/ny-daystar/addams) ![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/ny-daystar/addams) ![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/m/ny-daystar/addams/main) [![All Contributors](https://img.shields.io/badge/all_contributors-1-blue.svg?style=circular)](#contributors)
+
+![GitHub watchers](https://img.shields.io/github/watchers/ny-daystar/addams) ![GitHub forks](https://img.shields.io/github/forks/ny-daystar/addams) ![GitHub Repo stars](https://img.shields.io/github/stars/ny-daystar/addams)
 
 C# project to export in csv spotify user's playlist  
-Source code analysed with [DeepSource](https://deepsource.com/)
+Source code analysed with [DeepSource](https://deepsource.com/) and [Codacy](https://app.codacy.com)
 
-**\_Version: v1.0.2**
+**Version: v1.0.3**
 
 ## Summary
 
@@ -88,8 +80,8 @@ git config --global core.hooksPath .githooks
 
 The project setup an OAUTH2 token with your [spotify app credentials](#setup-in-spotify) to execute spotify api request
 
--   To get user's playlist : `https://api.spotify.com/v1/me/playlists?limit=50&offset=0`
--   To get playlist tracks : `https://api.spotify.com/v1/playlists/{playlistID}`
+-   [Authentication guide](https://johnnycrazy.github.io/SpotifyAPI-NET/docs/auth_introduction)
+-   [Use authorization code](https://johnnycrazy.github.io/SpotifyAPI-NET/docs/authorization_code)
 
 Once all data fetched we create a csv for each playlist with track's data:
 
@@ -111,22 +103,6 @@ Once all data fetched we create a csv for each playlist with track's data:
 -   `Track Preview Url` : Url track preview of the album (30sec audio)
 
 These csv are saved in the same path of Addams.exe in a folder name `data`
-
-## OAuth2 Simulation
-
-To understand how spotify generate token you can try the projet `Oauth2Simulation`
-
-This project will show you step-by-step the mecanism of Auth2
-
-1. Authorize the application
-2. Retrieve Authorization code
-3. Exchange Authorization code for an access Token
-4. Call Api to test Spotify Token
-
-For more information :
-
--   [Authentication guide](https://johnnycrazy.github.io/SpotifyAPI-NET/docs/auth_introduction)
--   [Use authorization code](https://johnnycrazy.github.io/SpotifyAPI-NET/docs/authorization_code)
 
 ## Tests
 

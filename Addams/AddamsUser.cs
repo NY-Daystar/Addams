@@ -22,14 +22,18 @@ internal static class AddamsUser
         int choice = 0;
         do
         {
-            choice = ChoosePlaylist(playlistNames);
+            choice = ChoosePlaylist(playlistNames) ?? 0;
 
             if (choice != -1)
             {
-                playlistChosen.Add(playlistNames[choice]);
+                var playlist = playlistNames[choice];
+                Core.WriteLine(Language.GetString("String54"), ConsoleColor.Green, playlist);
+                playlistChosen.Add(playlist);
                 playlistNames.RemoveAt(choice);
             }
-        } while (!playlistChosen.Any());
+        } while (choice != -1);
+
+        Core.WriteLine(Language.GetString("String55"), ConsoleColor.Green, $"\n\t - {string.Join("\n\t - ", playlistChosen)}");
 
         return playlists.Where(p => playlistChosen.Contains(p.Name)).ToList();
     }
@@ -39,7 +43,7 @@ internal static class AddamsUser
     /// </summary>
     /// <param name="playlistNames">Playlist names</param>
     /// <returns>-1 no choice or index of the playlist</returns>
-    private static int ChoosePlaylist(IEnumerable<string> playlistNames)
+    private static int? ChoosePlaylist(IEnumerable<string> playlistNames)
     {
         foreach (string playlistName in playlistNames)
         {
@@ -51,7 +55,7 @@ internal static class AddamsUser
             Console.WriteLine($"{string.Format(Language.GetString("String1"), playlistNames.Count())}");
 
             string key = Console.ReadLine() ?? string.Empty;
-            int keyInt;
+            int? keyInt;
             try
             {
                 keyInt = Convert.ToInt32(key);
@@ -81,15 +85,17 @@ internal static class AddamsUser
     public static string AskWhatToDo()
     {
         bool noretry = true;
-        string choice;
+        string? choice;
         do
         {
-            Console.Write($"{Language.GetString("String49")}" +
+            Console.WriteLine($"\n{Language.GetString("String49")}" +
                 $"\n\t{Language.GetString("String50")}" +
-                $"\t{Language.GetString("String51")}");
+                $"\n\t{Language.GetString("String51")}" +
+                $"\n\t{Language.GetString("String52")}" +
+                $"\n\t{Language.GetString("String53")}");
 
             choice = Console.ReadKey().KeyChar.ToString() ?? "1";
-            if (choice != "1" && choice != "2")
+            if (choice != "1" && choice != "2" && choice != "3" && choice != "4")
             {
                 Console.WriteLine($"\n{Language.GetString("String13")} '{choice}'. {Language.GetString("String18")}");
                 noretry = false;

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="String1" xml:space="preserve">
-    <value>Quelles playlists voulez-vous exporter ? (1 - {0})</value>
+    <value>Quelles playlists voulez-vous exporter ? (1 - {0}) - Tapez 0 pour valider</value>
   </data>
   <data name="String10" xml:space="preserve">
     <value>Playlists recherchés</value>
@@ -257,6 +257,18 @@
   </data>
   <data name="String51" xml:space="preserve">
     <value>[2]: Afficher la configuration   </value>
+  </data>
+  <data name="String52" xml:space="preserve">
+    <value>[3]: Modifier la configuration</value>
+  </data>
+  <data name="String53" xml:space="preserve">
+    <value>[4]: Afficher les logs</value>
+  </data>
+  <data name="String54" xml:space="preserve">
+    <value>Vous avez choisi : </value>
+  </data>
+  <data name="String55" xml:space="preserve">
+    <value>Vous avez sélectionné les playlists suivantes:</value>
   </data>
   <data name="String6" xml:space="preserve">
     <value>Vérification OAuth2</value>

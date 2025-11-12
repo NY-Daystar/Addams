@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="String1" xml:space="preserve">
-    <value>Which playlist do you want to export ? (1 - {0}) \nType 0 to exit : </value>
+    <value>Which playlist do you want to export ? (1 - {0}) - Type 0 to validate: </value>
   </data>
   <data name="String10" xml:space="preserve">
     <value>Playlist fetched...</value>
@@ -257,6 +257,18 @@
   </data>
   <data name="String51" xml:space="preserve">
     <value>[2]: Show configuration</value>
+  </data>
+  <data name="String52" xml:space="preserve">
+    <value>[3]: Change configuration</value>
+  </data>
+  <data name="String53" xml:space="preserve">
+    <value>[4]: Display logs</value>
+  </data>
+  <data name="String54" xml:space="preserve">
+    <value>You've chosen : </value>
+  </data>
+  <data name="String55" xml:space="preserve">
+    <value>You've selected following playlists: </value>
   </data>
   <data name="String6" xml:space="preserve">
     <value>Verify OAuth2 token</value>

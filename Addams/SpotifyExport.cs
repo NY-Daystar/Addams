@@ -1,6 +1,5 @@
 ﻿using Addams.Utils;
 using NLog;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -40,11 +39,8 @@ public static class SpotifyExport
     /// <param name="playlist">playlist data to save (playlist name, tracks, etc...)</param>
     public static void SavePlaylist(string path, Models.Playlist playlist)
     {
-        // Format filename
         string filename = PathUtil.FormatValidFilename(playlist.Name);
-
-        // Format path
-        string csvFilePath = Path.Combine(path, $"{filename}.csv");
+        string csvFilePath = Path.Combine(path, Path.GetFileName($"{filename}.csv"));
 
         string headerLine = string.Join(",", new List<string> {
             Language.GetString("String33"),

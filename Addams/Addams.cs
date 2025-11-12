@@ -1,5 +1,6 @@
 ﻿using Addams.Entities;
 using Addams.Utils;
+using Microsoft.VisualBasic;
 using NLog;
 using NLog.Config;
 using NLog.Layouts;
@@ -35,12 +36,11 @@ internal static class Addams
 
     private const string _application = "Addams";
 
-    private const string _version = "1.0.2";
+    private const string _version = "1.0.3";
 
     public static void Main(string[] args)
     {
         RunAsync(args).GetAwaiter().GetResult();
-        Process.Start("explorer.exe", PLAYLIST_FOLDER);
         Thread.Sleep(60000);
     }
 
@@ -57,19 +57,32 @@ internal static class Addams
 
         Logger.Info(Language.GetString("String4"));
 
-        switch (AddamsUser.AskWhatToDo())
+        while (true)
         {
-            case "1":
-                await Export();
-                break;
+            switch (AddamsUser.AskWhatToDo())
+            {
+                case "1":
+                    await ExportAsync();
+                    break;
 
-            case "2":
-                ShowConfiguration();
-                break;
+                case "2":
+                    ShowConfiguration();
+                    break;
+
+                case "3":
+                    ModifyConfiguration();
+                    break;
+
+                case "4":
+                    ShowLogs();
+                    break;
+                default:
+                    return;
+            }
         }
     }
 
-    private static async Task Export()
+    private static async Task ExportAsync()
     {
         Logger.Debug(Language.GetString("String5"));
         SpotifyService service = new();
@@ -83,7 +96,6 @@ internal static class Addams
 
         IEnumerable<Playlist> playlistsSelected = await service.GetPlaylistsNameAsync();
 
-        // If we don't want all playlist
         if (!AddamsUser.AskAllPlaylistWanted())
             playlistsSelected = AddamsUser.SelectPlaylist(playlistsSelected.ToList());
 
@@ -100,6 +112,8 @@ internal static class Addams
         Logger.Info(Language.GetString("String11"));
         SpotifyExport.SavePlaylists(PLAYLIST_FOLDER, playlists);
         Logger.Info(Language.GetString("String12"));
+
+        Process.Start("explorer.exe", PLAYLIST_FOLDER);
     }
 
     private static void ShowConfiguration()
@@ -108,6 +122,45 @@ internal static class Addams
         Console.WriteLine("---------------");
         Console.WriteLine(config);
         Console.WriteLine("---------------");
+    }
+
+    private static void ModifyConfiguration()
+    {
+        try
+        {
+            var psi = new ProcessStartInfo(SpotifyConfig.ConfigFilepath)
+            {
+                UseShellExecute = true
+            };
+            Process.Start(psi);
+        }
+        catch (Exception ex)
+        {
+            Logger.Debug(ex.Message);
+        }
+    }
+
+    private static void ShowLogs()
+    {
+        var tempfile = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.txt");
+        var directory = Directory.GetParent(LOGFILE);
+        if (directory != null)
+        {
+            FileManager.ConcatFiles(directory.FullName, tempfile);
+        }
+
+        try
+        {
+            var psi = new ProcessStartInfo(tempfile)
+            {
+                UseShellExecute = true
+            };
+            Process.Start(psi);
+        }
+        catch (Exception ex)
+        {
+            Logger.Debug(ex.Message);
+        }
     }
 
     /// <summary>

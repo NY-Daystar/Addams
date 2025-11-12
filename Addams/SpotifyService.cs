@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Addams;
 
@@ -52,10 +53,10 @@ internal class SpotifyService
 
         if (config.Token.ExpiredDate < DateTime.UtcNow)
         {
-            Core.WriteLine(ConsoleColor.Yellow, string.Format(Language.GetString("String28"), config.Token.ExpiredDate));
+            Core.WriteLine(ConsoleColor.Yellow, string.Format(Language.GetString("String28"), config.Token.ExpiredDate.ToLocalTime()));
             return false;
         }
-        Core.WriteLine(ConsoleColor.Green, string.Format(Language.GetString("String29"), config.Token.ExpiredDate));
+        Core.WriteLine(ConsoleColor.Green, string.Format(Language.GetString("String29"), config.Token.ExpiredDate.ToLocalTime()));
 
         try
         {
