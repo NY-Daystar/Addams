@@ -13,7 +13,7 @@ namespace Addams.Utils
                 throw new ArgumentNullException(nameof(resName));
             }
 
-            ResourceManager rm = new ResourceManager(RESOURCE, typeof(Addams).Assembly);
+            ResourceManager rm = new(RESOURCE, typeof(Addams).Assembly);
             return rm.GetString(resName) ?? "Not found";
         }
     }

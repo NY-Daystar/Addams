@@ -52,7 +52,7 @@ internal static class AddamsUser
             Console.Write(Language.GetString("String2"));
 
             string key = Console.ReadLine() ?? string.Empty;
-            int keyInt = 0;
+            int keyInt;
             try
             {
                 keyInt = Convert.ToInt32(key);
@@ -76,37 +76,61 @@ internal static class AddamsUser
     }
 
     /// <summary>
-    /// Ask the user if he want to export all playlist
+    /// Ask the user if he want to export all playlist, or show config
+    /// </summary>
+    /// <returns>char of the pick</returns>
+    public static string AskWhatToDo()
+    {
+        bool noretry = true;
+        string choice;
+        do
+        {
+            Console.Write($"{Language.GetString("String49")}" +
+                $"\n\t{Language.GetString("String50")}" +
+                $"\t{Language.GetString("String51")}");
+
+            choice = Console.ReadKey().KeyChar.ToString() ?? "1";
+            if (choice != "1" && choice != "2")
+            {
+                Console.WriteLine($"\n{Language.GetString("String13")} '{choice}'. {Language.GetString("String18")}");
+                noretry = false;
+            }
+        } while (!noretry);
+
+        Console.WriteLine();
+        return choice;
+    }
+
+    /// <summary>
+    /// Ask the user if he want to export all playlist, or show config
     /// Yes : means true, No means false
     /// </summary>
     /// <returns>bool of the pick</returns>
     public static bool AskAllPlaylistWanted()
     {
-        bool stop = false, choice = false;
+        bool noretry = true, choice = false;
         do
         {
             Console.Write($"{Language.GetString("String15")}" +
                 $"\n\t{Language.GetString("String16")}" +
                 $"\t{Language.GetString("String17")}");
 
-
             char key = Console.ReadKey().KeyChar;
 
             if (key == '1')
             {
-                stop = true;
                 choice = true;
             }
             else if (key == '2')
             {
-                stop = true;
                 choice = false;
             }
             else
             {
                 Console.WriteLine($"\n{Language.GetString("String13")} '{key}'. {Language.GetString("String18")}");
+                noretry = false;
             }
-        } while (!stop);
+        } while (!noretry);
 
         Console.WriteLine();
         return choice;

@@ -181,7 +181,7 @@
     <value>Le Token a expiré, date d'expiration : {0}</value>
   </data>
   <data name="String29" xml:space="preserve">
-    <value>Le Token est toujours valide, il expire le : {config.Token.ExpiredDate}</value>
+    <value>Le Token est toujours valide, il expire le : {0}</value>
   </data>
   <data name="String3" xml:space="preserve">
     <value>Vous n'avez pas saisi de nombre, merci d'en saisir un nouveau</value>
@@ -246,8 +246,17 @@
   <data name="String48" xml:space="preserve">
     <value>Url de la preview de la chanson</value>
   </data>
+  <data name="String49" xml:space="preserve">
+    <value>Que voulez-vous faire ?</value>
+  </data>
   <data name="String5" xml:space="preserve">
     <value>Mise en place des services avec la configuration et l'api</value>
+  </data>
+  <data name="String50" xml:space="preserve">
+    <value>[1]: Exporter les playlist(s)</value>
+  </data>
+  <data name="String51" xml:space="preserve">
+    <value>[2]: Afficher la configuration   </value>
   </data>
   <data name="String6" xml:space="preserve">
     <value>Vérification OAuth2</value>

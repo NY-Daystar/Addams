@@ -56,7 +56,7 @@ internal class SpotifyService
             return false;
         }
         Logger.Info(string.Format(Language.GetString("String29"), config.Token.ExpiredDate));
-        
+
         try
         {
             await GetPlaylistsNameAsync();

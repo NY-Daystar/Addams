@@ -181,7 +181,7 @@
     <value>Token has expired, expiration date : {0}</value>
   </data>
   <data name="String29" xml:space="preserve">
-    <value>Token is still valid, the expiration date is : {config.Token.ExpiredDate}</value>
+    <value>Token is still valid, the expiration date is : {0}</value>
   </data>
   <data name="String3" xml:space="preserve">
     <value>You typed a non-numeric value, please type a numeric value</value>
@@ -246,8 +246,17 @@
   <data name="String48" xml:space="preserve">
     <value>Track Preview Url</value>
   </data>
+  <data name="String49" xml:space="preserve">
+    <value>What do you want to do ?</value>
+  </data>
   <data name="String5" xml:space="preserve">
     <value>Setup service with config and api...</value>
+  </data>
+  <data name="String50" xml:space="preserve">
+    <value>[1]: Export playlist(s)</value>
+  </data>
+  <data name="String51" xml:space="preserve">
+    <value>[2]: Show configuration</value>
   </data>
   <data name="String6" xml:space="preserve">
     <value>Verify OAuth2 token</value>

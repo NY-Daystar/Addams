@@ -48,8 +48,6 @@ internal static class Addams
     {
         AddamsOptions options = AddamsOptions.DefineOptions(args);
 
-        // TODO faire un affichage de la config si demander
-
         // TODO 1 - Recuperer les musiques ne venant pas de spotify mais des fichiers locaux
 
         Core.WriteLine("Welcome to ", ConsoleColor.Yellow, _application, ConsoleColor.White,
@@ -61,6 +59,20 @@ internal static class Addams
 
         Logger.Info(Language.GetString("String4"));
 
+        switch (AddamsUser.AskWhatToDo())
+        {
+            case "1":
+                await Export();
+                break;
+
+            case "2":
+                ShowConfiguration();
+                break;
+        }
+    }
+
+    private static async Task Export()
+    {
         Logger.Debug(Language.GetString("String5"));
         SpotifyService service = new();
 
@@ -71,13 +83,10 @@ internal static class Addams
             await service.RefreshTokenAsync();
         }
 
-        // Ask if you want all playlist or just a few
-        bool allPlaylist = AddamsUser.AskAllPlaylistWanted();
-
         IEnumerable<Playlist> playlistsSelected = await service.GetPlaylistsNameAsync();
 
         // If we don't want all playlist
-        if (!allPlaylist)
+        if (!AddamsUser.AskAllPlaylistWanted())
             playlistsSelected = AddamsUser.SelectPlaylist(playlistsSelected.ToList());
 
         Logger.Info(Language.GetString("String8"));
@@ -93,6 +102,14 @@ internal static class Addams
         Logger.Info(Language.GetString("String11"));
         SpotifyExport.SavePlaylists(PLAYLIST_FOLDER, playlists);
         Logger.Info(Language.GetString("String12"));
+    }
+
+    private static void ShowConfiguration()
+    {
+        var config = SpotifyConfig.Get();
+        Console.WriteLine("---------------");
+        Console.WriteLine(config);
+        Console.WriteLine("---------------");
     }
 
     /// <summary>
@@ -118,10 +135,10 @@ internal static class Addams
         {
             Layout = layout
         };
-         
+
         config.AddRule(level, LogLevel.Fatal, logconsole);
         config.AddRule(LogLevel.Trace, LogLevel.Fatal, logfile);
-       
+
         LogManager.Configuration = config;
     }
 }
