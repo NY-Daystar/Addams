@@ -1,6 +1,7 @@
 ﻿using Addams.Entities;
 using Addams.Exceptions;
 using Addams.Models;
+using Addams.Utils;
 using IdentityModel.Client;
 using Newtonsoft.Json;
 using NLog;
@@ -107,12 +108,12 @@ public class SpotifyApi
         // Step 3 : Call Spotify Api to exchange `Authorization Code` for an `Access Token`
         var tokenEntity = await FetchTokenApiAsync(authorizationCode);
 
-        // Convert Token from entity to model
+        // Step 4 : Convert Token from entity to model
         TokenModel token = JsonConvert.DeserializeObject<TokenModel>(JsonConvert.SerializeObject(tokenEntity)) ?? new TokenModel();
         token.CalculateExpiration();
         if (string.IsNullOrEmpty(token.Value))
         {
-            Logger.Error("Error when exchange authorizing code for a token");
+            Logger.Error(Language.GetString("String19"));
         }
 
         Console.WriteLine($"\n\nToken d'accès : {token}\n\n");
@@ -227,9 +228,9 @@ public class SpotifyApi
         // Add all the tracks overflow by api on the playlist
         if (playlist.Tracks.Total >= TRACK_LIMIT)
         {
-            Logger.Warn($"For {playlist.Name} : only fetch {playlist.Tracks.Items.ToList().Count} tracks for a total to {playlist.Tracks.Total}");
+            Logger.Warn(string.Format(Language.GetString("String20"), playlist.Name, playlist.Tracks.Items.ToList().Count, playlist.Tracks.Total));
             playlist.Tracks.Items.AddRange(await FetchTracksOverflowAsync(playlist.Tracks));
-            Logger.Info($"Fetch all tracks for the playlist {playlist.Tracks.Items.ToList().Count}/{playlist.Tracks.Total}");
+            Logger.Info(string.Format(Language.GetString("String21"), playlist.Tracks.Items.ToList().Count, playlist.Tracks.Total));
         }
         return playlist;
     }
@@ -262,9 +263,9 @@ public class SpotifyApi
         // Add all the tracks overflow by api on the playlist
         if (playlist.Total >= TRACK_LIKED_LIMIT)
         {
-            Logger.Warn($"For Liked Song : only fetch {playlist.Items.ToList().Count} tracks for a total to {playlist.Total}");
+            Logger.Warn(string.Format(Language.GetString("String22"), playlist.Items.ToList().Count, playlist.Total));
             playlist.Items.AddRange(await FetchTracksOverflowAsync(playlist));
-            Logger.Info($"Fetch all tracks for the playlist {playlist.Items.ToList().Count}/{playlist.Total}");
+            Logger.Info(string.Format(Language.GetString("String21"), playlist.Items.ToList().Count, playlist.Total));
         }
         return playlist;
     }
@@ -310,7 +311,7 @@ public class SpotifyApi
         {
             if (playlist.Next == null)
             {
-                Logger.Warn("Playlist next url is null, can't get the rest of playlist");
+                Logger.Warn(Language.GetString("String23"));
                 break;
             }
 
@@ -320,7 +321,7 @@ public class SpotifyApi
             // Add tracks into original playlist
             allTracks.AddRange(trackList.Items);
             playlist.Next = trackList.Next;
-            Logger.Info($"Get the rest of playlist {playlist.Items.ToList().Count}/{playlist.Total} songs");
+            Logger.Info(string.Format(Language.GetString("String23"), playlist.Items.ToList().Count, playlist.Total));
         } while (playlist.Next != null);
 
         return allTracks;
