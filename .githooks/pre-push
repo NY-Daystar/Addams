@@ -2,7 +2,7 @@
 
 SLN_PATH=Addams.sln
 
-DLL=$(pwd)/Addams.Tests/bin/Debug/net7.0/Addams.Tests.dll
+DLL=$(pwd)/Addams.Tests/bin/Debug/net10.0/Addams.Tests.dll
 
 function main() {
     if [ "$1" = "--debug" ]; then
@@ -57,7 +57,7 @@ function check() {
         ;;
 
     'compile')
-        [ $result_code != 0 ] && log_color "Error: Impossible to builde the project $(${SLN_PATH}).\ngit push canceled" "red" && exit 1
+        [ $result_code != 0 ] && log_color "Error: Impossible to build the project $(${SLN_PATH}).\ngit push canceled" "red" && exit 1
         ;;
 
     'unittest')

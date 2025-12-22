@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="String10" xml:space="preserve">
+    <value>Lista de reproducción obtenida...</value>
+  </data>
+  <data name="String11" xml:space="preserve">
+    <value>Salvataggio delle playlist...</value>
+  </data>
+  <data name="String12" xml:space="preserve">
+    <value>Le playlist vengono salvate...</value>
+  </data>
+  <data name="String19" xml:space="preserve">
+    <value>Errore durante lo scambio del codice di autorizzazione per un token</value>
+  </data>
+  <data name="String21" xml:space="preserve">
+    <value>Tracce recuperate per la playlist {0}/{1}</value>
+  </data>
+  <data name="String23" xml:space="preserve">
+    <value>L'URL successivo della playlist è nullo, non è possibile ottenere il resto della playlist</value>
+  </data>
+  <data name="String24" xml:space="preserve">
+    <value>Ottieni il resto della playlist {0}/{1} brani"</value>
+  </data>
+  <data name="String25" xml:space="preserve">
+    <value>Genera configurazione</value>
+  </data>
+  <data name="String26" xml:space="preserve">
+    <value>Il file {0} è già aperto in un'altra applicazione</value>
+  </data>
+  <data name="String27" xml:space="preserve">
+    <value>Chiudilo e riprova</value>
+  </data>
+  <data name="String28" xml:space="preserve">
+    <value>Il token è scaduto, data di scadenza: {0}</value>
+  </data>
+  <data name="String29" xml:space="preserve">
+    <value>Il token è ancora valido, la data di scadenza è: {0}</value>
+  </data>
+  <data name="String30" xml:space="preserve">
+    <value>La tua playlist è salvata qui: {0}</value>
+  </data>
+  <data name="String31" xml:space="preserve">
+    <value>Nessuna traccia trovata per la playlist {0} - id: {1}</value>
+  </data>
+  <data name="String32" xml:space="preserve">
+    <value>Playlist selezionata: {0}</value>
+  </data>
+  <data name="String33" xml:space="preserve">
+    <value>Nome della traccia</value>
+  </data>
+  <data name="String34" xml:space="preserve">
+    <value>Nome(i) dell'artista</value>
+  </data>
+  <data name="String35" xml:space="preserve">
+    <value>Nome dell'album</value>
+  </data>
+  <data name="String36" xml:space="preserve">
+    <value>Nome/i dell'artista dell'album</value>
+  </data>
+  <data name="String37" xml:space="preserve">
+    <value>Data di uscita dell'album</value>
+  </data>
+  <data name="String38" xml:space="preserve">
+    <value>Numero del disco</value>
+  </data>
+  <data name="String39" xml:space="preserve">
+    <value>Numero della traccia</value>
+  </data>
+  <data name="String40" xml:space="preserve">
+    <value>Durata traccia</value>
+  </data>
+  <data name="String41" xml:space="preserve">
+    <value>Esplicita</value>
+  </data>
+  <data name="String43" xml:space="preserve">
+    <value>Aggiunto a</value>
+  </data>
+  <data name="String44" xml:space="preserve">
+    <value>Traccia Uri</value>
+  </data>
+  <data name="String45" xml:space="preserve">
+    <value>URL dell'artista</value>
+  </data>
+  <data name="String46" xml:space="preserve">
+    <value>URL dell'album</value>
+  </data>
+  <data name="String47" xml:space="preserve">
+    <value>URL dell'immagine dell'album</value>
+  </data>
+  <data name="String5" xml:space="preserve">
+    <value>Imposta il servizio con configurazione e API...</value>
+  </data>
+  <data name="String6" xml:space="preserve">
+    <value>Verifica il token OAuth2</value>
+  </data>
+  <data name="String7" xml:space="preserve">
+    <value>Token no válido, actualizando token</value>
+  </data>
+  <data name="String8" xml:space="preserve">
+    <value>Obteniendo datos de la lista de reproducción...</value>
+  </data>
+  <data name="String9" xml:space="preserve">
+    <value>No se encontró ninguna lista de reproducción</value>
+  </data>
+  <data name="String59" xml:space="preserve">
+    <value>Nessun token di aggiornamento, nel tuo browser vai all'URL qui sotto:</value>
+  </data>
+  <data name="String60" xml:space="preserve">
+    <value>Token di aggiornamento esistente, rinnovo del token di accesso</value>
+  </data>
+  <data name="String56" xml:space="preserve">
+    <value>Con token di aggiornamento, token di accesso al rinnovo</value>
+  </data>
+  <data name="String61" xml:space="preserve">
+    <value>Token valido, pronto per esportare la playlist di Spotify</value>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>Applicazione</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Versione</value>
+  </data>
+  <data name="String71" xml:space="preserve">
+    <value>Esportazione in corso</value>
+  </data>
+  <data name="String72" xml:space="preserve">
+    <value>Esportazione completata</value>
+  </data>
+  <data name="String73" xml:space="preserve">
+    <value>Playlist caricate</value>
+  </data>
+  <data name="String74" xml:space="preserve">
+    <value>Errore durante il caricamento delle playlist</value>
+  </data>
+  <data name="String75" xml:space="preserve">
+    <value>Configurazione non valida, vai alla configurazione</value>
+  </data>
+  <data name="String76" xml:space="preserve">
+    <value>Configurazione dell'errore</value>
+  </data>
+  <data name="String77" xml:space="preserve">
+    <value>Caricamento delle playlist per l'utente</value>
+  </data>
+  <data name="String78" xml:space="preserve">
+    <value>Prova l'autenticazione Spotify</value>
+  </data>
+  <data name="String79" xml:space="preserve">
+    <value>Autenticazione riuscita</value>
+  </data>
+  <data name="String80" xml:space="preserve">
+    <value>Carica configurazione</value>
+  </data>
+  <data name="String81" xml:space="preserve">
+    <value>Errore di esportazione</value>
+  </data>
+  <data name="String82" xml:space="preserve">
+    <value>Il token di aggiornamento non è valido, è necessario autenticarsi nella scheda di autenticazione</value>
+  </data>
+  <data name="UI_Tab1" xml:space="preserve">
+    <value>Esporta playlist</value>
+  </data>
+  <data name="UI_Tab2" xml:space="preserve">
+    <value>Mostra playlist</value>
+  </data>
+  <data name="UI_Tab3" xml:space="preserve">
+    <value>Impostazioni</value>
+  </data>
+  <data name="UI_ButtonSave" xml:space="preserve">
+    <value>Salva</value>
+  </data>
+  <data name="UI_Label1" xml:space="preserve">
+    <value>Nome utente</value>
+  </data>
+  <data name="UI_ButtonOpenFolder" xml:space="preserve">
+    <value>Apri cartella</value>
+  </data>
+  <data name="UI_ButtonReadSettings" xml:space="preserve">
+    <value>Apri Impostazioni</value>
+  </data>
+  <data name="UI_ButtonExport" xml:space="preserve">
+    <value>Esporta playlist</value>
+  </data>
+  <data name="UI_ColumnName" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="UI_ColumnSize" xml:space="preserve">
+    <value>Misurare</value>
+  </data>
+  <data name="UI_ColumnExtension" xml:space="preserve">
+    <value>Estensione</value>
+  </data>
+  <data name="UI_ColumnModifiedAt" xml:space="preserve">
+    <value>Modificato a</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value>Imposta il tuo account Spotify (nome utente, clientId e clientSecret), quindi fai clic su Autentica</value>
+  </data>
+  <data name="UI_Label4" xml:space="preserve">
+    <value>Lingua</value>
+  </data>
+  <data name="UI_ButtonTryAuthenticate" xml:space="preserve">
+    <value>Autenticare</value>
+  </data>
+  <data name="String2" xml:space="preserve">
+    <value>La configurazione esiste già: {0}</value>
+  </data>
+  <data name="String3" xml:space="preserve">
+    <value>Impossibile leggere la configurazione: {0}</value>
+  </data>
+  <data name="String4" xml:space="preserve">
+    <value>Leggi il percorso di configurazione: {0}</value>
+  </data>
+  <data name="UI_Label5" xml:space="preserve">
+    <value>Modalità di debug</value>
+  </data>
+  <data name="String13" xml:space="preserve">
+    <value>Impossibile caricare le playlist</value>
+  </data>
+  <data name="String14" xml:space="preserve">
+    <value>È richiesta una nuova autenticazione</value>
+  </data>
+  <data name="Language_EN" xml:space="preserve">
+    <value>Italian</value>
+  </data>
+  <data name="Language_DE" xml:space="preserve">
+    <value>Italienisch</value>
+  </data>
+  <data name="Language_ES" xml:space="preserve">
+    <value>Italiano</value>
+  </data>
+  <data name="Language_IT" xml:space="preserve">
+    <value>Italiano</value>
+  </data>
+  <data name="Language_FR" xml:space="preserve">
+    <value>Italien</value>
+  </data>
+  <data name="String15" xml:space="preserve">
+    <value>Modalità debug attivata</value>
+  </data>
+  <data name="String16" xml:space="preserve">
+    <value>Troppe richieste, devi attendere {0} ore</value>
+  </data>
+</root>
