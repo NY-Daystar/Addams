@@ -9,7 +9,13 @@ namespace Addams.Models;
 public class TokenModel
 {
     /// <summary>
-    /// Value of the token
+    /// Value of the refresh token in spotify to refresh access token simply
+    /// </summary>
+    [JsonProperty("refresh_token")]
+    public string Refresh { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Access token of spotify application
     /// </summary>
     [JsonProperty("access_token")]
     public string Value { get; set; } = string.Empty;

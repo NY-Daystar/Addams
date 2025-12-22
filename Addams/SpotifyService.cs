@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Addams;
 
@@ -73,12 +72,16 @@ internal class SpotifyService
     /// <summary>
     /// Setup authorization to Spotify Application to get Oauth2 Token
     /// update configuration and save it
+    /// if already done just an update with refresh token
     /// Update client and Api to request directly instead of restart app
     /// </summary>
     /// <returns>Token string</returns>
-    public async Task RefreshTokenAsync()
+    public async Task RefreshAccessTokenAsync()
     {
-        config.Token = await api.AuthorizeAsync();
+        config.Token = config.Token?.Refresh == null || config.Token?.Refresh == ""
+            ? await api.AuthorizeAsync()
+            : await api.RefreshAsync();
+
         config.Save();
         api.RefreshClient(config.Token.Value);
     }

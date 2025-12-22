@@ -253,16 +253,16 @@
     <value>Mise en place des services avec la configuration et l'api</value>
   </data>
   <data name="String50" xml:space="preserve">
-    <value>[1]: Exporter les playlist(s)</value>
+    <value>Exporter les playlist(s)</value>
   </data>
   <data name="String51" xml:space="preserve">
-    <value>[2]: Afficher la configuration   </value>
+    <value>Afficher la configuration</value>
   </data>
   <data name="String52" xml:space="preserve">
-    <value>[3]: Modifier la configuration</value>
+    <value>Modifier la configuration</value>
   </data>
   <data name="String53" xml:space="preserve">
-    <value>[4]: Afficher les logs</value>
+    <value>Afficher les logs</value>
   </data>
   <data name="String54" xml:space="preserve">
     <value>Vous avez choisi : </value>
@@ -274,12 +274,45 @@
     <value>Vérification OAuth2</value>
   </data>
   <data name="String7" xml:space="preserve">
-    <value>Token invalide, veuillez-le regénérer</value>
+    <value>Token invalide</value>
   </data>
   <data name="String8" xml:space="preserve">
     <value>Recherche des playlists</value>
   </data>
   <data name="String9" xml:space="preserve">
     <value>Aucune playlists trouvés</value>
+  </data>
+  <data name="String57" xml:space="preserve">
+    <value>Saisir votre Refresh Token</value>
+  </data>
+  <data name="String58" xml:space="preserve">
+    <value>Votre Refresh Token a bien été saisi</value>
+  </data>
+  <data name="String59" xml:space="preserve">
+    <value>Pas de refresh token, sur votre navigateur accédez à l'URL ci-dessous :</value>
+  </data>
+  <data name="String60" xml:space="preserve">
+    <value>Refresh Token présent, regéneration du token d'accès</value>
+  </data>
+  <data name="String56" xml:space="preserve">
+    <value>Avec le refresh token, regéneration du Token d'Accès</value>
+  </data>
+  <data name="String61" xml:space="preserve">
+    <value>Token Valide, Accès aux données de votre compte spotify</value>
+  </data>
+  <data name="String62" xml:space="preserve">
+    <value>Accéder au playlists sauvegardés</value>
+  </data>
+  <data name="String63" xml:space="preserve">
+    <value>Première connexion sur Addams, Veuillez configurer l'application</value>
+  </data>
+  <data name="String64" xml:space="preserve">
+    <value>Entrez votre nom d'utilisateur spotify</value>
+  </data>
+  <data name="String65" xml:space="preserve">
+    <value>Entrez votre spotify application client ID</value>
+  </data>
+  <data name="String66" xml:space="preserve">
+    <value>Entrez votre spotify application client Secret</value>
   </data>
 </root>
