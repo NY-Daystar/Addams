@@ -1,0 +1,915 @@
+{
+	"href": "https://api.spotify.com/v1/me/tracks?offset=0&limit=50",
+	"items": [
+		{
+			"added_at": "2026-02-18T20:29:26Z",
+			"track": {
+				"album": {
+					"album_type": "album",
+					"artists": [
+						{
+							"external_urls": {
+								"spotify": "https://open.spotify.com/artist/5El7Fa5t7eVZyZKhsAixU7"
+							},
+							"href": "https://api.spotify.com/v1/artists/5El7Fa5t7eVZyZKhsAixU7",
+							"id": "5El7Fa5t7eVZyZKhsAixU7",
+							"name": "Sophia Loren",
+							"type": "artist",
+							"uri": "spotify:artist:5El7Fa5t7eVZyZKhsAixU7"
+						}
+					],
+					"external_urls": {
+						"spotify": "https://open.spotify.com/album/0IfsyZ90m7U02vV0dEc3bA"
+					},
+					"href": "https://api.spotify.com/v1/albums/0IfsyZ90m7U02vV0dEc3bA",
+					"id": "0IfsyZ90m7U02vV0dEc3bA",
+					"images": [
+						{
+							"height": 640,
+							"width": 640,
+							"url": "https://i.scdn.co/image/ab67616d0000b2735fa69c42f0f20ec4f08e73ea"
+						},
+						{
+							"height": 300,
+							"width": 300,
+							"url": "https://i.scdn.co/image/ab67616d00001e025fa69c42f0f20ec4f08e73ea"
+						},
+						{
+							"height": 64,
+							"width": 64,
+							"url": "https://i.scdn.co/image/ab67616d000048515fa69c42f0f20ec4f08e73ea"
+						}
+					],
+					"is_playable": true,
+					"name": "The Italian Venus",
+					"release_date": "1954-12-19",
+					"release_date_precision": "day",
+					"total_tracks": 23,
+					"type": "album",
+					"uri": "spotify:album:0IfsyZ90m7U02vV0dEc3bA"
+				},
+				"artists": [
+					{
+						"external_urls": {
+							"spotify": "https://open.spotify.com/artist/5El7Fa5t7eVZyZKhsAixU7"
+						},
+						"href": "https://api.spotify.com/v1/artists/5El7Fa5t7eVZyZKhsAixU7",
+						"id": "5El7Fa5t7eVZyZKhsAixU7",
+						"name": "Sophia Loren",
+						"type": "artist",
+						"uri": "spotify:artist:5El7Fa5t7eVZyZKhsAixU7"
+					},
+					{
+						"external_urls": {
+							"spotify": "https://open.spotify.com/artist/6GMbArtEhQvuBq8zXXDo2X"
+						},
+						"href": "https://api.spotify.com/v1/artists/6GMbArtEhQvuBq8zXXDo2X",
+						"id": "6GMbArtEhQvuBq8zXXDo2X",
+						"name": "Peter Sellers",
+						"type": "artist",
+						"uri": "spotify:artist:6GMbArtEhQvuBq8zXXDo2X"
+					}
+				],
+				"disc_number": 1,
+				"duration_ms": 139184,
+				"explicit": false,
+				"external_urls": {
+					"spotify": "https://open.spotify.com/track/1rtLMB9IjVzN6g030FW5Gy"
+				},
+				"href": "https://api.spotify.com/v1/tracks/1rtLMB9IjVzN6g030FW5Gy",
+				"id": "1rtLMB9IjVzN6g030FW5Gy",
+				"is_local": false,
+				"is_playable": true,
+				"name": "Zoo Be Zoo Be Zoo",
+				"track_number": 1,
+				"type": "track",
+				"uri": "spotify:track:1rtLMB9IjVzN6g030FW5Gy"
+			}
+		},
+		{
+			"added_at": "2026-02-18T08:48:53Z",
+			"track": {
+				"album": {
+					"album_type": "single",
+					"artists": [
+						{
+							"external_urls": {
+								"spotify": "https://open.spotify.com/artist/31TPClRtHm23RisEBtV3X7"
+							},
+							"href": "https://api.spotify.com/v1/artists/31TPClRtHm23RisEBtV3X7",
+							"id": "31TPClRtHm23RisEBtV3X7",
+							"name": "Justin Timberlake",
+							"type": "artist",
+							"uri": "spotify:artist:31TPClRtHm23RisEBtV3X7"
+						}
+					],
+					"external_urls": {
+						"spotify": "https://open.spotify.com/album/5jlQrOtSuTXojcvBCpivyo"
+					},
+					"href": "https://api.spotify.com/v1/albums/5jlQrOtSuTXojcvBCpivyo",
+					"id": "5jlQrOtSuTXojcvBCpivyo",
+					"images": [
+						{
+							"height": 640,
+							"width": 640,
+							"url": "https://i.scdn.co/image/ab67616d0000b273c6467bd00844ba3f2084fe3f"
+						},
+						{
+							"height": 300,
+							"width": 300,
+							"url": "https://i.scdn.co/image/ab67616d00001e02c6467bd00844ba3f2084fe3f"
+						},
+						{
+							"height": 64,
+							"width": 64,
+							"url": "https://i.scdn.co/image/ab67616d00004851c6467bd00844ba3f2084fe3f"
+						}
+					],
+					"is_playable": true,
+					"name": "Suit & Tie (feat. JAY Z) (feat. JAY-Z) [Radio Edit]",
+					"release_date": "2013-01-15",
+					"release_date_precision": "day",
+					"total_tracks": 1,
+					"type": "album",
+					"uri": "spotify:album:5jlQrOtSuTXojcvBCpivyo"
+				},
+				"artists": [
+					{
+						"external_urls": {
+							"spotify": "https://open.spotify.com/artist/31TPClRtHm23RisEBtV3X7"
+						},
+						"href": "https://api.spotify.com/v1/artists/31TPClRtHm23RisEBtV3X7",
+						"id": "31TPClRtHm23RisEBtV3X7",
+						"name": "Justin Timberlake",
+						"type": "artist",
+						"uri": "spotify:artist:31TPClRtHm23RisEBtV3X7"
+					},
+					{
+						"external_urls": {
+							"spotify": "https://open.spotify.com/artist/3nFkdlSjzX9mRTtwJOzDYB"
+						},
+						"href": "https://api.spotify.com/v1/artists/3nFkdlSjzX9mRTtwJOzDYB",
+						"id": "3nFkdlSjzX9mRTtwJOzDYB",
+						"name": "JAŸ-Z",
+						"type": "artist",
+						"uri": "spotify:artist:3nFkdlSjzX9mRTtwJOzDYB"
+					}
+				],
+				"disc_number": 1,
+				"duration_ms": 268453,
+				"explicit": false,
+				"external_urls": {
+					"spotify": "https://open.spotify.com/track/4mQVHEjrnuUd7G5IVhSYTk"
+				},
+				"href": "https://api.spotify.com/v1/tracks/4mQVHEjrnuUd7G5IVhSYTk",
+				"id": "4mQVHEjrnuUd7G5IVhSYTk",
+				"is_local": false,
+				"is_playable": true,
+				"name": "Suit & Tie (feat. JAY Z) (feat. JAY-Z) - [Radio Edit]",
+				"track_number": 1,
+				"type": "track",
+				"uri": "spotify:track:4mQVHEjrnuUd7G5IVhSYTk"
+			}
+		},
+		{
+			"added_at": "2026-02-18T02:06:52Z",
+			"track": {
+				"album": {
+					"album_type": "single",
+					"artists": [
+						{
+							"external_urls": {
+								"spotify": "https://open.spotify.com/artist/41MozSoPIsD1dJM0CLPjZF"
+							},
+							"href": "https://api.spotify.com/v1/artists/41MozSoPIsD1dJM0CLPjZF",
+							"id": "41MozSoPIsD1dJM0CLPjZF",
+							"name": "BLACKPINK",
+							"type": "artist",
+							"uri": "spotify:artist:41MozSoPIsD1dJM0CLPjZF"
+						}
+					],
+					"external_urls": {
+						"spotify": "https://open.spotify.com/album/3hzoZlx2KwtvJEUl9piPWr"
+					},
+					"href": "https://api.spotify.com/v1/albums/3hzoZlx2KwtvJEUl9piPWr",
+					"id": "3hzoZlx2KwtvJEUl9piPWr",
+					"images": [
+						{
+							"height": 640,
+							"width": 640,
+							"url": "https://i.scdn.co/image/ab67616d0000b2736224d1236b0e0a0e1586efbb"
+						},
+						{
+							"height": 300,
+							"width": 300,
+							"url": "https://i.scdn.co/image/ab67616d00001e026224d1236b0e0a0e1586efbb"
+						},
+						{
+							"height": 64,
+							"width": 64,
+							"url": "https://i.scdn.co/image/ab67616d000048516224d1236b0e0a0e1586efbb"
+						}
+					],
+					"is_playable": true,
+					"name": "JUMP",
+					"release_date": "2025-07-11",
+					"release_date_precision": "day",
+					"total_tracks": 1,
+					"type": "album",
+					"uri": "spotify:album:3hzoZlx2KwtvJEUl9piPWr"
+				},
+				"artists": [
+					{
+						"external_urls": {
+							"spotify": "https://open.spotify.com/artist/41MozSoPIsD1dJM0CLPjZF"
+						},
+						"href": "https://api.spotify.com/v1/artists/41MozSoPIsD1dJM0CLPjZF",
+						"id": "41MozSoPIsD1dJM0CLPjZF",
+						"name": "BLACKPINK",
+						"type": "artist",
+						"uri": "spotify:artist:41MozSoPIsD1dJM0CLPjZF"
+					}
+				],
+				"disc_number": 1,
+				"duration_ms": 164718,
+				"explicit": false,
+				"external_urls": {
+					"spotify": "https://open.spotify.com/track/5H1sKFMzDeMtXwND3V6hRY"
+				},
+				"href": "https://api.spotify.com/v1/tracks/5H1sKFMzDeMtXwND3V6hRY",
+				"id": "5H1sKFMzDeMtXwND3V6hRY",
+				"is_local": false,
+				"is_playable": true,
+				"name": "JUMP",
+				"track_number": 1,
+				"type": "track",
+				"uri": "spotify:track:5H1sKFMzDeMtXwND3V6hRY"
+			}
+		},
+		{
+			"added_at": "2026-02-15T21:00:32Z",
+			"track": {
+				"album": {
+					"album_type": "album",
+					"artists": [
+						{
+							"external_urls": {
+								"spotify": "https://open.spotify.com/artist/3fMbdgg4jU18AjLCKBhRSm"
+							},
+							"href": "https://api.spotify.com/v1/artists/3fMbdgg4jU18AjLCKBhRSm",
+							"id": "3fMbdgg4jU18AjLCKBhRSm",
+							"name": "Michael Jackson",
+							"type": "artist",
+							"uri": "spotify:artist:3fMbdgg4jU18AjLCKBhRSm"
+						}
+					],
+					"external_urls": {
+						"spotify": "https://open.spotify.com/album/3OBhnTLrvkoEEETjFA3Qfk"
+					},
+					"href": "https://api.spotify.com/v1/albums/3OBhnTLrvkoEEETjFA3Qfk",
+					"id": "3OBhnTLrvkoEEETjFA3Qfk",
+					"images": [
+						{
+							"height": 640,
+							"width": 640,
+							"url": "https://i.scdn.co/image/ab67616d0000b273b4a878f008a0eda552446701"
+						},
+						{
+							"height": 300,
+							"width": 300,
+							"url": "https://i.scdn.co/image/ab67616d00001e02b4a878f008a0eda552446701"
+						},
+						{
+							"height": 64,
+							"width": 64,
+							"url": "https://i.scdn.co/image/ab67616d00004851b4a878f008a0eda552446701"
+						}
+					],
+					"is_playable": true,
+					"name": "HIStory - PAST, PRESENT AND FUTURE - BOOK I",
+					"release_date": "1995-06-16",
+					"release_date_precision": "day",
+					"total_tracks": 30,
+					"type": "album",
+					"uri": "spotify:album:3OBhnTLrvkoEEETjFA3Qfk"
+				},
+				"artists": [
+					{
+						"external_urls": {
+							"spotify": "https://open.spotify.com/artist/3fMbdgg4jU18AjLCKBhRSm"
+						},
+						"href": "https://api.spotify.com/v1/artists/3fMbdgg4jU18AjLCKBhRSm",
+						"id": "3fMbdgg4jU18AjLCKBhRSm",
+						"name": "Michael Jackson",
+						"type": "artist",
+						"uri": "spotify:artist:3fMbdgg4jU18AjLCKBhRSm"
+					}
+				],
+				"disc_number": 2,
+				"duration_ms": 405933,
+				"explicit": false,
+				"external_urls": {
+					"spotify": "https://open.spotify.com/track/4GCGH6TJ69neckwITeBFXK"
+				},
+				"href": "https://api.spotify.com/v1/tracks/4GCGH6TJ69neckwITeBFXK",
+				"id": "4GCGH6TJ69neckwITeBFXK",
+				"is_local": false,
+				"is_playable": true,
+				"name": "Earth Song",
+				"track_number": 5,
+				"type": "track",
+				"uri": "spotify:track:4GCGH6TJ69neckwITeBFXK"
+			}
+		},
+		{
+			"added_at": "2026-02-13T23:39:07Z",
+			"track": {
+				"album": {
+					"album_type": "single",
+					"artists": [
+						{
+							"external_urls": {
+								"spotify": "https://open.spotify.com/artist/49aaHxvAJ0tCh0F15OnwIl"
+							},
+							"href": "https://api.spotify.com/v1/artists/49aaHxvAJ0tCh0F15OnwIl",
+							"id": "49aaHxvAJ0tCh0F15OnwIl",
+							"name": "Loreen",
+							"type": "artist",
+							"uri": "spotify:artist:49aaHxvAJ0tCh0F15OnwIl"
+						}
+					],
+					"external_urls": {
+						"spotify": "https://open.spotify.com/album/6fYOQSJpXKdVBkD09Kg2lf"
+					},
+					"href": "https://api.spotify.com/v1/albums/6fYOQSJpXKdVBkD09Kg2lf",
+					"id": "6fYOQSJpXKdVBkD09Kg2lf",
+					"images": [
+						{
+							"height": 640,
+							"width": 640,
+							"url": "https://i.scdn.co/image/ab67616d0000b273a6d642f43edc9d64e0c0da03"
+						},
+						{
+							"height": 300,
+							"width": 300,
+							"url": "https://i.scdn.co/image/ab67616d00001e02a6d642f43edc9d64e0c0da03"
+						},
+						{
+							"height": 64,
+							"width": 64,
+							"url": "https://i.scdn.co/image/ab67616d00004851a6d642f43edc9d64e0c0da03"
+						}
+					],
+					"is_playable": true,
+					"name": "Is It Love",
+					"release_date": "2023-10-13",
+					"release_date_precision": "day",
+					"total_tracks": 1,
+					"type": "album",
+					"uri": "spotify:album:6fYOQSJpXKdVBkD09Kg2lf"
+				},
+				"artists": [
+					{
+						"external_urls": {
+							"spotify": "https://open.spotify.com/artist/49aaHxvAJ0tCh0F15OnwIl"
+						},
+						"href": "https://api.spotify.com/v1/artists/49aaHxvAJ0tCh0F15OnwIl",
+						"id": "49aaHxvAJ0tCh0F15OnwIl",
+						"name": "Loreen",
+						"type": "artist",
+						"uri": "spotify:artist:49aaHxvAJ0tCh0F15OnwIl"
+					}
+				],
+				"disc_number": 1,
+				"duration_ms": 143669,
+				"explicit": false,
+				"external_urls": {
+					"spotify": "https://open.spotify.com/track/5JEzgajKcC4eIQfRu3cZk7"
+				},
+				"href": "https://api.spotify.com/v1/tracks/5JEzgajKcC4eIQfRu3cZk7",
+				"id": "5JEzgajKcC4eIQfRu3cZk7",
+				"is_local": false,
+				"is_playable": true,
+				"name": "Is It Love",
+				"track_number": 1,
+				"type": "track",
+				"uri": "spotify:track:5JEzgajKcC4eIQfRu3cZk7"
+			}
+		},
+		{
+			"added_at": "2026-02-13T23:38:56Z",
+			"track": {
+				"album": {
+					"album_type": "single",
+					"artists": [
+						{
+							"external_urls": {
+								"spotify": "https://open.spotify.com/artist/2JyzPRPN5YKvt0QuxwUsLO"
+							},
+							"href": "https://api.spotify.com/v1/artists/2JyzPRPN5YKvt0QuxwUsLO",
+							"id": "2JyzPRPN5YKvt0QuxwUsLO",
+							"name": "Paayne",
+							"type": "artist",
+							"uri": "spotify:artist:2JyzPRPN5YKvt0QuxwUsLO"
+						},
+						{
+							"external_urls": {
+								"spotify": "https://open.spotify.com/artist/6RhxTiV8JXmhalO2I4PGhy"
+							},
+							"href": "https://api.spotify.com/v1/artists/6RhxTiV8JXmhalO2I4PGhy",
+							"id": "6RhxTiV8JXmhalO2I4PGhy",
+							"name": "myzko",
+							"type": "artist",
+							"uri": "spotify:artist:6RhxTiV8JXmhalO2I4PGhy"
+						}
+					],
+					"external_urls": {
+						"spotify": "https://open.spotify.com/album/2tfN4jgI7SbbqwvQsJ9wWO"
+					},
+					"href": "https://api.spotify.com/v1/albums/2tfN4jgI7SbbqwvQsJ9wWO",
+					"id": "2tfN4jgI7SbbqwvQsJ9wWO",
+					"images": [
+						{
+							"height": 640,
+							"width": 640,
+							"url": "https://i.scdn.co/image/ab67616d0000b27360875082b707025d49278694"
+						},
+						{
+							"height": 300,
+							"width": 300,
+							"url": "https://i.scdn.co/image/ab67616d00001e0260875082b707025d49278694"
+						},
+						{
+							"height": 64,
+							"width": 64,
+							"url": "https://i.scdn.co/image/ab67616d0000485160875082b707025d49278694"
+						}
+					],
+					"is_playable": true,
+					"name": "Freestyler (Rock The Microphone)",
+					"release_date": "2025-12-05",
+					"release_date_precision": "day",
+					"total_tracks": 1,
+					"type": "album",
+					"uri": "spotify:album:2tfN4jgI7SbbqwvQsJ9wWO"
+				},
+				"artists": [
+					{
+						"external_urls": {
+							"spotify": "https://open.spotify.com/artist/2JyzPRPN5YKvt0QuxwUsLO"
+						},
+						"href": "https://api.spotify.com/v1/artists/2JyzPRPN5YKvt0QuxwUsLO",
+						"id": "2JyzPRPN5YKvt0QuxwUsLO",
+						"name": "Paayne",
+						"type": "artist",
+						"uri": "spotify:artist:2JyzPRPN5YKvt0QuxwUsLO"
+					},
+					{
+						"external_urls": {
+							"spotify": "https://open.spotify.com/artist/6RhxTiV8JXmhalO2I4PGhy"
+						},
+						"href": "https://api.spotify.com/v1/artists/6RhxTiV8JXmhalO2I4PGhy",
+						"id": "6RhxTiV8JXmhalO2I4PGhy",
+						"name": "myzko",
+						"type": "artist",
+						"uri": "spotify:artist:6RhxTiV8JXmhalO2I4PGhy"
+					}
+				],
+				"disc_number": 1,
+				"duration_ms": 159913,
+				"explicit": false,
+				"external_urls": {
+					"spotify": "https://open.spotify.com/track/5RxBltWiCkWKjr7DbJytgM"
+				},
+				"href": "https://api.spotify.com/v1/tracks/5RxBltWiCkWKjr7DbJytgM",
+				"id": "5RxBltWiCkWKjr7DbJytgM",
+				"is_local": false,
+				"is_playable": true,
+				"name": "Freestyler (Rock The Microphone)",
+				"track_number": 1,
+				"type": "track",
+				"uri": "spotify:track:5RxBltWiCkWKjr7DbJytgM"
+			}
+		},
+		{
+			"added_at": "2026-02-13T23:38:45Z",
+			"track": {
+				"album": {
+					"album_type": "compilation",
+					"artists": [
+						{
+							"external_urls": {
+								"spotify": "https://open.spotify.com/artist/6d3BkI9bZouJ63vdkH3c4l"
+							},
+							"href": "https://api.spotify.com/v1/artists/6d3BkI9bZouJ63vdkH3c4l",
+							"id": "6d3BkI9bZouJ63vdkH3c4l",
+							"name": "Les Forbans",
+							"type": "artist",
+							"uri": "spotify:artist:6d3BkI9bZouJ63vdkH3c4l"
+						}
+					],
+					"external_urls": {
+						"spotify": "https://open.spotify.com/album/0GHNIVRdIe9dnUFbod9g1x"
+					},
+					"href": "https://api.spotify.com/v1/albums/0GHNIVRdIe9dnUFbod9g1x",
+					"id": "0GHNIVRdIe9dnUFbod9g1x",
+					"images": [
+						{
+							"height": 640,
+							"width": 640,
+							"url": "https://i.scdn.co/image/ab67616d0000b273be6f5d9b5debb8e5e940b5a5"
+						},
+						{
+							"height": 300,
+							"width": 300,
+							"url": "https://i.scdn.co/image/ab67616d00001e02be6f5d9b5debb8e5e940b5a5"
+						},
+						{
+							"height": 64,
+							"width": 64,
+							"url": "https://i.scdn.co/image/ab67616d00004851be6f5d9b5debb8e5e940b5a5"
+						}
+					],
+					"is_playable": true,
+					"name": "La Megacompil Des Forbans",
+					"release_date": "1990-01-01",
+					"release_date_precision": "day",
+					"total_tracks": 17,
+					"type": "album",
+					"uri": "spotify:album:0GHNIVRdIe9dnUFbod9g1x"
+				},
+				"artists": [
+					{
+						"external_urls": {
+							"spotify": "https://open.spotify.com/artist/6d3BkI9bZouJ63vdkH3c4l"
+						},
+						"href": "https://api.spotify.com/v1/artists/6d3BkI9bZouJ63vdkH3c4l",
+						"id": "6d3BkI9bZouJ63vdkH3c4l",
+						"name": "Les Forbans",
+						"type": "artist",
+						"uri": "spotify:artist:6d3BkI9bZouJ63vdkH3c4l"
+					}
+				],
+				"disc_number": 1,
+				"duration_ms": 178400,
+				"explicit": false,
+				"external_urls": {
+					"spotify": "https://open.spotify.com/track/70uAATa6l9BHWfAMYFV28u"
+				},
+				"href": "https://api.spotify.com/v1/tracks/70uAATa6l9BHWfAMYFV28u",
+				"id": "70uAATa6l9BHWfAMYFV28u",
+				"is_local": false,
+				"is_playable": true,
+				"name": "Chante",
+				"track_number": 2,
+				"type": "track",
+				"uri": "spotify:track:70uAATa6l9BHWfAMYFV28u"
+			}
+		},
+		{
+			"added_at": "2026-02-13T23:38:35Z",
+			"track": {
+				"album": {
+					"album_type": "compilation",
+					"artists": [
+						{
+							"external_urls": {
+								"spotify": "https://open.spotify.com/artist/4GFqys2YA5hdCl4P2pdX3h"
+							},
+							"href": "https://api.spotify.com/v1/artists/4GFqys2YA5hdCl4P2pdX3h",
+							"id": "4GFqys2YA5hdCl4P2pdX3h",
+							"name": "La Compagnie Créole",
+							"type": "artist",
+							"uri": "spotify:artist:4GFqys2YA5hdCl4P2pdX3h"
+						}
+					],
+					"external_urls": {
+						"spotify": "https://open.spotify.com/album/7BzFMQvwZtV39KOsGT4Ltl"
+					},
+					"href": "https://api.spotify.com/v1/albums/7BzFMQvwZtV39KOsGT4Ltl",
+					"id": "7BzFMQvwZtV39KOsGT4Ltl",
+					"images": [
+						{
+							"height": 640,
+							"width": 640,
+							"url": "https://i.scdn.co/image/ab67616d0000b2733984e035d273705dcfc8e3c8"
+						},
+						{
+							"height": 300,
+							"width": 300,
+							"url": "https://i.scdn.co/image/ab67616d00001e023984e035d273705dcfc8e3c8"
+						},
+						{
+							"height": 64,
+							"width": 64,
+							"url": "https://i.scdn.co/image/ab67616d000048513984e035d273705dcfc8e3c8"
+						}
+					],
+					"is_playable": true,
+					"name": "Best Of: C'est bon pour le moral !",
+					"release_date": "2011-07-25",
+					"release_date_precision": "day",
+					"total_tracks": 16,
+					"type": "album",
+					"uri": "spotify:album:7BzFMQvwZtV39KOsGT4Ltl"
+				},
+				"artists": [
+					{
+						"external_urls": {
+							"spotify": "https://open.spotify.com/artist/4GFqys2YA5hdCl4P2pdX3h"
+						},
+						"href": "https://api.spotify.com/v1/artists/4GFqys2YA5hdCl4P2pdX3h",
+						"id": "4GFqys2YA5hdCl4P2pdX3h",
+						"name": "La Compagnie Créole",
+						"type": "artist",
+						"uri": "spotify:artist:4GFqys2YA5hdCl4P2pdX3h"
+					}
+				],
+				"disc_number": 1,
+				"duration_ms": 333506,
+				"explicit": false,
+				"external_urls": {
+					"spotify": "https://open.spotify.com/track/3jSvX7uYhapSTCHouPPBVC"
+				},
+				"href": "https://api.spotify.com/v1/tracks/3jSvX7uYhapSTCHouPPBVC",
+				"id": "3jSvX7uYhapSTCHouPPBVC",
+				"is_local": false,
+				"is_playable": true,
+				"name": "Vive le Douanier Rousseau",
+				"track_number": 4,
+				"type": "track",
+				"uri": "spotify:track:3jSvX7uYhapSTCHouPPBVC"
+			}
+		},
+		{
+			"added_at": "2026-02-10T23:51:39Z",
+			"track": {
+				"album": {
+					"album_type": "single",
+					"artists": [
+						{
+							"external_urls": {
+								"spotify": "https://open.spotify.com/artist/4SGDDnlwi5G42HTGzYl2Fc"
+							},
+							"href": "https://api.spotify.com/v1/artists/4SGDDnlwi5G42HTGzYl2Fc",
+							"id": "4SGDDnlwi5G42HTGzYl2Fc",
+							"name": "2WEI",
+							"type": "artist",
+							"uri": "spotify:artist:4SGDDnlwi5G42HTGzYl2Fc"
+						},
+						{
+							"external_urls": {
+								"spotify": "https://open.spotify.com/artist/03u3O2Nv2hOb00DRFYEISs"
+							},
+							"href": "https://api.spotify.com/v1/artists/03u3O2Nv2hOb00DRFYEISs",
+							"id": "03u3O2Nv2hOb00DRFYEISs",
+							"name": "Joznez",
+							"type": "artist",
+							"uri": "spotify:artist:03u3O2Nv2hOb00DRFYEISs"
+						},
+						{
+							"external_urls": {
+								"spotify": "https://open.spotify.com/artist/1nRQXhY5N0L7Wpdoz9tSPv"
+							},
+							"href": "https://api.spotify.com/v1/artists/1nRQXhY5N0L7Wpdoz9tSPv",
+							"id": "1nRQXhY5N0L7Wpdoz9tSPv",
+							"name": "Prince of Persia",
+							"type": "artist",
+							"uri": "spotify:artist:1nRQXhY5N0L7Wpdoz9tSPv"
+						}
+					],
+					"external_urls": {
+						"spotify": "https://open.spotify.com/album/4LNnzY4srbB8ytC7Tb3PFS"
+					},
+					"href": "https://api.spotify.com/v1/albums/4LNnzY4srbB8ytC7Tb3PFS",
+					"id": "4LNnzY4srbB8ytC7Tb3PFS",
+					"images": [
+						{
+							"height": 640,
+							"width": 640,
+							"url": "https://i.scdn.co/image/ab67616d0000b273b0c114f584cf84734f90d4bb"
+						},
+						{
+							"height": 300,
+							"width": 300,
+							"url": "https://i.scdn.co/image/ab67616d00001e02b0c114f584cf84734f90d4bb"
+						},
+						{
+							"height": 64,
+							"width": 64,
+							"url": "https://i.scdn.co/image/ab67616d00004851b0c114f584cf84734f90d4bb"
+						}
+					],
+					"is_playable": true,
+					"name": "The Lost Crown (Original Music for Prince of Persia)",
+					"release_date": "2023-06-09",
+					"release_date_precision": "day",
+					"total_tracks": 1,
+					"type": "album",
+					"uri": "spotify:album:4LNnzY4srbB8ytC7Tb3PFS"
+				},
+				"artists": [
+					{
+						"external_urls": {
+							"spotify": "https://open.spotify.com/artist/4SGDDnlwi5G42HTGzYl2Fc"
+						},
+						"href": "https://api.spotify.com/v1/artists/4SGDDnlwi5G42HTGzYl2Fc",
+						"id": "4SGDDnlwi5G42HTGzYl2Fc",
+						"name": "2WEI",
+						"type": "artist",
+						"uri": "spotify:artist:4SGDDnlwi5G42HTGzYl2Fc"
+					},
+					{
+						"external_urls": {
+							"spotify": "https://open.spotify.com/artist/03u3O2Nv2hOb00DRFYEISs"
+						},
+						"href": "https://api.spotify.com/v1/artists/03u3O2Nv2hOb00DRFYEISs",
+						"id": "03u3O2Nv2hOb00DRFYEISs",
+						"name": "Joznez",
+						"type": "artist",
+						"uri": "spotify:artist:03u3O2Nv2hOb00DRFYEISs"
+					},
+					{
+						"external_urls": {
+							"spotify": "https://open.spotify.com/artist/4v5vKGibNG5JeqTPAhnqil"
+						},
+						"href": "https://api.spotify.com/v1/artists/4v5vKGibNG5JeqTPAhnqil",
+						"id": "4v5vKGibNG5JeqTPAhnqil",
+						"name": "Kataem",
+						"type": "artist",
+						"uri": "spotify:artist:4v5vKGibNG5JeqTPAhnqil"
+					}
+				],
+				"disc_number": 1,
+				"duration_ms": 199471,
+				"explicit": false,
+				"external_urls": {
+					"spotify": "https://open.spotify.com/track/116jZYVgxrFurFTmo6pDgv"
+				},
+				"href": "https://api.spotify.com/v1/tracks/116jZYVgxrFurFTmo6pDgv",
+				"id": "116jZYVgxrFurFTmo6pDgv",
+				"is_local": false,
+				"is_playable": true,
+				"name": "The Lost Crown (Prince of Persia)",
+				"track_number": 1,
+				"type": "track",
+				"uri": "spotify:track:116jZYVgxrFurFTmo6pDgv"
+			}
+		},
+		{
+			"added_at": "2026-02-09T22:08:34Z",
+			"track": {
+				"album": {
+					"album_type": "album",
+					"artists": [
+						{
+							"external_urls": {
+								"spotify": "https://open.spotify.com/artist/5gznATMVO85ZcLTkE9ULU7"
+							},
+							"href": "https://api.spotify.com/v1/artists/5gznATMVO85ZcLTkE9ULU7",
+							"id": "5gznATMVO85ZcLTkE9ULU7",
+							"name": "Lenny Kravitz",
+							"type": "artist",
+							"uri": "spotify:artist:5gznATMVO85ZcLTkE9ULU7"
+						}
+					],
+					"external_urls": {
+						"spotify": "https://open.spotify.com/album/7A3LlV59lh4KljWa7I6Tks"
+					},
+					"href": "https://api.spotify.com/v1/albums/7A3LlV59lh4KljWa7I6Tks",
+					"id": "7A3LlV59lh4KljWa7I6Tks",
+					"images": [
+						{
+							"height": 640,
+							"width": 640,
+							"url": "https://i.scdn.co/image/ab67616d0000b273bfc19627a4a3a604c0a195e5"
+						},
+						{
+							"height": 300,
+							"width": 300,
+							"url": "https://i.scdn.co/image/ab67616d00001e02bfc19627a4a3a604c0a195e5"
+						},
+						{
+							"height": 64,
+							"width": 64,
+							"url": "https://i.scdn.co/image/ab67616d00004851bfc19627a4a3a604c0a195e5"
+						}
+					],
+					"is_playable": true,
+					"name": "Mama Said",
+					"release_date": "1991-04-02",
+					"release_date_precision": "day",
+					"total_tracks": 14,
+					"type": "album",
+					"uri": "spotify:album:7A3LlV59lh4KljWa7I6Tks"
+				},
+				"artists": [
+					{
+						"external_urls": {
+							"spotify": "https://open.spotify.com/artist/5gznATMVO85ZcLTkE9ULU7"
+						},
+						"href": "https://api.spotify.com/v1/artists/5gznATMVO85ZcLTkE9ULU7",
+						"id": "5gznATMVO85ZcLTkE9ULU7",
+						"name": "Lenny Kravitz",
+						"type": "artist",
+						"uri": "spotify:artist:5gznATMVO85ZcLTkE9ULU7"
+					}
+				],
+				"disc_number": 1,
+				"duration_ms": 233066,
+				"explicit": false,
+				"external_urls": {
+					"spotify": "https://open.spotify.com/track/3xxBAMUVusDLjLFwwL9qoY"
+				},
+				"href": "https://api.spotify.com/v1/tracks/3xxBAMUVusDLjLFwwL9qoY",
+				"id": "3xxBAMUVusDLjLFwwL9qoY",
+				"is_local": false,
+				"is_playable": true,
+				"name": "Always On The Run",
+				"track_number": 2,
+				"type": "track",
+				"uri": "spotify:track:3xxBAMUVusDLjLFwwL9qoY"
+			}
+		},
+		{
+			"added_at": "2026-02-09T22:08:19Z",
+			"track": {
+				"album": {
+					"album_type": "album",
+					"artists": [
+						{
+							"external_urls": {
+								"spotify": "https://open.spotify.com/artist/5gznATMVO85ZcLTkE9ULU7"
+							},
+							"href": "https://api.spotify.com/v1/artists/5gznATMVO85ZcLTkE9ULU7",
+							"id": "5gznATMVO85ZcLTkE9ULU7",
+							"name": "Lenny Kravitz",
+							"type": "artist",
+							"uri": "spotify:artist:5gznATMVO85ZcLTkE9ULU7"
+						}
+					],
+					"external_urls": {
+						"spotify": "https://open.spotify.com/album/6MCNMOCRsh6nxs7PNzc0zN"
+					},
+					"href": "https://api.spotify.com/v1/albums/6MCNMOCRsh6nxs7PNzc0zN",
+					"id": "6MCNMOCRsh6nxs7PNzc0zN",
+					"images": [
+						{
+							"height": 640,
+							"width": 640,
+							"url": "https://i.scdn.co/image/ab67616d0000b273f1157b7dcd21bae0c2c75d89"
+						},
+						{
+							"height": 300,
+							"width": 300,
+							"url": "https://i.scdn.co/image/ab67616d00001e02f1157b7dcd21bae0c2c75d89"
+						},
+						{
+							"height": 64,
+							"width": 64,
+							"url": "https://i.scdn.co/image/ab67616d00004851f1157b7dcd21bae0c2c75d89"
+						}
+					],
+					"is_playable": true,
+					"name": "5",
+					"release_date": "1998-05-12",
+					"release_date_precision": "day",
+					"total_tracks": 15,
+					"type": "album",
+					"uri": "spotify:album:6MCNMOCRsh6nxs7PNzc0zN"
+				},
+				"artists": [
+					{
+						"external_urls": {
+							"spotify": "https://open.spotify.com/artist/5gznATMVO85ZcLTkE9ULU7"
+						},
+						"href": "https://api.spotify.com/v1/artists/5gznATMVO85ZcLTkE9ULU7",
+						"id": "5gznATMVO85ZcLTkE9ULU7",
+						"name": "Lenny Kravitz",
+						"type": "artist",
+						"uri": "spotify:artist:5gznATMVO85ZcLTkE9ULU7"
+					}
+				],
+				"disc_number": 1,
+				"duration_ms": 221332,
+				"explicit": false,
+				"external_urls": {
+					"spotify": "https://open.spotify.com/track/1OxcIUqVmVYxT6427tbhDW"
+				},
+				"href": "https://api.spotify.com/v1/tracks/1OxcIUqVmVYxT6427tbhDW",
+				"id": "1OxcIUqVmVYxT6427tbhDW",
+				"is_local": false,
+				"is_playable": true,
+				"name": "Fly Away",
+				"track_number": 8,
+				"type": "track",
+				"uri": "spotify:track:1OxcIUqVmVYxT6427tbhDW"
+			}
+		}
+	],
+	"limit": 50,
+	"next": "https://api.spotify.com/v1/me/tracks?offset=50&limit=50",
+	"offset": 0,
+	"previous": null,
+	"total": 239
+}

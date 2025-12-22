@@ -1,19 +1,19 @@
-﻿using Addams.Entities;
-using Addams.Models;
-using Addams.Exceptions;
-using NUnit.Framework;
+﻿using Addams.Core;
+using Addams.Core.Exceptions;
+using Addams.Core.Models;
+using Addams.Core.Spotify;
 
 namespace Addams.Tests;
 
-[TestFixture]
+[TestClass]
 public class TestsApi
 {
-    [Test]
+    [TestMethod]
     [Description("Test with wrong token")]
     public void TestGetPlaylistWithBadToken()
     {
         // Arrange
-        SpotifyConfig config = new()
+        AddamsConfig config = new()
         {
             UserName = "gravityx3",
             Token = new TokenModel { Value = "bad_token" },

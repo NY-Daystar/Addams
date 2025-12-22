@@ -1,12 +1,13 @@
-﻿using Addams.Utils;
-using NUnit.Framework;
+﻿using Addams.Core.Spotify;
+using Addams.Core.Utils;
+using Addams.Core.Models;
 
 namespace Addams.Tests;
 
-[TestFixture]
+[TestClass]
 public class TestsExport
 {
-    [Test]
+    [TestMethod]
     public void TestSavePlaylistWithInvalidFilename()
     {
         // Arrange
@@ -20,15 +21,15 @@ public class TestsExport
         }
 
         // Act
-        SpotifyExport.SavePlaylist(wDir, new Models.Playlist
+        SpotifyExport.SavePlaylist(wDir, new Playlist
         {
             Name = playlistName,
-            Tracks = new List<Models.Track>
-            {
-                new Models.Track {Name="Track1" },
-                new Models.Track {Name="Track2" },
-                new Models.Track {Name="Track3" },
-            }
+            Tracks =
+            [
+                new() {Name="Track1" },
+                new() {Name="Track2" },
+                new() {Name="Track3" },
+            ]
         });
         string playlistPathAfterValidate = $"{PathUtil.FormatValidFilename(playlistName)}.csv";
         string playlistPath = Path.Combine(wDir, playlistPathAfterValidate);
