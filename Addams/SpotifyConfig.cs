@@ -40,13 +40,13 @@ public class SpotifyConfig
     /// Default OAuth2 token
     /// </summary>
     [JsonPropertyName("token")]
-    public TokenModel? Token { get; set; }
+    public TokenModel Token { get; set; }
 
     /// <summary>
-    /// Hostname of uri redirection (default : http://localhost)
+    /// Hostname of uri redirection (default : http://127.0.0.1/callback)
     /// </summary>
     [JsonPropertyName("hostname")]
-    public const string Hostname = "http://localhost";
+    public const string Hostname = "http://127.0.0.1";
 
     /// <summary>
     /// Port of uri redirection (default : 8888)
@@ -77,6 +77,12 @@ public class SpotifyConfig
     /// </summary>
     [JsonIgnore]
     public const string Scope = "playlist-read-private user-library-read";
+
+    /// <summary>
+    /// Method name to cypher code verifyer in PKCE authentication 
+    /// </summary>
+    [JsonIgnore]
+    public const string ChallengeMethod = "S256";
 
     /// <summary>
     /// Datetime of last save
@@ -125,13 +131,13 @@ public class SpotifyConfig
     /// </summary>
     public void Setup()
     {
-        Console.Write("Enter your spotify username: ");
+        Console.Write($"{Language.GetString("String64")}: ");
         UserName = Console.ReadLine() ?? string.Empty;
 
-        Console.Write("Enter your spotify clientID: ");
+        Console.Write($"{Language.GetString("String65")}: ");
         ClientID = Console.ReadLine() ?? string.Empty;
 
-        Console.Write("Enter your spotify clientSecret: ");
+        Console.Write($"{Language.GetString("String66")}: ");
         ClientSecret = Console.ReadLine() ?? string.Empty;
     }
 
@@ -206,7 +212,11 @@ public class SpotifyConfig
         return $"\tUser: '{UserName}'\n" +
             $"\tClientID: '{ClientID}'\n" +
             $"\tClientSecret: '{ClientSecret}'\n" +
-            $"\tToken: '{Token}'\n" +
+            $"\tAccessToken: '{Token.Value}'\n" +
+            $"\tRefreshToken: '{Token.Refresh}'\n" +
+            $"\tGeneratedAt: '{Token.GeneratedAt}'\n" +
+            $"\tExpiresIn: '{Token.ExpiresIn}'\n" +
+            $"\tExpireAt: '{Token.ExpiredDate}'\n" +
             $"\tDatetime: '{Datetime}'";
     }
 }

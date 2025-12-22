@@ -1,6 +1,6 @@
 ﻿using Addams.Entities;
+using Addams.Exceptions;
 using Addams.Utils;
-using Microsoft.VisualBasic;
 using NLog;
 using NLog.Config;
 using NLog.Layouts;
@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Resources;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -36,7 +35,7 @@ internal static class Addams
 
     private const string _application = "Addams";
 
-    private const string _version = "1.0.3";
+    private const string _version = "1.0.4";
 
     public static void Main(string[] args)
     {
@@ -57,6 +56,18 @@ internal static class Addams
 
         Logger.Info(Language.GetString("String4"));
 
+        SpotifyConfig config = new();
+        try
+        {
+            config = SpotifyConfig.Read();
+        }
+        catch (SpotifyConfigException)
+        {
+            Core.WriteLine(ConsoleColor.Yellow, Language.GetString("String63"));
+            config.Setup();
+            config.Save();
+        }
+
         while (true)
         {
             switch (AddamsUser.AskWhatToDo())
@@ -66,14 +77,18 @@ internal static class Addams
                     break;
 
                 case "2":
-                    ShowConfiguration();
+                    GoToPlaylists();
                     break;
 
                 case "3":
-                    ModifyConfiguration();
+                    ShowConfiguration();
                     break;
 
                 case "4":
+                    ModifyConfiguration();
+                    break;
+
+                case "5":
                     ShowLogs();
                     break;
                 default:
@@ -91,8 +106,16 @@ internal static class Addams
         if (!await service.IsTokenValidAsync())
         {
             Logger.Warn(Language.GetString("String7"));
-            await service.RefreshTokenAsync();
+            var config = SpotifyConfig.Read();
+            if (config.Token.Refresh == null || config.Token.Refresh == "")
+                Console.WriteLine($"\n{Language.GetString("String59")}");
+            else
+                Console.WriteLine($"\n{Language.GetString("String60")}");
+
+            await service.RefreshAccessTokenAsync();
         }
+
+        Core.WriteLine(ConsoleColor.Green, Language.GetString("String61"));
 
         IEnumerable<Playlist> playlistsSelected = await service.GetPlaylistsNameAsync();
 
@@ -113,6 +136,11 @@ internal static class Addams
         SpotifyExport.SavePlaylists(PLAYLIST_FOLDER, playlists);
         Logger.Info(Language.GetString("String12"));
 
+        GoToPlaylists();
+    }
+
+    private static void GoToPlaylists()
+    {
         Process.Start("explorer.exe", PLAYLIST_FOLDER);
     }
 

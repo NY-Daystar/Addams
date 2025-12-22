@@ -92,21 +92,26 @@ public class SpotifyApi
     /// <returns>Token</returns>
     public async Task<TokenModel> AuthorizeAsync()
     {
-        // Step 1 : Redirect the user to spotify to authorize application
+        var codeVerifier = Cypher.GenerateCodeVerifier();
+        var codeChallenge = Cypher.GenerateCodeChallenge(codeVerifier);
+
+        // Step 1 : Redirect the user to spotify to authorize application with PKCE Flow
         var url = $"{SpotifyConfig.AuthorityUri}/authorize?" +
             $"client_id={Config.ClientID}" +
             $"&response_type={SpotifyConfig.ResponseType}" +
             $"&redirect_uri={Uri.EscapeDataString(SpotifyConfig.RedirectUri)}" +
-            $"&scope={Uri.EscapeDataString(SpotifyConfig.Scope)}";
+            $"&scope={Uri.EscapeDataString(SpotifyConfig.Scope)}" +
+            $"&code_challenge_method={SpotifyConfig.ChallengeMethod}" +
+            $"&code_challenge={codeChallenge}";
 
-        Console.WriteLine("\n\nAuthorize application, visiting this URL :");
-        Console.WriteLine($"{url}\n");
+        //Console.WriteLine($"{url}\n");
+        Core.WriteLine(ConsoleColor.DarkCyan, url);
 
-        // Step 2 : Get Authorization Code
+        // Step 2 : Get Authorization Code with PKCE Flow
         var authorizationCode = await FetchAuthorizationCodeAsync();
 
-        // Step 3 : Call Spotify Api to exchange `Authorization Code` for an `Access Token`
-        var tokenEntity = await FetchTokenApiAsync(authorizationCode);
+        // Step 3 : Call Spotify Api to exchange `Authorization Code` and `Code Verifier` for an `Access Token`
+        var tokenEntity = await FetchTokenApiAsync(authorizationCode, codeVerifier);
 
         // Step 4 : Convert Token from entity to model
         TokenModel token = JsonConvert.DeserializeObject<TokenModel>(JsonConvert.SerializeObject(tokenEntity)) ?? new TokenModel();
@@ -115,6 +120,37 @@ public class SpotifyApi
         {
             Logger.Error(Language.GetString("String19"));
         }
+
+        Console.WriteLine($"\n\nToken d'accès : {token}\n\n");
+
+        return token;
+    }
+
+    /// <summary>
+    /// If we have refresh token from spotify we can use it to get access token
+    /// </summary>
+    /// <returns>Token</returns>
+    public async Task<TokenModel> RefreshAsync()
+    {
+        Console.WriteLine($"\n{Language.GetString("String56")}");
+
+        HttpClient client = new();
+
+        var data = new Dictionary<string, string>
+        {
+            { "grant_type", "refresh_token" },
+            { "client_id", Config.ClientID },
+            { "refresh_token", Config.Token.Refresh }
+        };
+
+        var response = await client.PostAsync("https://accounts.spotify.com/api/token", new FormUrlEncodedContent(data));
+
+        response.EnsureSuccessStatusCode();
+
+        string content = await response.Content.ReadAsStringAsync();
+
+        TokenModel token = JsonConvert.DeserializeObject<TokenModel>(content) ?? new TokenModel();
+        token.CalculateExpiration();
 
         Console.WriteLine($"\n\nToken d'accès : {token}\n\n");
 
@@ -153,9 +189,10 @@ public class SpotifyApi
     /// <summary>
     /// Send Http request to spotify with authorization code to get Token
     /// </summary>
-    /// <param name="authorizationCode"></param>
+    /// <param name="authorizationCode">code receipt with /authorize spotify API</param>
+    /// <param name="codeVerifier">code cypher in SHA256 generate in the begining to insure integrity</param>
     /// <returns>Token object</returns>
-    async Task<Token> FetchTokenApiAsync(string authorizationCode)
+    async Task<TokenModel> FetchTokenApiAsync(string authorizationCode, string codeVerifier)
     {
         var httpClient = new HttpClient();
         var url = $"{SpotifyConfig.AuthorityUri}/api/token";
@@ -166,10 +203,11 @@ public class SpotifyApi
             ClientId = Config.ClientID,
             ClientSecret = Config.ClientSecret,
             Code = authorizationCode ?? string.Empty,
-            RedirectUri = SpotifyConfig.RedirectUri
+            RedirectUri = SpotifyConfig.RedirectUri,
+            CodeVerifier = codeVerifier
         });
         string content = response.Raw ?? string.Empty;
-        Token token = JsonConvert.DeserializeObject<Token>(content) ?? new Token();
+        TokenModel token = JsonConvert.DeserializeObject<TokenModel>(content) ?? new TokenModel();
         return token;
     }
 

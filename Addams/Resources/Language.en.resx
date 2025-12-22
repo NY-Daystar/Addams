@@ -253,16 +253,16 @@
     <value>Setup service with config and api...</value>
   </data>
   <data name="String50" xml:space="preserve">
-    <value>[1]: Export playlist(s)</value>
+    <value>Export playlist(s)</value>
   </data>
   <data name="String51" xml:space="preserve">
-    <value>[2]: Show configuration</value>
+    <value>Show configuration</value>
   </data>
   <data name="String52" xml:space="preserve">
-    <value>[3]: Change configuration</value>
+    <value>Change configuration</value>
   </data>
   <data name="String53" xml:space="preserve">
-    <value>[4]: Display logs</value>
+    <value>Display logs</value>
   </data>
   <data name="String54" xml:space="preserve">
     <value>You've chosen : </value>
@@ -281,5 +281,38 @@
   </data>
   <data name="String9" xml:space="preserve">
     <value>None playlist found</value>
+  </data>
+  <data name="String57" xml:space="preserve">
+    <value>Seize your refresh Token</value>
+  </data>
+  <data name="String58" xml:space="preserve">
+    <value>Your refresh token has been seized</value>
+  </data>
+  <data name="String59" xml:space="preserve">
+    <value>No refresh token, in your browser go to the url below :</value>
+  </data>
+  <data name="String60" xml:space="preserve">
+    <value>Refresh Token existing, renewal of access token</value>
+  </data>
+  <data name="String56" xml:space="preserve">
+    <value>With refresh token, Renewal Access Token</value>
+  </data>
+  <data name="String61" xml:space="preserve">
+    <value>Token Valid, Access to your Spotify Account</value>
+  </data>
+  <data name="String62" xml:space="preserve">
+    <value>Get access to saved playlists</value>
+  </data>
+  <data name="String63" xml:space="preserve">
+    <value>First connection to Addams, you need to configure application</value>
+  </data>
+  <data name="String64" xml:space="preserve">
+    <value>Enter your spotify account username</value>
+  </data>
+  <data name="String65" xml:space="preserve">
+    <value>Enter your spotify application client ID</value>
+  </data>
+  <data name="String66" xml:space="preserve">
+    <value>Enter your spotify application client Secret</value>
   </data>
 </root>
