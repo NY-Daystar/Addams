@@ -5,18 +5,7 @@ SLN_PATH=Addams.sln
 DLL=$(pwd)/Addams.Tests/bin/Debug/net10.0/Addams.Tests.dll
 
 function main() {
-    if [ "$1" = "--debug" ]; then
-        DEBUG=true
-        log_verbose "Debug mode"
-    fi
-
-    if [ "$1" = "--detailed" ] || [ "$2" = "--detailed" ]; then
-        DETAILED=true
-        DEBUG=true
-        log_color "Detailed mode" "yellow"
-    fi
-
-    log_verbose "For solution : ${SLN_PATH}"
+    check_version
 
     check_prerequisites
     check 'prerequisites' $?
@@ -66,6 +55,30 @@ function check() {
     esac
 }
 
+function check_version(){
+    last_tag=$(git tag | tail -n 1)
+    if [ -z ${last_tag} ];then
+        return 0
+    fi
+    last_version=$(echo "${last_tag}" | grep -oP "\K[0-9].[0-9].[0-9]")
+
+    file_version="./AddamsSetup/AddamsSetup.vdproj"
+
+    regex="\"ProductVersion\" = \"8:\K([0-9].[0-9].[0-9])"
+    current_version=$(grep -Po "${regex}" "${file_version}")
+
+    vercomp ${current_version} ${last_version}
+    result=$?
+    case ${result} in
+        0) op='=';;
+        1) op='>';;
+        2) op='<';;
+    esac
+    if [ ${op} == "=" ] || [ ${op} == "<" ];then 
+        log "$(log_color "Careful your version is downgraded current:" "yellow") $(log_color "${current_version}" "red") $(log_color "last:" "yellow") $(log_color "${last_version}" "red")"
+    fi
+}
+
 function check_prerequisites() {
     which dotnet >/dev/null
 }
@@ -86,6 +99,38 @@ function unittest() {
 }
 
 ################################################################### Utils functions ###################################################################
+
+###
+# Compare version semver
+# $1: [string], semver version compared (ex: 1.0.0)
+# $2: [string], semver version to compare (ex: 1.1.1)
+# returns: 0 if equal, 1 if $1 < $2, 2 if $1 > $2
+###
+vercomp () {
+    if [[ $1 == $2 ]]
+    then
+        return 0
+    fi
+    local IFS=.
+    local i ver1=($1) ver2=($2)
+    # fill empty fields in ver1 with zeros
+    for ((i=${#ver1[@]}; i<${#ver2[@]}; i++))
+    do
+        ver1[i]=0
+    done
+    for ((i=0; i<${#ver1[@]}; i++))
+    do
+        if ((10#${ver1[i]:=0} > 10#${ver2[i]:=0}))
+        then
+            return 1
+        fi
+        if ((10#${ver1[i]} < 10#${ver2[i]}))
+        then
+            return 2
+        fi
+    done
+    return 0
+}
 
 function get_datetime {
     log $(date '+%Y-%m-%d %H:%M:%S')

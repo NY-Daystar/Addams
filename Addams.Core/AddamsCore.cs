@@ -29,7 +29,7 @@ public static class AddamsCore
 
     public const string Application = "Addams";
 
-    public const string Version = "1.1.0";
+    public const string Version = "1.1.1";
 
     /// <summary>
     /// Launch core application and return file of logs

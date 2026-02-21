@@ -1,4 +1,4 @@
-﻿# Addams
+﻿<h1 style="text-align:center;" > <img style="vertical-align: middle;" alt="Application view" src="Addams/AddamsLogo.ico"width="48" height="48" /> Addams</h1>
 
 ![Application view](Docs/app_view.png)
 
@@ -11,17 +11,13 @@
 
 ![GitHub watchers](https://img.shields.io/github/watchers/ny-daystar/addams) ![GitHub forks](https://img.shields.io/github/forks/ny-daystar/addams) ![GitHub Repo stars](https://img.shields.io/github/stars/ny-daystar/addams)
 
-C# project to export in csv spotify user's playlist  
 Source code analysed with [DeepSource](https://deepsource.com/) and [Codacy](https://app.codacy.com)
-
-**Version: v1.1.0**
 
 ## Summary
 
-- [Requirements](#requirements)
-- [Get started](#get-started)
+- [User Guide](#user-guide)
     - [Create spotify application](#setup-spotify-application)
-    - [Launch Addams](#launch-addams-application)
+- [Requirements](#requirements)
 - [For developer](#for-developpers)
     - [Setup project](#setup-project)
     - [How it works](#how-it-works)
@@ -30,12 +26,32 @@ Source code analysed with [DeepSource](https://deepsource.com/) and [Codacy](htt
 - [Contact](#contact)
 - [Credits](#credits)
 
-## Requirements
+## User Guide
 
-- [.NET Framework / .NET 10.0](https://dotnet.microsoft.com/en-us/download/dotnet/10.0) >= .NET 10
-- [VS 2026](https://visualstudio.microsoft.com/fr/vs/)
+This application can allow to export in csv spotify user's playlist
 
-## Get Started
+  <img style="text-align: center;" alt="View application" src="./Docs/app_view.png" width="500" height="275" />
+
+1. Download `AddamsInstaller.msi` project from [this link](https://github.com/NY-Daystar/Doppler/releases/download/v1.1.1/AddamsInstaller.msi)
+
+2. Execute `AddamsSetup.msi` to install
+
+3. Launch `Addams.exe`
+
+4. First you need to setup configuration (<strong>user account, client id and secret of spotify application</strong>)
+   <img style="text-align: center;" alt="Configure application" src="./Docs/Configure_application.png" width="500" height="275" />
+
+> If you don't have spotify application [go there](#setup-spotify-application)
+
+5.  Click on `Authenticate` to authentify yourself spotify application into Addams like below
+
+> After the first authentication, the token renewal itself like this, if not click on `Authenticate` in `Settings` tab
+> ![Relaunch Authentication](Docs/relaunch_authentication.png)
+
+6. Then you have multiple actions like export and/or show playlists, change configuration of application
+   ![export playlists](Docs/app_view.png)  
+   ![show playlists](Docs/show_playlist.png)  
+   ![change configuration](Docs/change_configuration.png)
 
 ### Setup spotify application
 
@@ -56,25 +72,10 @@ You will get something like this
 
 > **IMPORTANT: You can delete your app in this [link](https://www.spotify.com/fr/account/apps/)**
 
-### Launch Addams application
+## Requirements
 
-5.  You can download the `Addams Application` by [this link](https://github.com/NY-Daystar/Addams/releases/download/v1.1.0/AddamsInstaller-v1.1.0.msi)
-
-6.  Install it and launch `Addams.exe`
-
-7.  First you need to setup configuration (user account, client id and secret of spotify application)
-    ![Configure Addams](Docs/Configure_application.png)
-
-8.  Then you can authentify your spotify application into Addams like below
-    ![Access token first time](Docs/access_token_1st.png)
-
-> After the first authentication, the token renewal itself like this, if not click on `Authenticate` in `Settings` tab
-> ![Relaunch Authentication](Docs/relaunch_authentication.png)
-
-8. Then you have multiple actions like export and/or show playlists, change configuration of application
-   ![export playlists](Docs/app_view.png)  
-   ![show playlists](Docs/show_playlist.png)  
-   ![change configuration](Docs/change_configuration.png)
+- [.NET Framework / .NET 10.0](https://dotnet.microsoft.com/en-us/download/dotnet/10.0) >= .NET 10
+- [VS 2026](https://visualstudio.microsoft.com/fr/vs/)
 
 ## For developpers
 
