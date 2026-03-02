@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Project releases
 
-## v1.1.0 - March 2nd, 2026 - Fixe Csv post-gui features
+## v1.1.1 - March 2nd, 2026 - Fixe Csv post-gui features
 
 ### Fixed
 

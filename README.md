@@ -32,7 +32,7 @@ This application can allow to export in csv spotify user's playlist
 
   <img style="text-align: center;" alt="View application" src="./Docs/app_view.png" width="500" height="275" />
 
-1. Download `AddamsInstaller.msi` project from [this link](https://github.com/NY-Daystar/Doppler/releases/download/v1.1.1/AddamsInstaller.msi)
+1. Download `AddamsInstaller.msi` project from [this link](https://github.com/NY-Daystar/Addams/releases/download/v1.1.1/AddamsInstaller.msi)
 
 2. Execute `AddamsSetup.msi` to install
 
