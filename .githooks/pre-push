@@ -94,6 +94,7 @@ function compile() {
 }
 
 function unittest() {
+    [[ -z "${DLL}" ]] && log_color "Careful you have no tests project" "yellow"
     [ "${DETAILED}" == "true" ] && dotnet test ${DLL} || dotnet test ${DLL} >/dev/null
     return $?
 }
